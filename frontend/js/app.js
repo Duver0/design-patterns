@@ -10,7 +10,7 @@ const App = (() => {
   // ── Boot ──────────────────────────────────────────────────────────────────
   async function init() {
     try {
-      const res = await fetch('data/patterns.json');
+      const res = await fetch('./data/patterns.json');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       patterns = await res.json();
     } catch (err) {
@@ -36,8 +36,8 @@ const App = (() => {
 
   function navigateToPattern(pattern) {
     activePattern = pattern;
-    // Cargar preguntas completas si no están presentes (para que la UI de detalle muestre el conteo real)
-    fetch(`src/data/patterns/${pattern.id}.json`)
+    // Cargar preguntas completas si no están presentes
+    fetch(`./src/data/patterns/${pattern.id}.json`)
       .then(res => res.json())
       .then(fullData => {
         pattern.questions = fullData.questions;

@@ -34,8 +34,8 @@ export class QuestionService {
    * @returns {Promise<Array>} 
    */
   static async getQuestionSet(patternId) {
-    // patternId could be something like 'singleton' or 'factory_method'
-    const patternPath = `./src/data/patterns/${patternId}.json`;
+    // Usar ruta relativa al index.html de la carpeta dist
+    const patternPath = `src/data/patterns/${patternId}.json`;
     const patternData = await this.loadPattern(patternPath);
 
     // Shuffle and pick 10
