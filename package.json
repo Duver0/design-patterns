@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite frontend",
     "build": "vite build frontend --outDir ../dist --base ./",
+    "postbuild": "mkdir -p dist/js dist/data dist/src/data && cp -r frontend/js/. dist/js/ && cp -r frontend/data/. dist/data/ && cp -r frontend/src/data/patterns dist/src/data/",
     "preview": "vite preview frontend"
   },
   "devDependencies": {

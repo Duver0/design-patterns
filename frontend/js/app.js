@@ -23,6 +23,11 @@ const App = (() => {
       return;
     }
 
+    const navHomeBtn = document.getElementById('nav-home');
+    if (navHomeBtn) {
+      navHomeBtn.onclick = navigateHome;
+    }
+
     navigateHome();
   }
 
@@ -108,5 +113,7 @@ const App = (() => {
   // ── Public API ────────────────────────────────────────────────────────────
   return { init, handleAnswer, navigateHome };
 })();
+
+window.App = App;
 
 document.addEventListener('DOMContentLoaded', App.init);

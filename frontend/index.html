@@ -72,64 +72,25 @@
         <button id="btn-start-quiz" class="btn btn--primary">▶ Iniciar cuestionario</button>
         <button id="btn-reset-pattern" class="btn btn--danger">🗑️ Reiniciar patrón</button>
       </div>
+
+      <div id="questions-list"></div>
     </section>
 
     <!-- ── View: Quiz ───────────────────────────────────────────────────────── -->
     <section id="view-quiz" class="view hidden" aria-label="Cuestionario">
-      <div id="progress-container"></div>
-      
-      <!-- Quiz Header for New Architecture -->
       <div id="quiz-header" class="quiz-header">
         <h2 id="quiz-pattern-name"></h2>
-        <div class="quiz-progress-bar">
-          <div id="quiz-progress-fill" style="width: 0%"></div>
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-bar">
+            <div id="quiz-progress-fill" style="width: 0%"></div>
+          </div>
+          <p id="quiz-progress-text" class="quiz-progress-text"></p>
         </div>
-        <p id="quiz-progress-text"></p>
       </div>
 
-      <div id="quiz-container">
-        <!-- New architecture uses Strategy Pattern for rendering here -->
-      </div>
-      <div id="feedback-container"></div>
-    </section>
-
-    <!-- App Entry Point (New Architecture) -->
-    <script type="module">
-        import { AppOrchestrator } from './src/app/app.js';
-        const orchestrator = new AppOrchestrator();
-
-        // Simple bypass to existing logic to use new architecture
-        window.addEventListener('load', () => {
-            console.log("New Architecture Loaded.");
-            
-            // Re-bind existing start buttons if they exist
-            document.addEventListener('click', (e) => {
-                if (e.target.id === 'btn-start-quiz') {
-                    // This is a simplified example, in a real scenario you'd get the pattern ID from state
-                    // or from the button itself.
-                    const patternName = document.getElementById('detail-name').textContent.toLowerCase().replace(' ', '_');
-                    document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
-                    document.getElementById('view-quiz').classList.remove('hidden');
-                    orchestrator.startQuiz(patternName);
-                }
-            });
-
-            // Temporary development button
-            // const main = document.querySelector('.main-content');
-            // const devBtn = document.createElement('button');
-            // devBtn.textContent = "DEBUG: Start Singleton Quiz (new architecture)";
-            // devBtn.className = "btn btn--outline";
-            // devBtn.style.marginTop = "20px";
-            // devBtn.onclick = () => {
-            //     document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
-            //     document.getElementById('view-quiz').classList.remove('hidden');
-            //     orchestrator.startQuiz('singleton');
-            // };
-            // main.appendChild(devBtn);
-        });
-    </script>
-</body>
-</html>
+      <div class="question-card">
+        <span id="question-type-label" class="question-type-label">–</span>
+        <p id="question-text" class="question-text">–</p>
 
         <!-- Answer area (rendered dynamically) -->
         <div id="answer-area">
