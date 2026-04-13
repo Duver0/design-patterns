@@ -1,0 +1,427 @@
+{
+  "id": "command",
+  "name": "Command",
+  "category": "Comportamiento",
+  "description": "Encapsula una solicitud como un objeto para desacoplar quien invoca la accion de quien la ejecuta, permitiendo parametrizar operaciones, encolarlas, registrarlas y soportar undo/redo de forma extensible.",
+  "questions": [
+    {
+      "id": "command_q1",
+      "type": "mcq",
+      "question": "Cual es el objetivo central del patron Command en un diseno orientado a objetos?",
+      "options": [
+        "Crear familias de objetos relacionados sin exponer clases concretas",
+        "Encapsular una solicitud como objeto para desacoplar emisor y ejecutor",
+        "Forzar una unica instancia global de cada servicio",
+        "Definir una jerarquia de algoritmos con herencia"
+      ],
+      "correct": 1,
+      "explanation": "Command convierte una accion en un objeto con contrato comun. Asi, el invocador no depende de la implementacion concreta que realiza el trabajo."
+    },
+    {
+      "id": "command_q2",
+      "type": "mcq",
+      "question": "Que participante del patron contiene la logica para invocar operaciones sobre el Receiver?",
+      "options": [
+        "Invoker",
+        "Client",
+        "ConcreteCommand",
+        "Memento"
+      ],
+      "correct": 2,
+      "explanation": "ConcreteCommand conoce al Receiver y traduce execute() en llamadas concretas del dominio."
+    },
+    {
+      "id": "command_q3",
+      "type": "mcq",
+      "question": "En una arquitectura con botones de UI y acciones editables, que ventaja practica aporta Command?",
+      "options": [
+        "Evitar por completo el uso de interfaces",
+        "Reutilizar el mismo flujo de disparo para acciones diferentes",
+        "Eliminar la necesidad de validaciones de negocio",
+        "Sustituir automaticamente todos los eventos asincronos"
+      ],
+      "correct": 1,
+      "explanation": "Cada boton puede disparar un Command distinto, pero el mecanismo de invocacion permanece uniforme."
+    },
+    {
+      "id": "command_q4",
+      "type": "mcq",
+      "question": "Que escenario real justifica especialmente Command en backend distribuido?",
+      "options": [
+        "Cuando todas las operaciones son puramente de lectura",
+        "Cuando se necesita serializar solicitudes para cola, reintento y trazabilidad",
+        "Cuando se requiere herencia multiple para servicios",
+        "Cuando no existe ningun cambio de estado"
+      ],
+      "correct": 1,
+      "explanation": "Representar solicitudes como objetos serializables permite enviarlas a colas, reintentarlas y auditarlas de forma consistente."
+    },
+    {
+      "id": "command_q5",
+      "type": "mcq",
+      "question": "Para soportar undo robusto en operaciones complejas, que combinacion suele ser mas segura?",
+      "options": [
+        "Guardar solo el nombre del metodo ejecutado",
+        "Confiar en un singleton global sin historial",
+        "Persistir datos para revertir o integrar snapshots de estado",
+        "Reejecutar el comando igual y esperar que deshaga solo"
+      ],
+      "correct": 2,
+      "explanation": "El undo requiere informacion suficiente para restaurar estado, ya sea por operacion inversa, datos de compensacion o snapshot."
+    },
+    {
+      "id": "command_q6",
+      "type": "mcq",
+      "question": "Comparado con Strategy, que describe mejor a Command?",
+      "options": [
+        "Command selecciona algoritmos intercambiables, Strategy modela solicitudes",
+        "Strategy encapsula peticiones con historial, Command solo herencia",
+        "Command modela una solicitud ejecutable; Strategy modela variantes de algoritmo",
+        "No existe diferencia conceptual entre ambos"
+      ],
+      "correct": 2,
+      "explanation": "Strategy resuelve como variar un algoritmo; Command resuelve como encapsular y disparar acciones."
+    },
+    {
+      "id": "command_q7",
+      "type": "mcq",
+      "question": "En relacion con Chain of Responsibility, cual afirmacion es correcta?",
+      "options": [
+        "Command siempre pasa la solicitud por una cadena de handlers",
+        "Chain decide quien procesa en una secuencia; Command representa la accion en si",
+        "Chain y Command son equivalentes si hay una interfaz comun",
+        "Command no puede convivir con pipelines de handlers"
+      ],
+      "correct": 1,
+      "explanation": "Chain enfoca en enrutamiento de responsabilidad; Command en encapsulacion de la solicitud."
+    },
+    {
+      "id": "command_q8",
+      "type": "mcq",
+      "question": "Frente a Template Method, cual es una diferencia estructural clave?",
+      "options": [
+        "Template Method usa composicion dinamica y Command herencia fija",
+        "Command usa composicion de objetos; Template Method fija pasos por herencia",
+        "Ambos requieren una superclase abstracta con hooks obligatorios",
+        "Template Method permite encolar acciones serializadas por defecto"
+      ],
+      "correct": 1,
+      "explanation": "Command desacopla comportamiento en objetos ejecutables; Template Method define un esqueleto en clase base."
+    },
+    {
+      "id": "command_q9",
+      "type": "mcq",
+      "question": "Si comparas Command con Mediator, que rol distingue mejor a Command?",
+      "options": [
+        "Coordinar interacciones entre muchos colegas sin accion explicita",
+        "Encapsular una operacion concreta invocable, registrable y reversible",
+        "Sustituir todos los eventos por llamadas directas",
+        "Imponer dependencia bidireccional entre componentes"
+      ],
+      "correct": 1,
+      "explanation": "Mediator orquesta colaboraciones; Command encapsula acciones puntuales como objetos."
+    },
+    {
+      "id": "command_q10",
+      "type": "mcq",
+      "question": "Respecto a Memento, cuando se usa Command para undo, que enunciado es mas preciso?",
+      "options": [
+        "Memento representa la accion y Command almacena snapshots",
+        "Command puede usar Memento para restaurar estado previo al deshacer",
+        "Memento reemplaza por completo la necesidad de Command",
+        "Command y Memento nunca deben combinarse"
+      ],
+      "correct": 1,
+      "explanation": "Command modela la operacion; Memento puede preservar estado interno para restauraciones seguras."
+    },
+    {
+      "id": "command_q11",
+      "type": "mcq",
+      "question": "En un editor de texto con barra de herramientas, que diseno aprovecha mejor Command?",
+      "options": [
+        "Cada boton conoce todos los detalles del documento",
+        "Cada accion (copiar, pegar, deshacer) se representa como comando independiente",
+        "Un switch gigante en la capa UI decide toda la logica de negocio",
+        "Todas las acciones se resuelven con una sola clase monolitica"
+      ],
+      "correct": 1,
+      "explanation": "La UI dispara comandos, y cada comando concentra su accion. Esto reduce acoplamiento y facilita extension."
+    },
+    {
+      "id": "command_q12",
+      "type": "mcq",
+      "question": "Que es un MacroCommand?",
+      "options": [
+        "Un comando que ejecuta una secuencia de comandos atomicos",
+        "Un comando que solo puede ejecutarse una vez",
+        "Una implementacion de Command sin Receiver",
+        "Una variante de Observer para notificaciones por lotes"
+      ],
+      "correct": 0,
+      "explanation": "MacroCommand compone varios comandos y permite tratarlos como una unica unidad de ejecucion."
+    },
+    {
+      "id": "command_q13",
+      "type": "mcq",
+      "question": "En sistemas con reintentos automaticos, que propiedad de los comandos reduce efectos duplicados?",
+      "options": [
+        "Polimorfismo covariante",
+        "Inmutabilidad de clases base",
+        "Idempotencia de la ejecucion",
+        "Herencia multiple del Receiver"
+      ],
+      "correct": 2,
+      "explanation": "Si execute() es idempotente, repetir la misma solicitud no produce efectos no deseados adicionales."
+    },
+    {
+      "id": "command_q14",
+      "type": "mcq",
+      "question": "Que beneficio de observabilidad suele aportar Command en produccion?",
+      "options": [
+        "Evitar por completo el logging para mejorar rendimiento",
+        "Registrar intentos, resultados y metadatos por accion de forma uniforme",
+        "Eliminar trazas distribuidas por incompatibilidad",
+        "Impedir correlacion entre acciones y usuarios"
+      ],
+      "correct": 1,
+      "explanation": "Al estandarizar acciones como comandos, se puede instrumentar metricas y auditoria de manera consistente."
+    },
+    {
+      "id": "command_q15",
+      "type": "mcq",
+      "question": "Cuando puede ser sobreingenieria aplicar Command?",
+      "options": [
+        "Cuando existe una sola accion estable y sin necesidad de historial o cola",
+        "Cuando hay multiples acciones extensibles con origenes de disparo distintos",
+        "Cuando se requiere desacoplar UI de logica de negocio",
+        "Cuando se planea soporte de undo/redo"
+      ],
+      "correct": 0,
+      "explanation": "Si el dominio no necesita variacion, cola, historial ni desacoplamiento extra, Command puede agregar complejidad innecesaria."
+    },
+    {
+      "id": "command_q16",
+      "type": "mcq",
+      "question": "Que practica fortalece Command en aplicaciones event-driven con alta concurrencia?",
+      "options": [
+        "Incluir metadatos de correlacion y version para control de ejecucion",
+        "Acoplar cada comando a una unica implementacion concreta de transporte",
+        "Ocultar fallos de ejecucion para simplificar metricas",
+        "Ejecutar siempre en memoria sin posibilidad de persistencia"
+      ],
+      "correct": 0,
+      "explanation": "Metadatos como correlationId, version y timestamp ayudan a rastrear, ordenar y diagnosticar la ejecucion de comandos."
+    },
+    {
+      "id": "command_q17",
+      "type": "true_false",
+      "question": "En Command, el Invoker puede disparar execute() sin conocer detalles internos del Receiver.",
+      "correct": true,
+      "explanation": "Verdadero. El Invoker depende del contrato Command, no de la implementacion concreta del trabajo."
+    },
+    {
+      "id": "command_q18",
+      "type": "true_false",
+      "question": "El patron Command obliga a que toda ejecucion sea sincrona en el mismo hilo.",
+      "correct": false,
+      "explanation": "Falso. Un comando puede ejecutarse de forma sincrona o asincrona segun la infraestructura."
+    },
+    {
+      "id": "command_q19",
+      "type": "true_false",
+      "question": "Para implementar undo correctamente, un comando suele necesitar estado previo o logica de compensacion.",
+      "correct": true,
+      "explanation": "Verdadero. Deshacer requiere conocer como revertir efectos, no solo repetir execute()."
+    },
+    {
+      "id": "command_q20",
+      "type": "true_false",
+      "question": "Strategy y Command comparten estructura similar en algunos casos, pero su intencion principal es distinta.",
+      "correct": true,
+      "explanation": "Verdadero. Strategy cambia algoritmos; Command encapsula solicitudes invocables."
+    },
+    {
+      "id": "command_q21",
+      "type": "true_false",
+      "question": "Chain of Responsibility decide dinamicamente que handler procesa una solicitud; Command no define ese enrutamiento por si solo.",
+      "correct": true,
+      "explanation": "Verdadero. Chain resuelve propagacion/seleccion de manejador, mientras Command modela la accion."
+    },
+    {
+      "id": "command_q22",
+      "type": "true_false",
+      "question": "Template Method y Command son identicos porque ambos encapsulan una accion en un objeto serializable.",
+      "correct": false,
+      "explanation": "Falso. Template Method se basa en herencia y esqueleto de algoritmo; Command en objetos de solicitud."
+    },
+    {
+      "id": "command_q23",
+      "type": "true_false",
+      "question": "Mediator puede coordinar dialogos entre componentes, mientras Command encapsula operaciones individuales para ejecucion.",
+      "correct": true,
+      "explanation": "Verdadero. Son patrones de comportamiento con focos diferentes y frecuentemente complementarios."
+    },
+    {
+      "id": "command_q24",
+      "type": "true_false",
+      "question": "Memento captura estado interno; Command captura la intencion de una accion y puede apoyarse en Memento para undo.",
+      "correct": true,
+      "explanation": "Verdadero. Es una combinacion comun en editores y sistemas con historial."
+    },
+    {
+      "id": "command_q25",
+      "type": "true_false",
+      "question": "Encapsular acciones en comandos facilita agregar nuevas operaciones sin modificar el Invoker.",
+      "correct": true,
+      "explanation": "Verdadero. El Invoker permanece estable si trabaja contra la interfaz Command."
+    },
+    {
+      "id": "command_q26",
+      "type": "true_false",
+      "question": "Todo comando debe ser completamente stateless para cumplir el patron.",
+      "correct": false,
+      "explanation": "Falso. Muchos comandos necesitan parametros o contexto; lo importante es respetar el contrato y la responsabilidad."
+    },
+    {
+      "id": "command_q27",
+      "type": "true_false",
+      "question": "Serializar comandos puede habilitar ejecucion diferida, encolada o remota.",
+      "correct": true,
+      "explanation": "Verdadero. Esa es una ventaja practica de representar acciones como objetos."
+    },
+    {
+      "id": "command_q28",
+      "type": "true_false",
+      "question": "Si un comando puede reintentarse por fallos transitorios, la idempotencia ayuda a mantener consistencia.",
+      "correct": true,
+      "explanation": "Verdadero. Reduce el riesgo de aplicar el mismo efecto varias veces por reintentos o duplicados."
+    },
+    {
+      "id": "command_q29",
+      "type": "true_false",
+      "question": "Es habitual que el Client construya ConcreteCommand y lo configure con su Receiver antes de entregarlo al Invoker.",
+      "correct": true,
+      "explanation": "Verdadero. El armado de dependencias suele ocurrir en el cliente o en una fabrica/DI container."
+    },
+    {
+      "id": "command_q30",
+      "type": "true_false",
+      "question": "Adoptar Command implica eliminar servicios de dominio y reemplazarlos por invocadores genericos.",
+      "correct": false,
+      "explanation": "Falso. Command organiza el disparo de acciones; la logica de dominio puede seguir en servicios y entidades."
+    },
+    {
+      "id": "command_q31",
+      "type": "short",
+      "question": "Como se llama el participante que dispara comandos sin conocer la implementacion de negocio?",
+      "correct": [
+        "invoker",
+        "invocador"
+      ],
+      "hint": "Es quien llama execute() desde UI, scheduler o cola.",
+      "explanation": "El Invoker activa la ejecucion del comando y permanece desacoplado del Receiver concreto."
+    },
+    {
+      "id": "command_q32",
+      "type": "short",
+      "question": "Nombre del metodo canonico que expone la interfaz Command.",
+      "correct": [
+        "execute",
+        "execute()"
+      ],
+      "hint": "Es el punto de entrada uniforme de la accion.",
+      "explanation": "execute es la operacion estandar para invocar cualquier comando concreto."
+    },
+    {
+      "id": "command_q33",
+      "type": "short",
+      "question": "Estructura de datos comun para historial de undo/redo con politica LIFO.",
+      "correct": [
+        "stack",
+        "pila"
+      ],
+      "hint": "Permite sacar primero lo ultimo ejecutado.",
+      "explanation": "Una pila modela naturalmente la reversion del ultimo comando aplicado."
+    },
+    {
+      "id": "command_q34",
+      "type": "short",
+      "question": "Tipo de comando que agrupa y ejecuta varios comandos en secuencia.",
+      "correct": [
+        "macrocommand",
+        "macro command",
+        "comando macro"
+      ],
+      "hint": "Se usa para automatizaciones o acciones compuestas.",
+      "explanation": "MacroCommand encapsula una lista de comandos y los trata como una sola operacion."
+    },
+    {
+      "id": "command_q35",
+      "type": "short",
+      "question": "Registro persistente de comandos ejecutados para trazabilidad y auditoria.",
+      "correct": [
+        "log",
+        "audit log",
+        "bitacora"
+      ],
+      "hint": "Permite reconstruir que paso, cuando y por quien.",
+      "explanation": "El log de comandos conserva evidencia operativa util para soporte, cumplimiento y debugging."
+    },
+    {
+      "id": "command_q36",
+      "type": "short",
+      "question": "Principio SOLID favorecido cuando el invocador depende de la interfaz Command y no de concretos.",
+      "correct": [
+        "dip",
+        "inversion de dependencias",
+        "dependency inversion"
+      ],
+      "hint": "Es el principio de depender de abstracciones.",
+      "explanation": "Dependency Inversion reduce acoplamiento al hacer que modulos de alto nivel no dependan de detalles concretos."
+    },
+    {
+      "id": "command_q37",
+      "type": "short",
+      "question": "Operacion habitual para revertir el ultimo comando aplicado.",
+      "correct": [
+        "undo",
+        "deshacer"
+      ],
+      "hint": "Es la accion inversa de aplicar una operacion.",
+      "explanation": "undo restaura el estado previo mediante compensacion o datos guardados del comando."
+    },
+    {
+      "id": "command_q38",
+      "type": "short",
+      "question": "Variante usada para evitar null checks cuando no hay accion real que ejecutar.",
+      "correct": [
+        "null command",
+        "comando nulo"
+      ],
+      "hint": "Representa una accion vacia pero valida por contrato.",
+      "explanation": "Null Command implementa execute sin efectos y simplifica flujo al evitar condicionales por ausencia."
+    },
+    {
+      "id": "command_q39",
+      "type": "short",
+      "question": "Propiedad clave para soportar reintentos seguros sin duplicar efectos de negocio.",
+      "correct": [
+        "idempotencia",
+        "idempotency"
+      ],
+      "hint": "Repetir la misma solicitud no debe cambiar el resultado final esperado.",
+      "explanation": "La idempotencia ayuda a mantener consistencia cuando hay duplicados, reintentos o recuperacion ante fallos."
+    },
+    {
+      "id": "command_q40",
+      "type": "short",
+      "question": "Participante que contiene la logica de dominio real y es invocado por ConcreteCommand.",
+      "correct": [
+        "receiver",
+        "receptor"
+      ],
+      "hint": "Es quien sabe hacer el trabajo concreto.",
+      "explanation": "El Receiver implementa las operaciones del dominio; el comando solo encapsula como y cuando invocarlas."
+    }
+  ]
+}

@@ -1,0 +1,425 @@
+{
+  "id": "chain_of_responsibility",
+  "name": "Chain of Responsibility",
+  "category": "Comportamiento",
+  "description": "Permite pasar una solicitud a traves de una cadena de manejadores donde cada uno decide si la procesa o la delega al siguiente, desacoplando al emisor de la logica de resolucion.",
+  "questions": [
+    {
+      "id": "chain_of_responsibility_q1",
+      "type": "mcq",
+      "question": "Cual es la intencion principal de Chain of Responsibility?",
+      "options": [
+        "Desacoplar emisor y receptor pasando la solicitud por manejadores encadenados",
+        "Garantizar una unica instancia global del procesador",
+        "Construir objetos complejos paso a paso",
+        "Notificar simultaneamente a todos los suscriptores"
+      ],
+      "correct": 0,
+      "explanation": "El patron busca que el cliente no conozca quien atiende finalmente la solicitud; la cadena define el enrutamiento de manera flexible."
+    },
+    {
+      "id": "chain_of_responsibility_q2",
+      "type": "mcq",
+      "question": "Que problema de diseno suele motivar este patron?",
+      "options": [
+        "Necesidad de clonar objetos pesados con eficiencia",
+        "Bloques crecientes de if/else para decidir quien atiende cada caso",
+        "Dependencia circular entre factories de productos",
+        "Sincronizar estado entre vistas distribuidas"
+      ],
+      "correct": 1,
+      "explanation": "Chain of Responsibility reemplaza condicionales monoliticos por objetos especializados que evalua y delegan."
+    },
+    {
+      "id": "chain_of_responsibility_q3",
+      "type": "mcq",
+      "question": "Que participante define el contrato de manejo y la referencia al siguiente manejador?",
+      "options": [
+        "Handler",
+        "Client",
+        "Receiver",
+        "Invoker"
+      ],
+      "correct": 0,
+      "explanation": "La abstraccion Handler establece la operacion comun y normalmente conserva el enlace al siguiente elemento de la cadena."
+    },
+    {
+      "id": "chain_of_responsibility_q4",
+      "type": "mcq",
+      "question": "En el flujo canonico, que hace un manejador cuando no puede resolver la solicitud?",
+      "options": [
+        "Lanza excepcion obligatoriamente",
+        "La delega al siguiente manejador",
+        "Reinicia la cadena desde el primer nodo",
+        "Convierte la solicitud en evento asincrono"
+      ],
+      "correct": 1,
+      "explanation": "El comportamiento esperado es delegar al siguiente para mantener continuidad del flujo y bajo acoplamiento."
+    },
+    {
+      "id": "chain_of_responsibility_q5",
+      "type": "mcq",
+      "question": "Cual es un caso real donde este patron encaja de forma natural?",
+      "options": [
+        "Middleware HTTP para autenticacion, autorizacion y logging",
+        "Renderizado 3D por pipeline de shaders",
+        "Compresion de archivos por lotes",
+        "Creacion de entidades con ORM"
+      ],
+      "correct": 0,
+      "explanation": "Los middlewares encadenados aplican reglas sucesivas sobre request/response, delegando cuando corresponde."
+    },
+    {
+      "id": "chain_of_responsibility_q6",
+      "type": "mcq",
+      "question": "Que ventaja de mantenibilidad aporta al agregar nuevas reglas de negocio?",
+      "options": [
+        "Obliga a editar el cliente para cada nuevo caso",
+        "Permite extender con nuevos handlers sin alterar los existentes",
+        "Elimina la necesidad de pruebas de integracion",
+        "Reduce a cero el costo de depuracion"
+      ],
+      "correct": 1,
+      "explanation": "Favorece OCP: se agregan manejadores adicionales sin tocar codigo estable del flujo ya probado."
+    },
+    {
+      "id": "chain_of_responsibility_q7",
+      "type": "mcq",
+      "question": "Comparado con Command, cual afirmacion es mas precisa?",
+      "options": [
+        "Command encapsula una accion; Chain define quien procesa una solicitud en secuencia",
+        "Command y Chain son equivalentes si hay una sola clase",
+        "Chain siempre necesita deshacer operaciones como Command",
+        "Command reemplaza completamente el concepto de manejador"
+      ],
+      "correct": 0,
+      "explanation": "Command modela peticiones como objetos ejecutables; Chain modela el enrutamiento y la responsabilidad de atencion."
+    },
+    {
+      "id": "chain_of_responsibility_q8",
+      "type": "mcq",
+      "question": "Comparado con Mediator, donde radica la diferencia estructural clave?",
+      "options": [
+        "Mediator usa cadena lineal y Chain coordina malla completa",
+        "Chain distribuye decision entre nodos encadenados; Mediator centraliza la coordinacion",
+        "Mediator no desacopla componentes",
+        "Chain exige conocimiento global de todos los colegas"
+      ],
+      "correct": 1,
+      "explanation": "En Chain, cada nodo conoce principalmente al siguiente; en Mediator, el orquestador conoce reglas de interaccion entre colegas."
+    },
+    {
+      "id": "chain_of_responsibility_q9",
+      "type": "mcq",
+      "question": "Comparado con Decorator, cual enunciado describe mejor su intencion?",
+      "options": [
+        "Decorator define quien maneja peticiones por prioridad",
+        "Decorator y Chain siempre requieren detenerse en el primer nodo",
+        "Decorator agrega responsabilidades al objeto; Chain decide quien atiende una solicitud",
+        "Decorator solo aplica a procesos asincronos y Chain a sincronos"
+      ],
+      "correct": 2,
+      "explanation": "Decorator transforma comportamiento del componente envuelto; Chain rutea solicitudes por una secuencia de manejadores."
+    },
+    {
+      "id": "chain_of_responsibility_q10",
+      "type": "mcq",
+      "question": "Comparado con Observer, cual diferencia funcional es correcta?",
+      "options": [
+        "Observer procesa uno-a-uno y Chain difunde a muchos",
+        "Chain difunde a todos los observadores en paralelo",
+        "Observer publica a muchos suscriptores; Chain suele avanzar hasta que alguien maneja o termina",
+        "No existe diferencia de intencion entre ambos"
+      ],
+      "correct": 2,
+      "explanation": "Observer es modelo de notificacion uno-a-muchos; Chain es ruta secuencial de decision de manejo."
+    },
+    {
+      "id": "chain_of_responsibility_q11",
+      "type": "mcq",
+      "question": "Comparado con Strategy, cual afirmacion es la mas exacta?",
+      "options": [
+        "Strategy recorre multiples candidatos hasta match; Chain selecciona uno fijo",
+        "Strategy selecciona un algoritmo; Chain evalua posibles manejadores en secuencia",
+        "Ambos siempre ejecutan todos los nodos",
+        "Strategy elimina interfaces y Chain las obliga"
+      ],
+      "correct": 1,
+      "explanation": "Strategy elige una variante de algoritmo; Chain puede probar varios manejadores hasta resolver."
+    },
+    {
+      "id": "chain_of_responsibility_q12",
+      "type": "mcq",
+      "question": "Que desventaja tecnica puede aparecer en cadenas largas?",
+      "options": [
+        "Imposibilidad total de trazabilidad",
+        "Mayor latencia y depuracion mas compleja por salto entre handlers",
+        "Bloqueo automatico por deadlock en todos los casos",
+        "Perdida de encapsulacion del dominio"
+      ],
+      "correct": 1,
+      "explanation": "Cada salto agrega trabajo y complejidad de observabilidad; es importante medir y trazar el recorrido."
+    },
+    {
+      "id": "chain_of_responsibility_q13",
+      "type": "mcq",
+      "question": "Cuando NO suele ser recomendable aplicar Chain of Responsibility?",
+      "options": [
+        "Cuando las reglas cambian por configuracion y crecen en el tiempo",
+        "Cuando existe un unico caso estable y la ruta de decision es trivial",
+        "Cuando se necesita desacoplar cliente de concretos",
+        "Cuando se requiere ordenar validaciones en pipeline"
+      ],
+      "correct": 1,
+      "explanation": "Si no hay variacion real de reglas, introducir cadena puede ser sobreingenieria innecesaria."
+    },
+    {
+      "id": "chain_of_responsibility_q14",
+      "type": "mcq",
+      "question": "Que estrategia de diseno evita errores cuando ningun handler procesa la solicitud?",
+      "options": [
+        "Asumir exito silencioso por defecto",
+        "Definir un comportamiento terminal explicito (fallback o error controlado)",
+        "Volver siempre al primer handler en bucle",
+        "Eliminar el ultimo manejador de la cadena"
+      ],
+      "correct": 1,
+      "explanation": "Un final explicito evita resultados ambiguos y hace predecible el contrato cuando no hay coincidencias."
+    },
+    {
+      "id": "chain_of_responsibility_q15",
+      "type": "mcq",
+      "question": "Por que el orden de handlers suele ser critico?",
+      "options": [
+        "Porque todos los handlers son conmutativos por definicion",
+        "Porque un handler anterior puede consumir o transformar la solicitud antes que otro",
+        "Porque solo el ultimo handler puede modificar estado",
+        "Porque el cliente reordena automaticamente la cadena en runtime"
+      ],
+      "correct": 1,
+      "explanation": "La prioridad efectiva emerge del orden; cambios de posicion pueden alterar resultado funcional."
+    },
+    {
+      "id": "chain_of_responsibility_q16",
+      "type": "mcq",
+      "question": "Que practica de construccion mejora flexibilidad sin acoplar al cliente?",
+      "options": [
+        "Crear la cadena dentro de cada handler con new",
+        "Ensamblar la cadena en bootstrap o contenedor DI",
+        "Forzar herencia multiple entre handlers",
+        "Persistir los handlers como entidades de base de datos"
+      ],
+      "correct": 1,
+      "explanation": "Componer la cadena en una capa de configuracion permite cambiar politicas sin modificar el cliente ni los nodos."
+    },
+    {
+      "id": "chain_of_responsibility_q17",
+      "type": "true_false",
+      "question": "En Chain of Responsibility puede haber varios handlers capaces de atender la misma solicitud, y el primero que califica define el resultado.",
+      "correct": true,
+      "explanation": "Verdadero. La cadena expresa prioridad operacional; por eso el orden y criterio de match importan."
+    },
+    {
+      "id": "chain_of_responsibility_q18",
+      "type": "true_false",
+      "question": "El patron obliga a que todos los handlers conozcan a todos los demas para decidir correctamente.",
+      "correct": false,
+      "explanation": "Falso. Normalmente cada nodo conoce solo su propio criterio y, como maximo, el siguiente enlace."
+    },
+    {
+      "id": "chain_of_responsibility_q19",
+      "type": "true_false",
+      "question": "Un cliente puede quedar desacoplado de clases concretas enviando la solicitud al primer handler a traves de una abstraccion.",
+      "correct": true,
+      "explanation": "Verdadero. Ese desacoplamiento facilita sustitucion de reglas y pruebas."
+    },
+    {
+      "id": "chain_of_responsibility_q20",
+      "type": "true_false",
+      "question": "En una implementacion tipica, todos los handlers deben ejecutar siempre su logica, incluso despues de que uno ya resolvio la solicitud.",
+      "correct": false,
+      "explanation": "Falso. Lo comun es cortar al resolver; ejecutar siempre todos cambia la semantica y puede introducir efectos no deseados."
+    },
+    {
+      "id": "chain_of_responsibility_q21",
+      "type": "true_false",
+      "question": "A diferencia de Command, Chain of Responsibility se centra en el enrutamiento de la solicitud entre posibles procesadores, no en encapsular una operacion ejecutable.",
+      "correct": true,
+      "explanation": "Verdadero. Command encapsula invocaciones; Chain gestiona la responsabilidad de atencion."
+    },
+    {
+      "id": "chain_of_responsibility_q22",
+      "type": "true_false",
+      "question": "A diferencia de Mediator, Chain of Responsibility no necesita una autoridad central que conozca todas las interacciones entre participantes.",
+      "correct": true,
+      "explanation": "Verdadero. Chain distribuye la decision entre nodos enlazados, mientras Mediator centraliza coordinacion."
+    },
+    {
+      "id": "chain_of_responsibility_q23",
+      "type": "true_false",
+      "question": "Aplicar Chain of Responsibility elimina por completo la necesidad de definir contratos claros entre handlers.",
+      "correct": false,
+      "explanation": "Falso. Sin contrato de entrada/salida y reglas de delegacion, la cadena se vuelve fragil e impredecible."
+    },
+    {
+      "id": "chain_of_responsibility_q24",
+      "type": "true_false",
+      "question": "A diferencia de Decorator, Chain of Responsibility no busca enriquecer el mismo componente base, sino decidir quien atiende la solicitud.",
+      "correct": true,
+      "explanation": "Verdadero. Decorator compone responsabilidades sobre un objeto; Chain distribuye decision de manejo."
+    },
+    {
+      "id": "chain_of_responsibility_q25",
+      "type": "true_false",
+      "question": "El patron es especialmente util cuando las reglas de enrutamiento cambian con frecuencia por configuracion.",
+      "correct": true,
+      "explanation": "Verdadero. Permite insertar, remover o reordenar handlers sin reescritura del flujo cliente."
+    },
+    {
+      "id": "chain_of_responsibility_q26",
+      "type": "true_false",
+      "question": "Si no se define una politica de parada y error terminal, pueden aparecer solicitudes perdidas sin trazabilidad clara.",
+      "correct": true,
+      "explanation": "Verdadero. El caso 'no atendido' debe ser explicito para evitar fallos silenciosos."
+    },
+    {
+      "id": "chain_of_responsibility_q27",
+      "type": "true_false",
+      "question": "Observer y Chain of Responsibility comparten la misma semantica de difusion: ambos notifican siempre a todos los receptores.",
+      "correct": false,
+      "explanation": "Falso. Observer publica a multiples suscriptores; Chain suele avanzar secuencialmente hasta resolver o terminar."
+    },
+    {
+      "id": "chain_of_responsibility_q28",
+      "type": "true_false",
+      "question": "Una cadena mal ensamblada puede introducir ciclos y producir recursividad infinita o bucles de delegacion.",
+      "correct": true,
+      "explanation": "Verdadero. Es un riesgo real si no se valida topologia y condiciones de corte."
+    },
+    {
+      "id": "chain_of_responsibility_q29",
+      "type": "true_false",
+      "question": "En rutas criticas de rendimiento, una cadena excesivamente larga puede incrementar latencia aun cuando cada handler sea simple.",
+      "correct": true,
+      "explanation": "Verdadero. El costo acumulado de saltos y verificaciones puede ser relevante bajo alta carga."
+    },
+    {
+      "id": "chain_of_responsibility_q30",
+      "type": "true_false",
+      "question": "A diferencia de Strategy, Chain of Responsibility puede evaluar multiples candidatos en secuencia antes de resolver.",
+      "correct": true,
+      "explanation": "Verdadero. Strategy selecciona una politica de algoritmo; Chain recorre potenciales responsables."
+    },
+    {
+      "id": "chain_of_responsibility_q31",
+      "type": "short",
+      "question": "Como se llama el contrato comun que implementan los procesadores en este patron?",
+      "correct": [
+        "handler",
+        "manejador"
+      ],
+      "hint": "Define la operacion de procesar y delegar.",
+      "explanation": "La abstraccion Handler unifica la interfaz para que todos los nodos sean intercambiables en la cadena."
+    },
+    {
+      "id": "chain_of_responsibility_q32",
+      "type": "short",
+      "question": "Que nombre suele tener la referencia al siguiente nodo de la cadena?",
+      "correct": [
+        "next",
+        "siguiente"
+      ],
+      "hint": "Es el enlace que permite delegar.",
+      "explanation": "El puntero al siguiente handler materializa la estructura secuencial del patron."
+    },
+    {
+      "id": "chain_of_responsibility_q33",
+      "type": "short",
+      "question": "Que accion realiza un handler cuando decide no atender la solicitud?",
+      "correct": [
+        "delegar",
+        "delegacion"
+      ],
+      "hint": "No resuelve localmente; la pasa adelante.",
+      "explanation": "La delegacion preserva el desacoplamiento y permite que otro manejador intente resolver."
+    },
+    {
+      "id": "chain_of_responsibility_q34",
+      "type": "short",
+      "question": "Que principio SOLID se favorece al agregar nuevos handlers sin modificar los existentes?",
+      "correct": [
+        "ocp",
+        "open closed",
+        "abierto cerrado"
+      ],
+      "hint": "Extender sin alterar codigo estable.",
+      "explanation": "La extension por nuevos nodos concretos respeta el principio Open/Closed."
+    },
+    {
+      "id": "chain_of_responsibility_q35",
+      "type": "short",
+      "question": "Que patron, a diferencia de Chain, se enfoca en encapsular una solicitud como objeto ejecutable?",
+      "correct": [
+        "command",
+        "comando"
+      ],
+      "hint": "Suele usarse con invoker y receiver.",
+      "explanation": "Command modela una accion invocable; Chain modela la ruta de responsabilidad."
+    },
+    {
+      "id": "chain_of_responsibility_q36",
+      "type": "short",
+      "question": "En un pipeline web, que objeto suele circular por la cadena de middlewares?",
+      "correct": [
+        "request",
+        "solicitud"
+      ],
+      "hint": "Representa la entrada HTTP.",
+      "explanation": "El request viaja por los handlers para validarse, enriquecerse o resolverse."
+    },
+    {
+      "id": "chain_of_responsibility_q37",
+      "type": "short",
+      "question": "Quien inicia normalmente el envio de la solicitud al primer handler?",
+      "correct": [
+        "cliente",
+        "client"
+      ],
+      "hint": "No decide toda la ruta interna.",
+      "explanation": "El cliente dispara la operacion y delega la resolucion en la cadena configurada."
+    },
+    {
+      "id": "chain_of_responsibility_q38",
+      "type": "short",
+      "question": "Como se denomina una respuesta final definida para cuando nadie atiende la solicitud?",
+      "correct": [
+        "fallback",
+        "default handler"
+      ],
+      "hint": "Evita fallos silenciosos al final del flujo.",
+      "explanation": "Un mecanismo terminal explicito garantiza comportamiento predecible si no hay coincidencias."
+    },
+    {
+      "id": "chain_of_responsibility_q39",
+      "type": "short",
+      "question": "Que efecto no funcional suele crecer cuando la cadena es demasiado larga?",
+      "correct": [
+        "latencia",
+        "latency"
+      ],
+      "hint": "Afecta el tiempo de respuesta.",
+      "explanation": "Cada salto agrega costo acumulado; medir latencia ayuda a ajustar longitud y orden."
+    },
+    {
+      "id": "chain_of_responsibility_q40",
+      "type": "short",
+      "question": "Que patron, a diferencia de Chain, agrega responsabilidades envolviendo el mismo componente base?",
+      "correct": [
+        "decorator",
+        "decorador"
+      ],
+      "hint": "Trabaja por envolturas sucesivas de un componente.",
+      "explanation": "Decorator extiende comportamiento por composicion envolvente, no por decision de responsabilidad."
+    }
+  ]
+}

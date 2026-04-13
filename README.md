@@ -11,7 +11,7 @@ Plataforma estática de aprendizaje para dominar los patrones de diseño (GoF) m
   - **Factory Method:** Centraliza la creación de las estrategias de preguntas.
   - **Singleton:** El `SessionState` mantiene el estado global del quiz activo de forma única.
 - **Datos:** Bancos de 40 preguntas por patrón almacenados en archivos JSON independientes.
-- **Datos:** Bancos de preguntas por patrón almacenados en archivos JSON independientes (25-40 preguntas según patrón).
+- **Despliegue:** Arquitectura 100% estática, compatible con GitHub Pages.
 
 ## 🚀 Cómo ejecutar el proyecto localmente
 
@@ -38,9 +38,21 @@ Este comando genera una carpeta `dist/` en la raíz con todos los archivos está
 
 ### Despliegue en GitHub Pages
 El proyecto está optimizado para ser desplegado como un sitio estático:
-1. Asegúrate de que el comando `bun run build` haya generado la carpeta `dist`.
+1. Asegúrate de que el comando `npm run build` haya generado la carpeta `dist`.
 2. Sube el contenido de `dist` a la rama de despliegue (`gh-pages` o `main` dependiendo de tu configuración).
 3. En la configuración de GitHub Pages, apunta a la raíz de la rama/carpeta donde subiste los archivos.
+
+## 🏭 Patrones Creacionales
+
+Banco de preguntas creacionales en formato JSON, consumido por el motor del quiz.
+
+| Patrón | Preguntas | Estado |
+|---|---:|---|
+| Abstract Factory | 40 | Completo |
+| Builder | 40 | Completo |
+| Factory Method | 40 | Completo |
+| Prototype | 40 | Completo |
+| Singleton | 40 | Completo |
 
 ## 🧱 Patrones Estructurales
 
@@ -56,13 +68,33 @@ Banco de preguntas estructurales en formato JSON, consumido por el motor del qui
 | Flyweight | 40 | Completo |
 | Proxy | 40 | Completo |
 
-Criterio de completitud: un patrón se considera completo cuando tiene al menos 25 preguntas válidas.
+## 🎯 Patrones Comportamentales
+
+Banco de preguntas comportamentales en formato JSON, consumido por el motor del quiz.
+
+| Patrón | Preguntas | Estado |
+|---|---:|---|
+| Chain of Responsibility | 40 | Completo |
+| Command | 40 | Completo |
+| Iterator | 40 | Completo |
+| Mediator | 40 | Completo |
+| Memento | 40 | Completo |
+| Observer | 40 | Completo |
+| State | 40 | Completo |
+| Strategy | 40 | Completo |
+| Template Method | 40 | Completo |
+| Visitor | 40 | Completo |
+
+**Completitud global del banco actual:** Creacionales, Estructurales y Comportamentales están completos (40 preguntas por patrón).
 
 ## 📈 Estructura del Proyecto
 
 - `frontend/`: Código fuente, estilos y estructuras base.
-  - `src/domain/`: Interfaces y estrategias de negocio (Strategy Pattern).
-  - `src/services/`: Lógica de creación (Factory), aleatorización y estado (Singleton).
-  - `src/data/patterns/`: Bancos de preguntas en formato JSON.
+   - `src/app/`: Punto de entrada y orquestación general de la aplicación.
+   - `src/domain/`: Interfaces y estrategias de negocio (Strategy Pattern).
+   - `src/services/`: Lógica de creación (Factory), aleatorización y estado (Singleton).
+   - `src/data/patterns/`: Bancos de preguntas en formato JSON.
+   - `src/ui/components/`: Componentes de interfaz reutilizables.
+   - `src/ui/views/`: Vistas del flujo del quiz.
 - `dist/`: Generado automáticamente tras el build para despliegue.
 

@@ -1,0 +1,425 @@
+{
+  "id": "memento",
+  "name": "Memento",
+  "category": "Comportamiento",
+  "description": "Captura y externaliza el estado interno de un objeto sin violar encapsulacion, para poder restaurarlo mas adelante.",
+  "questions": [
+    {
+      "id": "memento_q1",
+      "type": "mcq",
+      "question": "¿Cual es el proposito principal del patron Memento?",
+      "options": [
+        "Coordinar multiples receptores de eventos en tiempo real",
+        "Guardar y restaurar estados anteriores de un objeto sin exponer su implementacion interna",
+        "Crear familias de objetos relacionados sin acoplar al cliente",
+        "Reemplazar condicionales por algoritmos intercambiables"
+      ],
+      "correct": 1,
+      "explanation": "Memento se centra en deshacer/restaurar estado preservando encapsulacion. No define familias de objetos ni seleccion de algoritmos."
+    },
+    {
+      "id": "memento_q2",
+      "type": "mcq",
+      "question": "¿Que trio de participantes define la estructura clasica de Memento?",
+      "options": [
+        "Invoker, Command y Receiver",
+        "Context, State y ConcreteState",
+        "Originator, Memento y Caretaker",
+        "Client, Strategy y Context"
+      ],
+      "correct": 2,
+      "explanation": "Originator crea/restaura snapshots, Memento representa el estado capturado y Caretaker administra el historial sin inspeccionar detalles internos."
+    },
+    {
+      "id": "memento_q3",
+      "type": "mcq",
+      "question": "¿Cual es la responsabilidad correcta del Caretaker?",
+      "options": [
+        "Modificar campos internos del Memento para optimizar memoria",
+        "Construir el estado inicial del Originator",
+        "Persistir y organizar mementos sin romper encapsulacion del Originator",
+        "Validar reglas de negocio del Originator antes de cada cambio"
+      ],
+      "correct": 2,
+      "explanation": "El Caretaker custodia historial y metadatos. La logica de serializacion interna y restauracion pertenece al Originator."
+    },
+    {
+      "id": "memento_q4",
+      "type": "mcq",
+      "question": "Comparado con Command, ¿que diferencia conceptual es mas precisa?",
+      "options": [
+        "Command guarda snapshots completos y Memento guarda solo intenciones",
+        "Memento captura estado para restaurar; Command encapsula una accion y su ejecucion",
+        "No hay diferencia real, ambos son el mismo patron",
+        "Memento requiere invocadores remotos y Command no"
+      ],
+      "correct": 1,
+      "explanation": "Command modela operaciones (hacer/ejecutar). Memento modela estado historico para rollback. Pueden colaborar, pero su intencion es distinta."
+    },
+    {
+      "id": "memento_q5",
+      "type": "mcq",
+      "question": "¿Que distingue a Memento frente a State?",
+      "options": [
+        "State representa estados activos que cambian comportamiento; Memento representa estados historicos para recuperacion",
+        "Memento cambia algoritmos en runtime y State guarda historial",
+        "State es creacional y Memento estructural",
+        "Memento y State solo difieren en el nombre de las clases"
+      ],
+      "correct": 0,
+      "explanation": "State modela comportamiento actual segun estado vigente. Memento guarda fotografia de estado pasado para volver atras."
+    },
+    {
+      "id": "memento_q6",
+      "type": "mcq",
+      "question": "En comparacion conceptual con Event Sourcing, ¿que afirmacion es correcta?",
+      "options": [
+        "Memento registra eventos inmutables como fuente de verdad historica",
+        "Event Sourcing guarda snapshots y descarta eventos de dominio",
+        "Memento suele guardar estado puntual; Event Sourcing reconstruye estado reproduciendo eventos",
+        "Ambos exigen exactamente la misma infraestructura"
+      ],
+      "correct": 2,
+      "explanation": "Memento captura estado en puntos concretos. Event Sourcing prioriza eventos como historial canonico y puede usar snapshots como optimizacion."
+    },
+    {
+      "id": "memento_q7",
+      "type": "mcq",
+      "question": "¿Cuando conviene una copia profunda al crear un Memento?",
+      "options": [
+        "Cuando el estado contiene referencias mutables compartidas que podrian cambiar despues del snapshot",
+        "Solo cuando el objeto tiene menos de tres campos",
+        "Nunca; la copia superficial siempre garantiza undo correcto",
+        "Unicamente cuando se trabaja con tipos primitivos"
+      ],
+      "correct": 0,
+      "explanation": "Si el snapshot comparte referencias mutables con el estado vivo, el historial se corrompe. En esos casos, deep copy evita efectos colaterales."
+    },
+    {
+      "id": "memento_q8",
+      "type": "mcq",
+      "question": "¿Que caso de uso describe mejor la aplicacion de Memento?",
+      "options": [
+        "Un editor que permite deshacer y rehacer varias operaciones",
+        "Un balanceador de carga con estrategias de enrutamiento",
+        "Una fabrica de interfaces por sistema operativo",
+        "Un adaptador para integrar APIs incompatibles"
+      ],
+      "correct": 0,
+      "explanation": "Undo/redo en editores es el ejemplo clasico: se capturan snapshots del documento para restaurar versiones previas."
+    },
+    {
+      "id": "memento_q9",
+      "type": "mcq",
+      "question": "¿Cual es un riesgo tecnico frecuente al usar Memento de forma ingenua?",
+      "options": [
+        "Pérdida de polimorfismo en toda la aplicacion",
+        "Explosión de consumo de memoria por historiales largos de snapshots completos",
+        "Imposibilidad de encapsular objetos complejos",
+        "Eliminacion automatica de invariantes de dominio"
+      ],
+      "correct": 1,
+      "explanation": "Guardar estados completos en cada cambio puede crecer rapidamente en memoria. Se mitiga con limites, compresion o checkpoints."
+    },
+    {
+      "id": "memento_q10",
+      "type": "mcq",
+      "question": "Frente a Prototype, ¿cuando Memento es mas apropiado?",
+      "options": [
+        "Cuando necesitas duplicar objetos para crear nuevas instancias equivalentes",
+        "Cuando necesitas volver a estados previos del mismo objeto durante su ciclo de vida",
+        "Cuando quieres ocultar la construccion de familias de productos",
+        "Cuando buscas intercambiar algoritmos de validacion"
+      ],
+      "correct": 1,
+      "explanation": "Prototype clona para crear objetos nuevos. Memento guarda historial del mismo objeto para restaurarlo luego."
+    },
+    {
+      "id": "memento_q11",
+      "type": "mcq",
+      "question": "Comparado con Strategy, Memento se enfoca en:",
+      "options": [
+        "Seleccionar politicas de comportamiento en runtime",
+        "Persistir decisiones de negocio en factories",
+        "Capturar y recuperar estado interno, no variar algoritmos",
+        "Publicar eventos a subscriptores desacoplados"
+      ],
+      "correct": 2,
+      "explanation": "Strategy cambia como se comporta el sistema; Memento cambia a que estado vuelve el sistema."
+    },
+    {
+      "id": "memento_q12",
+      "type": "mcq",
+      "question": "¿Que estrategia reduce costo de restauracion en historiales muy extensos?",
+      "options": [
+        "Crear un memento por cada lectura de estado",
+        "Usar checkpoints periodicos y conservar solo deltas intermedios",
+        "Evitar cualquier politica de retencion",
+        "Reemplazar snapshots por variables globales"
+      ],
+      "correct": 1,
+      "explanation": "Checkpoints + deltas equilibran memoria y tiempo de reconstruccion en escenarios de alta frecuencia de cambios."
+    },
+    {
+      "id": "memento_q13",
+      "type": "mcq",
+      "question": "¿Por que se recomienda que el Memento sea inmutable?",
+      "options": [
+        "Para permitir que el Caretaker lo altere sin riesgos",
+        "Para garantizar integridad historica y evitar corrupcion accidental del snapshot",
+        "Para acelerar la carga de clases en tiempo de compilacion",
+        "Porque Memento no puede contener estructuras compuestas"
+      ],
+      "correct": 1,
+      "explanation": "Si el snapshot puede mutar desde fuera, el historial deja de ser confiable para undo/redo."
+    },
+    {
+      "id": "memento_q14",
+      "type": "mcq",
+      "question": "Escenario: necesitas auditoria legal completa, reproduccion temporal y consultas por evento. ¿Que opcion encaja mejor?",
+      "options": [
+        "Solo Memento, porque reemplaza historico de eventos",
+        "Command con una sola cola en memoria",
+        "Event Sourcing como base, usando snapshots tipo Memento solo para optimizar reconstruccion",
+        "State con transiciones internas sin persistencia"
+      ],
+      "correct": 2,
+      "explanation": "Para trazabilidad total, Event Sourcing es mas adecuado. Snapshots tipo Memento pueden acelerar el replay, pero no sustituyen el registro de eventos."
+    },
+    {
+      "id": "memento_q15",
+      "type": "mcq",
+      "question": "En entornos concurrentes, ¿que practica mejora consistencia de mementos?",
+      "options": [
+        "Capturar estado parcial mientras otras escrituras siguen activas",
+        "Tomar snapshots en secciones atomicas o sobre versiones inmutables",
+        "Permitir que cualquier hilo edite mementos historicos",
+        "Reutilizar una sola instancia de memento para todo el historial"
+      ],
+      "correct": 1,
+      "explanation": "La captura atomica evita snapshots intermedios inconsistentes cuando hay concurrencia o cambios simultaneos."
+    },
+    {
+      "id": "memento_q16",
+      "type": "mcq",
+      "question": "¿En cual caso NO conviene aplicar Memento directamente?",
+      "options": [
+        "Cambios esporadicos y necesidad clara de undo",
+        "Estado pequeno, bien encapsulado y bajo costo de copia",
+        "Estado enorme con alta frecuencia de cambios y sin necesidad real de retroceso",
+        "Flujos de edicion donde el usuario exige revertir acciones"
+      ],
+      "correct": 2,
+      "explanation": "Si no hay requerimiento de rollback y el costo de snapshot es alto, Memento introduce complejidad y consumo innecesarios."
+    },
+    {
+      "id": "memento_q17",
+      "type": "true_false",
+      "question": "Memento busca preservar encapsulacion al evitar que el Caretaker manipule directamente el estado interno del Originator.",
+      "correct": true,
+      "explanation": "Verdadero. El snapshot existe para recuperar estado sin exponer detalles internos del objeto originador."
+    },
+    {
+      "id": "memento_q18",
+      "type": "true_false",
+      "question": "El Caretaker deberia poder editar libremente el contenido interno de cada memento para ahorrar memoria.",
+      "correct": false,
+      "explanation": "Falso. Si el Caretaker altera snapshots, se rompe la confiabilidad del historial y la encapsulacion."
+    },
+    {
+      "id": "memento_q19",
+      "type": "true_false",
+      "question": "Un sistema con Memento puede soportar undo multinivel si administra correctamente una pila o historial de snapshots.",
+      "correct": true,
+      "explanation": "Verdadero. El soporte de multiples pasos depende de una politica de almacenamiento y navegacion del historial."
+    },
+    {
+      "id": "memento_q20",
+      "type": "true_false",
+      "question": "Memento y Strategy tienen la misma intencion principal: seleccionar algoritmos alternativos en tiempo de ejecucion.",
+      "correct": false,
+      "explanation": "Falso. Strategy selecciona algoritmos; Memento captura y restaura estado."
+    },
+    {
+      "id": "memento_q21",
+      "type": "true_false",
+      "question": "Si un memento guarda referencias a objetos mutables compartidos, el resultado de undo puede volverse incorrecto.",
+      "correct": true,
+      "explanation": "Verdadero. Los cambios posteriores sobre esas referencias contaminan snapshots antiguos."
+    },
+    {
+      "id": "memento_q22",
+      "type": "true_false",
+      "question": "Prototype siempre reemplaza a Memento porque ambos trabajan con copias de objetos.",
+      "correct": false,
+      "explanation": "Falso. Prototype crea nuevas instancias por clonacion; Memento conserva historial del mismo objeto para recuperacion."
+    },
+    {
+      "id": "memento_q23",
+      "type": "true_false",
+      "question": "Para mejorar escalabilidad, es valido limitar la cantidad de mementos retenidos segun politicas de ventana historica.",
+      "correct": true,
+      "explanation": "Verdadero. Politicas de retencion (por cantidad o tiempo) controlan uso de memoria en sistemas de larga vida."
+    },
+    {
+      "id": "memento_q24",
+      "type": "true_false",
+      "question": "En Event Sourcing, lo canonico son los eventos de dominio; un snapshot estilo Memento puede usarse como optimizacion.",
+      "correct": true,
+      "explanation": "Verdadero. El estado se puede reconstruir desde eventos, y snapshots aceleran ese proceso cuando el historial crece."
+    },
+    {
+      "id": "memento_q25",
+      "type": "true_false",
+      "question": "Command y Memento pueden combinarse: Command para ejecutar/revertir acciones y Memento para restaurar estado complejo.",
+      "correct": true,
+      "explanation": "Verdadero. Es una combinacion comun en undo/redo cuando deshacer por logica inversa no es suficiente."
+    },
+    {
+      "id": "memento_q26",
+      "type": "true_false",
+      "question": "State modela estados activos que alteran comportamiento; no esta orientado principalmente a historiales de retroceso.",
+      "correct": true,
+      "explanation": "Verdadero. State describe comportamiento actual por estado; Memento conserva pasado para restaurar."
+    },
+    {
+      "id": "memento_q27",
+      "type": "true_false",
+      "question": "Es buena practica que el memento exponga solo metadatos minimos al Caretaker, manteniendo opaco el detalle del estado.",
+      "correct": true,
+      "explanation": "Verdadero. Metadatos como timestamp o etiqueta pueden ser utiles sin romper encapsulacion."
+    },
+    {
+      "id": "memento_q28",
+      "type": "true_false",
+      "question": "Todo Memento debe ser una copia completa; los enfoques por diferencias (deltas) son incompatibles con el patron.",
+      "correct": false,
+      "explanation": "Falso. Deltas y checkpoints son variantes validas siempre que permitan restaurar correctamente."
+    },
+    {
+      "id": "memento_q29",
+      "type": "true_false",
+      "question": "Si el estado contiene informacion sensible, puede ser necesario cifrar snapshots persistidos.",
+      "correct": true,
+      "explanation": "Verdadero. Seguridad y cumplimiento pueden exigir cifrado en reposo y control de acceso al historial."
+    },
+    {
+      "id": "memento_q30",
+      "type": "true_false",
+      "question": "En flujos no deterministas, guardar solo la marca de tiempo suele ser suficiente para reproducir exactamente el estado anterior.",
+      "correct": false,
+      "explanation": "Falso. Sin capturar estado relevante (o entradas determinantes), un timestamp por si solo no garantiza reconstruccion exacta."
+    },
+    {
+      "id": "memento_q31",
+      "type": "short",
+      "question": "¿Como se llama el objeto que crea y restaura snapshots en Memento?",
+      "correct": [
+        "originator",
+        "originador"
+      ],
+      "hint": "Es el dueno del estado interno que se desea proteger.",
+      "explanation": "El Originator conoce su estructura interna y por eso es quien genera y reaplica mementos."
+    },
+    {
+      "id": "memento_q32",
+      "type": "short",
+      "question": "¿Como se denomina quien administra el historial de snapshots?",
+      "correct": [
+        "caretaker",
+        "cuidador"
+      ],
+      "hint": "Custodia, pero no debe inspeccionar el estado interno.",
+      "explanation": "El Caretaker organiza y conserva mementos sin violar encapsulacion."
+    },
+    {
+      "id": "memento_q33",
+      "type": "short",
+      "question": "Nombre del objeto que representa la captura de estado en este patron.",
+      "correct": [
+        "memento",
+        "snapshot"
+      ],
+      "hint": "Es la fotografia del estado en un instante.",
+      "explanation": "El Memento encapsula la informacion necesaria para restaurar el Originator."
+    },
+    {
+      "id": "memento_q34",
+      "type": "short",
+      "question": "Operacion de editor que mas comunmente implementa Memento junto con Command.",
+      "correct": [
+        "undo",
+        "deshacer"
+      ],
+      "hint": "Revierte la ultima modificacion aplicada.",
+      "explanation": "Undo es el caso clasico donde Command y Memento se complementan."
+    },
+    {
+      "id": "memento_q35",
+      "type": "short",
+      "question": "Operacion inversa a deshacer que reaplica un cambio revertido.",
+      "correct": [
+        "redo",
+        "rehacer"
+      ],
+      "hint": "Suele requerir una segunda pila de historial.",
+      "explanation": "Redo vuelve a aplicar una accion previamente deshecha."
+    },
+    {
+      "id": "memento_q36",
+      "type": "short",
+      "question": "Propiedad recomendada del memento para evitar alteraciones externas.",
+      "correct": [
+        "inmutable",
+        "immutability",
+        "inmutabilidad"
+      ],
+      "hint": "Una vez creado, no deberia cambiar.",
+      "explanation": "La inmutabilidad protege la integridad del historial de restauracion."
+    },
+    {
+      "id": "memento_q37",
+      "type": "short",
+      "question": "Estructura de datos tipica para historial de undo multinivel.",
+      "correct": [
+        "pila",
+        "stack"
+      ],
+      "hint": "Funciona con politica LIFO.",
+      "explanation": "La pila permite recuperar el ultimo estado guardado de forma natural."
+    },
+    {
+      "id": "memento_q38",
+      "type": "short",
+      "question": "Snapshot periodico usado para acortar reconstrucciones largas.",
+      "correct": [
+        "checkpoint"
+      ],
+      "hint": "Se combina con deltas o eventos intermedios.",
+      "explanation": "Un checkpoint evita recomponer desde el inicio completo del historial."
+    },
+    {
+      "id": "memento_q39",
+      "type": "short",
+      "question": "Tecnica que guarda solo cambios respecto al estado previo, en lugar de copia completa.",
+      "correct": [
+        "delta",
+        "deltas"
+      ],
+      "hint": "Reduce memoria cuando los cambios son pequenos.",
+      "explanation": "El enfoque por deltas almacena diferencias y reconstruye estado acumulando cambios."
+    },
+    {
+      "id": "memento_q40",
+      "type": "short",
+      "question": "En Event Sourcing, ¿que unidad inmutable se almacena como historial principal?",
+      "correct": [
+        "evento",
+        "event",
+        "evento de dominio"
+      ],
+      "hint": "No es snapshot; representa algo que ocurrio en el dominio.",
+      "explanation": "A diferencia de Memento, Event Sourcing persiste eventos de dominio como fuente canonica de verdad."
+    }
+  ]
+}

@@ -1,0 +1,421 @@
+{
+  "id": "state",
+  "name": "State",
+  "category": "Comportamiento",
+  "description": "Permite que un objeto cambie su comportamiento cuando cambia su estado interno, delegando reglas y transiciones en objetos de estado para eliminar condicionales complejas y mejorar la extensibilidad.",
+  "questions": [
+    {
+      "id": "state_q1",
+      "type": "mcq",
+      "question": "¿Cual es el objetivo principal del patron State?",
+      "options": [
+        "Centralizar toda la logica en un unico switch global",
+        "Permitir que un objeto cambie su comportamiento segun su estado interno",
+        "Crear una unica instancia compartida para todo el sistema",
+        "Construir objetos complejos paso a paso"
+      ],
+      "correct": 1,
+      "explanation": "State encapsula el comportamiento dependiente del estado en clases separadas, de modo que el Context cambia de conducta al cambiar de estado activo."
+    },
+    {
+      "id": "state_q2",
+      "type": "mcq",
+      "question": "En la estructura canonica de State, ¿quien mantiene la referencia al estado actual?",
+      "options": [
+        "El cliente",
+        "El ConcreteState",
+        "El Context",
+        "Un Factory externo obligatorio"
+      ],
+      "correct": 2,
+      "explanation": "El Context conserva la referencia al estado activo y delega en el las operaciones cuyo comportamiento varia por fase."
+    },
+    {
+      "id": "state_q3",
+      "type": "mcq",
+      "question": "¿Que problema de diseño suele motivar la adopcion de State?",
+      "options": [
+        "Exceso de clases inmutables",
+        "Bloques extensos de if/else o switch por estado",
+        "Necesidad de serializar objetos",
+        "Falta de herencia multiple"
+      ],
+      "correct": 1,
+      "explanation": "Cuando la logica por estado crece en condicionales dispersas, State reemplaza esas ramas por polimorfismo y reglas encapsuladas."
+    },
+    {
+      "id": "state_q4",
+      "type": "mcq",
+      "question": "¿Que participante define el contrato comun de comportamiento para todos los estados?",
+      "options": [
+        "Interfaz State",
+        "Context",
+        "Cliente",
+        "Adapter"
+      ],
+      "correct": 0,
+      "explanation": "La abstraccion State (interfaz o clase base) establece las operaciones que cada estado concreto implementa."
+    },
+    {
+      "id": "state_q5",
+      "type": "mcq",
+      "question": "¿En cual escenario es mas adecuado aplicar State?",
+      "options": [
+        "Un calculo puro sin fases ni transiciones",
+        "Un workflow de aprobacion con reglas distintas por etapa",
+        "Una utilidad estatica sin datos internos",
+        "Una entidad con una sola regla estable"
+      ],
+      "correct": 1,
+      "explanation": "State encaja cuando un objeto atraviesa fases (pendiente, aprobado, rechazado, etc.) y cada fase cambia operaciones permitidas y efectos."
+    },
+    {
+      "id": "state_q6",
+      "type": "mcq",
+      "question": "¿Que beneficio concreto aporta State respecto al principio OCP?",
+      "options": [
+        "Obliga a editar todas las clases al agregar un estado",
+        "Permite agregar nuevos estados creando clases nuevas sin romper clientes",
+        "Elimina por completo la necesidad de interfaces",
+        "Impide las transiciones en runtime"
+      ],
+      "correct": 1,
+      "explanation": "Si el contrato State es estable, nuevas variantes se introducen como nuevos ConcreteState, minimizando cambios en codigo existente."
+    },
+    {
+      "id": "state_q7",
+      "type": "mcq",
+      "question": "¿Que diferencia de intencion separa mejor State de Strategy?",
+      "options": [
+        "State evita interfaces y Strategy las exige",
+        "State modela fases internas y transiciones; Strategy selecciona algoritmos alternativos",
+        "Strategy solo funciona con herencia multiple",
+        "State no permite cambio en tiempo de ejecucion"
+      ],
+      "correct": 1,
+      "explanation": "Aunque su estructura puede parecer similar, State expresa evolucion del ciclo de vida interno; Strategy expresa eleccion de algoritmo por conveniencia."
+    },
+    {
+      "id": "state_q8",
+      "type": "mcq",
+      "question": "Comparado con Template Method, ¿que ventaja clave ofrece State?",
+      "options": [
+        "Fijar la secuencia en una superclase inmutable",
+        "Cambiar comportamiento reemplazando objetos de estado en runtime",
+        "Eliminar totalmente la composicion",
+        "Obligar a duplicar la jerarquia de clases"
+      ],
+      "correct": 1,
+      "explanation": "Template Method varia pasos por herencia y estructura fija; State cambia la implementacion activa por composicion segun transiciones dinamicas."
+    },
+    {
+      "id": "state_q9",
+      "type": "mcq",
+      "question": "¿Cual enunciado compara correctamente State con Chain of Responsibility?",
+      "options": [
+        "En State, varios objetos atienden la misma solicitud en cascada",
+        "En Chain, solo un estado global define todo el comportamiento",
+        "State usa un estado activo a la vez; Chain propaga la solicitud por una cadena de handlers",
+        "Ambos patrones tienen exactamente la misma semantica"
+      ],
+      "correct": 2,
+      "explanation": "State representa una fase activa del Context; Chain delega una solicitud entre manejadores potenciales hasta que alguien la procesa."
+    },
+    {
+      "id": "state_q10",
+      "type": "mcq",
+      "question": "¿Que diferencia tecnica distingue State frente a Observer?",
+      "options": [
+        "Observer modela cambio de estado interno y State publica eventos",
+        "State cambia comportamiento del mismo objeto; Observer notifica cambios a suscriptores externos",
+        "State requiere broker distribuido y Observer no",
+        "Observer solo aplica a patrones creacionales"
+      ],
+      "correct": 1,
+      "explanation": "State se centra en comportamiento interno del Context por fase; Observer se centra en comunicacion uno-a-muchos cuando ocurre un cambio."
+    },
+    {
+      "id": "state_q11",
+      "type": "mcq",
+      "question": "¿Que comparacion con Command es correcta?",
+      "options": [
+        "Command encapsula solicitudes ejecutables; State encapsula comportamiento por fase del Context",
+        "State guarda historial de undo/redo por definicion",
+        "Command reemplaza siempre la necesidad de estados",
+        "Ambos patrones obligan a usar una sola instancia global"
+      ],
+      "correct": 0,
+      "explanation": "Command modela acciones como objetos invocables y potencialmente reversibles; State modela reglas de comportamiento segun fase activa."
+    },
+    {
+      "id": "state_q12",
+      "type": "mcq",
+      "question": "Si varios Context comparten instancias de estado, ¿cuando es seguro hacerlo?",
+      "options": [
+        "Cuando los ConcreteState son inmutables o sin estado mutable",
+        "Siempre, sin excepcion",
+        "Nunca, State lo prohibe",
+        "Solo con herencia multiple"
+      ],
+      "correct": 0,
+      "explanation": "Compartir estados puede ahorrar memoria, pero solo es seguro cuando no guardan datos mutables dependientes de cada Context."
+    },
+    {
+      "id": "state_q13",
+      "type": "mcq",
+      "question": "¿Que riesgo aparece si cada estado conoce y crea todos los demas estados concretos?",
+      "options": [
+        "Disminuye el acoplamiento de forma automatica",
+        "Aumenta el acoplamiento y dificulta evolucionar transiciones",
+        "Elimina la necesidad de pruebas",
+        "Convierte State en Singleton"
+      ],
+      "correct": 1,
+      "explanation": "Si los estados se referencian en exceso entre si, se endurece la red de dependencias y se vuelve costoso cambiar el grafo de transiciones."
+    },
+    {
+      "id": "state_q14",
+      "type": "mcq",
+      "question": "¿Cuando State seria probablemente sobreingenieria?",
+      "options": [
+        "Cuando existen muchas fases con reglas cambiantes",
+        "Cuando solo hay dos variantes triviales y estables sin crecimiento esperado",
+        "Cuando se requiere testeo aislado por fase",
+        "Cuando hay transiciones no lineales"
+      ],
+      "correct": 1,
+      "explanation": "Si la variacion es minima y estable, introducir interfaz y multiples clases puede agregar complejidad sin beneficio real."
+    },
+    {
+      "id": "state_q15",
+      "type": "mcq",
+      "question": "¿Que practica mejora la testabilidad en un diseño con State?",
+      "options": [
+        "Probar solo el Context y omitir estados concretos",
+        "Probar cada ConcreteState en aislamiento y luego transiciones integradas",
+        "Evitar mocks del Context en pruebas de estado",
+        "Forzar una unica prueba end-to-end"
+      ],
+      "correct": 1,
+      "explanation": "Separar pruebas por estado valida reglas locales y luego pruebas de integracion verifican transiciones y coherencia del ciclo completo."
+    },
+    {
+      "id": "state_q16",
+      "type": "mcq",
+      "question": "¿Que criterio ayuda a decidir si la transicion debe vivir en el Context o en el estado concreto?",
+      "options": [
+        "Si la regla depende de politicas globales del proceso, suele pertenecer al Context",
+        "Toda transicion debe estar siempre dentro del estado",
+        "Toda transicion debe estar siempre en el cliente",
+        "La ubicacion no afecta mantenimiento"
+      ],
+      "correct": 0,
+      "explanation": "Las transiciones acopladas a reglas globales o coordinacion externa suelen quedar mejor en el Context; las locales a una fase pueden vivir en el estado."
+    },
+    {
+      "id": "state_q17",
+      "type": "true_false",
+      "question": "En State, el Context delega operaciones al estado activo para evitar condicionales repetitivos por fase.",
+      "correct": true,
+      "explanation": "Verdadero. La delegacion polimorfica reemplaza ramas por comportamiento encapsulado en cada estado concreto."
+    },
+    {
+      "id": "state_q18",
+      "type": "true_false",
+      "question": "Aplicar State implica que toda la logica de variacion de comportamiento debe permanecer en un unico switch dentro del Context.",
+      "correct": false,
+      "explanation": "Falso. Precisamente State busca extraer esa variacion en clases de estado y reducir switches centrales."
+    },
+    {
+      "id": "state_q19",
+      "type": "true_false",
+      "question": "Si el contrato State se mantiene estable, agregar un nuevo estado puede hacerse sin modificar los consumidores del Context.",
+      "correct": true,
+      "explanation": "Verdadero. Los clientes interactuan con el Context y no con detalles de cada ConcreteState."
+    },
+    {
+      "id": "state_q20",
+      "type": "true_false",
+      "question": "Un mal diseño de transiciones en State puede generar ciclos inesperados y hacer dificil razonar sobre el flujo.",
+      "correct": true,
+      "explanation": "Verdadero. Sin reglas claras de transicion, el grafo de estados puede volverse confuso y propenso a errores."
+    },
+    {
+      "id": "state_q21",
+      "type": "true_false",
+      "question": "Es valido reutilizar la misma instancia de un estado entre multiples Context si ese estado no guarda datos mutables propios del Context.",
+      "correct": true,
+      "explanation": "Verdadero. En estados stateless o inmutables, la reutilizacion reduce objetos sin comprometer aislamiento."
+    },
+    {
+      "id": "state_q22",
+      "type": "true_false",
+      "question": "En una implementacion canonica, cada estado concreto implementa el mismo contrato para ser intercambiable.",
+      "correct": true,
+      "explanation": "Verdadero. La sustituibilidad depende de un contrato comun que el Context pueda invocar de manera uniforme."
+    },
+    {
+      "id": "state_q23",
+      "type": "true_false",
+      "question": "Permitir que un estado reciba referencia al Context puede ser util para solicitar cambios de estado cuando completa una accion.",
+      "correct": true,
+      "explanation": "Verdadero. Esa colaboracion habilita transiciones desde el propio estado, aunque debe cuidarse el acoplamiento."
+    },
+    {
+      "id": "state_q24",
+      "type": "true_false",
+      "question": "State y Strategy pueden compartir estructura (Context + interfaz + implementaciones), pero su intencion principal no es la misma.",
+      "correct": true,
+      "explanation": "Verdadero. State modela evolucion de fase interna; Strategy modela seleccion de algoritmo."
+    },
+    {
+      "id": "state_q25",
+      "type": "true_false",
+      "question": "Template Method ofrece la misma flexibilidad que State para reemplazar comportamiento por fase en runtime sin cambiar jerarquia.",
+      "correct": false,
+      "explanation": "Falso. Template Method depende de herencia y estructura fija; State permite reemplazar objeto de estado activo en ejecucion."
+    },
+    {
+      "id": "state_q26",
+      "type": "true_false",
+      "question": "En Chain of Responsibility, una solicitud puede pasar por varios handlers; en State, normalmente un solo estado activo define el comportamiento del Context en ese momento.",
+      "correct": true,
+      "explanation": "Verdadero. Esa diferencia cambia la semantica: cadena de procesamiento vs fase activa de comportamiento."
+    },
+    {
+      "id": "state_q27",
+      "type": "true_false",
+      "question": "Observer y State son equivalentes porque ambos consisten en reaccionar a eventos.",
+      "correct": false,
+      "explanation": "Falso. Observer trata de notificacion entre objetos; State trata de comportamiento interno dependiente de fase."
+    },
+    {
+      "id": "state_q28",
+      "type": "true_false",
+      "question": "Command encapsula una accion invocable; State encapsula reglas de comportamiento ligadas a una fase del objeto.",
+      "correct": true,
+      "explanation": "Verdadero. Son encapsulaciones diferentes: solicitud ejecutable vs estado de ciclo de vida."
+    },
+    {
+      "id": "state_q29",
+      "type": "true_false",
+      "question": "Si no existen diferencias reales de comportamiento entre fases, usar State suele introducir complejidad innecesaria.",
+      "correct": true,
+      "explanation": "Verdadero. Sin variacion significativa, el costo de clases extra puede superar los beneficios."
+    },
+    {
+      "id": "state_q30",
+      "type": "true_false",
+      "question": "State ayuda a reducir duplicacion de reglas cuando las acciones permitidas dependen de la etapa actual del proceso.",
+      "correct": true,
+      "explanation": "Verdadero. Cada estado concentra sus reglas y evita replicarlas en multiples condicionales dispersas."
+    },
+    {
+      "id": "state_q31",
+      "type": "short",
+      "question": "¿Como se llama el objeto que mantiene la referencia al estado actual y delega comportamiento?",
+      "correct": [
+        "Context",
+        "Contexto"
+      ],
+      "hint": "Es el dueño del ciclo de vida del estado activo.",
+      "explanation": "El Context contiene el estado actual y redirige operaciones al contrato State."
+    },
+    {
+      "id": "state_q32",
+      "type": "short",
+      "question": "¿Nombre de la abstraccion comun que implementan los estados concretos?",
+      "correct": [
+        "State",
+        "Estado"
+      ],
+      "hint": "Es la interfaz base del patron.",
+      "explanation": "La interfaz o clase abstracta State define las operaciones polimorficas entre estados."
+    },
+    {
+      "id": "state_q33",
+      "type": "short",
+      "question": "¿Como se llama el cambio controlado de un estado activo a otro?",
+      "correct": [
+        "Transicion",
+        "Cambio de estado"
+      ],
+      "hint": "Ocurre cuando una regla habilita pasar de fase.",
+      "explanation": "Las transiciones conectan estados y determinan como evoluciona el comportamiento del Context."
+    },
+    {
+      "id": "state_q34",
+      "type": "short",
+      "question": "Si deseas compartir estados inmutables para ahorrar memoria, ¿que patron de apoyo suele aplicarse?",
+      "correct": [
+        "Flyweight"
+      ],
+      "hint": "Reutiliza objetos livianos compartidos.",
+      "explanation": "Flyweight permite compartir instancias cuando su estado intrinseco no depende de cada Context."
+    },
+    {
+      "id": "state_q35",
+      "type": "short",
+      "question": "¿Que principio SOLID se favorece al agregar nuevos estados sin modificar codigo estable?",
+      "correct": [
+        "OCP",
+        "Open Closed Principle"
+      ],
+      "hint": "Abierto para extender, cerrado para modificar.",
+      "explanation": "State bien aplicado facilita extension por nuevas clases sin tocar partes consolidadas."
+    },
+    {
+      "id": "state_q36",
+      "type": "short",
+      "question": "¿Que patron se combina frecuentemente para notificar a terceros cuando el Context cambia de estado?",
+      "correct": [
+        "Observer"
+      ],
+      "hint": "Relacion uno a muchos basada en suscripcion.",
+      "explanation": "Observer complementa State cuando ademas de cambiar comportamiento interno se requiere difundir eventos a suscriptores."
+    },
+    {
+      "id": "state_q37",
+      "type": "short",
+      "question": "¿Nombre de la metrica que suele bajar al reemplazar grandes if/else por State?",
+      "correct": [
+        "Complejidad ciclomatica",
+        "Ciclomatica"
+      ],
+      "hint": "Mide rutas de decision del codigo.",
+      "explanation": "Al distribuir decisiones por polimorfismo, se reduce la complejidad de control concentrada en un solo bloque."
+    },
+    {
+      "id": "state_q38",
+      "type": "short",
+      "question": "¿Artefacto visual recomendado para documentar estados y transiciones permitidas?",
+      "correct": [
+        "Diagrama de estados",
+        "State diagram"
+      ],
+      "hint": "Representa nodos y flechas de cambio.",
+      "explanation": "Un diagrama de estados aclara rutas validas, eventos de disparo y restricciones del flujo."
+    },
+    {
+      "id": "state_q39",
+      "type": "short",
+      "question": "¿Que tipo de acoplamiento aumenta cuando cada estado conoce internamente demasiados estados destino?",
+      "correct": [
+        "Acoplamiento"
+      ],
+      "hint": "Se vuelve mas costoso cambiar dependencias.",
+      "explanation": "El conocimiento excesivo entre estados endurece dependencias y complica evolucion y pruebas."
+    },
+    {
+      "id": "state_q40",
+      "type": "short",
+      "question": "¿Que anti-patron suele reemplazarse al migrar a State en codigo heredado?",
+      "correct": [
+        "Switch",
+        "If else"
+      ],
+      "hint": "Bloque condicional repetitivo por fase.",
+      "explanation": "State ataca ramas condicionales extensas por estado, reemplazandolas por despacho polimorfico."
+    }
+  ]
+}

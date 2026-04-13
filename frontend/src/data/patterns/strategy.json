@@ -2,38 +2,426 @@
   "id": "strategy",
   "name": "Strategy",
   "category": "Comportamiento",
-  "description": "Define una familia de algoritmos, encapsula cada uno y los hace intercambiables. Permite que el algoritmo varíe independientemente de los clientes que lo usan.",
+  "description": "Define una familia de algoritmos, encapsula cada variante detras de un contrato comun y permite seleccionar la politica adecuada en runtime con tradeoffs explicitos de flexibilidad, complejidad y rendimiento.",
   "questions": [
     {
       "id": "strategy_q1",
-      "type": "multiple_choice",
-      "question": "¿Cuál de las siguientes situaciones es un buen caso de uso para el patrón Strategy?",
+      "type": "mcq",
+      "question": "¿Que problema resuelve Strategy con mayor precision?",
       "options": [
-        "Necesitas que solo exista un objeto de una clase en toda la aplicación",
-        "Tienes múltiples variantes de un algoritmo y quieres poder cambiarlas en tiempo de ejecución",
-        "Quieres añadir funcionalidades a un objeto sin modificar su clase",
-        "Necesitas representar una jerarquía compleja de objetos"
+        "Garantizar una unica instancia global",
+        "Sustituir herencia multiple en modelos de dominio",
+        "Variar algoritmos bajo el mismo contrato sin cambiar el cliente",
+        "Encadenar handlers para que cada uno decida si procesa"
       ],
-      "correct": 1,
-      "explanation": "Strategy es ideal cuando tienes varias formas de realizar una tarea y quieres cambiar entre ellas dinámicamente. Por ejemplo, diferentes estrategias de ordenamiento, descuento, o validación."
+      "correct": 2,
+      "explanation": "Strategy encapsula variantes de un algoritmo y permite intercambiarlas mediante una abstraccion estable, evitando acoplar el cliente a implementaciones concretas."
     },
     {
       "id": "strategy_q2",
-      "type": "true_false",
-      "question": "El patrón Strategy viola el principio abierto/cerrado (OCP) porque requiere modificar el contexto cada vez que se añade un nuevo algoritmo.",
-      "correct": false,
-      "explanation": "Falso. Strategy **respeta** el OCP: para agregar un nuevo algoritmo, simplemente creas una nueva clase que implementa la interfaz Strategy, sin modificar el contexto ni las estrategias existentes."
+      "type": "mcq",
+      "question": "¿Que diferencia de intencion separa mejor Strategy de State?",
+      "options": [
+        "State modela transiciones por estado interno; Strategy selecciona algoritmos por politica de uso",
+        "State siempre usa if/else y Strategy no",
+        "Strategy no puede cambiarse en runtime y State si",
+        "No existe diferencia real, solo cambia el nombre"
+      ],
+      "correct": 0,
+      "explanation": "Aunque su estructura puede parecer similar, State representa ciclos de estado del objeto y Strategy representa elecciones de algoritmo independientes del ciclo de vida interno."
     },
     {
       "id": "strategy_q3",
-      "type": "short_answer",
-      "question": "¿Cómo se llama el objeto que usa una Strategy y delega el comportamiento a ella?",
-      "correct": [
-        "contexto",
-        "context"
+      "type": "mcq",
+      "question": "Frente a Template Method, ¿cuando es preferible Strategy?",
+      "options": [
+        "Cuando se necesita fijar una secuencia inmutable por herencia",
+        "Cuando se requiere cambiar algoritmo en runtime sin crear subclases del contexto",
+        "Cuando se quiere evitar interfaces",
+        "Cuando la variacion solo puede expresarse con metodos final"
       ],
-      "hint": "Es el objeto que mantiene una referencia a la estrategia y la invoca.",
-      "explanation": "El objeto que usa la estrategia se llama **Contexto** (Context). Mantiene una referencia a un objeto Strategy y delega el trabajo al objeto Strategy cuando necesita ejecutar el algoritmo."
+      "correct": 1,
+      "explanation": "Template Method define variacion por herencia y esqueleto fijo; Strategy permite variacion por composicion e intercambio dinamico."
+    },
+    {
+      "id": "strategy_q4",
+      "type": "mcq",
+      "question": "¿Que afirmacion distingue mejor Strategy de Command?",
+      "options": [
+        "Command encapsula una solicitud como objeto (cola, log, undo); Strategy encapsula una familia de algoritmos",
+        "Strategy requiere receptor explicito y Command no",
+        "Command no puede serializarse",
+        "Strategy se usa solo para UI"
+      ],
+      "correct": 0,
+      "explanation": "Command centra su valor en desacoplar emisor/receptor y habilitar historial o deshacer; Strategy centra su valor en elegir politicas de ejecucion."
+    },
+    {
+      "id": "strategy_q5",
+      "type": "mcq",
+      "question": "Comparado con Chain of Responsibility, ¿que caracteriza a Strategy?",
+      "options": [
+        "En Strategy se selecciona una politica principal; en Chain la solicitud puede pasar por multiples handlers",
+        "Chain siempre ejecuta exactamente un handler",
+        "Strategy exige arboles de objetos",
+        "No hay diferencia de flujo entre ambos"
+      ],
+      "correct": 0,
+      "explanation": "Strategy elige una alternativa de algoritmo; Chain organiza un flujo de delegacion donde varios nodos pueden intervenir o rechazar la solicitud."
+    },
+    {
+      "id": "strategy_q6",
+      "type": "mcq",
+      "question": "¿Cuando conviene mantener policy objects simples en lugar de formalizar un Strategy completo?",
+      "options": [
+        "Cuando hay una sola operacion estable, pocas variantes y el contrato funcional es claro",
+        "Cuando se necesita una jerarquia compleja con estado compartido",
+        "Cuando se requiere undo/redo",
+        "Cuando el contexto no debe conocer ninguna abstraccion"
+      ],
+      "correct": 0,
+      "explanation": "Si el dominio aun es pequeno, funciones o policy objects simples pueden ser suficientes; Strategy completo aporta mas estructura cuando crecen variantes, reglas y colaboraciones."
+    },
+    {
+      "id": "strategy_q7",
+      "type": "mcq",
+      "question": "¿Que practica mejora el desacoplamiento del Context al aplicar Strategy?",
+      "options": [
+        "Instanciar estrategias concretas con new dentro de cada metodo",
+        "Depender de la interfaz Strategy e inyectar implementaciones",
+        "Exponer todos los detalles internos del Context a cada estrategia",
+        "Fusionar Context y ConcreteStrategy para reducir clases"
+      ],
+      "correct": 1,
+      "explanation": "El Context debe depender de una abstraccion y recibir estrategias desde fuera; asi se facilita sustitucion, pruebas y evolucion del sistema."
+    },
+    {
+      "id": "strategy_q8",
+      "type": "mcq",
+      "question": "¿Cual es un criterio robusto para seleccionar estrategia en runtime?",
+      "options": [
+        "Elegir al azar para distribuir carga",
+        "Basarse en reglas de negocio observables y metricas de resultado",
+        "Fijar la primera estrategia registrada siempre",
+        "Cambiar estrategia en cada invocacion para maximizar dinamismo"
+      ],
+      "correct": 1,
+      "explanation": "La seleccion debe ser determinista y trazable, guiada por reglas de dominio y, cuando aplique, por telemetria o experimentacion controlada."
+    },
+    {
+      "id": "strategy_q9",
+      "type": "mcq",
+      "question": "¿Que tradeoff de testabilidad aparece con Strategy bien aplicado?",
+      "options": [
+        "No se pueden usar mocks porque hay polimorfismo",
+        "Se prueba cada estrategia en aislamiento, pero aumenta el numero total de casos",
+        "Solo se valida con pruebas end-to-end",
+        "Las pruebas dejan de verificar reglas de negocio"
+      ],
+      "correct": 1,
+      "explanation": "Strategy mejora aislamiento de pruebas y claridad de responsabilidades, aunque introduce mas unidades y combinaciones que cubrir."
+    },
+    {
+      "id": "strategy_q10",
+      "type": "mcq",
+      "question": "¿Que condicion protege mejor la sustituibilidad entre estrategias?",
+      "options": [
+        "Que todas compartan nombre de clase similar",
+        "Que el Context conozca campos privados de cada concreta",
+        "Que respeten el mismo contrato y expectativas semanticas",
+        "Que cada estrategia tenga su propio Context"
+      ],
+      "correct": 2,
+      "explanation": "La sustituibilidad no depende solo de firma; tambien exige comportamiento coherente con las precondiciones y postcondiciones esperadas por el Context."
+    },
+    {
+      "id": "strategy_q11",
+      "type": "mcq",
+      "question": "¿Cuando NO usar Strategy suele ser la decision mas razonable?",
+      "options": [
+        "Cuando el algoritmo es unico, estable y no hay señales de variacion futura",
+        "Cuando existe dependencia de inyeccion",
+        "Cuando el equipo usa pruebas unitarias",
+        "Cuando hay requerimientos de observabilidad"
+      ],
+      "correct": 0,
+      "explanation": "Introducir interfaces y multiples clases sin necesidad real agrega complejidad accidental y costo de mantenimiento."
+    },
+    {
+      "id": "strategy_q12",
+      "type": "mcq",
+      "question": "¿Que tradeoff de rendimiento puede aparecer en escenarios criticos?",
+      "options": [
+        "El despacho indirecto y objetos extra pueden agregar overhead medible",
+        "Strategy elimina toda asignacion de memoria",
+        "La JVM/CLR impide cualquier optimizacion con Strategy",
+        "No existe costo de abstraccion en ningun lenguaje"
+      ],
+      "correct": 0,
+      "explanation": "La abstraccion tiene costo potencial en rutas calientes; por eso conviene medir antes de optimizar o simplificar."
+    },
+    {
+      "id": "strategy_q13",
+      "type": "mcq",
+      "question": "Si el numero de estrategias crece sin gobierno, ¿que riesgo aumenta?",
+      "options": [
+        "Menor trazabilidad de decisiones y mayor carga cognitiva",
+        "Desaparicion de deuda tecnica",
+        "Imposibilidad de inyectar dependencias",
+        "Eliminacion automatica de duplicidad"
+      ],
+      "correct": 0,
+      "explanation": "Demasiadas variantes poco diferenciadas deterioran descubribilidad y consistencia; se requiere catalogo, criterios y deprecacion activa."
+    },
+    {
+      "id": "strategy_q14",
+      "type": "mcq",
+      "question": "¿Que decision reduce riesgos de concurrencia al reutilizar estrategias?",
+      "options": [
+        "Compartir estado mutable global entre todas las concretas",
+        "Preferir estrategias inmutables o estado encapsulado por solicitud",
+        "Guardar contexto de usuario en variables estaticas",
+        "Cambiar estrategia desde cualquier hilo sin sincronizacion"
+      ],
+      "correct": 1,
+      "explanation": "Estrategias sin estado mutable compartido son mas seguras para ejecucion concurrente y mas faciles de razonar."
+    },
+    {
+      "id": "strategy_q15",
+      "type": "mcq",
+      "question": "¿Que enfoque de resiliencia conserva la intencion de Strategy?",
+      "options": [
+        "Reemplazar Strategy por if/else cuando una politica falla",
+        "Definir estrategia primaria y estrategia de fallback bajo el mismo contrato",
+        "Capturar excepciones y devolver null siempre",
+        "Deshabilitar el Context durante incidentes"
+      ],
+      "correct": 1,
+      "explanation": "Un fallback explicitamente modelado mantiene separacion de responsabilidades y facilita observabilidad del comportamiento degradado."
+    },
+    {
+      "id": "strategy_q16",
+      "type": "mcq",
+      "question": "¿Que combinacion facilita escalar Strategy en sistemas grandes?",
+      "options": [
+        "Registro en contenedor DI mas fabrica de resolucion por clave",
+        "Instanciacion manual dispersa en cada modulo",
+        "Uso de clases anonimas sin contrato",
+        "Eliminacion de telemetria para simplificar"
+      ],
+      "correct": 0,
+      "explanation": "DI y fabrica centralizan seleccion, reducen acoplamiento y permiten controlar versiones o politicas por entorno."
+    },
+    {
+      "id": "strategy_q17",
+      "type": "true_false",
+      "question": "Strategy permite cambiar comportamiento del Context sin alterar su tipo publico.",
+      "correct": true,
+      "explanation": "Verdadero. El Context mantiene su interfaz; cambia la implementacion delegada del contrato Strategy."
+    },
+    {
+      "id": "strategy_q18",
+      "type": "true_false",
+      "question": "Aplicar Strategy obliga a que cada algoritmo sea una clase; funciones de primera clase nunca son validas.",
+      "correct": false,
+      "explanation": "Falso. En lenguajes que lo permiten, funciones pueden representar estrategias si mantienen contrato y legibilidad."
+    },
+    {
+      "id": "strategy_q19",
+      "type": "true_false",
+      "question": "Si el cambio de comportamiento depende de transiciones internas del objeto (no de una politica externa), suele encajar mejor State que Strategy.",
+      "correct": true,
+      "explanation": "Verdadero. Ese criterio separa la intencion de ambos patrones cuando su estructura parece similar."
+    },
+    {
+      "id": "strategy_q20",
+      "type": "true_false",
+      "question": "Cuando hay un algoritmo con pasos invariantes y pocos hooks variables, Template Method suele ser mas directo que Strategy.",
+      "correct": true,
+      "explanation": "Verdadero. Template Method destaca cuando la secuencia base es estable y la variacion esta acotada a puntos concretos."
+    },
+    {
+      "id": "strategy_q21",
+      "type": "true_false",
+      "question": "Command y Strategy son equivalentes porque ambos encapsulan comportamiento en objetos.",
+      "correct": false,
+      "explanation": "Falso. Comparten encapsulacion, pero Command modela solicitudes y capacidades como undo/queue; Strategy modela seleccion de algoritmos."
+    },
+    {
+      "id": "strategy_q22",
+      "type": "true_false",
+      "question": "Chain of Responsibility puede ejecutar varios handlers; Strategy normalmente aplica una politica seleccionada para la operacion.",
+      "correct": true,
+      "explanation": "Verdadero. Chain organiza flujo de delegacion, mientras Strategy escoge una alternativa principal de algoritmo."
+    },
+    {
+      "id": "strategy_q23",
+      "type": "true_false",
+      "question": "Policy objects simples en forma de funciones pueden ser una implementacion ligera de Strategy cuando el dominio aun no requiere jerarquias complejas.",
+      "correct": true,
+      "explanation": "Verdadero. Es una evolucion incremental valida: empezar simple y formalizar clases cuando crecen responsabilidades."
+    },
+    {
+      "id": "strategy_q24",
+      "type": "true_false",
+      "question": "Si no hay variacion real del algoritmo, introducir Strategy puede ser sobreingenieria.",
+      "correct": true,
+      "explanation": "Verdadero. El patron debe responder a una necesidad concreta de variacion para justificar su costo estructural."
+    },
+    {
+      "id": "strategy_q25",
+      "type": "true_false",
+      "question": "Un exceso de estrategias pequenas y poco diferenciadas puede dificultar mantenimiento y onboarding.",
+      "correct": true,
+      "explanation": "Verdadero. Sin criterios de diseno y catalogo claro, la proliferacion de variantes aumenta complejidad cognitiva."
+    },
+    {
+      "id": "strategy_q26",
+      "type": "true_false",
+      "question": "Compartir estado mutable global entre estrategias siempre es seguro porque el contrato las aisla.",
+      "correct": false,
+      "explanation": "Falso. El contrato no elimina riesgos de carrera o efectos colaterales causados por mutabilidad compartida."
+    },
+    {
+      "id": "strategy_q27",
+      "type": "true_false",
+      "question": "Si la seleccion de estrategia queda repartida en muchos switch del codigo cliente, se degrada el beneficio del patron.",
+      "correct": true,
+      "explanation": "Verdadero. La seleccion deberia centralizarse para evitar duplicacion de reglas y alto acoplamiento."
+    },
+    {
+      "id": "strategy_q28",
+      "type": "true_false",
+      "question": "Para preservar limites de arquitectura, las estrategias no deberian exigir al Context detalles de transporte o framework.",
+      "correct": true,
+      "explanation": "Verdadero. Mantener contratos orientados al dominio evita fugas de infraestructura y mejora portabilidad."
+    },
+    {
+      "id": "strategy_q29",
+      "type": "true_false",
+      "question": "Combinar Strategy con una fabrica para resolver implementaciones por clave de negocio es una practica valida.",
+      "correct": true,
+      "explanation": "Verdadero. Ese enfoque organiza la creacion y mantiene al Context desacoplado de concretas."
+    },
+    {
+      "id": "strategy_q30",
+      "type": "true_false",
+      "question": "Cambiar de estrategia deberia requerir que el cliente conozca nombres de clases concretas.",
+      "correct": false,
+      "explanation": "Falso. Idealmente la resolucion ocurre por abstraccion, configuracion o fabrica, no por dependencias directas a concretas."
+    },
+    {
+      "id": "strategy_q31",
+      "type": "short",
+      "question": "¿Nombre del contrato comun que implementan las variantes del algoritmo?",
+      "correct": [
+        "strategy",
+        "estrategia",
+        "interfaz strategy"
+      ],
+      "hint": "Es la abstraccion que habilita sustituibilidad.",
+      "explanation": "Ese contrato define la operacion comun para intercambiar algoritmos sin romper al Context."
+    },
+    {
+      "id": "strategy_q32",
+      "type": "short",
+      "question": "¿Objeto que delega el trabajo a una estrategia activa?",
+      "correct": [
+        "context",
+        "contexto"
+      ],
+      "hint": "No implementa todas las variantes; las orquesta.",
+      "explanation": "El Context coordina la operacion y delega la parte variable al objeto Strategy configurado."
+    },
+    {
+      "id": "strategy_q33",
+      "type": "short",
+      "question": "Principio SOLID que permite extender con nuevas estrategias sin modificar codigo estable.",
+      "correct": [
+        "ocp",
+        "open-closed",
+        "abierto/cerrado"
+      ],
+      "hint": "Extender sin editar lo ya consolidado.",
+      "explanation": "Strategy favorece OCP al incorporar variantes mediante nuevas implementaciones del contrato."
+    },
+    {
+      "id": "strategy_q34",
+      "type": "short",
+      "question": "Relacion estructural recomendada en Strategy: ______ sobre herencia.",
+      "correct": [
+        "composicion",
+        "composition"
+      ],
+      "hint": "El Context contiene una dependencia intercambiable.",
+      "explanation": "La composicion permite cambiar algoritmo sin rigidizar la jerarquia de tipos."
+    },
+    {
+      "id": "strategy_q35",
+      "type": "short",
+      "question": "Si solo hay un algoritmo estable y sin roadmap de variantes, el riesgo principal es ______.",
+      "correct": [
+        "sobreingenieria",
+        "overengineering"
+      ],
+      "hint": "Mas estructura de la necesaria para el problema actual.",
+      "explanation": "Aplicar el patron sin necesidad real agrega capas y costos de mantenimiento evitables."
+    },
+    {
+      "id": "strategy_q36",
+      "type": "short",
+      "question": "Costo potencial en rutas criticas por indirecciones y objetos extra.",
+      "correct": [
+        "overhead",
+        "sobrecosto"
+      ],
+      "hint": "Debe verificarse con mediciones, no con suposiciones.",
+      "explanation": "La flexibilidad del patron puede introducir costo de abstraccion en escenarios de alto rendimiento."
+    },
+    {
+      "id": "strategy_q37",
+      "type": "short",
+      "question": "Componente habitual para resolver estrategia por clave sin acoplar al cliente.",
+      "correct": [
+        "fabrica",
+        "factory",
+        "factory method"
+      ],
+      "hint": "Centraliza la creacion/seleccion de concretas.",
+      "explanation": "Una fabrica encapsula reglas de resolucion y mantiene limpio al consumidor del algoritmo."
+    },
+    {
+      "id": "strategy_q38",
+      "type": "short",
+      "question": "Atributo de calidad que mejora al probar cada algoritmo en aislamiento.",
+      "correct": [
+        "testabilidad",
+        "testeabilidad"
+      ],
+      "hint": "Se facilita usar mocks/stubs del contrato.",
+      "explanation": "La separacion de responsabilidades incrementa la capacidad de probar unidades de forma precisa."
+    },
+    {
+      "id": "strategy_q39",
+      "type": "short",
+      "question": "Riesgo tecnico cuando varias estrategias comparten estado mutable no controlado.",
+      "correct": [
+        "efectos colaterales",
+        "inconsistencia"
+      ],
+      "hint": "Suele manifestarse como comportamiento no determinista.",
+      "explanation": "La mutabilidad compartida rompe aislamiento y puede introducir fallos intermitentes dificiles de diagnosticar."
+    },
+    {
+      "id": "strategy_q40",
+      "type": "short",
+      "question": "Criterio para migrar de policy objects simples a Strategy formal: aumento de ______ del dominio.",
+      "correct": [
+        "complejidad",
+        "variabilidad"
+      ],
+      "hint": "Mas reglas, mas variantes y mayor necesidad de gobierno.",
+      "explanation": "Cuando crecen variantes, dependencias y tradeoffs, conviene formalizar el patron para mantener orden y escalabilidad."
     }
   ]
 }

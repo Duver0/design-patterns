@@ -2,41 +2,427 @@
   "id": "observer",
   "name": "Observer",
   "category": "Comportamiento",
-  "description": "Define una dependencia uno-a-muchos entre objetos, de modo que cuando uno cambia de estado, todos sus dependientes son notificados automáticamente.",
+  "description": "Define una dependencia uno-a-muchos entre un Subject y sus Observers para propagar cambios de estado con bajo acoplamiento, considerando trade-offs de orden, latencia, consistencia y ciclo de vida.",
   "questions": [
     {
       "id": "observer_q1",
-      "type": "multiple_choice",
-      "question": "En el patrón Observer, ¿qué nombre recibe el objeto que mantiene el estado y notifica a los demás?",
+      "type": "mcq",
+      "question": "¿Cual es el objetivo principal del patron Observer?",
       "options": [
-        "Observer",
-        "Subscriber",
-        "Subject (Publisher)",
-        "Handler"
+        "Garantizar una unica instancia global",
+        "Notificar a multiples interesados cuando cambia un estado",
+        "Encapsular algoritmos intercambiables",
+        "Construir objetos complejos paso a paso"
       ],
-      "correct": 2,
-      "explanation": "El objeto que mantiene el estado y envía notificaciones se llama **Subject** (también conocido como Publisher o Observable). Los objetos que reciben las notificaciones son los **Observers** (o Subscribers)."
+      "correct": 1,
+      "explanation": "Observer desacopla al emisor del cambio de sus receptores y permite notificacion a multiples suscriptores."
     },
     {
       "id": "observer_q2",
-      "type": "true_false",
-      "question": "El patrón Observer promueve el acoplamiento fuerte entre el Subject y sus Observers.",
-      "correct": false,
-      "explanation": "Falso. El Observer promueve el **desacoplamiento**: el Subject solo conoce la interfaz del Observer, no su implementación concreta. Esto permite agregar o eliminar Observers sin modificar el Subject."
+      "type": "mcq",
+      "question": "En una implementacion clasica, ¿quien mantiene la lista de suscriptores?",
+      "options": [
+        "Cada Observer",
+        "El Subject",
+        "Un Builder",
+        "El cliente final"
+      ],
+      "correct": 1,
+      "explanation": "El Subject suele exponer attach/detach y conservar la coleccion activa de observers."
     },
     {
       "id": "observer_q3",
-      "type": "short_answer",
-      "question": "¿Qué método suele llamar el Subject para notificar a todos sus observadores?",
-      "correct": [
-        "notify",
-        "notificar",
-        "notifyObservers",
-        "notifyAll",
-        "update"
+      "type": "mcq",
+      "question": "¿Que diferencia describe mejor push vs pull en Observer?",
+      "options": [
+        "Push consulta al Subject; pull envia payload completo",
+        "Push envia datos en la notificacion; pull obliga al observer a consultar estado",
+        "Ambos son identicos",
+        "Pull solo existe en sistemas distribuidos"
       ],
-      "hint": "Es un método que recorre la lista de observadores y llama a su método de actualización.",
-      "explanation": "El Subject usa un método como **notify()** o **notifyObservers()** para iterar sobre su lista de observadores y llamar al método **update()** (o similar) de cada uno, pasando el nuevo estado."
+      "correct": 1,
+      "explanation": "Push reduce consultas posteriores, mientras pull minimiza payload inicial pero incrementa dependencia a la API del Subject."
+    },
+    {
+      "id": "observer_q4",
+      "type": "mcq",
+      "question": "Si no se hace detach y hay referencias fuertes, ¿cual es el riesgo mas comun?",
+      "options": [
+        "Perdida de polimorfismo",
+        "Fuga de memoria",
+        "Corrupcion de tipos en runtime",
+        "Compilacion mas lenta"
+      ],
+      "correct": 1,
+      "explanation": "Los observers retenidos por el Subject pueden quedar vivos mas tiempo del debido y causar leaks."
+    },
+    {
+      "id": "observer_q5",
+      "type": "mcq",
+      "question": "¿Que practica mejora resiliencia cuando un observer falla durante notify?",
+      "options": [
+        "Abortar todo el ciclo de notificacion",
+        "Capturar error por observer y continuar con los demas",
+        "Eliminar todos los observers",
+        "Reiniciar el proceso completo"
+      ],
+      "correct": 1,
+      "explanation": "Aislar fallos evita que un consumidor defectuoso bloquee la propagacion completa."
+    },
+    {
+      "id": "observer_q6",
+      "type": "mcq",
+      "question": "Con attach/detach concurrente durante notify, ¿que tecnica evita errores de iteracion?",
+      "options": [
+        "Iterar la lista mutable original",
+        "Bloquear toda la aplicacion",
+        "Usar snapshot inmutable para la ronda actual",
+        "Duplicar cada observer antes de llamar update"
+      ],
+      "correct": 2,
+      "explanation": "El snapshot fija el conjunto de receptores de esa ronda y evita inconsistencias por cambios concurrentes."
+    },
+    {
+      "id": "observer_q7",
+      "type": "mcq",
+      "question": "¿En que caso NO conviene introducir Observer?",
+      "options": [
+        "Hay multiples consumidores dinamicos",
+        "Solo existe un receptor fijo y flujo lineal estable",
+        "Se requiere extension por plugins",
+        "Hay desacoplamiento por interfaces"
+      ],
+      "correct": 1,
+      "explanation": "Con un solo receptor estable, Observer puede ser sobreingenieria frente a una llamada directa."
+    },
+    {
+      "id": "observer_q8",
+      "type": "mcq",
+      "question": "¿Que diferencia clave hay entre Observer y Mediator?",
+      "options": [
+        "Observer centraliza reglas entre colegas; Mediator solo notifica cambios",
+        "Mediator coordina interacciones entre colegas; Observer difunde cambios desde una fuente",
+        "Son equivalentes en intencion y estructura",
+        "Observer elimina por completo acoplamiento temporal"
+      ],
+      "correct": 1,
+      "explanation": "Mediator orquesta colaboraciones entre componentes; Observer propaga eventos de estado."
+    },
+    {
+      "id": "observer_q9",
+      "type": "mcq",
+      "question": "¿Cuando Event Bus/Pub-Sub supera a Observer in-process?",
+      "options": [
+        "Cuando productor y consumidores viven en el mismo objeto",
+        "Cuando se necesita comunicacion entre procesos con desacoplamiento temporal",
+        "Cuando hay un unico consumidor local",
+        "Cuando no existen eventos de dominio"
+      ],
+      "correct": 1,
+      "explanation": "Pub-Sub via bus permite desacoplamiento espacial/temporal y cruza fronteras de proceso."
+    },
+    {
+      "id": "observer_q10",
+      "type": "mcq",
+      "question": "¿Que describe mejor la diferencia entre Observer y Chain of Responsibility?",
+      "options": [
+        "Chain hace broadcast a todos; Observer procesa uno",
+        "Observer busca primer manejador valido; Chain notifica a todos",
+        "Chain procesa secuencialmente y puede detenerse en el primer handler; Observer suele notificar a varios",
+        "No hay diferencia funcional"
+      ],
+      "correct": 2,
+      "explanation": "Chain modela una ruta de decision por handlers; Observer modela difusion de cambios."
+    },
+    {
+      "id": "observer_q11",
+      "type": "mcq",
+      "question": "Frente a callbacks directos, ¿que aporta Observer cuando crece el numero de interesados?",
+      "options": [
+        "Menos abstracciones y menor sobrecosto siempre",
+        "Registro dinamico de multiples receptores sin acoplar al emisor a cada callback concreto",
+        "Garantia nativa de entrega durable",
+        "Orden determinista automatico"
+      ],
+      "correct": 1,
+      "explanation": "Observer facilita alta/baja dinamica de listeners y reduce acoplamiento explicito por receptor."
+    },
+    {
+      "id": "observer_q12",
+      "type": "mcq",
+      "question": "¿Que opcion expresa mejor Observer vs Strategy?",
+      "options": [
+        "Observer selecciona algoritmos; Strategy publica eventos",
+        "Strategy define variaciones de algoritmo; Observer notifica cambios de estado",
+        "Ambos se usan solo para UI reactiva",
+        "Observer reemplaza completamente Strategy"
+      ],
+      "correct": 1,
+      "explanation": "Strategy encapsula como se hace algo; Observer comunica que algo cambio."
+    },
+    {
+      "id": "observer_q13",
+      "type": "mcq",
+      "question": "Si el problema es elegir entre varios algoritmos de calculo en runtime, ¿que patron es mas adecuado que Observer?",
+      "options": [
+        "Strategy",
+        "Memento",
+        "Decorator",
+        "Flyweight"
+      ],
+      "correct": 0,
+      "explanation": "La seleccion de algoritmos es objetivo directo de Strategy, no de Observer."
+    },
+    {
+      "id": "observer_q14",
+      "type": "mcq",
+      "question": "Si una API tiene un solo consumidor estable y contrato estricto uno-a-uno, ¿que alternativa suele ser mejor que Observer?",
+      "options": [
+        "Callback directo",
+        "Prototype",
+        "Abstract Factory",
+        "Adapter"
+      ],
+      "correct": 0,
+      "explanation": "Para una relacion fija y simple, callback directo reduce complejidad accidental."
+    },
+    {
+      "id": "observer_q15",
+      "type": "mcq",
+      "question": "¿Cuando NO usar Observer por requerimientos de confiabilidad?",
+      "options": [
+        "Cuando basta consistencia eventual local",
+        "Cuando se exige durabilidad, replay y trazabilidad estricta de eventos",
+        "Cuando hay dos listeners en memoria",
+        "Cuando el estado cambia poco"
+      ],
+      "correct": 1,
+      "explanation": "Observer in-process no garantiza por si solo persistencia, replay ni entrega confiable."
+    },
+    {
+      "id": "observer_q16",
+      "type": "mcq",
+      "question": "¿Que riesgo de diseño aparece con fan-out alto sin control de flujo?",
+      "options": [
+        "Menor latencia en todos los casos",
+        "Saturacion por tormenta de notificaciones y cola creciente",
+        "Tipado mas fuerte automaticamente",
+        "Eliminacion de condiciones de carrera"
+      ],
+      "correct": 1,
+      "explanation": "Con muchos eventos y consumidores lentos, se acumula trabajo y se degrada rendimiento."
+    },
+    {
+      "id": "observer_q17",
+      "type": "true_false",
+      "question": "Observer favorece OCP al permitir agregar nuevos receptores sin editar la logica principal del Subject.",
+      "correct": true,
+      "explanation": "Verdadero. Se extiende comportamiento incorporando observers adicionales."
+    },
+    {
+      "id": "observer_q18",
+      "type": "true_false",
+      "question": "En un buen diseño Observer, el Subject debe depender de clases concretas de cada observer.",
+      "correct": false,
+      "explanation": "Falso. Debe depender de una abstraccion para mantener bajo acoplamiento."
+    },
+    {
+      "id": "observer_q19",
+      "type": "true_false",
+      "question": "Mediator y Observer tienen exactamente la misma intencion de diseño.",
+      "correct": false,
+      "explanation": "Falso. Mediator coordina colaboraciones; Observer propaga cambios."
+    },
+    {
+      "id": "observer_q20",
+      "type": "true_false",
+      "question": "Observer in-process y Pub-Sub distribuido son equivalentes en garantias de entrega.",
+      "correct": false,
+      "explanation": "Falso. Las garantias dependen de infraestructura y protocolo, no del patron Observer basico."
+    },
+    {
+      "id": "observer_q21",
+      "type": "true_false",
+      "question": "El modelo pull puede reducir payload en notify, pero aumenta acoplamiento del observer a la API del Subject.",
+      "correct": true,
+      "explanation": "Verdadero. Pull desplaza parte del costo a consultas posteriores."
+    },
+    {
+      "id": "observer_q22",
+      "type": "true_false",
+      "question": "En notificacion sincrona, la latencia total puede quedar dominada por el observer mas lento.",
+      "correct": true,
+      "explanation": "Verdadero. El hilo emisor queda bloqueado hasta completar cada callback."
+    },
+    {
+      "id": "observer_q23",
+      "type": "true_false",
+      "question": "Si el requisito es first-handler-wins en una secuencia de validaciones, Chain of Responsibility suele ajustar mejor que Observer.",
+      "correct": true,
+      "explanation": "Verdadero. Chain representa mejor flujo secuencial con posible corte temprano."
+    },
+    {
+      "id": "observer_q24",
+      "type": "true_false",
+      "question": "Olvidar detach nunca produce problemas porque el garbage collector limpia todo automaticamente.",
+      "correct": false,
+      "explanation": "Falso. Referencias fuertes en el Subject pueden impedir liberacion de memoria."
+    },
+    {
+      "id": "observer_q25",
+      "type": "true_false",
+      "question": "Hacer detach idempotente reduce errores de ciclo de vida.",
+      "correct": true,
+      "explanation": "Verdadero. Permite desuscribir varias veces sin efectos colaterales."
+    },
+    {
+      "id": "observer_q26",
+      "type": "true_false",
+      "question": "Notificar observers mientras se mantiene un lock global puede incrementar riesgo de deadlock.",
+      "correct": true,
+      "explanation": "Verdadero. Se ejecuta codigo externo dentro de secciones criticas."
+    },
+    {
+      "id": "observer_q27",
+      "type": "true_false",
+      "question": "Un fallo de un observer obliga siempre a cancelar la notificacion del resto.",
+      "correct": false,
+      "explanation": "Falso. Muchas implementaciones prefieren aislamiento de errores y continuidad."
+    },
+    {
+      "id": "observer_q28",
+      "type": "true_false",
+      "question": "Cuando el dominio exige flujo determinista estricto con compensaciones paso a paso, Observer puede no ser la opcion principal.",
+      "correct": true,
+      "explanation": "Verdadero. Ese escenario suele requerir orquestacion mas explicita."
+    },
+    {
+      "id": "observer_q29",
+      "type": "true_false",
+      "question": "Fan-out alto sin backpressure puede saturar CPU, memoria o colas internas.",
+      "correct": true,
+      "explanation": "Verdadero. Sin control de ritmo, la produccion de eventos supera consumo."
+    },
+    {
+      "id": "observer_q30",
+      "type": "true_false",
+      "question": "Si todas las reacciones deben completarse en transaccion fuerte y atomica, Observer asincrono puede ser riesgoso.",
+      "correct": true,
+      "explanation": "Verdadero. La asincronia introduce ventanas de inconsistencia temporal."
+    },
+    {
+      "id": "observer_q31",
+      "type": "short",
+      "question": "¿Como se llama la fuente que emite cambios en Observer?",
+      "correct": [
+        "subject",
+        "observable"
+      ],
+      "hint": "Es el origen del estado observado.",
+      "explanation": "El emisor principal se denomina Subject (u Observable en algunas APIs)."
+    },
+    {
+      "id": "observer_q32",
+      "type": "short",
+      "question": "¿Como se llama el receptor de notificaciones?",
+      "correct": [
+        "observer",
+        "subscriber",
+        "suscriptor"
+      ],
+      "hint": "Implementa update o callback equivalente.",
+      "explanation": "El consumidor de eventos es el Observer."
+    },
+    {
+      "id": "observer_q33",
+      "type": "short",
+      "question": "Operacion comun para registrar un observer.",
+      "correct": [
+        "attach",
+        "subscribe",
+        "suscribir"
+      ],
+      "hint": "Es el alta de suscripcion.",
+      "explanation": "El alta suele llamarse attach o subscribe."
+    },
+    {
+      "id": "observer_q34",
+      "type": "short",
+      "question": "Operacion comun para remover un observer.",
+      "correct": [
+        "detach",
+        "unsubscribe",
+        "desuscribir"
+      ],
+      "hint": "Evita notificaciones futuras.",
+      "explanation": "La baja de suscripcion suele llamarse detach o unsubscribe."
+    },
+    {
+      "id": "observer_q35",
+      "type": "short",
+      "question": "Modelo donde el Subject envia datos en la notificacion.",
+      "correct": [
+        "push"
+      ],
+      "hint": "El payload viaja en el evento.",
+      "explanation": "Push entrega informacion directamente al observer."
+    },
+    {
+      "id": "observer_q36",
+      "type": "short",
+      "question": "Modelo donde el observer consulta estado despues de recibir señal.",
+      "correct": [
+        "pull"
+      ],
+      "hint": "Primero aviso, luego lectura.",
+      "explanation": "Pull separa la señal del acceso a datos."
+    },
+    {
+      "id": "observer_q37",
+      "type": "short",
+      "question": "Tecnica de iteracion segura que usa copia estable de listeners.",
+      "correct": [
+        "snapshot",
+        "copy-on-write",
+        "copia defensiva"
+      ],
+      "hint": "Evita fallos si la lista cambia durante notify.",
+      "explanation": "Un snapshot estabiliza la ronda de notificacion."
+    },
+    {
+      "id": "observer_q38",
+      "type": "short",
+      "question": "Tecnica para reducir rafagas de eventos y evitar exceso de actualizaciones.",
+      "correct": [
+        "debounce",
+        "throttle",
+        "coalescing"
+      ],
+      "hint": "Agrupa o limita frecuencia de disparo.",
+      "explanation": "Debounce/throttle/coalescing disminuyen tormentas de notificacion."
+    },
+    {
+      "id": "observer_q39",
+      "type": "short",
+      "question": "Nombre del problema al retener listeners innecesarios mucho tiempo.",
+      "correct": [
+        "memory leak",
+        "leak",
+        "fuga de memoria"
+      ],
+      "hint": "Impacta uso de memoria en ejecuciones largas.",
+      "explanation": "La retencion accidental de observers produce leaks."
+    },
+    {
+      "id": "observer_q40",
+      "type": "short",
+      "question": "Mecanismo para controlar ritmo productor-consumidor en sistemas de eventos.",
+      "correct": [
+        "backpressure",
+        "control de flujo"
+      ],
+      "hint": "Evita que productor sobrecargue a consumidores.",
+      "explanation": "Backpressure protege el sistema cuando la demanda supera capacidad de consumo."
     }
   ]
 }

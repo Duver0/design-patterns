@@ -1,0 +1,421 @@
+{
+  "id": "template_method",
+  "name": "Template Method",
+  "category": "Comportamiento",
+  "description": "Define el esqueleto de un algoritmo en una clase base y permite que las subclases redefinan pasos especificos sin cambiar la secuencia general.",
+  "questions": [
+    {
+      "id": "template_method_q1",
+      "type": "mcq",
+      "question": "¿Cual es la intencion principal del patron Template Method?",
+      "options": [
+        "Fijar la estructura de un algoritmo y delegar pasos variables a subclases",
+        "Crear familias de objetos relacionados sin exponer clases concretas",
+        "Encapsular solicitudes como objetos para deshacer operaciones",
+        "Separar estado interno en objetos de estado intercambiables"
+      ],
+      "correct": 0,
+      "explanation": "Template Method establece una secuencia comun en la clase base y permite personalizar detalles en subclases sin romper el flujo general."
+    },
+    {
+      "id": "template_method_q2",
+      "type": "mcq",
+      "question": "¿Que participante define normalmente el metodo plantilla con la secuencia de pasos?",
+      "options": [
+        "ConcreteClass",
+        "AbstractClass",
+        "Client",
+        "Invoker"
+      ],
+      "correct": 1,
+      "explanation": "La clase abstracta suele contener el metodo plantilla y los puntos de variacion (operaciones abstractas o hooks)."
+    },
+    {
+      "id": "template_method_q3",
+      "type": "mcq",
+      "question": "En Template Method, ¿que caracteriza mejor a un hook?",
+      "options": [
+        "Es un paso obligatorio sin implementacion por defecto",
+        "Es un metodo opcional con implementacion por defecto que la subclase puede redefinir",
+        "Es una fabrica de objetos concretos",
+        "Es una transicion automatica de estado interno"
+      ],
+      "correct": 1,
+      "explanation": "Un hook permite extension opcional, normalmente con comportamiento por defecto en la clase base."
+    },
+    {
+      "id": "template_method_q4",
+      "type": "mcq",
+      "question": "¿Que diferencia clave hay entre Template Method y Strategy?",
+      "options": [
+        "Template Method usa composicion para cambiar el algoritmo en runtime; Strategy usa herencia",
+        "Template Method define una secuencia fija por herencia; Strategy intercambia algoritmos por composicion",
+        "No hay diferencia relevante, son equivalentes",
+        "Strategy se usa solo para UI y Template Method solo para backend"
+      ],
+      "correct": 1,
+      "explanation": "Template Method varia pasos mediante herencia y mantiene el esqueleto fijo. Strategy cambia algoritmos encapsulados por composicion, incluso en runtime."
+    },
+    {
+      "id": "template_method_q5",
+      "type": "mcq",
+      "question": "Comparado con State, Template Method se usa principalmente cuando...",
+      "options": [
+        "El comportamiento cambia por transiciones de estado del objeto",
+        "Se necesita modelar ciclos de vida con estados y eventos",
+        "Se requiere una secuencia de algoritmo estable con pasos personalizables",
+        "Cada estado debe decidir el siguiente estado en tiempo real"
+      ],
+      "correct": 2,
+      "explanation": "State modela cambio de comportamiento por estado interno. Template Method fija un flujo y permite variar implementaciones de pasos."
+    },
+    {
+      "id": "template_method_q6",
+      "type": "mcq",
+      "question": "¿Que afirmacion diferencia mejor Template Method de Command?",
+      "options": [
+        "Command encapsula una accion invocable; Template Method estructura un algoritmo por pasos",
+        "Template Method encapsula receptores y Command define hooks",
+        "Command siempre usa herencia y Template Method siempre usa composicion",
+        "No se pueden combinar en una misma arquitectura"
+      ],
+      "correct": 0,
+      "explanation": "Command representa solicitudes como objetos. Template Method organiza la ejecucion de un algoritmo en pasos definidos por una clase base."
+    },
+    {
+      "id": "template_method_q7",
+      "type": "mcq",
+      "question": "¿Que contraste con Visitor es tecnicamente correcto?",
+      "options": [
+        "Visitor fija la secuencia de un algoritmo interno, Template Method agrega operaciones a estructuras de objetos",
+        "Template Method agrega operaciones nuevas sobre jerarquias sin tocarlas; Visitor fija un flujo base",
+        "Visitor se centra en agregar operaciones sobre elementos; Template Method en definir el flujo de un algoritmo",
+        "Visitor y Template Method son variantes del mismo patron con distinto nombre"
+      ],
+      "correct": 2,
+      "explanation": "Visitor separa operaciones de la estructura de objetos. Template Method se centra en el orden del algoritmo y su extension controlada."
+    },
+    {
+      "id": "template_method_q8",
+      "type": "mcq",
+      "question": "¿Como se relaciona Template Method con Factory Method en algunos disenos?",
+      "options": [
+        "Factory Method suele ser un paso abstracto dentro del metodo plantilla",
+        "Template Method reemplaza por completo cualquier necesidad de Factory Method",
+        "Factory Method solo aplica en patrones estructurales",
+        "No pueden coexistir por conflicto de responsabilidades"
+      ],
+      "correct": 0,
+      "explanation": "Es comun que el metodo plantilla invoque un paso de creacion que una subclase resuelve mediante Factory Method."
+    },
+    {
+      "id": "template_method_q9",
+      "type": "mcq",
+      "question": "¿Que cambio respeta mejor OCP cuando aparece una nueva variante del algoritmo?",
+      "options": [
+        "Agregar condicionales en la clase base para cada variante",
+        "Crear una nueva subclase que implemente los pasos variables",
+        "Duplicar toda la clase base y editar la copia",
+        "Mover toda la logica al cliente"
+      ],
+      "correct": 1,
+      "explanation": "La extension natural en Template Method es crear subclases nuevas sin modificar el esqueleto estable."
+    },
+    {
+      "id": "template_method_q10",
+      "type": "mcq",
+      "question": "¿Que riesgo aparece si una subclase altera pasos criticos del flujo sin restricciones?",
+      "options": [
+        "Mejora garantizada de rendimiento",
+        "Violacion de invariantes del algoritmo base",
+        "Eliminacion del acoplamiento accidental",
+        "Menor necesidad de pruebas"
+      ],
+      "correct": 1,
+      "explanation": "Si se permite modificar indebidamente el flujo, se rompe la consistencia del algoritmo y pueden aparecer errores sutiles."
+    },
+    {
+      "id": "template_method_q11",
+      "type": "mcq",
+      "question": "¿En cual escenario es mas apropiado Template Method?",
+      "options": [
+        "Procesos ETL con fases fijas (leer, transformar, persistir) y detalles variables por fuente",
+        "Sistema que cambia totalmente el orden del flujo por configuracion de usuario en cada ejecucion",
+        "Caso con un solo algoritmo simple sin variantes previstas",
+        "Acciones de undo/redo basadas en comandos encapsulados"
+      ],
+      "correct": 0,
+      "explanation": "Template Method encaja cuando el esqueleto del proceso es estable y solo cambian implementaciones de ciertos pasos."
+    },
+    {
+      "id": "template_method_q12",
+      "type": "mcq",
+      "question": "¿Cual es una desventaja frecuente de Template Method?",
+      "options": [
+        "Impide por completo el polimorfismo",
+        "Puede generar muchas subclases cuando hay muchas variantes",
+        "No permite reutilizar codigo comun",
+        "No funciona con pruebas unitarias"
+      ],
+      "correct": 1,
+      "explanation": "Cuando crecen las variantes, puede haber explosion de subclases y mayor complejidad de mantenimiento."
+    },
+    {
+      "id": "template_method_q13",
+      "type": "mcq",
+      "question": "¿Que practica mejora la testabilidad del patron?",
+      "options": [
+        "Probar solo la subclase y asumir correcto el flujo base",
+        "Verificar en pruebas que la secuencia del metodo plantilla se mantiene y que cada paso cumple su contrato",
+        "Eliminar hooks para evitar ramas de prueba",
+        "Reemplazar todo por metodos estaticos"
+      ],
+      "correct": 1,
+      "explanation": "Se debe validar tanto la secuencia definida en la base como el comportamiento de los pasos concretos."
+    },
+    {
+      "id": "template_method_q14",
+      "type": "mcq",
+      "question": "¿Que diferencia hay entre una operacion abstracta y un hook en Template Method?",
+      "options": [
+        "La operacion abstracta es opcional y el hook obligatorio",
+        "Ambas son obligatorias y sin implementacion",
+        "La operacion abstracta debe implementarse; el hook tiene implementacion por defecto y es opcional",
+        "El hook solo se usa para crear objetos"
+      ],
+      "correct": 2,
+      "explanation": "Las operaciones abstractas son puntos de extension obligatorios. Los hooks permiten personalizacion opcional."
+    },
+    {
+      "id": "template_method_q15",
+      "type": "mcq",
+      "question": "¿Que principio se refleja en la idea \"No nos llames, nosotros te llamaremos\" dentro de Template Method?",
+      "options": [
+        "Ley de Demeter",
+        "Principio de inversion de control (Hollywood Principle)",
+        "Responsabilidad unica",
+        "Segregacion de interfaces"
+      ],
+      "correct": 1,
+      "explanation": "La clase base controla el flujo y llama a extensiones en subclases en puntos definidos."
+    },
+    {
+      "id": "template_method_q16",
+      "type": "mcq",
+      "question": "¿Cuando suele ser mala eleccion Template Method?",
+      "options": [
+        "Cuando el flujo debe recombinar pasos dinamicamente en runtime con alta variabilidad de orden",
+        "Cuando varias implementaciones comparten exactamente la misma secuencia base",
+        "Cuando se desea centralizar reglas invariables en una superclase",
+        "Cuando hay pasos obligatorios y opcionales bien delimitados"
+      ],
+      "correct": 0,
+      "explanation": "Si el orden cambia de forma dinamica y frecuente, Strategy u otras composiciones suelen ser mas flexibles."
+    },
+    {
+      "id": "template_method_q17",
+      "type": "true_false",
+      "question": "Template Method pertenece a la categoria de patrones de comportamiento.",
+      "correct": true,
+      "explanation": "Evalua como se organiza y distribuye el comportamiento de un algoritmo entre clase base y subclases."
+    },
+    {
+      "id": "template_method_q18",
+      "type": "true_false",
+      "question": "El metodo plantilla define el orden general de ejecucion de los pasos.",
+      "correct": true,
+      "explanation": "Ese orden fijo es el nucleo del patron."
+    },
+    {
+      "id": "template_method_q19",
+      "type": "true_false",
+      "question": "Las subclases deberian poder reordenar libremente los pasos del metodo plantilla para mayor flexibilidad.",
+      "correct": false,
+      "explanation": "Reordenar pasos rompe la garantia de estructura. El patron busca mantener el esqueleto estable."
+    },
+    {
+      "id": "template_method_q20",
+      "type": "true_false",
+      "question": "Un hook puede existir con implementacion por defecto y ser redefinido solo cuando sea necesario.",
+      "correct": true,
+      "explanation": "Esa es precisamente la funcion de un hook dentro del patron."
+    },
+    {
+      "id": "template_method_q21",
+      "type": "true_false",
+      "question": "Template Method es util cuando varias variantes comparten etapas fijas pero difieren en detalles de implementacion.",
+      "correct": true,
+      "explanation": "Permite reutilizar flujo comun y especializar solo los pasos variables."
+    },
+    {
+      "id": "template_method_q22",
+      "type": "true_false",
+      "question": "A diferencia de Strategy, Template Method suele variar comportamiento principalmente por herencia y no por composicion de algoritmos intercambiables.",
+      "correct": true,
+      "explanation": "Strategy intercambia objetos de algoritmo; Template Method especializa pasos en subclases."
+    },
+    {
+      "id": "template_method_q23",
+      "type": "true_false",
+      "question": "State y Template Method tienen la misma intencion principal: representar transiciones entre estados internos.",
+      "correct": false,
+      "explanation": "State modela comportamiento segun estado y transiciones. Template Method define un flujo de algoritmo."
+    },
+    {
+      "id": "template_method_q24",
+      "type": "true_false",
+      "question": "Command y Template Method son equivalentes porque ambos encapsulan exactamente el mismo concepto de comportamiento.",
+      "correct": false,
+      "explanation": "Command encapsula peticiones; Template Method define la secuencia de un algoritmo con puntos de extension."
+    },
+    {
+      "id": "template_method_q25",
+      "type": "true_false",
+      "question": "Visitor suele usarse para agregar operaciones sobre una estructura de objetos, no para fijar la secuencia interna de un algoritmo base.",
+      "correct": true,
+      "explanation": "Visitor separa operaciones de la jerarquia de elementos; Template Method fija el flujo dentro de una jerarquia."
+    },
+    {
+      "id": "template_method_q26",
+      "type": "true_false",
+      "question": "Es valido que un paso del metodo plantilla sea un Factory Method implementado por subclases.",
+      "correct": true,
+      "explanation": "Es una combinacion clasica: el flujo se mantiene en la base y la creacion concreta se delega a subclases."
+    },
+    {
+      "id": "template_method_q27",
+      "type": "true_false",
+      "question": "Si una subclase rompe precondiciones o postcondiciones del algoritmo base, puede violar LSP.",
+      "correct": true,
+      "explanation": "Las subclases deben preservar contratos del algoritmo para seguir siendo sustituibles."
+    },
+    {
+      "id": "template_method_q28",
+      "type": "true_false",
+      "question": "Template Method obliga siempre a usar interfaces en lugar de clases abstractas.",
+      "correct": false,
+      "explanation": "La implementacion canonica usa una clase abstracta con metodo plantilla y pasos redefinibles."
+    },
+    {
+      "id": "template_method_q29",
+      "type": "true_false",
+      "question": "Cambiar la secuencia del algoritmo suele requerir modificar la clase base que define el metodo plantilla.",
+      "correct": true,
+      "explanation": "El esqueleto se centraliza en la base; cambiarlo implica tocar ese punto."
+    },
+    {
+      "id": "template_method_q30",
+      "type": "true_false",
+      "question": "Si el orden de pasos debe decidirse dinamicamente en cada ejecucion, Template Method suele ser menos adecuado que enfoques basados en composicion.",
+      "correct": true,
+      "explanation": "Cuando la variacion principal es el orden dinamico, un diseno por estrategias/composicion suele adaptarse mejor."
+    },
+    {
+      "id": "template_method_q31",
+      "type": "short",
+      "question": "¿Como se llama la clase base que define el esqueleto del algoritmo en este patron?",
+      "correct": [
+        "clase abstracta",
+        "abstractclass"
+      ],
+      "hint": "No suele instanciarse directamente.",
+      "explanation": "La clase abstracta concentra el metodo plantilla y los puntos de extension."
+    },
+    {
+      "id": "template_method_q32",
+      "type": "short",
+      "question": "¿Que nombre recibe el metodo que fija la secuencia de pasos?",
+      "correct": [
+        "template method",
+        "metodo plantilla"
+      ],
+      "hint": "Da nombre al patron.",
+      "explanation": "El metodo plantilla define el flujo general del algoritmo."
+    },
+    {
+      "id": "template_method_q33",
+      "type": "short",
+      "question": "¿Como se llaman los puntos de extension opcionales con implementacion por defecto?",
+      "correct": [
+        "hooks",
+        "hook"
+      ],
+      "hint": "No todos son obligatorios de redefinir.",
+      "explanation": "Los hooks permiten personalizar comportamiento sin forzar implementaciones en todas las subclases."
+    },
+    {
+      "id": "template_method_q34",
+      "type": "short",
+      "question": "Completa el principio asociado: \"No nos llames, nosotros te llamaremos\" es el principio de ______.",
+      "correct": [
+        "hollywood"
+      ],
+      "hint": "Relacionada con inversion de control.",
+      "explanation": "El Hollywood Principle describe que la base controla el flujo y llama a extensiones."
+    },
+    {
+      "id": "template_method_q35",
+      "type": "short",
+      "question": "Si necesitas cambiar el algoritmo completo en runtime por composicion, ¿que patron es el mas directo?",
+      "correct": [
+        "strategy",
+        "estrategia"
+      ],
+      "hint": "Comparativa clasica con Template Method.",
+      "explanation": "Strategy encapsula algoritmos intercambiables y permite sustituirlos dinamicamente."
+    },
+    {
+      "id": "template_method_q36",
+      "type": "short",
+      "question": "¿Como se llama un paso obligatorio que la subclase debe implementar dentro del metodo plantilla?",
+      "correct": [
+        "operacion primitiva",
+        "primitive operation"
+      ],
+      "hint": "No tiene implementacion final en la base.",
+      "explanation": "Las operaciones primitivas son puntos de variacion obligatorios del algoritmo."
+    },
+    {
+      "id": "template_method_q37",
+      "type": "short",
+      "question": "¿Que mecanismo OOP usa la subclase para personalizar un paso heredado?",
+      "correct": [
+        "sobrescritura",
+        "override"
+      ],
+      "hint": "Se redefine un metodo heredado.",
+      "explanation": "La personalizacion en Template Method ocurre sobrescribiendo operaciones previstas."
+    },
+    {
+      "id": "template_method_q38",
+      "type": "short",
+      "question": "¿Que palabra clave se usa a menudo para impedir que subclases alteren el metodo plantilla?",
+      "correct": [
+        "final"
+      ],
+      "hint": "Evita redefinicion del flujo principal.",
+      "explanation": "Marcar el metodo plantilla como final protege la secuencia del algoritmo."
+    },
+    {
+      "id": "template_method_q39",
+      "type": "short",
+      "question": "¿Como se denomina la subclase que implementa los pasos variables del algoritmo?",
+      "correct": [
+        "subclase concreta",
+        "concreteclass"
+      ],
+      "hint": "Especializa la clase base.",
+      "explanation": "La subclase concreta define el comportamiento especifico de los pasos extensibles."
+    },
+    {
+      "id": "template_method_q40",
+      "type": "short",
+      "question": "Template Method basa su variacion principal en la relacion de ______.",
+      "correct": [
+        "herencia"
+      ],
+      "hint": "Relacion estructural entre base y subclase.",
+      "explanation": "El patron depende de herencia para especializar partes del algoritmo manteniendo su esqueleto."
+    }
+  ]
+}

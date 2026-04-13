@@ -87,14 +87,70 @@
     "id": "observer",
     "name": "Observer",
     "category": "Comportamiento",
-    "description": "Define una dependencia uno-a-muchos entre objetos, de modo que cuando uno cambia de estado, todos sus dependientes son notificados automáticamente.",
-    "questionCount": 3
+    "description": "Define una dependencia uno-a-muchos entre un Subject y sus Observers para propagar cambios de estado con bajo acoplamiento, considerando trade-offs de orden, latencia, consistencia y ciclo de vida.",
+    "questionCount": 40
   },
   {
     "id": "strategy",
     "name": "Strategy",
     "category": "Comportamiento",
-    "description": "Define una familia de algoritmos, encapsula cada uno y los hace intercambiables. Permite que el algoritmo varíe independientemente de los clientes que lo usan.",
-    "questionCount": 3
+    "description": "Define una familia de algoritmos, encapsula cada variante detras de un contrato comun y permite seleccionar la politica adecuada en runtime con tradeoffs explicitos de flexibilidad, complejidad y rendimiento.",
+    "questionCount": 40
+  },
+  {
+    "id": "chain_of_responsibility",
+    "name": "Chain of Responsibility",
+    "category": "Comportamiento",
+    "description": "Permite pasar una solicitud a traves de una cadena de manejadores donde cada uno decide si la procesa o la delega al siguiente, desacoplando al emisor de la logica de resolucion.",
+    "questionCount": 40
+  },
+  {
+    "id": "command",
+    "name": "Command",
+    "category": "Comportamiento",
+    "description": "Encapsula una solicitud como un objeto para desacoplar quien invoca la accion de quien la ejecuta, permitiendo parametrizar operaciones, encolarlas, registrarlas y soportar undo/redo de forma extensible.",
+    "questionCount": 40
+  },
+  {
+    "id": "iterator",
+    "name": "Iterator",
+    "category": "Comportamiento",
+    "description": "Proporciona una forma de recorrer elementos de una coleccion sin exponer su representacion interna, desacoplando el algoritmo de recorrido de la estructura de datos.",
+    "questionCount": 40
+  },
+  {
+    "id": "mediator",
+    "name": "Mediator",
+    "category": "Comportamiento",
+    "description": "Define un objeto que encapsula como interactua un conjunto de colegas, centralizando protocolos de colaboracion para reducir acoplamiento directo y controlar la complejidad de coordinacion.",
+    "questionCount": 40
+  },
+  {
+    "id": "memento",
+    "name": "Memento",
+    "category": "Comportamiento",
+    "description": "Captura y externaliza el estado interno de un objeto sin violar encapsulacion, para poder restaurarlo mas adelante.",
+    "questionCount": 40
+  },
+  {
+    "id": "state",
+    "name": "State",
+    "category": "Comportamiento",
+    "description": "Permite que un objeto cambie su comportamiento cuando cambia su estado interno, delegando reglas y transiciones en objetos de estado para eliminar condicionales complejas y mejorar la extensibilidad.",
+    "questionCount": 40
+  },
+  {
+    "id": "template_method",
+    "name": "Template Method",
+    "category": "Comportamiento",
+    "description": "Define el esqueleto de un algoritmo en una clase base y permite que las subclases redefinan pasos especificos sin cambiar la secuencia general.",
+    "questionCount": 40
+  },
+  {
+    "id": "visitor",
+    "name": "Visitor",
+    "category": "Comportamiento",
+    "description": "Permite definir nuevas operaciones sobre una estructura de objetos sin modificar las clases de los elementos, delegando la logica en visitantes y apoyandose en doble despacho para resolver el comportamiento segun el tipo concreto.",
+    "questionCount": 40
   }
 ]

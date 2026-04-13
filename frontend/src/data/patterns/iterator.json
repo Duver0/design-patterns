@@ -1,0 +1,425 @@
+{
+  "id": "iterator",
+  "name": "Iterator",
+  "category": "Comportamiento",
+  "description": "Proporciona una forma de recorrer elementos de una coleccion sin exponer su representacion interna, desacoplando el algoritmo de recorrido de la estructura de datos.",
+  "questions": [
+    {
+      "id": "iterator_q1",
+      "type": "mcq",
+      "question": "Cual es la intencion principal del patron Iterator?",
+      "options": [
+        "Garantizar una unica instancia global para el recorrido",
+        "Separar el recorrido de una coleccion de su estructura interna",
+        "Construir objetos complejos paso a paso",
+        "Notificar cambios de estado a observadores"
+      ],
+      "correct": 1,
+      "explanation": "Iterator encapsula el estado y la logica de recorrido para que el cliente no dependa de indices, nodos o detalles internos."
+    },
+    {
+      "id": "iterator_q2",
+      "type": "mcq",
+      "question": "Que problema de diseno suele motivar Iterator?",
+      "options": [
+        "El cliente debe conocer detalles internos de la coleccion para recorrerla",
+        "Se necesita crear familias de objetos relacionados",
+        "Se requiere una fachada para simplificar subsistemas",
+        "Se busca compartir estado intrinseco para ahorrar memoria"
+      ],
+      "correct": 0,
+      "explanation": "Sin Iterator, el cliente suele acoplarse a la estructura interna del contenedor, dificultando cambios y mantenimiento."
+    },
+    {
+      "id": "iterator_q3",
+      "type": "mcq",
+      "question": "Que participante suele mantener la posicion actual del recorrido?",
+      "options": [
+        "Aggregate",
+        "ConcreteIterator",
+        "Client",
+        "Factory"
+      ],
+      "correct": 1,
+      "explanation": "El iterador concreto guarda el cursor o estado de avance y define como moverse al siguiente elemento."
+    },
+    {
+      "id": "iterator_q4",
+      "type": "mcq",
+      "question": "Cual describe mejor el flujo canonico con Iterator externo?",
+      "options": [
+        "El iterador crea la coleccion y luego el cliente itera",
+        "La coleccion empuja todos los elementos al cliente en un solo paso",
+        "El cliente solicita un iterador al aggregate y repite hasNext/next",
+        "El cliente modifica internamente nodos para avanzar"
+      ],
+      "correct": 2,
+      "explanation": "El flujo comun es obtener iterador desde la coleccion y consumir secuencialmente mientras haya elementos."
+    },
+    {
+      "id": "iterator_q5",
+      "type": "mcq",
+      "question": "Que ventaja concreta aporta sobre un bucle acoplado a indices?",
+      "options": [
+        "Elimina por completo la complejidad temporal del recorrido",
+        "Permite varios recorridos simultaneos e independientes",
+        "Obliga a usar recursividad en todas las colecciones",
+        "Evita cualquier costo de memoria adicional"
+      ],
+      "correct": 1,
+      "explanation": "Puedes tener varios iteradores con estados distintos sobre la misma coleccion sin interferencia directa."
+    },
+    {
+      "id": "iterator_q6",
+      "type": "mcq",
+      "question": "Que riesgo tecnico aparece si la coleccion cambia durante la iteracion sin politica definida?",
+      "options": [
+        "Se convierte automaticamente en recorrido bidireccional",
+        "Se garantiza consistencia total sin costo",
+        "Puede invalidarse el cursor y romper la coherencia del recorrido",
+        "El iterador deja de ser un patron de comportamiento"
+      ],
+      "correct": 2,
+      "explanation": "Cambios estructurales concurrentes pueden provocar saltos, duplicados o errores si no hay estrategia fail-fast o snapshot."
+    },
+    {
+      "id": "iterator_q7",
+      "type": "mcq",
+      "question": "En que escenario suele ser sobreingenieria aplicar Iterator explicito?",
+      "options": [
+        "Cuando hay varios tipos de recorrido sobre la misma estructura",
+        "Cuando la coleccion es simple y el for-each nativo cubre todo el caso",
+        "Cuando se quiere ocultar nodos internos de una estructura compleja",
+        "Cuando se necesita recorrido lazy para datos grandes"
+      ],
+      "correct": 1,
+      "explanation": "Si no hay variaciones de recorrido ni requisitos extra, el soporte nativo del lenguaje suele ser suficiente."
+    },
+    {
+      "id": "iterator_q8",
+      "type": "mcq",
+      "question": "Diferencia clave entre Iterator y Visitor?",
+      "options": [
+        "Iterator agrega operaciones nuevas a nodos sin tocarlos",
+        "Iterator encapsula recorrido; Visitor encapsula operaciones sobre elementos",
+        "Visitor solo se usa con colecciones lineales",
+        "Iterator requiere doble despacho obligatoriamente"
+      ],
+      "correct": 1,
+      "explanation": "Iterator se centra en navegar elementos; Visitor en ejecutar operaciones nuevas sobre una estructura estable."
+    },
+    {
+      "id": "iterator_q9",
+      "type": "mcq",
+      "question": "Respecto a Composite, cual afirmacion es correcta?",
+      "options": [
+        "Composite modela parte-todo; Iterator define como recorrer esa estructura",
+        "Ambos tienen exactamente la misma intencion",
+        "Iterator reemplaza por completo la necesidad de Composite",
+        "Composite solo aplica a listas planas"
+      ],
+      "correct": 0,
+      "explanation": "Composite organiza la jerarquia y Iterator puede proveer recorridos uniformes sobre ella."
+    },
+    {
+      "id": "iterator_q10",
+      "type": "mcq",
+      "question": "Comparado con Strategy, Iterator se diferencia porque:",
+      "options": [
+        "Strategy selecciona algoritmos de negocio; Iterator recorre elementos",
+        "Iterator define familias de algoritmos intercambiables",
+        "Strategy requiere siempre metodos hasNext y next",
+        "Iterator no usa objetos para variar comportamiento"
+      ],
+      "correct": 0,
+      "explanation": "La intencion de Strategy es elegir algoritmo; la de Iterator es abstraer navegacion de una coleccion."
+    },
+    {
+      "id": "iterator_q11",
+      "type": "mcq",
+      "question": "Comparado con Observer, cual enunciado es mas preciso?",
+      "options": [
+        "Observer y Iterator son equivalentes si hay eventos",
+        "Iterator dispara notificaciones automaticas ante cambios",
+        "Observer propaga cambios; Iterator entrega acceso secuencial bajo demanda",
+        "Iterator solo funciona de forma asincrona"
+      ],
+      "correct": 2,
+      "explanation": "Observer trata comunicacion de cambios entre sujetos y observadores; Iterator trata recorrido controlado por el cliente."
+    },
+    {
+      "id": "iterator_q12",
+      "type": "mcq",
+      "question": "Frente a Template Method, cual diferencia es correcta?",
+      "options": [
+        "Template Method fija pasos por herencia; Iterator separa estado de recorrido en un objeto",
+        "Iterator obliga a clases abstractas con hooks",
+        "Template Method necesita siempre colecciones y cursores",
+        "Ambos dependen del mismo mecanismo principal"
+      ],
+      "correct": 0,
+      "explanation": "Template Method varia partes de un algoritmo heredando; Iterator encapsula navegacion y cursor en colaborador separado."
+    },
+    {
+      "id": "iterator_q13",
+      "type": "mcq",
+      "question": "Cual es un uso real donde Iterator aporta valor directo?",
+      "options": [
+        "Forzar una sola instancia global de repositorio",
+        "Convertir interfaces incompatibles de terceros",
+        "Recorrer resultados paginados de una API sin cargar todo en memoria",
+        "Reemplazar validaciones de dominio por polimorfismo"
+      ],
+      "correct": 2,
+      "explanation": "Iteradores lazy o por cursor permiten consumir grandes volumenes gradualmente y con menor memoria."
+    },
+    {
+      "id": "iterator_q14",
+      "type": "mcq",
+      "question": "Que propiedad caracteriza mejor al iterador externo frente al interno?",
+      "options": [
+        "El contenedor controla totalmente cuando cortar la iteracion",
+        "El cliente controla ritmo, pausa y corte del recorrido",
+        "El iterador externo no mantiene estado",
+        "Solo puede recorrer en orden natural ascendente"
+      ],
+      "correct": 1,
+      "explanation": "En iteracion externa, el cliente orquesta cada paso, util para fusionar recorridos o detener temprano."
+    },
+    {
+      "id": "iterator_q15",
+      "type": "mcq",
+      "question": "Si necesitas consistencia de lectura mientras hay escrituras concurrentes, que enfoque es mas adecuado?",
+      "options": [
+        "Desactivar iteradores y exponer nodos internos",
+        "Permitir mutacion libre durante next sin reglas",
+        "Reiniciar el iterador en cada llamada a next",
+        "Usar snapshot iterator o fail-fast segun requisito de negocio"
+      ],
+      "correct": 3,
+      "explanation": "Snapshot prioriza consistencia de vista; fail-fast detecta cambios y falla temprano para evitar resultados engañosos."
+    },
+    {
+      "id": "iterator_q16",
+      "type": "mcq",
+      "question": "Debes ofrecer DFS y BFS sobre el mismo grafo sin tocar el cliente. Que diseno encaja mejor?",
+      "options": [
+        "Un solo metodo con if gigante dentro del cliente",
+        "Dos subclases del cliente, una por recorrido",
+        "Dos ConcreteIterator y una fabrica de iteradores en el aggregate",
+        "Observer con notificaciones por nodo visitado"
+      ],
+      "correct": 2,
+      "explanation": "Separar recorridos en iteradores concretos permite cambiar estrategia de navegacion sin modificar quien consume."
+    },
+    {
+      "id": "iterator_q17",
+      "type": "true_false",
+      "question": "Iterator desacopla el recorrido de la representacion interna de la coleccion.",
+      "correct": true,
+      "explanation": "Verdadero. El cliente usa un contrato estable en lugar de conocer nodos o indices internos."
+    },
+    {
+      "id": "iterator_q18",
+      "type": "true_false",
+      "question": "Iterator obliga a que exista un unico orden de recorrido para cada coleccion.",
+      "correct": false,
+      "explanation": "Falso. Una coleccion puede ofrecer varios iteradores: directo, inverso, DFS, BFS, filtrado, etc."
+    },
+    {
+      "id": "iterator_q19",
+      "type": "true_false",
+      "question": "Dos iteradores sobre la misma coleccion pueden avanzar independientemente si cada uno mantiene su propio estado.",
+      "correct": true,
+      "explanation": "Verdadero. Cada iterador conserva su cursor, lo que habilita recorridos concurrentes de lectura."
+    },
+    {
+      "id": "iterator_q20",
+      "type": "true_false",
+      "question": "Cambios estructurales durante la iteracion pueden invalidar el recorrido si no hay politica de concurrencia.",
+      "correct": true,
+      "explanation": "Verdadero. Sin reglas, el iterador puede observar estados inconsistentes o fallar."
+    },
+    {
+      "id": "iterator_q21",
+      "type": "true_false",
+      "question": "Si un lenguaje tiene for-each, crear iteradores personalizados nunca aporta valor.",
+      "correct": false,
+      "explanation": "Falso. Iteradores personalizados sirven para recorrido lazy, filtros, ordenes especiales o fuentes no triviales."
+    },
+    {
+      "id": "iterator_q22",
+      "type": "true_false",
+      "question": "En iteracion externa, el cliente controla explicitamente cuando detener el recorrido.",
+      "correct": true,
+      "explanation": "Verdadero. El control del flujo de consumo recae en el cliente."
+    },
+    {
+      "id": "iterator_q23",
+      "type": "true_false",
+      "question": "La iteracion interna puede dificultar mezclar dos recorridos en lockstep con logica de corte compleja.",
+      "correct": true,
+      "explanation": "Verdadero. Al delegar el bucle al contenedor, se pierde flexibilidad para coordinar fuentes."
+    },
+    {
+      "id": "iterator_q24",
+      "type": "true_false",
+      "question": "Iterator y Visitor tienen la misma intencion principal.",
+      "correct": false,
+      "explanation": "Falso. Iterator recorre; Visitor agrega operaciones sobre elementos de una estructura."
+    },
+    {
+      "id": "iterator_q25",
+      "type": "true_false",
+      "question": "Composite puede combinarse con Iterator para recorrer una jerarquia sin exponer su forma interna al cliente.",
+      "correct": true,
+      "explanation": "Verdadero. Es una combinacion frecuente en arboles de objetos."
+    },
+    {
+      "id": "iterator_q26",
+      "type": "true_false",
+      "question": "Strategy y Iterator se usan para el mismo objetivo de diseno.",
+      "correct": false,
+      "explanation": "Falso. Strategy elige algoritmos de negocio; Iterator abstrae navegacion de colecciones."
+    },
+    {
+      "id": "iterator_q27",
+      "type": "true_false",
+      "question": "Observer se enfoca en notificar cambios de estado, no en recorrer secuencialmente una coleccion.",
+      "correct": true,
+      "explanation": "Verdadero. Son problemas de diseno distintos."
+    },
+    {
+      "id": "iterator_q28",
+      "type": "true_false",
+      "question": "Template Method y Iterator comparten exactamente el mismo mecanismo central de variacion.",
+      "correct": false,
+      "explanation": "Falso. Template Method usa herencia y hooks; Iterator usa objeto iterador con estado de recorrido."
+    },
+    {
+      "id": "iterator_q29",
+      "type": "true_false",
+      "question": "Un iterador lazy puede reducir consumo de memoria al evitar materializar toda la secuencia.",
+      "correct": true,
+      "explanation": "Verdadero. Se producen elementos bajo demanda."
+    },
+    {
+      "id": "iterator_q30",
+      "type": "true_false",
+      "question": "Un snapshot iterator puede mejorar consistencia de lectura, aunque incremente costo de memoria.",
+      "correct": true,
+      "explanation": "Verdadero. Mantiene una vista estable del conjunto iterado a costa de copia o versionado."
+    },
+    {
+      "id": "iterator_q31",
+      "type": "short",
+      "question": "Como se llama el participante que expone la creacion del iterador?",
+      "correct": [
+        "aggregate",
+        "collection",
+        "agregado"
+      ],
+      "hint": "Es la estructura que contiene los elementos.",
+      "explanation": "El aggregate (o collection) provee el metodo para obtener un iterador compatible."
+    },
+    {
+      "id": "iterator_q32",
+      "type": "short",
+      "question": "Nombre comun del metodo que indica si quedan elementos por recorrer.",
+      "correct": [
+        "hasnext",
+        "has_next",
+        "haysiguiente"
+      ],
+      "hint": "Suele consultarse antes de pedir el siguiente elemento.",
+      "explanation": "hasNext expresa si el cursor aun puede avanzar sin salirse de la coleccion."
+    },
+    {
+      "id": "iterator_q33",
+      "type": "short",
+      "question": "Nombre comun del metodo que devuelve el siguiente elemento del recorrido.",
+      "correct": [
+        "next",
+        "siguiente"
+      ],
+      "hint": "Avanza el cursor y entrega un elemento.",
+      "explanation": "next es la operacion basica para consumir secuencialmente la coleccion."
+    },
+    {
+      "id": "iterator_q34",
+      "type": "short",
+      "question": "Clase que implementa la logica de recorrido especifica.",
+      "correct": [
+        "concreteiterator",
+        "iteradorconcreto",
+        "iterador concreto"
+      ],
+      "hint": "No es la interfaz, sino su implementacion.",
+      "explanation": "ConcreteIterator mantiene estado y decide como avanzar segun el orden definido."
+    },
+    {
+      "id": "iterator_q35",
+      "type": "short",
+      "question": "Sigla habitual del recorrido en profundidad sobre estructuras tipo arbol o grafo.",
+      "correct": [
+        "dfs",
+        "profundidad"
+      ],
+      "hint": "Explora primero una rama antes de retroceder.",
+      "explanation": "DFS (depth-first search) es una estrategia de recorrido que puede modelarse con un iterador."
+    },
+    {
+      "id": "iterator_q36",
+      "type": "short",
+      "question": "Sigla habitual del recorrido por niveles sobre estructuras tipo grafo.",
+      "correct": [
+        "bfs",
+        "anchura"
+      ],
+      "hint": "Usa cola y avanza por niveles.",
+      "explanation": "BFS (breadth-first search) recorre por capas y tambien puede exponerse via Iterator."
+    },
+    {
+      "id": "iterator_q37",
+      "type": "short",
+      "question": "Principio de diseno que se beneficia al ocultar detalles internos del contenedor.",
+      "correct": [
+        "encapsulacion"
+      ],
+      "hint": "Evita que el cliente dependa de la estructura interna.",
+      "explanation": "Iterator protege la encapsulacion al separar consumo externo de representacion interna."
+    },
+    {
+      "id": "iterator_q38",
+      "type": "short",
+      "question": "Termino para produccion de elementos solo cuando se solicitan durante la iteracion.",
+      "correct": [
+        "lazy",
+        "perezosa",
+        "evaluacion perezosa"
+      ],
+      "hint": "No se calcula todo al inicio.",
+      "explanation": "La evaluacion lazy reduce trabajo y memoria cuando no todos los elementos seran consumidos."
+    },
+    {
+      "id": "iterator_q39",
+      "type": "short",
+      "question": "Patron de comparacion que agrega operaciones nuevas sobre una estructura sin modificar sus nodos.",
+      "correct": [
+        "visitor"
+      ],
+      "hint": "Suele usar doble despacho.",
+      "explanation": "Visitor se centra en operaciones sobre elementos; Iterator en su recorrido."
+    },
+    {
+      "id": "iterator_q40",
+      "type": "short",
+      "question": "Patron de comparacion que selecciona algoritmos intercambiables segun contexto.",
+      "correct": [
+        "strategy"
+      ],
+      "hint": "Encapsula familias de algoritmos.",
+      "explanation": "Strategy decide que algoritmo aplicar; Iterator decide como navegar elementos."
+    }
+  ]
+}

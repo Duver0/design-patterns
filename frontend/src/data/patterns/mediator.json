@@ -1,0 +1,427 @@
+{
+  "id": "mediator",
+  "name": "Mediator",
+  "category": "Comportamiento",
+  "description": "Define un objeto que encapsula como interactua un conjunto de colegas, centralizando protocolos de colaboracion para reducir acoplamiento directo y controlar la complejidad de coordinacion.",
+  "questions": [
+    {
+      "id": "mediator_q1",
+      "type": "mcq",
+      "question": "¿Cual es la intencion principal del patron Mediator?",
+      "options": [
+        "Separar la creacion de objetos de su representacion",
+        "Encapsular la coordinacion entre objetos colegas para evitar dependencias directas",
+        "Definir una interfaz simplificada para un subsistema externo",
+        "Encadenar manejadores para procesar una solicitud secuencialmente"
+      ],
+      "correct": 1,
+      "explanation": "Mediator centraliza la colaboracion entre colegas para reducir el grafo de dependencias y evitar comunicacion punto a punto entre ellos."
+    },
+    {
+      "id": "mediator_q2",
+      "type": "mcq",
+      "question": "En una implementacion canonica, ¿que responsabilidad suele asumir el ConcreteMediator?",
+      "options": [
+        "Persistir entidades de dominio y gestionar transacciones",
+        "Construir todas las instancias de colegas con logica creacional",
+        "Mantener referencias a colegas y orquestar su protocolo de interaccion",
+        "Reemplazar interfaces por llamadas estaticas globales"
+      ],
+      "correct": 2,
+      "explanation": "El ConcreteMediator conoce a los colegas necesarios y define como se enrutan mensajes, eventos o comandos entre ellos."
+    },
+    {
+      "id": "mediator_q3",
+      "type": "mcq",
+      "question": "¿Que escenario suele justificar mejor aplicar Mediator?",
+      "options": [
+        "Solo existe un objeto con comportamiento estable y sin colaboraciones",
+        "Hay muchos componentes UI que reaccionan entre si con reglas de habilitacion y validacion cruzada",
+        "Se necesita clonar objetos complejos con copia profunda",
+        "Se requiere una unica instancia global de configuracion"
+      ],
+      "correct": 1,
+      "explanation": "Cuando hay multiples dependencias cruzadas entre componentes, Mediator ayuda a concentrar las reglas de colaboracion y reduce el acoplamiento lateral."
+    },
+    {
+      "id": "mediator_q4",
+      "type": "mcq",
+      "question": "¿Que estructura de dependencias refleja mejor Mediator bien aplicado?",
+      "options": [
+        "Cada colega depende de todos los demas colegas",
+        "Los colegas dependen del contrato del mediador y evitan referencias directas entre ellos",
+        "El mediador depende de la capa de presentacion para decidir reglas de dominio",
+        "Los colegas exponen estado mutable publico para sincronizarse"
+      ],
+      "correct": 1,
+      "explanation": "La idea es transformar una red densa N a N en una coordinacion central, donde el contrato del mediador actua como punto de colaboracion."
+    },
+    {
+      "id": "mediator_q5",
+      "type": "mcq",
+      "question": "Al agregar un nuevo colega en un diseno con Mediator, ¿que cambio minimiza regresiones?",
+      "options": [
+        "Modificar todos los colegas existentes para que conozcan al nuevo",
+        "Agregar reglas en el mediador y mantener estables las interfaces de colegas previos",
+        "Eliminar el mediador y conectar al nuevo colega directamente con todos",
+        "Mover la logica de coordinacion al cliente final"
+      ],
+      "correct": 1,
+      "explanation": "Mediator favorece extension localizada: se integra el nuevo participante ajustando la orquestacion central en lugar de propagar cambios en cascada."
+    },
+    {
+      "id": "mediator_q6",
+      "type": "mcq",
+      "question": "¿Cual es el riesgo arquitectonico mas comun al abusar de Mediator?",
+      "options": [
+        "Convertir el mediador en un objeto dios con demasiadas reglas y dependencias",
+        "Perder por completo la trazabilidad de interacciones",
+        "Eliminar accidentalmente el polimorfismo de la aplicacion",
+        "Impedir pruebas unitarias de forma estructural"
+      ],
+      "correct": 0,
+      "explanation": "Si toda decision termina en un unico mediador sin limites claros, se degrada cohesion y mantenibilidad."
+    },
+    {
+      "id": "mediator_q7",
+      "type": "mcq",
+      "question": "Comparado con Observer, ¿que describe mejor a Mediator?",
+      "options": [
+        "Mediator prioriza difusion uno-a-muchos de eventos sin reglas de coordinacion central",
+        "Mediator centraliza protocolos entre colegas; Observer enfatiza suscripcion y notificacion de cambios",
+        "Observer y Mediator son equivalentes y solo cambia el nombre",
+        "Observer requiere un objeto coordinador que decide toda interaccion bilateral"
+      ],
+      "correct": 1,
+      "explanation": "Observer modela dependencias de notificacion; Mediator modela colaboracion coordinada entre pares con reglas explicitas de interaccion."
+    },
+    {
+      "id": "mediator_q8",
+      "type": "mcq",
+      "question": "¿Que diferencia clave separa Mediator de Facade?",
+      "options": [
+        "Facade regula la colaboracion entre colegas internos; Mediator simplifica API para clientes externos",
+        "Mediator centraliza interacciones entre colegas; Facade simplifica el acceso de clientes a un subsistema",
+        "Facade y Mediator son ambos patrones creacionales",
+        "Mediator solo aplica en sistemas distribuidos y Facade no"
+      ],
+      "correct": 1,
+      "explanation": "Facade esta orientado al cliente consumidor de un subsistema; Mediator esta orientado a como colaboran componentes pares dentro del sistema."
+    },
+    {
+      "id": "mediator_q9",
+      "type": "mcq",
+      "question": "Frente a Chain of Responsibility, ¿que afirmacion es mas precisa sobre Mediator?",
+      "options": [
+        "Chain y Mediator encaminan solicitudes con la misma semantica secuencial",
+        "Mediator decide destinos segun reglas de coordinacion; Chain delega secuencialmente hasta manejo",
+        "Mediator elimina la necesidad de contratos entre objetos",
+        "Chain siempre centraliza todas las decisiones en un unico objeto"
+      ],
+      "correct": 1,
+      "explanation": "En Chain la solicitud recorre una cadena de posibles manejadores; en Mediator, la orquestacion se concentra y no depende de una cadena lineal."
+    },
+    {
+      "id": "mediator_q10",
+      "type": "mcq",
+      "question": "¿Como se relacionan mejor Mediator y Command en un flujo complejo?",
+      "options": [
+        "Son mutuamente excluyentes: usar uno impide usar el otro",
+        "Command encapsula acciones; Mediator puede decidir cuando y a quien despacharlas",
+        "Mediator reemplaza la necesidad de representar operaciones como objetos",
+        "Command siempre centraliza comunicacion entre colegas"
+      ],
+      "correct": 1,
+      "explanation": "Ambos pueden combinarse: Command modela la peticion y Mediator coordina su enrutamiento segun contexto."
+    },
+    {
+      "id": "mediator_q11",
+      "type": "mcq",
+      "question": "Respecto a Strategy, ¿donde suele encajar Mediator?",
+      "options": [
+        "Strategy coordina colegas; Mediator selecciona algoritmos intercambiables",
+        "Mediator puede usar Strategy internamente para variar politicas de enrutamiento",
+        "Mediator y Strategy siempre deben fusionarse en una unica clase",
+        "Strategy elimina la necesidad de cualquier coordinacion entre componentes"
+      ],
+      "correct": 1,
+      "explanation": "Strategy puede parametrizar decisiones del mediador (por ejemplo reglas de ruteo), manteniendo separada la intencion de ambos patrones."
+    },
+    {
+      "id": "mediator_q12",
+      "type": "mcq",
+      "question": "Si varios colegas emiten eventos en paralelo hacia un mediador compartido, ¿que practica reduce condiciones de carrera?",
+      "options": [
+        "Confiar en orden implicito de llegada sin sincronizacion",
+        "Serializar eventos con cola o proteger secciones criticas de estado compartido",
+        "Permitir mutacion libre del estado del mediador desde cualquier hilo",
+        "Eliminar validaciones de consistencia para mejorar rendimiento"
+      ],
+      "correct": 1,
+      "explanation": "Cuando hay concurrencia, el mediador necesita politicas de sincronizacion o procesamiento secuencial para preservar invariantes."
+    },
+    {
+      "id": "mediator_q13",
+      "type": "mcq",
+      "question": "¿Que enfoque de pruebas valida mejor un Mediator con muchas reglas de colaboracion?",
+      "options": [
+        "Solo pruebas visuales del frontend",
+        "Pruebas de interaccion verificando mensajes enviados a colegas y ramas de coordinacion",
+        "Evitar mocks porque el mediador no requiere aislamiento",
+        "Probar unicamente constructores de colegas"
+      ],
+      "correct": 1,
+      "explanation": "El valor de Mediator esta en el protocolo; por eso conviene validar rutas de decision, notificaciones y efectos colaterales entre colegas."
+    },
+    {
+      "id": "mediator_q14",
+      "type": "mcq",
+      "question": "En dominios con invariantes cruzadas, ¿que aporta Mediator bien disenado?",
+      "options": [
+        "Duplica reglas en cada colega para mayor autonomia",
+        "Centraliza secuencias de colaboracion donde el orden y precondiciones importan",
+        "Reemplaza por completo entidades y servicios de dominio",
+        "Evita cualquier necesidad de validacion"
+      ],
+      "correct": 1,
+      "explanation": "Cuando varias partes deben coordinarse en un orden especifico, el mediador puede encapsular ese protocolo sin dispersar reglas."
+    },
+    {
+      "id": "mediator_q15",
+      "type": "mcq",
+      "question": "¿Que olor de diseno indica que Mediator esta mal aplicado en un modulo?",
+      "options": [
+        "Los colegas no conocen las clases concretas entre si",
+        "El mediador define un contrato minimo y estable",
+        "Persisten llamadas directas extensas colega-a-colega fuera del protocolo central",
+        "Existen pruebas de colaboracion automatizadas"
+      ],
+      "correct": 2,
+      "explanation": "Si la mayoria de interacciones sigue siendo lateral y directa, el mediador no esta cumpliendo su objetivo de desacoplar colaboraciones."
+    },
+    {
+      "id": "mediator_q16",
+      "type": "mcq",
+      "question": "¿Cuando NO conviene introducir Mediator?",
+      "options": [
+        "Cuando hay pocos colaboradores y su protocolo es simple y estable",
+        "Cuando existe alto acoplamiento ciclico entre muchos componentes",
+        "Cuando se esperan nuevas variantes de interaccion con frecuencia",
+        "Cuando las reglas de coordinacion deben auditarse en un punto unico"
+      ],
+      "correct": 0,
+      "explanation": "Si el costo de coordinacion es bajo y no hay complejidad de colaboracion, Mediator puede ser sobreingenieria."
+    },
+    {
+      "id": "mediator_q17",
+      "type": "true_false",
+      "question": "Mediator reduce dependencias directas entre colegas al convertir interacciones laterales en comunicacion mediada.",
+      "correct": true,
+      "explanation": "Verdadero. El patron busca desacoplar colegas y concentrar el protocolo de colaboracion."
+    },
+    {
+      "id": "mediator_q18",
+      "type": "true_false",
+      "question": "Aplicar Mediator elimina todo tipo de acoplamiento del sistema.",
+      "correct": false,
+      "explanation": "Falso. El acoplamiento no desaparece; se redistribuye hacia el contrato del mediador y sus reglas."
+    },
+    {
+      "id": "mediator_q19",
+      "type": "true_false",
+      "question": "Un ConcreteMediator puede encapsular politicas de secuenciacion y precondiciones entre colegas.",
+      "correct": true,
+      "explanation": "Verdadero. Esa capacidad de orquestar protocolos es una de sus utilidades principales."
+    },
+    {
+      "id": "mediator_q20",
+      "type": "true_false",
+      "question": "Observer y Mediator tienen la misma intencion principal: ambos centralizan reglas de colaboracion bilateral.",
+      "correct": false,
+      "explanation": "Falso. Observer prioriza suscripcion/notificacion; Mediator prioriza coordinacion de interacciones entre colegas."
+    },
+    {
+      "id": "mediator_q21",
+      "type": "true_false",
+      "question": "Facade y Mediator pueden parecerse estructuralmente, pero su intencion difiere: Facade simplifica acceso de clientes y Mediator regula colaboracion interna.",
+      "correct": true,
+      "explanation": "Verdadero. La diferencia de intencion es clave para elegir correctamente."
+    },
+    {
+      "id": "mediator_q22",
+      "type": "true_false",
+      "question": "En Chain of Responsibility, la solicitud suele recorrer manejadores en secuencia; en Mediator, la decision de destino se concentra en reglas centrales.",
+      "correct": true,
+      "explanation": "Verdadero. Chain delega paso a paso; Mediator coordina desde un punto de orquestacion."
+    },
+    {
+      "id": "mediator_q23",
+      "type": "true_false",
+      "question": "Command y Mediator son incompatibles en el mismo diseno porque ambos duplican exactamente la misma responsabilidad.",
+      "correct": false,
+      "explanation": "Falso. Command modela solicitudes como objetos; Mediator coordina colaboradores. Pueden complementarse."
+    },
+    {
+      "id": "mediator_q24",
+      "type": "true_false",
+      "question": "Strategy puede usarse dentro de un Mediator para cambiar politicas de enrutamiento sin alterar el contrato externo.",
+      "correct": true,
+      "explanation": "Verdadero. Es una composicion util para mantener extensibilidad en decisiones internas del mediador."
+    },
+    {
+      "id": "mediator_q25",
+      "type": "true_false",
+      "question": "Si el mediador depende de detalles concretos y usa condicionales por tipo para cada colega, se deteriora OCP.",
+      "correct": true,
+      "explanation": "Verdadero. El exceso de conocimiento concreto vuelve fragil la extension del sistema."
+    },
+    {
+      "id": "mediator_q26",
+      "type": "true_false",
+      "question": "Mediator siempre simplifica el sistema sin costos de complejidad adicional.",
+      "correct": false,
+      "explanation": "Falso. Puede introducir complejidad central y mas abstracciones; su valor depende del contexto."
+    },
+    {
+      "id": "mediator_q27",
+      "type": "true_false",
+      "question": "En escenarios concurrentes, un mediador con estado compartido puede requerir sincronizacion explicita.",
+      "correct": true,
+      "explanation": "Verdadero. Sin control de concurrencia, se comprometen invariantes y orden de colaboracion."
+    },
+    {
+      "id": "mediator_q28",
+      "type": "true_false",
+      "question": "Una buena practica es mover todas las reglas de negocio de cada modulo al mediador para centralizar totalmente el dominio.",
+      "correct": false,
+      "explanation": "Falso. El mediador debe coordinar interacciones, no absorber indiscriminadamente toda logica de dominio."
+    },
+    {
+      "id": "mediator_q29",
+      "type": "true_false",
+      "question": "Con Mediator bien aplicado, agregar un nuevo colega suele requerir menos cambios transversales que en colaboracion directa N a N.",
+      "correct": true,
+      "explanation": "Verdadero. Se reduce el efecto cascada porque la colaboracion esta concentrada."
+    },
+    {
+      "id": "mediator_q30",
+      "type": "true_false",
+      "question": "Un mediador mal particionado puede convertirse en cuello de botella funcional y de rendimiento.",
+      "correct": true,
+      "explanation": "Verdadero. Si toda interaccion cae en una pieza monolitica, aumentan contencion y complejidad."
+    },
+    {
+      "id": "mediator_q31",
+      "type": "short",
+      "question": "¿Nombre del objeto central que coordina la colaboracion entre colegas?",
+      "correct": [
+        "mediador",
+        "mediator"
+      ],
+      "hint": "Es el rol principal del patron.",
+      "explanation": "El mediador concentra la comunicacion y evita dependencias laterales directas entre colegas."
+    },
+    {
+      "id": "mediator_q32",
+      "type": "short",
+      "question": "¿Como se llama el rol de los objetos que delegan su comunicacion al mediador?",
+      "correct": [
+        "colegas",
+        "colleagues",
+        "colega",
+        "colleague"
+      ],
+      "hint": "No se comunican directo entre si.",
+      "explanation": "Los colegas participan en la colaboracion, pero canalizan interacciones a traves del mediador."
+    },
+    {
+      "id": "mediator_q33",
+      "type": "short",
+      "question": "¿Clase que implementa reglas especificas de coordinacion del contrato Mediator?",
+      "correct": [
+        "mediador concreto",
+        "concrete mediator"
+      ],
+      "hint": "Es la implementacion, no la abstraccion.",
+      "explanation": "El ConcreteMediator define las reglas concretas de orquestacion entre colegas."
+    },
+    {
+      "id": "mediator_q34",
+      "type": "short",
+      "question": "¿Tipo de comunicacion entre colegas cuando Mediator esta bien aplicado?",
+      "correct": [
+        "indirecta",
+        "indirect"
+      ],
+      "hint": "No es punto a punto entre colegas.",
+      "explanation": "La interaccion se vuelve indirecta: los colegas colaboran a traves del mediador."
+    },
+    {
+      "id": "mediator_q35",
+      "type": "short",
+      "question": "¿Anti patron frecuente cuando el mediador acumula demasiadas responsabilidades?",
+      "correct": [
+        "objeto dios",
+        "god object"
+      ],
+      "hint": "Huele a clase con demasiadas decisiones.",
+      "explanation": "Si el mediador centraliza en exceso sin limites, se convierte en un objeto dios dificil de mantener."
+    },
+    {
+      "id": "mediator_q36",
+      "type": "short",
+      "question": "¿Topologia de dependencias que suele emerger al reemplazar colaboracion N a N por Mediator?",
+      "correct": [
+        "estrella",
+        "star"
+      ],
+      "hint": "Un nodo central conecta a los demas.",
+      "explanation": "La red de dependencias tiende a forma de estrella alrededor del mediador."
+    },
+    {
+      "id": "mediator_q37",
+      "type": "short",
+      "question": "¿Estado de acoplamiento buscado entre colegas tras introducir Mediator?",
+      "correct": [
+        "bajo acoplamiento",
+        "loose coupling"
+      ],
+      "hint": "Objetivo clave de mantenibilidad.",
+      "explanation": "Mediator busca reducir el acoplamiento directo para facilitar evolucion y pruebas."
+    },
+    {
+      "id": "mediator_q38",
+      "type": "short",
+      "question": "¿Metodo comun para que un colega notifique eventos al mediador en muchos ejemplos GoF?",
+      "correct": [
+        "notify",
+        "notificar"
+      ],
+      "hint": "Suele representar aviso de cambio.",
+      "explanation": "Muchos disenos usan un metodo de notificacion para que el mediador tome decisiones de coordinacion."
+    },
+    {
+      "id": "mediator_q39",
+      "type": "short",
+      "question": "¿Estructura de control util para serializar eventos hacia el mediador y evitar carreras?",
+      "correct": [
+        "cola",
+        "queue"
+      ],
+      "hint": "Procesa entradas en orden.",
+      "explanation": "Una cola ayuda a ordenar y procesar eventos de forma controlada cuando hay concurrencia."
+    },
+    {
+      "id": "mediator_q40",
+      "type": "short",
+      "question": "¿Tipo de prueba orientada a verificar mensajes intercambiados entre mediador y colegas?",
+      "correct": [
+        "interaccion",
+        "interaction test",
+        "prueba de interaccion"
+      ],
+      "hint": "Valida colaboraciones, no solo resultados finales.",
+      "explanation": "Las pruebas de interaccion confirman que el protocolo coordinado por el mediador se ejecuta como se espera."
+    }
+  ]
+}

@@ -1,0 +1,420 @@
+{
+  "id": "visitor",
+  "name": "Visitor",
+  "category": "Comportamiento",
+  "description": "Permite definir nuevas operaciones sobre una estructura de objetos sin modificar las clases de los elementos, delegando la logica en visitantes y apoyandose en doble despacho para resolver el comportamiento segun el tipo concreto.",
+  "questions": [
+    {
+      "id": "visitor_q1",
+      "type": "mcq",
+      "question": "¿Cual es la intencion central del patron Visitor?",
+      "options": [
+        "Encapsular la creacion de familias de objetos relacionados",
+        "Separar algoritmos de una jerarquia de objetos para agregar operaciones sin cambiar los elementos",
+        "Sincronizar acceso concurrente a objetos compartidos",
+        "Reducir el numero de clases mediante herencia multiple"
+      ],
+      "explanation": "Visitor externaliza operaciones en objetos visitantes. Asi puedes anadir nuevas operaciones sobre una jerarquia estable sin editar las clases de los elementos.",
+      "correct": 1
+    },
+    {
+      "id": "visitor_q2",
+      "type": "mcq",
+      "question": "¿Que colaboracion habilita el doble despacho en Visitor?",
+      "options": [
+        "El cliente decide en compilacion que metodo visitar ejecutar",
+        "El metodo visit se elige solo por el tipo del visitante",
+        "accept del elemento invoca visit(this) para combinar tipo del visitante y tipo concreto del elemento",
+        "Un switch global sustituye la necesidad de interfaces"
+      ],
+      "explanation": "Primero se despacha accept por el tipo concreto del elemento; luego visit(this) permite seleccionar la sobrecarga adecuada por el tipo del elemento recibido.",
+      "correct": 2
+    },
+    {
+      "id": "visitor_q3",
+      "type": "mcq",
+      "question": "¿Que costo principal asume Visitor cuando la jerarquia de elementos cambia con frecuencia?",
+      "options": [
+        "No se pueden agregar nuevas operaciones",
+        "Cada nuevo elemento obliga a extender la interfaz Visitor y todos los visitantes concretos",
+        "Se pierde polimorfismo en tiempo de ejecucion",
+        "Los elementos dejan de ser recorribles"
+      ],
+      "explanation": "Visitor favorece agregar operaciones, no tipos de elemento. Si agregas un elemento nuevo, debes actualizar contrato y visitantes existentes.",
+      "correct": 1
+    },
+    {
+      "id": "visitor_q4",
+      "type": "mcq",
+      "question": "Frente a Iterator, ¿que aporta Visitor sobre una estructura heterogenea de nodos?",
+      "options": [
+        "Solo define el orden de recorrido",
+        "Sustituye completamente la necesidad de recorrer",
+        "Permite comportamiento especializado por tipo concreto de nodo durante el recorrido",
+        "Elimina la necesidad de interfaces en nodos"
+      ],
+      "explanation": "Iterator se centra en como avanzar por elementos; Visitor se centra en que hacer con cada tipo concreto durante ese avance.",
+      "correct": 2
+    },
+    {
+      "id": "visitor_q5",
+      "type": "mcq",
+      "question": "¿Cual diferencia tecnica describe mejor Visitor frente a Strategy?",
+      "options": [
+        "Strategy define operaciones por tipo de elemento y Visitor selecciona un algoritmo unico",
+        "Visitor aplica una operacion transversal por tipo de elemento; Strategy intercambia un algoritmo para un contexto",
+        "Ambos exigen modificar todas las clases de dominio para cada algoritmo nuevo",
+        "Strategy depende de doble despacho y Visitor no"
+      ],
+      "explanation": "Strategy cambia una politica de ejecucion para un contexto; Visitor distribuye una misma operacion a traves de muchos tipos de elementos.",
+      "correct": 1
+    },
+    {
+      "id": "visitor_q6",
+      "type": "mcq",
+      "question": "Comparado con Command, ¿que afirmacion es correcta?",
+      "options": [
+        "Visitor encapsula solicitudes para cola, logging y undo por defecto",
+        "Command encapsula una accion invocable; Visitor modela operaciones sobre estructuras de objetos",
+        "Ambos tienen exactamente el mismo objetivo arquitectonico",
+        "Command requiere doble despacho para funcionar"
+      ],
+      "explanation": "Command representa una solicitud como objeto. Visitor organiza logica por tipo de elemento dentro de una jerarquia.",
+      "correct": 1
+    },
+    {
+      "id": "visitor_q7",
+      "type": "mcq",
+      "question": "¿Por que Visitor suele combinarse bien con Composite?",
+      "options": [
+        "Porque ambos evitan por completo las interfaces",
+        "Porque Composite aporta estructura jerarquica y Visitor agrega operaciones transversales sin tocar nodos",
+        "Porque Visitor reemplaza a los nodos compuestos",
+        "Porque Composite resuelve doble despacho automaticamente"
+      ],
+      "explanation": "Una estructura arbol parte-todo es un objetivo natural para aplicar visitas de render, validacion o analisis sobre nodos heterogeneos.",
+      "correct": 1
+    },
+    {
+      "id": "visitor_q8",
+      "type": "mcq",
+      "question": "Respecto a Template Method, ¿que ventaja practica ofrece Visitor?",
+      "options": [
+        "Template Method permite agregar operaciones nuevas sin cambiar jerarquias",
+        "Visitor facilita agregar operaciones nuevas como clases separadas sin editar clases base",
+        "Template Method usa doble despacho por defecto",
+        "Visitor elimina la necesidad de polimorfismo"
+      ],
+      "explanation": "Template Method fija un esqueleto en herencia; Visitor permite extender operaciones como objetos externos sobre una jerarquia existente.",
+      "correct": 1
+    },
+    {
+      "id": "visitor_q9",
+      "type": "mcq",
+      "question": "¿En cual escenario Visitor suele aportar mayor valor?",
+      "options": [
+        "Jerarquia de nodos estable con multiples operaciones de analisis, optimizacion y exportacion",
+        "Modelo de dominio de dos clases sin recorridos",
+        "Servicio con una sola regla de negocio invariable",
+        "Sistema donde cada operacion muta persistentemente todos los nodos"
+      ],
+      "explanation": "Cuando hay muchas operaciones transversales sobre una estructura relativamente estable, Visitor evita inflar las clases de dominio.",
+      "correct": 0
+    },
+    {
+      "id": "visitor_q10",
+      "type": "mcq",
+      "question": "¿Que riesgo de diseño aparece si un Visitor necesita demasiados detalles internos de cada elemento?",
+      "options": [
+        "Se fortalece encapsulacion automaticamente",
+        "No existe acoplamiento adicional",
+        "Puede erosionar encapsulacion y aumentar acoplamiento entre visitantes y elementos concretos",
+        "El doble despacho deja de funcionar en runtime"
+      ],
+      "explanation": "Si el visitante depende de internals, la frontera de encapsulacion se debilita y los cambios internos de elementos impactan mas visitantes.",
+      "correct": 2
+    },
+    {
+      "id": "visitor_q11",
+      "type": "mcq",
+      "question": "¿Que detalle asegura que se ejecute visitNodoConcreto en lugar de una version generica?",
+      "options": [
+        "Solo el tipo estatico de la referencia Element",
+        "Una anotacion de runtime obligatoria",
+        "La implementacion de accept en cada elemento concreto llamando a visit(this)",
+        "Orden alfabetico de metodos visit"
+      ],
+      "explanation": "Cada elemento concreto implementa accept y delega al metodo de visita correspondiente, habilitando seleccion precisa del comportamiento.",
+      "correct": 2
+    },
+    {
+      "id": "visitor_q12",
+      "type": "mcq",
+      "question": "¿Que variante ayuda a reducir el impacto cuando no todos los visitantes soportan todos los elementos?",
+      "options": [
+        "Visitor aciclico con interfaces de visita segregadas",
+        "Singleton visitor global",
+        "Builder con director fijo",
+        "Template method reflexivo"
+      ],
+      "explanation": "El enfoque aciclico divide contratos de visita para reducir dependencias forzadas y compilar solo las combinaciones necesarias.",
+      "correct": 0
+    },
+    {
+      "id": "visitor_q13",
+      "type": "mcq",
+      "question": "¿Que principio se favorece cuando reportes y validaciones se implementan como visitantes en vez de metodos dentro de cada nodo?",
+      "options": [
+        "Separacion de responsabilidades",
+        "Persistencia eventual",
+        "Inversion de bucles",
+        "Evitar objetos inmutables"
+      ],
+      "explanation": "Los nodos conservan su responsabilidad de representar estructura; las operaciones cambiantes viven en visitantes independientes.",
+      "correct": 0
+    },
+    {
+      "id": "visitor_q14",
+      "type": "mcq",
+      "question": "¿Que consideracion es clave para visitantes con estado acumulado en ejecucion concurrente?",
+      "options": [
+        "Reutilizar una sola instancia mutable en todos los hilos",
+        "Hacer visitantes stateless o aislar estado por ejecucion",
+        "Compartir estructuras sin sincronizacion para rendimiento",
+        "Eliminar el metodo accept"
+      ],
+      "explanation": "Si el visitante acumula resultados, conviene aislar instancia por recorrido o proteger estado para evitar condiciones de carrera.",
+      "correct": 1
+    },
+    {
+      "id": "visitor_q15",
+      "type": "mcq",
+      "question": "¿Que ventaja ofrece Visitor sobre una jerarquia inmutable de elementos?",
+      "options": [
+        "Permite mutar internamente cada nodo sin restricciones",
+        "Facilita extender operaciones externas sin alterar el modelo inmutable",
+        "Evita por completo crear clases nuevas",
+        "Reemplaza el sistema de tipos del lenguaje"
+      ],
+      "explanation": "Con elementos inmutables y estables, Visitor agrega capacidades nuevas sin abrir ni modificar las clases del dominio.",
+      "correct": 1
+    },
+    {
+      "id": "visitor_q16",
+      "type": "mcq",
+      "question": "¿Cuando NO conviene usar Visitor como primera opcion?",
+      "options": [
+        "Cuando la jerarquia de elementos es estable y las operaciones crecen",
+        "Cuando se requiere separar operaciones de representacion",
+        "Cuando constantemente aparecen nuevos tipos de elemento y pocas operaciones",
+        "Cuando se necesita analisis semantico por fases"
+      ],
+      "explanation": "Si cambian seguido los elementos, el costo de mantenimiento de interfaz Visitor y visitantes concretos crece rapidamente.",
+      "correct": 2
+    },
+    {
+      "id": "visitor_q17",
+      "type": "true_false",
+      "question": "Visitor pertenece a los patrones de comportamiento porque organiza como se aplican operaciones sobre objetos.",
+      "explanation": "Su foco esta en encapsular comportamiento transversal sobre una estructura de objetos, no en creacion ni composicion estructural.",
+      "correct": true
+    },
+    {
+      "id": "visitor_q18",
+      "type": "true_false",
+      "question": "Una implementacion canonica de Visitor requiere que cada elemento concreto implemente accept y llame al metodo visit correspondiente.",
+      "explanation": "Ese contrato es el nucleo del doble despacho en la variante clasica del patron.",
+      "correct": true
+    },
+    {
+      "id": "visitor_q19",
+      "type": "true_false",
+      "question": "Agregar una nueva operacion con Visitor normalmente exige editar todas las clases de elementos.",
+      "explanation": "En jerarquias estables, puedes agregar operaciones creando nuevos visitantes, sin tocar elementos existentes.",
+      "correct": false
+    },
+    {
+      "id": "visitor_q20",
+      "type": "true_false",
+      "question": "Si agregas un nuevo tipo de elemento concreto, el contrato Visitor suele requerir actualizacion global.",
+      "explanation": "Debes incluir el nuevo metodo de visita y ajustar visitantes concretos para mantener cobertura de tipos.",
+      "correct": true
+    },
+    {
+      "id": "visitor_q21",
+      "type": "true_false",
+      "question": "Visitor siempre mejora encapsulacion en cualquier contexto.",
+      "explanation": "Puede requerir exponer datos de elementos para operar, lo cual puede degradar encapsulacion si no se diseña con cuidado.",
+      "correct": false
+    },
+    {
+      "id": "visitor_q22",
+      "type": "true_false",
+      "question": "Un visitante puede mantener estado acumulado, por ejemplo tablas de simbolos o contadores, durante un recorrido.",
+      "explanation": "Es comun usar visitantes stateful para analisis semantico, metrica o transformaciones con contexto.",
+      "correct": true
+    },
+    {
+      "id": "visitor_q23",
+      "type": "true_false",
+      "question": "Iterator se centra en el recorrido; Visitor se centra en la operacion aplicada por tipo de elemento.",
+      "explanation": "Son preocupaciones ortogonales: uno organiza la secuencia, el otro la semantica por nodo.",
+      "correct": true
+    },
+    {
+      "id": "visitor_q24",
+      "type": "true_false",
+      "question": "Command modela acciones invocables y puede soportar undo/redo; Visitor no provee eso por si mismo.",
+      "explanation": "Visitor no encapsula historial de solicitudes. Si se requiere undo, debe diseñarse explicitamente aparte.",
+      "correct": true
+    },
+    {
+      "id": "visitor_q25",
+      "type": "true_false",
+      "question": "Strategy selecciona un algoritmo para un contexto; Visitor distribuye logica por tipos concretos dentro de una estructura.",
+      "explanation": "La unidad de variacion en Strategy es el algoritmo intercambiable; en Visitor, la operacion por tipo de elemento.",
+      "correct": true
+    },
+    {
+      "id": "visitor_q26",
+      "type": "true_false",
+      "question": "Template Method y Visitor se basan principalmente en el mismo mecanismo de doble despacho.",
+      "explanation": "Template Method usa herencia y enlazado dinamico de hooks; Visitor depende especificamente de doble despacho via accept/visit.",
+      "correct": false
+    },
+    {
+      "id": "visitor_q27",
+      "type": "true_false",
+      "question": "Visitor sobre Composite permite agregar nuevas operaciones sobre un arbol sin cambiar las clases de nodo.",
+      "explanation": "Composite aporta la estructura jerarquica y Visitor agrega comportamientos transversales extensibles.",
+      "correct": true
+    },
+    {
+      "id": "visitor_q28",
+      "type": "true_false",
+      "question": "La sobrecarga de metodos visit por si sola garantiza el mismo resultado que Visitor sin accept.",
+      "explanation": "Sin accept, normalmente decides por tipo estatico. El doble despacho requiere colaboracion explicita entre elemento y visitante.",
+      "correct": false
+    },
+    {
+      "id": "visitor_q29",
+      "type": "true_false",
+      "question": "Un reflective visitor puede reducir boilerplate, pero suele perder verificacion estricta en compilacion.",
+      "explanation": "La resolucion por reflexion es flexible, pero traslada errores potenciales de tipos a runtime.",
+      "correct": true
+    },
+    {
+      "id": "visitor_q30",
+      "type": "true_false",
+      "question": "En sistemas grandes, Visitor puede incrementar acoplamiento ciclico entre paquetes si no se separan contratos cuidadosamente.",
+      "explanation": "Si visitantes y elementos concretos se referencian mutuamente en capas inadecuadas, aparecen dependencias dificiles de mantener.",
+      "correct": true
+    },
+    {
+      "id": "visitor_q31",
+      "type": "short",
+      "question": "¿Que metodo define cada elemento para recibir un visitante?",
+      "hint": "Es el punto de entrada del visitante en el elemento.",
+      "explanation": "accept recibe el visitante y dispara la llamada de visita correspondiente para habilitar doble despacho.",
+      "correct": [
+        "accept"
+      ]
+    },
+    {
+      "id": "visitor_q32",
+      "type": "short",
+      "question": "¿Como se llama el mecanismo clave que combina tipo del elemento y del visitante en runtime?",
+      "hint": "No es solo polimorfismo simple.",
+      "explanation": "Visitor clasico depende de doble despacho para resolver la operacion correcta segun ambos tipos participantes.",
+      "correct": [
+        "doble despacho",
+        "double dispatch"
+      ]
+    },
+    {
+      "id": "visitor_q33",
+      "type": "short",
+      "question": "¿Que componente implementa una operacion especifica sobre todos los tipos de elemento?",
+      "hint": "Es una implementacion particular de la interfaz Visitor.",
+      "explanation": "Cada visitante concreto encapsula una operacion transversal completa sobre la jerarquia.",
+      "correct": [
+        "concrete visitor",
+        "visitante concreto"
+      ]
+    },
+    {
+      "id": "visitor_q34",
+      "type": "short",
+      "question": "¿Como suele llamarse la familia de metodos especializados dentro de la interfaz del visitante?",
+      "hint": "Comparten prefijo y cambian por sobrecarga.",
+      "explanation": "Los metodos visit reciben distintos tipos concretos de elemento para aplicar comportamiento especifico.",
+      "correct": [
+        "visit"
+      ]
+    },
+    {
+      "id": "visitor_q35",
+      "type": "short",
+      "question": "En un arbol de nodos, ¿como se llama un nodo sin hijos?",
+      "hint": "Es terminal en la jerarquia.",
+      "explanation": "Distinguir nodos terminales ayuda a definir reglas de visita y acumulacion en recorridos jerarquicos.",
+      "correct": [
+        "hoja",
+        "leaf"
+      ]
+    },
+    {
+      "id": "visitor_q36",
+      "type": "short",
+      "question": "¿Que principio se refuerza al anadir operaciones nuevas sin modificar elementos existentes?",
+      "hint": "Abierto para extender, cerrado para modificar.",
+      "explanation": "Visitor permite extender comportamiento mediante nuevos visitantes, reduciendo cambios en clases del modelo estable.",
+      "correct": [
+        "abierto-cerrado",
+        "ocp"
+      ]
+    },
+    {
+      "id": "visitor_q37",
+      "type": "short",
+      "question": "¿Que palabra describe el estado compartido que un visitante mantiene durante todo el recorrido?",
+      "hint": "Incluye informacion acumulada entre visitas.",
+      "explanation": "Muchos visitantes dependen de contexto para decisiones semanticas, validaciones o resultados agregados.",
+      "correct": [
+        "contexto"
+      ]
+    },
+    {
+      "id": "visitor_q38",
+      "type": "short",
+      "question": "¿Como se llama el criterio que determina el orden en que se procesan los nodos?",
+      "hint": "Puede ser profundidad o amplitud.",
+      "explanation": "El orden de procesamiento afecta resultados cuando la operacion depende de dependencias entre nodos.",
+      "correct": [
+        "travesia",
+        "recorrido"
+      ]
+    },
+    {
+      "id": "visitor_q39",
+      "type": "short",
+      "question": "¿Que variante de Visitor usa reflexion para seleccionar metodos de visita?",
+      "hint": "Reduce metodos explicitos, pero sacrifica seguridad estatica.",
+      "explanation": "La variante reflexiva simplifica codigo ceremonial, aunque desplaza validacion de tipos hacia runtime.",
+      "correct": [
+        "reflective visitor",
+        "visitor reflexivo"
+      ]
+    },
+    {
+      "id": "visitor_q40",
+      "type": "short",
+      "question": "¿Que artefacto comun en compiladores se analiza frecuentemente con Visitor?",
+      "hint": "Representa la estructura sintactica del programa.",
+      "explanation": "Un AST concentra nodos heterogeneos y fases multiples, escenario clasico para aplicar visitantes.",
+      "correct": [
+        "ast"
+      ]
+    }
+  ]
+}
