@@ -331,7 +331,7 @@ const UI = (() => {
 
   function shakeElement(element) {
     element.classList.remove('shake');
-    void element.offsetWidth; // reflow
+    void element.offsetWidth; // Force reflow to restart CSS animation
     element.classList.add('shake');
     element.addEventListener('animationend', () => element.classList.remove('shake'), { once: true });
   }

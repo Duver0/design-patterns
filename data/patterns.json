@@ -30,7 +30,7 @@
         "type": "short_answer",
         "question": "¿Qué modificador de acceso debe tener el constructor en una implementación típica de Singleton?",
         "correct": ["privado", "private"],
-        "hint": "El constructor debe ser in-accesible desde fuera de la clase.",
+        "hint": "El constructor debe ser inaccesible desde fuera de la clase.",
         "explanation": "El constructor del Singleton debe ser **privado** para evitar que otras clases instancien directamente la clase. Esto obliga a usar el método estático (por ejemplo, `getInstance()`) para obtener la única instancia."
       }
     ]
