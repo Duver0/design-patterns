@@ -69,32 +69,9 @@ export class AppOrchestrator {
     this.container.appendChild(renderedUI);
     this.feedbackContainer.innerHTML = '';
 
-    // Attach validation listeners depending on strategy
-    this.attachValidationListeners(question, strategy);
-  }
-
-  attachValidationListeners(question, strategy) {
-    const strategyName = strategy.constructor.name;
-    
-    // Simple direct handling per strategy for immediate feedback flow
-    if (strategyName === 'MultipleChoiceStrategy' || strategyName === 'TrueFalseStrategy') {
-        const buttons = this.container.querySelectorAll('button');
-        buttons.forEach(btn => {
-            btn.onclick = () => {
-                const answer = btn.dataset.index || btn.dataset.value;
-                this.handleAnswerSubmission(answer, question, strategy);
-            };
-        });
-    } else if (strategyName === 'ShortAnswerStrategy') {
-        const validateBtn = this.container.querySelector('.validate-short-btn');
-        const input = this.container.querySelector('.short-input');
-        
-        validateBtn.onclick = () => {
-            if (input.value.trim() !== "") {
-                this.handleAnswerSubmission(input.value, question, strategy);
-            }
-        };
-    }
+    strategy.bindAnswerHandler(this.container, answer => {
+      this.handleAnswerSubmission(answer, question, strategy);
+    });
   }
 
   handleAnswerSubmission(answer, question, strategy) {

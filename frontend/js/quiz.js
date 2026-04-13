@@ -41,14 +41,21 @@ const Quiz = (() => {
   }
 
   // ── Session management ────────────────────────────────────────────────────
-  function startSession(pattern) {
+  function startSession(pattern, questions) {
+    const safeQuestions = Array.isArray(questions) ? questions : [];
     session = {
       pattern,
-      questions: [...pattern.questions],
+      questions: [...safeQuestions],
       currentIndex: 0,
       score: 0,
     };
     return session;
+  }
+
+  function getPatternQuestionCount(pattern) {
+    if (Number.isFinite(pattern.questionCount)) return pattern.questionCount;
+    if (Array.isArray(pattern.questions)) return pattern.questions.length;
+    return 0;
   }
 
   function getCurrentQuestion() {
@@ -79,36 +86,10 @@ const Quiz = (() => {
    * @returns {{ correct: boolean, correctAnswer: string }}
    */
   function validateAnswer(question, userAnswer) {
-    let correct = false;
-    let correctAnswer = '';
-
-    switch (question.type) {
-      case 'multiple_choice': {
-        const idx = typeof userAnswer === 'number' ? userAnswer : parseInt(userAnswer, 10);
-        correct = idx === question.correct;
-        correctAnswer = question.options[question.correct];
-        break;
-      }
-
-      case 'true_false': {
-        const normalized = typeof userAnswer === 'boolean'
-          ? userAnswer
-          : userAnswer === 'true';
-        correct = normalized === question.correct;
-        correctAnswer = question.correct ? 'Verdadero' : 'Falso';
-        break;
-      }
-
-      case 'short_answer': {
-        const trimmed = String(userAnswer).trim().toLowerCase();
-        correct = question.correct.some(ans => ans.toLowerCase() === trimmed);
-        correctAnswer = question.correct[0];
-        break;
-      }
-
-      default:
-        break;
-    }
+    const correct = Boolean(question?.validate?.(userAnswer));
+    const correctAnswer = typeof question?.getCorrectAnswer === 'function'
+      ? question.getCorrectAnswer()
+      : '';
 
     // Persist answer in session & global progress
     if (session) {
@@ -161,7 +142,7 @@ const Quiz = (() => {
     let completedPatterns = 0;
 
     patterns.forEach(pattern => {
-      totalQ += pattern.questions.length;
+      totalQ += getPatternQuestionCount(pattern);
       const entry = getPatternProgress(pattern.id);
       if (entry) {
         correctQ += Object.values(entry.answers).filter(Boolean).length;

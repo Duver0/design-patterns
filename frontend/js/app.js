@@ -35,34 +35,43 @@ const App = (() => {
   function navigateHome() {
     activePattern = null;
     Quiz.endSession();
-    UI.renderHome(patterns, navigateToPattern, handleResetAll);
+    UI.renderPatternSelector(patterns, navigateToPattern, handleResetAll);
     UI.showView('view-home');
   }
 
   function navigateToPattern(pattern) {
     activePattern = pattern;
-    // Cargar preguntas completas si no están presentes
-    fetch(`./src/data/patterns/${pattern.id}.json`)
-      .then(res => res.json())
-      .then(fullData => {
-        pattern.questions = fullData.questions;
-        UI.renderPatternDetail(pattern, startQuiz, navigateHome);
-        UI.showView('view-pattern');
-      })
-      .catch(err => {
-        console.error("Error al cargar preguntas para el detalle:", err);
-        UI.renderPatternDetail(pattern, startQuiz, navigateHome);
-        UI.showView('view-pattern');
-      });
+    UI.renderPatternDetail(pattern, startQuiz, navigateHome);
+    UI.showView('view-pattern');
   }
 
-  function startQuiz(pattern) {
+  async function startQuiz(pattern) {
     activePattern = pattern;
-    Quiz.startSession(pattern);
 
-    const total = pattern.questions.length;
-    UI.renderQuizHeader(pattern, 1, total);
-    UI.renderQuestion(Quiz.getCurrentQuestion(), 1, total);
+    let rawPatternData = null;
+    let sessionQuestions = [];
+    try {
+      rawPatternData = await QuestionService.loadPatternData(pattern.id);
+      const selectedQuestionData = QuestionService.pickRandomQuestions(rawPatternData.questions, 10);
+      sessionQuestions = QuestionFactory.createQuestions({
+        ...rawPatternData,
+        questions: selectedQuestionData,
+      });
+    } catch (err) {
+      console.error('Error al cargar preguntas para iniciar el quiz:', err);
+      alert('No se pudieron cargar las preguntas para este patrón.');
+      return;
+    }
+
+    if (!sessionQuestions.length) {
+      alert('Este patrón no tiene preguntas disponibles para iniciar el quiz.');
+      return;
+    }
+
+    Quiz.startSession(pattern, sessionQuestions);
+
+    const total = sessionQuestions.length;
+    UI.renderQuizView(pattern, Quiz.getCurrentQuestion(), 1, total);
     UI.showView('view-quiz');
   }
 
@@ -96,7 +105,7 @@ const App = (() => {
       } else {
         Quiz.advanceQuestion();
         const nextNum = Quiz.session.currentIndex + 1;
-        UI.renderQuestion(Quiz.getCurrentQuestion(), nextNum, total);
+        UI.renderQuizView(activePattern, Quiz.getCurrentQuestion(), nextNum, total);
         UI.hide('feedback-box');
       }
     });

@@ -1,0 +1,423 @@
+{
+  "id": "abstract_factory",
+  "name": "Abstract Factory",
+  "category": "Creacional",
+  "description": "Proporciona una interfaz para crear familias de objetos relacionados o dependientes sin especificar sus clases concretas, manteniendo consistencia entre productos que deben colaborar.",
+  "questions": [
+    {
+      "id": "abstract_factory_q1",
+      "type": "mcq",
+      "question": "¿Cuál es la intención principal del patrón Abstract Factory?",
+      "options": [
+        "Encapsular la creación de familias de objetos relacionados sin exponer clases concretas",
+        "Garantizar una única instancia global de cada producto",
+        "Convertir una interfaz incompatible en otra esperada por el cliente",
+        "Añadir responsabilidades dinámicamente a un objeto"
+      ],
+      "answer": 0,
+      "explanation": "Abstract Factory abstrae la creación de una familia completa de productos compatibles. El cliente trabaja con interfaces, no con implementaciones concretas."
+    },
+    {
+      "id": "abstract_factory_q2",
+      "type": "mcq",
+      "question": "¿Qué participante suele garantizar que los productos creados pertenezcan a la misma familia compatible?",
+      "options": [
+        "El cliente",
+        "La fabrica concreta (ConcreteFactory)",
+        "El producto abstracto",
+        "El adaptador"
+      ],
+      "answer": 1,
+      "explanation": "Cada ConcreteFactory implementa la fabrica abstracta y crea variantes compatibles entre si, preservando coherencia funcional y de estilo."
+    },
+    {
+      "id": "abstract_factory_q3",
+      "type": "mcq",
+      "question": "¿Cuál describe mejor la diferencia entre Abstract Factory y Factory Method?",
+      "options": [
+        "Abstract Factory crea un objeto; Factory Method crea familias completas",
+        "No hay diferencia practica entre ambos",
+        "Abstract Factory crea familias de productos relacionados; Factory Method suele crear un tipo de producto por jerarquia",
+        "Factory Method es estructural y Abstract Factory es de comportamiento"
+      ],
+      "answer": 2,
+      "explanation": "Factory Method centra la variacion en un metodo de creacion. Abstract Factory agrupa varios metodos para crear multiples productos relacionados."
+    },
+    {
+      "id": "abstract_factory_q4",
+      "type": "mcq",
+      "question": "En una app UI con temas Light y Dark, ¿cuándo tiene mas sentido aplicar Abstract Factory?",
+      "options": [
+        "Cuando cada widget puede mezclarse libremente entre temas",
+        "Cuando todos los widgets deben cambiar en conjunto y permanecer visualmente coherentes",
+        "Cuando solo existe un unico tipo de boton",
+        "Cuando no se usan interfaces"
+      ],
+      "answer": 1,
+      "explanation": "Abstract Factory es ideal cuando varios widgets (boton, checkbox, menu) deben pertenecer a una misma familia visual/funcional."
+    },
+    {
+      "id": "abstract_factory_q5",
+      "type": "mcq",
+      "question": "¿Qué escenario de videojuegos encaja mejor con Abstract Factory?",
+      "options": [
+        "Crear un solo tipo de enemigo con un constructor simple",
+        "Generar enemigos, armas y efectos compatibles por faccion o bioma",
+        "Guardar el estado de una partida en disco",
+        "Aplicar fisica a un personaje con Strategy"
+      ],
+      "answer": 1,
+      "explanation": "El patron permite producir un conjunto coherente de objetos del juego por contexto (faccion, nivel, bioma) evitando mezclas incompatibles."
+    },
+    {
+      "id": "abstract_factory_q6",
+      "type": "mcq",
+      "question": "¿Cómo favorece Abstract Factory el principio DIP (Dependency Inversion Principle)?",
+      "options": [
+        "Haciendo que el cliente dependa de clases concretas para mayor velocidad",
+        "Permitiendo que el cliente dependa de abstracciones de fabrica y productos",
+        "Eliminando interfaces para simplificar el diseño",
+        "Obligando a usar metodos estaticos globales"
+      ],
+      "answer": 1,
+      "explanation": "Con DIP, el cliente de alto nivel depende de interfaces (AbstractFactory y AbstractProduct), no de implementaciones concretas."
+    },
+    {
+      "id": "abstract_factory_q7",
+      "type": "mcq",
+      "question": "¿Cuál es una desventaja frecuente de Abstract Factory?",
+      "options": [
+        "Aumenta la cantidad de tipos y la complejidad cuando hay pocas variantes reales",
+        "Impide completamente el polimorfismo",
+        "No permite pruebas unitarias",
+        "Solo funciona en lenguajes funcionales"
+      ],
+      "answer": 0,
+      "explanation": "El patron introduce mas interfaces y clases. Si no hay multiples familias o evolucion prevista, puede ser sobreingenieria."
+    },
+    {
+      "id": "abstract_factory_q8",
+      "type": "mcq",
+      "question": "Necesitas agregar una nueva familia de productos \"HighContrast\" sin tocar la logica cliente. ¿Qué accion respeta mejor OCP?",
+      "options": [
+        "Agregar un switch gigante en cada pantalla",
+        "Crear HighContrastFactory y sus productos concretos compatibles",
+        "Reescribir todas las interfaces de producto",
+        "Eliminar la abstraccion y usar new en el cliente"
+      ],
+      "answer": 1,
+      "explanation": "OCP se cumple extendiendo con nuevas implementaciones (nueva familia) sin modificar el codigo cliente existente."
+    },
+    {
+      "id": "abstract_factory_q9",
+      "type": "mcq",
+      "question": "En una GUI, ¿cuál par representa correctamente productos abstractos de la familia?",
+      "options": [
+        "ThemeManager y EventBus",
+        "AbstractFactory y ConcreteFactory",
+        "Button y Checkbox (interfaces abstractas)",
+        "Controller y Repository"
+      ],
+      "answer": 2,
+      "explanation": "Los productos abstractos son los tipos de objetos creados por la fabrica (por ejemplo, Button, Checkbox, Menu)."
+    },
+    {
+      "id": "abstract_factory_q10",
+      "type": "mcq",
+      "question": "¿Qué riesgo aparece al mezclar productos de distintas familias en una misma pantalla?",
+      "options": [
+        "Inconsistencia visual o comportamientos incompatibles",
+        "Mejora automatica del rendimiento",
+        "Eliminacion de dependencias",
+        "Mayor cumplimiento de OCP"
+      ],
+      "answer": 0,
+      "explanation": "La motivacion del patron es evitar mezclas incoherentes; mantener una sola familia por contexto reduce errores de integracion."
+    },
+    {
+      "id": "abstract_factory_q11",
+      "type": "mcq",
+      "question": "¿Por qué se dice que Abstract Factory favorece composicion sobre herencia en el cliente?",
+      "options": [
+        "Porque el cliente recibe un objeto fabrica y delega creacion por composicion",
+        "Porque obliga a que todos los productos hereden de una unica clase concreta",
+        "Porque elimina por completo las interfaces",
+        "Porque requiere herencia multiple en todos los productos"
+      ],
+      "answer": 0,
+      "explanation": "El cliente compone con una fabrica abstracta inyectada y usa sus metodos, en lugar de heredar para decidir que crear."
+    },
+    {
+      "id": "abstract_factory_q12",
+      "type": "mcq",
+      "question": "¿Quién suele decidir qué fabrica concreta usar en tiempo de ejecucion?",
+      "options": [
+        "El producto abstracto",
+        "El producto concreto",
+        "El objeto creado previamente",
+        "La capa de configuracion/arranque (bootstrap o contenedor DI)"
+      ],
+      "answer": 3,
+      "explanation": "Normalmente la seleccion de la familia concreta ocurre en composicion de dependencias: configuracion, entorno o IoC container."
+    },
+    {
+      "id": "abstract_factory_q13",
+      "type": "mcq",
+      "question": "¿En qué caso Abstract Factory suele ser una mala eleccion?",
+      "options": [
+        "Cuando hay multiples familias que deben mantenerse consistentes",
+        "Cuando solo existe un producto simple y no se esperan variantes relacionadas",
+        "Cuando se requiere desacoplar al cliente de clases concretas",
+        "Cuando se quiere facilitar pruebas con dobles"
+      ],
+      "answer": 1,
+      "explanation": "Si no hay familias ni evolucion de variantes, el costo de abstracciones adicionales puede superar el beneficio."
+    },
+    {
+      "id": "abstract_factory_q14",
+      "type": "mcq",
+      "question": "¿Cuál relacion entre patrones es tecnicamente correcta?",
+      "options": [
+        "Abstract Factory reemplaza siempre a Factory Method y lo vuelve innecesario",
+        "Factory Method no puede coexistir con Abstract Factory",
+        "Una ConcreteFactory puede implementar sus metodos de creacion usando Factory Method",
+        "Factory Method solo aplica a patrones estructurales"
+      ],
+      "answer": 2,
+      "explanation": "Es comun implementar cada metodo de creacion de una fabrica concreta como un Factory Method interno o equivalente."
+    },
+    {
+      "id": "abstract_factory_q15",
+      "type": "mcq",
+      "question": "¿Cómo ayuda Abstract Factory a testear una capa de UI?",
+      "options": [
+        "Obligando a renderizar componentes reales en todas las pruebas",
+        "Permitiendo inyectar una fabrica doble que entregue productos simulados",
+        "Eliminando la necesidad de pruebas de integracion",
+        "Acoplando las pruebas a clases concretas de framework"
+      ],
+      "answer": 1,
+      "explanation": "Al depender de abstracciones, puedes sustituir la fabrica por test doubles y verificar logica sin acoplarte a implementaciones reales."
+    },
+    {
+      "id": "abstract_factory_q16",
+      "type": "true_false",
+      "question": "Abstract Factory pertenece a la categoria de patrones creacionales.",
+      "answer": true,
+      "explanation": "Su objetivo central es gestionar la creacion de objetos, concretamente de familias relacionadas."
+    },
+    {
+      "id": "abstract_factory_q17",
+      "type": "true_false",
+      "question": "En Abstract Factory, el cliente idealmente instancia productos concretos directamente con new.",
+      "answer": false,
+      "explanation": "El cliente deberia pedir productos a traves de la fabrica abstracta para mantener desacoplamiento."
+    },
+    {
+      "id": "abstract_factory_q18",
+      "type": "true_false",
+      "question": "Una fabrica concreta debe crear productos de la misma familia para preservar compatibilidad.",
+      "answer": true,
+      "explanation": "Ese es el valor clave del patron: coherencia entre objetos que colaboran."
+    },
+    {
+      "id": "abstract_factory_q19",
+      "type": "true_false",
+      "question": "Agregar un nuevo tipo de producto (por ejemplo, Toolbar) suele requerir cambios en la fabrica abstracta y en todas las fabricas concretas.",
+      "answer": true,
+      "explanation": "Es una desventaja conocida: extender por familias es facil, pero extender por nuevos tipos de producto es mas costoso."
+    },
+    {
+      "id": "abstract_factory_q20",
+      "type": "true_false",
+      "question": "Abstract Factory y Factory Method son patrones incompatibles entre si.",
+      "answer": false,
+      "explanation": "Pueden coexistir. De hecho, Abstract Factory suele apoyarse en metodos de creacion polimorficos."
+    },
+    {
+      "id": "abstract_factory_q21",
+      "type": "true_false",
+      "question": "Al depender de interfaces de fabrica y producto, Abstract Factory puede apoyar el principio DIP.",
+      "answer": true,
+      "explanation": "El modulo cliente de alto nivel no necesita conocer implementaciones concretas."
+    },
+    {
+      "id": "abstract_factory_q22",
+      "type": "true_false",
+      "question": "Si el cliente usa solo abstracciones de producto, cambiar de familia concreta puede hacerse sin reescribir su logica principal.",
+      "answer": true,
+      "explanation": "Ese cambio suele limitarse a la configuracion de que fabrica concreta se inyecta."
+    },
+    {
+      "id": "abstract_factory_q23",
+      "type": "true_false",
+      "question": "Abstract Factory normalmente reduce el numero total de clases del sistema.",
+      "answer": false,
+      "explanation": "Generalmente aumenta interfaces y clases, a cambio de mayor desacoplamiento y extensibilidad por familias."
+    },
+    {
+      "id": "abstract_factory_q24",
+      "type": "true_false",
+      "question": "En aplicaciones multiplataforma, una fabrica concreta por plataforma ayuda a mantener consistencia de widgets.",
+      "answer": true,
+      "explanation": "Cada fabrica crea controles propios de su plataforma, manteniendo un contrato comun."
+    },
+    {
+      "id": "abstract_factory_q25",
+      "type": "true_false",
+      "question": "Abstract Factory obliga a que todos los productos concretos hereden de una misma clase concreta.",
+      "answer": false,
+      "explanation": "Solo exige cumplir interfaces o abstracciones de producto; no requiere una base concreta unica."
+    },
+    {
+      "id": "abstract_factory_q26",
+      "type": "true_false",
+      "question": "Cambiar de DarkThemeFactory a LightThemeFactory puede actualizar multiples widgets de forma coherente.",
+      "answer": true,
+      "explanation": "La familia seleccionada determina todos los productos creados, preservando consistencia global."
+    },
+    {
+      "id": "abstract_factory_q27",
+      "type": "true_false",
+      "question": "Abstract Factory siempre viola OCP porque obliga a modificar el cliente cuando agregas una nueva familia.",
+      "answer": false,
+      "explanation": "Agregar una familia suele requerir nuevas implementaciones, no cambios en la logica cliente que depende de abstracciones."
+    },
+    {
+      "id": "abstract_factory_q28",
+      "type": "true_false",
+      "question": "En videojuegos, Abstract Factory puede encapsular la creacion coordinada de enemigo, arma y efecto por faccion.",
+      "answer": true,
+      "explanation": "Ese caso refleja exactamente la creacion de familias de objetos que deben ser compatibles entre si."
+    },
+    {
+      "id": "abstract_factory_q29",
+      "type": "true_false",
+      "question": "Si el sistema tendra una sola variante estable de productos, Abstract Factory puede resultar sobreingenieria.",
+      "answer": true,
+      "explanation": "Sin variabilidad real, el costo de abstracciones adicionales rara vez se justifica."
+    },
+    {
+      "id": "abstract_factory_q30",
+      "type": "true_false",
+      "question": "Abstract Factory elimina por completo la necesidad de inyeccion de dependencias.",
+      "answer": false,
+      "explanation": "Suele complementarse con DI para seleccionar e inyectar la fabrica concreta adecuada."
+    },
+    {
+      "id": "abstract_factory_q31",
+      "type": "short",
+      "question": "¿Qué patron crea familias de objetos relacionados sin exponer clases concretas?",
+      "answer": [
+        "abstract factory",
+        "fabrica abstracta"
+      ],
+      "hint": "Patron creacional orientado a familias.",
+      "explanation": "La esencia del patron es crear productos compatibles mediante una interfaz de fabrica abstracta."
+    },
+    {
+      "id": "abstract_factory_q32",
+      "type": "short",
+      "question": "Principio SOLID que se fortalece cuando el cliente depende de abstracciones de fabrica y producto.",
+      "answer": [
+        "dip",
+        "inversion de dependencias",
+        "dependency inversion"
+      ],
+      "hint": "Alto nivel no depende de bajo nivel.",
+      "explanation": "DIP promueve que ambos niveles dependan de abstracciones, justo lo que facilita Abstract Factory."
+    },
+    {
+      "id": "abstract_factory_q33",
+      "type": "short",
+      "question": "¿Cómo se llama el conjunto coherente de objetos como Button, Checkbox y Menu de un mismo tema?",
+      "answer": [
+        "familia de productos",
+        "familia"
+      ],
+      "hint": "No es un objeto aislado, es un conjunto relacionado.",
+      "explanation": "Abstract Factory trabaja con familias completas para mantener consistencia entre productos colaborativos."
+    },
+    {
+      "id": "abstract_factory_q34",
+      "type": "short",
+      "question": "Patron creacional mas comparado con Abstract Factory cuando se crea un solo producto por jerarquia.",
+      "answer": [
+        "factory method",
+        "metodo fabrica"
+      ],
+      "hint": "Tambien es GoF y se centra en un metodo de creacion.",
+      "explanation": "Factory Method varia la creacion de un producto; Abstract Factory escala esa idea a varias familias de productos."
+    },
+    {
+      "id": "abstract_factory_q35",
+      "type": "short",
+      "question": "En juegos, un conjunto Orco + Hacha + Fortaleza compatible es una ____. ",
+      "answer": [
+        "familia",
+        "familia de productos"
+      ],
+      "hint": "Conjunto de objetos que deben encajar entre si.",
+      "explanation": "Ese conjunto representa una familia de productos concreta dentro del patron."
+    },
+    {
+      "id": "abstract_factory_q36",
+      "type": "short",
+      "question": "Componente que conoce clases concretas y fabrica productos compatibles de una familia.",
+      "answer": [
+        "fabrica concreta",
+        "concrete factory"
+      ],
+      "hint": "Implementacion real de la interfaz de fabrica.",
+      "explanation": "La ConcreteFactory materializa la familia concreta de productos respetando las interfaces abstractas."
+    },
+    {
+      "id": "abstract_factory_q37",
+      "type": "short",
+      "question": "Riesgo principal al mezclar productos de familias distintas en una misma UI.",
+      "answer": [
+        "inconsistencia",
+        "incompatibilidad",
+        "inconsistencia visual"
+      ],
+      "hint": "Se rompe la coherencia entre componentes.",
+      "explanation": "La mezcla puede causar comportamiento desigual o apariencia incoherente, justo lo que Abstract Factory busca evitar."
+    },
+    {
+      "id": "abstract_factory_q38",
+      "type": "short",
+      "question": "Tecnica comun para seleccionar la fabrica concreta al iniciar la aplicacion.",
+      "answer": [
+        "inyeccion de dependencias",
+        "di",
+        "ioc"
+      ],
+      "hint": "Suele resolverse en el contenedor de composicion.",
+      "explanation": "DI/IoC facilita elegir e inyectar la familia concreta sin acoplar el cliente."
+    },
+    {
+      "id": "abstract_factory_q39",
+      "type": "short",
+      "question": "Principio que permite agregar nuevas familias sin modificar la logica cliente existente.",
+      "answer": [
+        "ocp",
+        "abierto cerrado",
+        "open closed"
+      ],
+      "hint": "Abierto para extender, cerrado para modificar.",
+      "explanation": "Con Abstract Factory, normalmente extiendes creando nuevas fabricas y productos concretos."
+    },
+    {
+      "id": "abstract_factory_q40",
+      "type": "short",
+      "question": "Si solo hay una variante estable y simple, aplicar Abstract Factory puede ser ____. ",
+      "answer": [
+        "sobreingenieria",
+        "sobrediseno",
+        "complejidad innecesaria"
+      ],
+      "hint": "Mas estructura de la necesaria.",
+      "explanation": "Cuando no existe variabilidad real, el patron puede introducir costo accidental sin beneficio proporcional."
+    }
+  ]
+}

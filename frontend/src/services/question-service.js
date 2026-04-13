@@ -1,5 +1,3 @@
-import { RandomizerService } from './randomizer-service.js';
-
 /**
  * Question Service
  * 
@@ -28,24 +26,21 @@ export class QuestionService {
   }
 
   /**
-   * Loads a full pattern and gets a randomized sub-selection of 10 questions.
+   * Loads full pattern data with its complete question bank.
    * 
    * @param {string} patternId 
-   * @returns {Promise<Array>} 
+    * @returns {Promise<Object>} 
    */
   static async getQuestionSet(patternId) {
     // Usar ruta relativa al index.html de la carpeta dist
     const patternPath = `src/data/patterns/${patternId}.json`;
     const patternData = await this.loadPattern(patternPath);
-
-    // Shuffle and pick 10
-    const randomizedQuestions = RandomizerService.getRandomQuestions(patternData.questions, 10);
     
     return {
       id: patternData.id,
       name: patternData.name,
       category: patternData.category,
-      questions: randomizedQuestions
+      questions: Array.isArray(patternData.questions) ? patternData.questions : []
     };
   }
 

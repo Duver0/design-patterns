@@ -6,6 +6,10 @@ export class QuestionStrategy {
     throw new Error("Method 'render()' must be implemented.");
   }
 
+  bindAnswerHandler(_container, _onSubmit) {
+    throw new Error("Method 'bindAnswerHandler()' must be implemented.");
+  }
+
   validate(answer, correctAnswer) {
     throw new Error("Method 'validate()' must be implemented.");
   }
@@ -47,6 +51,13 @@ export class MultipleChoiceStrategy extends QuestionStrategy {
   validate(selectedIndex, correctIndex) {
     return parseInt(selectedIndex) === parseInt(correctIndex);
   }
+
+  bindAnswerHandler(container, onSubmit) {
+    const buttons = container.querySelectorAll('button.option-btn');
+    buttons.forEach(btn => {
+      btn.onclick = () => onSubmit(btn.dataset.index);
+    });
+  }
 }
 
 /**
@@ -74,6 +85,13 @@ export class TrueFalseStrategy extends QuestionStrategy {
 
   validate(selectedValue, correctAnswer) {
     return selectedValue === String(correctAnswer);
+  }
+
+  bindAnswerHandler(container, onSubmit) {
+    const buttons = container.querySelectorAll('button.tf-btn');
+    buttons.forEach(btn => {
+      btn.onclick = () => onSubmit(btn.dataset.value);
+    });
   }
 }
 
@@ -108,5 +126,17 @@ export class ShortAnswerStrategy extends QuestionStrategy {
     return Array.isArray(correctAnswers) 
       ? correctAnswers.map(a => a.toLowerCase()).includes(normalized)
       : correctAnswers.toLowerCase() === normalized;
+  }
+
+  bindAnswerHandler(container, onSubmit) {
+    const validateBtn = container.querySelector('.validate-short-btn');
+    const input = container.querySelector('.short-input');
+
+    if (validateBtn && input) {
+      validateBtn.onclick = () => {
+        const value = input.value.trim();
+        if (value) onSubmit(value);
+      };
+    }
   }
 }
