@@ -1,0 +1,39 @@
+{
+  "id": "adapter",
+  "name": "Adapter",
+  "category": "Estructural",
+  "description": "Permite la colaboración entre objetos con interfaces incompatibles, actuando como un traductor o envoltorio.",
+  "questions": [
+    {
+      "id": "adapter_q1",
+      "type": "multiple_choice",
+      "question": "¿Cuál es el escenario típico de uso del patrón Adapter?",
+      "options": [
+        "Quieres notificar a múltiples objetos cuando cambia el estado de otro",
+        "Necesitas usar una clase existente pero su interfaz no es compatible con el resto del código",
+        "Quieres crear objetos sin especificar su clase concreta",
+        "Necesitas dividir una operación compleja en pasos simples"
+      ],
+      "correct": 1,
+      "explanation": "El Adapter se usa cuando tienes una clase existente (Adaptee) con una interfaz incompatible y quieres que trabaje con otro código sin modificar su código fuente. Actúa como un traductor entre interfaces."
+    },
+    {
+      "id": "adapter_q2",
+      "type": "true_false",
+      "question": "El patrón Adapter modifica la interfaz del objeto original (Adaptee) directamente para hacerla compatible.",
+      "correct": false,
+      "explanation": "Falso. El Adapter **no modifica** el Adaptee. En su lugar, crea una nueva clase (Adapter) que envuelve al Adaptee y traduce las llamadas entre la interfaz esperada y la interfaz real del Adaptee."
+    },
+    {
+      "id": "adapter_q3",
+      "type": "short_answer",
+      "question": "¿Cómo se llama la clase existente con interfaz incompatible que el Adapter envuelve?",
+      "correct": [
+        "adaptee",
+        "adaptado"
+      ],
+      "hint": "Es la clase que tiene la funcionalidad que necesitas pero con una interfaz diferente.",
+      "explanation": "La clase existente con interfaz incompatible se llama **Adaptee**. El Adapter la envuelve y convierte su interfaz en la interfaz Target que el cliente espera."
+    }
+  ]
+}

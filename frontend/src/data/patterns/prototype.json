@@ -1,0 +1,420 @@
+{
+  "id": "prototype",
+  "name": "Prototype",
+  "category": "Creacional",
+  "description": "Especifica los tipos de objetos a crear mediante una instancia prototípica y crea nuevos objetos copiando este prototipo. Es ideal cuando el costo de instanciación es alto o se requiere independencia del sistema de creación.",
+  "questions": [
+    {
+      "id": "prototype_mcq_1",
+      "type": "multiple_choice",
+      "question": "¿Cuál es la intención principal del patrón Prototype según el GoF?",
+      "options": [
+        "Definir una interfaz para crear un objeto e instanciar en tiempo de ejecución.",
+        "Especificar tipos de objetos a crear mediante una instancia prototípica y copiarla para nuevos objetos.",
+        "Garantizar que una clase tenga solo una instancia y punto de acceso global.",
+        "Separar la construcción de un objeto complejo de su representación final."
+      ],
+      "correct": 1,
+      "explanation": "La intención de Prototype es usar una instancia existente como 'molde' para generar nuevos objetos mediante duplicación."
+    },
+    {
+      "id": "prototype_mcq_2",
+      "type": "multiple_choice",
+      "question": "¿Qué participante del patrón es responsable de declarar el método clone()?",
+      "options": [
+        "ConcretePrototype",
+        "Client",
+        "PrototypeRegistry",
+        "Prototype"
+      ],
+      "correct": 3,
+      "explanation": "El Prototype (por lo general una interfaz o clase abstracta) declara la interfaz que expone la capacidad de clonación."
+    },
+    {
+      "id": "prototype_mcq_3",
+      "type": "multiple_choice",
+      "question": "En una 'Shallow Copy' (Copia Superficial), ¿qué sucede con los campos que son referencias a otros objetos?",
+      "options": [
+        "Se duplican recursivamente en nuevas direcciones de memoria.",
+        "Se inicializan a su valor predeterminado (ej: null).",
+        "Se copian las direcciones, por lo que el clon y el original comparten los mismos objetos referenciados.",
+        "Se lanza una excepción si no implementan la interfaz Serializable."
+      ],
+      "correct": 2,
+      "explanation": "La copia superficial solo copia los valores de los campos. Si un campo es una referencia, ambos objetos apuntarán a la misma instancia mutable."
+    },
+    {
+      "id": "prototype_mcq_4",
+      "type": "multiple_choice",
+      "question": "¿Cuándo es especialmente beneficioso usar Prototype en lugar de Factory Method?",
+      "options": [
+        "Cuando queremos centralizar toda la creación en una sola clase global.",
+        "Cuando el sistema debe ser capaz de instanciar clases cargadas dinámicamente en tiempo de ejecución.",
+        "Cuando la jerarquía de productos es fija y nunca cambiará.",
+        "Cuando solo necesitamos una única instancia de cada clase en memoria."
+      ],
+      "correct": 1,
+      "explanation": "Prototype permite registrar e instanciar objetos cuyas clases no se conocían en tiempo de compilación, clonando prototipos pre-cargados."
+    },
+    {
+      "id": "prototype_mcq_5",
+      "type": "multiple_choice",
+      "question": "¿Cuál es la función de un 'Prototype Registry'?",
+      "options": [
+        "Asegurar que solo exista una copia del prototipo en todo el sistema.",
+        "Actuar como un catálogo donde el cliente puede buscar y solicitar la clonación de prototipos mediante una clave.",
+        "Validar que el objeto clonado sea idéntico al original en términos binarios.",
+        "Eliminar prototipos que no se han usado en un periodo de tiempo determinado."
+      ],
+      "correct": 1,
+      "explanation": "El registro (Registry o Manager) permite gestionar un conjunto de prototipos 'semilla' para que el cliente no dependa de clases concretas."
+    },
+    {
+      "id": "prototype_mcq_6",
+      "type": "multiple_choice",
+      "question": "¿Qué desventaja técnica es común al implementar el patrón Prototype?",
+      "options": [
+        "Aumenta el número de clases necesarias para la creación de objetos.",
+        "Es incompatible con la herencia múltiple.",
+        "Implementar la clonación profunda (Deep Copy) puede ser complejo en objetos con referencias circulares.",
+        "Requiere que todos los métodos de la clase sean estáticos."
+      ],
+      "correct": 2,
+      "explanation": "La copia profunda recursiva debe manejar grafos de objetos complejos, lo que puede derivar en ciclos infinitos si no se gestiona correctamente."
+    },
+    {
+      "id": "prototype_mcq_7",
+      "type": "multiple_choice",
+      "question": "Si realizamos una 'Deep Copy', ¿cuál es el estado del nuevo objeto respecto al original?",
+      "options": [
+        "Es una referencia al mismo objeto original.",
+        "Es un objeto independiente; los cambios en sus sub-objetos no afectan al original.",
+        "Es un objeto que solo contiene los campos públicos del original.",
+        "Es una instancia vacía que debe reinicializarse manualmente."
+      ],
+      "correct": 1,
+      "explanation": "Una copia profunda crea duplicados de toda el árbol de objetos, garantizando independencia total entre el clon y el original."
+    },
+    {
+      "id": "prototype_mcq_8",
+      "type": "multiple_choice",
+      "question": "¿Por qué es útil el patrón Prototype en el desarrollo de videojuegos?",
+      "options": [
+        "Para reducir el tamaño del ejecutable final.",
+        "Para clonar entidades complejas (como NPCs) sin repetir procesos costosos de carga de recursos y configuración.",
+        "Para que todos los enemigos compartan el mismo estado de salud.",
+        "Para evitar el uso de memoria RAM."
+      ],
+      "correct": 1,
+      "explanation": "Clonar objetos ya inicializados es más rápido que realizar una instanciación completa que involucre carga de texturas, IA o scripts pesados."
+    },
+    {
+      "id": "prototype_mcq_9",
+      "type": "multiple_choice",
+      "question": "¿Cómo puede interactuar Prototype con Abstract Factory?",
+      "options": [
+        "Abstract Factory puede heredar de Prototype para simplificar su estructura.",
+        "Una Abstract Factory puede almacenar un conjunto de prototipos y clonarlos en lugar de crear nuevas instancias.",
+        "Prototype reemplaza completamente la necesidad de una Abstract Factory.",
+        "No pueden usarse juntos en el mismo proyecto."
+      ],
+      "correct": 1,
+      "explanation": "Las factorías abstractas a menudo usan prototipos internamente para evitar la creación de múltiples subclases de factoría."
+    },
+    {
+      "id": "prototype_mcq_10",
+      "type": "multiple_choice",
+      "question": "¿Qué característica de JavaScript lo relaciona conceptualmente con este patrón?",
+      "options": [
+        "Es un lenguaje de tipado estático.",
+        "Usa una arquitectura orientada a servicios.",
+        "Utiliza herencia basada en prototipos donde los objetos heredan directamente de otros objetos.",
+        "No admite el uso de clases ni constructores."
+      ],
+      "correct": 2,
+      "explanation": "A diferencia de lenguajes basados en clases, JavaScript permite que objetos funcionen como prototipos naturales para otros."
+    },
+    {
+      "id": "prototype_mcq_11",
+      "type": "multiple_choice",
+      "question": "¿Qué se evita al usar Prototype para instanciar objetos sin usar sub-clases de factoría?",
+      "options": [
+        "La necesidad de interfaces.",
+        "La duplicación de código en el cliente.",
+        "La 'explosión de clases' en la jerarquía de creadores (Factory Classes).",
+        "El uso de memoria Stack."
+      ],
+      "correct": 2,
+      "explanation": "Con Prototype, no necesitas un 'Creator' específico para cada 'Product'; basta con pasar el prototipo correcto al cliente."
+    },
+    {
+      "id": "prototype_mcq_12",
+      "type": "multiple_choice",
+      "question": "En el patrón Prototype, ¿quién es el 'Client'?",
+      "options": [
+        "El usuario final de la aplicación.",
+        "La clase que solicita la creación de un nuevo objeto duplicando uno existente.",
+        "La base de datos que almacena el estado de los prototipos.",
+        "El compilador del lenguaje de programación."
+      ],
+      "correct": 1,
+      "explanation": "El Cliente es el componente de software que invoca el método de clonación para obtener nuevas instancias."
+    },
+    {
+      "id": "prototype_mcq_13",
+      "type": "multiple_choice",
+      "question": "Al implementar Prototype con herencia, ¿qué debe asegurar el ConcretePrototype?",
+      "options": [
+        "Invocar el método de clonación de la superclase para copiar los atributos heredados.",
+        "Eliminar todos los atributos heredados para ahorrar memoria.",
+        "Convertir todos los campos heredados en constantes.",
+        "No es posible clonar objetos que usen herencia."
+      ],
+      "correct": 0,
+      "explanation": "Para una copia completa, se debe propagar la clonación hacia arriba en la jerarquía (ej: llamando a super.clone())."
+    },
+    {
+      "id": "prototype_mcq_14",
+      "type": "multiple_choice",
+      "question": "¿Qué ventaja ofrece la Serialización como mecanismo para implementar Deep Copy?",
+      "options": [
+        "Es el método más rápido en ejecución de CPU.",
+        "Maneja automáticamente grafos de objetos complejos y resuelve referencias circulares.",
+        "No requiere que la clase implemente ninguna interfaz adicional.",
+        "Funciona incluso si los campos son de tipo 'transient'."
+      ],
+      "correct": 1,
+      "explanation": "Serializar y deserializar un objeto crea una copia profunda completa, gestionando automáticamente las dependencias internas del grafo."
+    },
+    {
+      "id": "prototype_mcq_15",
+      "type": "multiple_choice",
+      "question": "Diferencia clave entre Prototype y un Constructor de Copia (Copy Constructor):",
+      "options": [
+        "Prototype es una técnica específica de C++, mientras que el constructor es universal.",
+        "Prototype es más lento porque usa reflexión.",
+        "Prototype permite la clonación polimórfica sin conocer la clase exacta del objeto original en tiempo de compilación.",
+        "El constructor de copia no permite inicializar valores."
+      ],
+      "correct": 2,
+      "explanation": "El polimorfismo es vital: el cliente puede clonar cualquier objeto que cumpla la interfaz Prototype sin saber su tipo concreto."
+    },
+    {
+      "id": "prototype_tf_1",
+      "type": "true_false",
+      "question": "El patrón Prototype pertenece a la categoría de patrones Estructurales.",
+      "correct": false,
+      "explanation": "Es un patrón Creacional ya que su propósito central es la creación de nuevos objetos."
+    },
+    {
+      "id": "prototype_tf_2",
+      "type": "true_false",
+      "question": "El método estándar 'clone()' es fundamental en la implementación del patrón Prototype.",
+      "correct": true,
+      "explanation": "Este método permite que el objeto se duplique a sí mismo, delegando la lógica de copia al propio objeto."
+    },
+    {
+      "id": "prototype_tf_3",
+      "type": "true_false",
+      "question": "En una Shallow Copy, si el objeto original modifica un atributo de tipo primitivo (como un entero), el clon también se ve afectado.",
+      "correct": false,
+      "explanation": "Los tipos primitivos se copian por valor; es en las referencias a objetos (Shallow) donde ambos comparten la misma instancia."
+    },
+    {
+      "id": "prototype_tf_4",
+      "type": "true_false",
+      "question": "Prototype es útil cuando queremos que el sistema sea independiente de cómo se crean, componen y representan sus productos.",
+      "correct": true,
+      "explanation": "Esta independencia es uno de los beneficios clave de los patrones creacionales, incluido Prototype."
+    },
+    {
+      "id": "prototype_tf_5",
+      "type": "true_false",
+      "question": "Un 'Prototype Registry' siempre devuelve la referencia al objeto original para ahorrar memoria.",
+      "correct": false,
+      "explanation": "El registro debe devolver una copia (clon) del prototipo solicitado, de lo contrario no se estarían creando nuevas instancias."
+    },
+    {
+      "id": "prototype_tf_6",
+      "type": "true_false",
+      "question": "La clonación puede ser más eficiente que 'new' si el constructor realiza operaciones pesadas como accesos a bases de datos o red.",
+      "correct": true,
+      "explanation": "Al copiar un objeto ya inicializado, evitamos repetir los procesos costosos de su creación original."
+    },
+    {
+      "id": "prototype_tf_7",
+      "type": "true_false",
+      "question": "En Java, la interfaz Cloneable es una interfaz marcadora requerida para usar el método Object.clone().",
+      "correct": true,
+      "explanation": "Aunque es discutida por su diseño, es la forma estándar de habilitar la clonación nativa en el lenguaje Java."
+    },
+    {
+      "id": "prototype_tf_8",
+      "type": "true_false",
+      "question": "Con Prototype, es posible añadir nuevos tipos de objetos al sistema simplemente registrando una nueva instancia prototípica en tiempo de ejecución.",
+      "correct": true,
+      "explanation": "Esto dota al sistema de una gran flexibilidad dinámica que no ofrecen otros patrones como Factory Method."
+    },
+    {
+      "id": "prototype_tf_9",
+      "type": "true_false",
+      "question": "Una 'Deep Copy' asegura que el clon y el original no compartan ninguna referencia a sub-objetos mutables.",
+      "correct": true,
+      "explanation": "La copia profunda duplica todo el grafo de objetos, logrando un desacoplamiento de estado total."
+    },
+    {
+      "id": "prototype_tf_10",
+      "type": "true_false",
+      "question": "El uso del patrón Prototype siempre garantiza una mejora significativa en el rendimiento de la aplicación.",
+      "correct": false,
+      "explanation": "El rendimiento depende de la complejidad de la clonación; a veces 'new' sigue siendo más rápido si el constructor es simple."
+    },
+    {
+      "id": "prototype_tf_11",
+      "type": "true_false",
+      "question": "Un ConcretePrototype tiene prohibido tener otros métodos que no sean clone().",
+      "correct": false,
+      "explanation": "Un ConcretePrototype es una clase funcional normal que además implementa la funcionalidad de clonación."
+    },
+    {
+      "id": "prototype_tf_12",
+      "type": "true_false",
+      "question": "Prototype es el patrón ideal si el número de clases de productos es pequeño y estable.",
+      "correct": false,
+      "explanation": "Si hay pocas clases, Factory Method suele ser más simple. Prototype brilla cuando hay muchas clases o se definen dinámicamente."
+    },
+    {
+      "id": "prototype_tf_13",
+      "type": "true_false",
+      "question": "El patrón Prototype permite evitar jerarquías paralelas de factorías para cada tipo de producto.",
+      "correct": true,
+      "explanation": "Al clonar objetos, no necesitamos una clase 'Creator' por cada 'Product' concreto."
+    },
+    {
+      "id": "prototype_tf_14",
+      "type": "true_false",
+      "question": "En objetos inmutables (como String en Java), la diferencia entre Shallow Copy y Deep Copy es irrelevante a nivel de comportamiento.",
+      "correct": true,
+      "explanation": "Como el estado no puede cambiar, compartir la referencia es seguro y no produce efectos secundarios inesperados."
+    },
+    {
+      "id": "prototype_tf_15",
+      "type": "true_false",
+      "question": "La serialización es el método de clonación más rápido pero menos seguro.",
+      "correct": false,
+      "explanation": "La serialización suele ser lenta debido al procesamiento de streams, pero es muy segura para manejar grafos complejos."
+    },
+    {
+      "id": "prototype_short_1",
+      "type": "short_answer",
+      "question": "¿Cómo se llama el tipo de copia que solo duplica las referencias a objetos internos?",
+      "correct": [
+        "copia superficial",
+        "shallow copy"
+      ],
+      "hint": "Contrario a la copia profunda.",
+      "explanation": "La copia superficial copia el valor de la referencia, no el objeto al que apunta."
+    },
+    {
+      "id": "prototype_short_2",
+      "type": "short_answer",
+      "question": "¿Qué nombre técnico recibe la clase que implementa el método de clonación?",
+      "correct": [
+        "concreteprototype",
+        "prototipo concreto"
+      ],
+      "hint": "Es la implementación real de la interfaz Prototype.",
+      "explanation": "El ConcretePrototype es el objeto real que sabe cómo duplicarse."
+    },
+    {
+      "id": "prototype_short_3",
+      "type": "short_answer",
+      "question": "¿Qué patrón se recomienda si la instanciación de un objeto requiere mucho tiempo o recursos?",
+      "correct": [
+        "prototype",
+        "prototipo"
+      ],
+      "hint": "Se basa en copiar instancias existentes.",
+      "explanation": "Copiar un objeto ya inicializado suele ser mucho más eficiente."
+    },
+    {
+      "id": "prototype_short_4",
+      "type": "short_answer",
+      "question": "¿Cómo se llama el catálogo que gestiona los diferentes prototipos disponibles?",
+      "correct": [
+        "registry",
+        "manager",
+        "registro"
+      ],
+      "hint": "Centraliza la gestión de prototipos por nombre o ID.",
+      "explanation": "El Registry permite al cliente obtener clones buscando por una clave."
+    },
+    {
+      "id": "prototype_short_5",
+      "type": "short_answer",
+      "question": "¿Qué tipo de copia duplica recursivamente todos los objetos contenidos?",
+      "correct": [
+        "copia profunda",
+        "deep copy"
+      ],
+      "hint": "Garantiza independencia total entre original y clon.",
+      "explanation": "La copia profunda crea nuevas instancias para cada objeto en el grafo."
+    },
+    {
+      "id": "prototype_short_6",
+      "type": "short_answer",
+      "question": "Nombre del participante que solicita la clonación a un prototipo.",
+      "correct": [
+        "client",
+        "cliente"
+      ],
+      "hint": "Es el usuario del patrón.",
+      "explanation": "El Cliente interactúa con la interfaz Prototype para obtener nuevos objetos."
+    },
+    {
+      "id": "prototype_short_7",
+      "type": "short_answer",
+      "question": "Nombre del método más común en lenguajes de programación para realizar copias.",
+      "correct": [
+        "clone",
+        "clonar"
+      ],
+      "hint": "Palabra reservada o estándar de 5 letras en inglés.",
+      "explanation": "El método clone() es el estándar 'de facto' para la duplicación de objetos."
+    },
+    {
+      "id": "prototype_short_8",
+      "type": "short_answer",
+      "question": "¿En qué categoría de patrones GoF se clasifica Prototype?",
+      "correct": [
+        "creacional",
+        "creacionales"
+      ],
+      "hint": "Relacionado con la creación de objetos.",
+      "explanation": "Es un patrón creacional porque define un mecanismo de instanciación."
+    },
+    {
+      "id": "prototype_short_9",
+      "type": "short_answer",
+      "question": "¿Qué técnica técnica convierte un objeto en bytes para luego reconstruirlo como una copia profunda?",
+      "correct": [
+        "serialización",
+        "serialization"
+      ],
+      "hint": "Muy usada para persistencia y transmisión de datos.",
+      "explanation": "La serialización permite crear clones profundos de forma automática (aunque más lenta)."
+    },
+    {
+      "id": "prototype_short_10",
+      "type": "short_answer",
+      "question": "Prototype evita la necesidad de crear jerarquías paralelas de...",
+      "correct": [
+        "factorías",
+        "creators",
+        "factories"
+      ],
+      "hint": "Clases encargadas de instanciar productos.",
+      "explanation": "Al usar clonación, no necesitamos un Creator paralelo por cada Product concreto."
+    }
+  ]
+}

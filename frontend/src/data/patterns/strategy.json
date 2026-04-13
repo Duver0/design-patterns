@@ -1,0 +1,39 @@
+{
+  "id": "strategy",
+  "name": "Strategy",
+  "category": "Comportamiento",
+  "description": "Define una familia de algoritmos, encapsula cada uno y los hace intercambiables. Permite que el algoritmo varíe independientemente de los clientes que lo usan.",
+  "questions": [
+    {
+      "id": "strategy_q1",
+      "type": "multiple_choice",
+      "question": "¿Cuál de las siguientes situaciones es un buen caso de uso para el patrón Strategy?",
+      "options": [
+        "Necesitas que solo exista un objeto de una clase en toda la aplicación",
+        "Tienes múltiples variantes de un algoritmo y quieres poder cambiarlas en tiempo de ejecución",
+        "Quieres añadir funcionalidades a un objeto sin modificar su clase",
+        "Necesitas representar una jerarquía compleja de objetos"
+      ],
+      "correct": 1,
+      "explanation": "Strategy es ideal cuando tienes varias formas de realizar una tarea y quieres cambiar entre ellas dinámicamente. Por ejemplo, diferentes estrategias de ordenamiento, descuento, o validación."
+    },
+    {
+      "id": "strategy_q2",
+      "type": "true_false",
+      "question": "El patrón Strategy viola el principio abierto/cerrado (OCP) porque requiere modificar el contexto cada vez que se añade un nuevo algoritmo.",
+      "correct": false,
+      "explanation": "Falso. Strategy **respeta** el OCP: para agregar un nuevo algoritmo, simplemente creas una nueva clase que implementa la interfaz Strategy, sin modificar el contexto ni las estrategias existentes."
+    },
+    {
+      "id": "strategy_q3",
+      "type": "short_answer",
+      "question": "¿Cómo se llama el objeto que usa una Strategy y delega el comportamiento a ella?",
+      "correct": [
+        "contexto",
+        "context"
+      ],
+      "hint": "Es el objeto que mantiene una referencia a la estrategia y la invoca.",
+      "explanation": "El objeto que usa la estrategia se llama **Contexto** (Context). Mantiene una referencia a un objeto Strategy y delega el trabajo al objeto Strategy cuando necesita ejecutar el algoritmo."
+    }
+  ]
+}

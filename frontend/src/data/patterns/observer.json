@@ -1,0 +1,42 @@
+{
+  "id": "observer",
+  "name": "Observer",
+  "category": "Comportamiento",
+  "description": "Define una dependencia uno-a-muchos entre objetos, de modo que cuando uno cambia de estado, todos sus dependientes son notificados automáticamente.",
+  "questions": [
+    {
+      "id": "observer_q1",
+      "type": "multiple_choice",
+      "question": "En el patrón Observer, ¿qué nombre recibe el objeto que mantiene el estado y notifica a los demás?",
+      "options": [
+        "Observer",
+        "Subscriber",
+        "Subject (Publisher)",
+        "Handler"
+      ],
+      "correct": 2,
+      "explanation": "El objeto que mantiene el estado y envía notificaciones se llama **Subject** (también conocido como Publisher o Observable). Los objetos que reciben las notificaciones son los **Observers** (o Subscribers)."
+    },
+    {
+      "id": "observer_q2",
+      "type": "true_false",
+      "question": "El patrón Observer promueve el acoplamiento fuerte entre el Subject y sus Observers.",
+      "correct": false,
+      "explanation": "Falso. El Observer promueve el **desacoplamiento**: el Subject solo conoce la interfaz del Observer, no su implementación concreta. Esto permite agregar o eliminar Observers sin modificar el Subject."
+    },
+    {
+      "id": "observer_q3",
+      "type": "short_answer",
+      "question": "¿Qué método suele llamar el Subject para notificar a todos sus observadores?",
+      "correct": [
+        "notify",
+        "notificar",
+        "notifyObservers",
+        "notifyAll",
+        "update"
+      ],
+      "hint": "Es un método que recorre la lista de observadores y llama a su método de actualización.",
+      "explanation": "El Subject usa un método como **notify()** o **notifyObservers()** para iterar sobre su lista de observadores y llamar al método **update()** (o similar) de cada uno, pasando el nuevo estado."
+    }
+  ]
+}

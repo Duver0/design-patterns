@@ -1,0 +1,41 @@
+{
+  "id": "decorator",
+  "name": "Decorator",
+  "category": "Estructural",
+  "description": "Permite añadir funcionalidades a objetos colocándolos dentro de objetos encapsuladores especiales (decoradores) que contienen los comportamientos adicionales.",
+  "questions": [
+    {
+      "id": "decorator_q1",
+      "type": "multiple_choice",
+      "question": "¿Cuál es la ventaja principal del patrón Decorator sobre la herencia para extender funcionalidades?",
+      "options": [
+        "El Decorator es más rápido en tiempo de ejecución",
+        "El Decorator permite extender comportamientos en tiempo de ejecución sin crear subclases",
+        "El Decorator simplifica la jerarquía de clases al reducir el número de interfaces",
+        "El Decorator garantiza que solo exista una instancia del objeto decorado"
+      ],
+      "correct": 1,
+      "explanation": "A diferencia de la herencia (que es estática y definida en tiempo de compilación), el Decorator permite añadir o combinar comportamientos dinámicamente en tiempo de ejecución, componiendo decoradores de forma flexible."
+    },
+    {
+      "id": "decorator_q2",
+      "type": "true_false",
+      "question": "Un Decorator debe implementar la misma interfaz que el objeto que decora.",
+      "correct": true,
+      "explanation": "Correcto. El Decorator implementa la misma interfaz que el componente que envuelve. Esto permite que el cliente use el decorador exactamente igual que el objeto original, siendo transparente para el código que lo usa."
+    },
+    {
+      "id": "decorator_q3",
+      "type": "short_answer",
+      "question": "¿Cómo se llama el objeto original que el Decorator envuelve?",
+      "correct": [
+        "componente",
+        "component",
+        "wrapped",
+        "wrappee"
+      ],
+      "hint": "Es el objeto base al que el decorador añade funcionalidades.",
+      "explanation": "El objeto que el Decorator envuelve se llama **Componente** (Component o Wrappee). El Decorator mantiene una referencia a un Componente y delega las operaciones a él, añadiendo su propio comportamiento antes o después."
+    }
+  ]
+}

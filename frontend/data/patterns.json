@@ -1,0 +1,37 @@
+[
+  {
+    "id": "singleton",
+    "name": "Singleton",
+    "category": "Creacional",
+    "description": "Garantiza que una clase tenga una única instancia y proporciona un punto de acceso global a ella.",
+    "questions": [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]
+  },
+  {
+    "id": "factory_method",
+    "name": "Factory Method",
+    "category": "Creacional",
+    "description": "Define una interfaz para crear un objeto, pero deja a las subclases decidir qué clase instanciar.",
+    "questions": [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]
+  },
+  {
+    "id": "abstract_factory",
+    "name": "Abstract Factory",
+    "category": "Creacional",
+    "description": "Proporciona una interfaz para crear familias de objetos relacionados o dependientes sin especificar sus clases concretas.",
+    "questions": []
+  },
+  {
+    "id": "builder",
+    "name": "Builder",
+    "category": "Creacional",
+    "description": "Permite construir objetos complejos paso a paso. El patrón permite producir distintos tipos y representaciones de un objeto empleando el mismo código de construcción.",
+    "questions": []
+  },
+  {
+    "id": "prototype",
+    "name": "Prototype",
+    "category": "Creacional",
+    "description": "Permite copiar objetos existentes sin que el código dependa de sus clases.",
+    "questions": []
+  }
+]

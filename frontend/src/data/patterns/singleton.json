@@ -1,0 +1,428 @@
+{
+  "id": "singleton",
+  "name": "Singleton",
+  "category": "Creacional",
+  "description": "Garantiza que una clase tenga una única instancia y proporciona un punto de acceso global a ella.",
+  "questions": [
+    {
+      "id": "singleton_q1",
+      "type": "mcq",
+      "question": "¿Cuál es el propósito principal del patrón Singleton?",
+      "options": [
+        "Crear múltiples instancias de una clase de forma eficiente",
+        "Garantizar que una clase tenga solo una instancia y proveer acceso global a ella",
+        "Permitir que una clase cambie su comportamiento en tiempo de ejecución",
+        "Definir una familia de algoritmos intercambiables"
+      ],
+      "answer": 1,
+      "explanation": "El Singleton restringe la instanciación de una clase a un único objeto y proporciona un punto de acceso global. Se usa cuando exactamente un objeto es necesario para coordinar acciones en el sistema."
+    },
+    {
+      "id": "singleton_q2",
+      "type": "true_false",
+      "question": "El patrón Singleton puede causar problemas en aplicaciones multihilo si no se implementa correctamente.",
+      "answer": true,
+      "explanation": "En entornos multihilo, si dos hilos intentan crear la instancia al mismo tiempo sin sincronización, podrían crearse dos instancias distintas, rompiendo la garantía del patrón."
+    },
+    {
+      "id": "singleton_q3",
+      "type": "short",
+      "question": "¿Qué modificador de acceso debe tener el constructor en una implementación típica de Singleton?",
+      "answer": [
+        "privado",
+        "private"
+      ],
+      "hint": "Inaccesible desde fuera de la clase.",
+      "explanation": "El constructor debe ser privado para evitar que otras clases instancien directamente la clase, forzando el uso del método de acceso estático."
+    },
+    {
+      "id": "singleton_q4",
+      "type": "mcq",
+      "question": "En Java, ¿cuál es la forma más sencilla y segura de implementar un Singleton que sea 'Thread-Safe' por defecto?",
+      "options": [
+        "Usando un bloque synchronized en el constructor",
+        "Usando un Enum",
+        "Usando Double-Checked Locking",
+        "Usando Lazy Initialization simple"
+      ],
+      "answer": 1,
+      "explanation": "Joshua Bloch recomienda el uso de Enums para Singletons en Java, ya que proporciona protección contra la serialización y garantiza la creación de una única instancia incluso frente a ataques de reflexión."
+    },
+    {
+      "id": "singleton_q5",
+      "type": "true_false",
+      "question": "El patrón Singleton facilita enormemente las pruebas unitarias (Unit Testing).",
+      "answer": false,
+      "explanation": "Al contrario, el Singleton a menudo dificulta las pruebas unitarias porque introduce un estado global que persiste entre pruebas y oculta dependencias, lo que hace difícil mockear o aislar componentes."
+    },
+    {
+      "id": "singleton_q6",
+      "type": "short",
+      "question": "¿Cómo se llama la técnica donde la instancia del Singleton se crea solo en el momento en que se solicita por primera vez?",
+      "answer": [
+        "lazy initialization",
+        "inicializacion perezosa",
+        "lazy loading"
+      ],
+      "hint": "Carga bajo demanda.",
+      "explanation": "La inicialización perezosa (Lazy Initialization) retrasa la creación del objeto hasta que realmente se necesita, optimizando el uso de recursos si la instancia nunca se utiliza."
+    },
+    {
+      "id": "singleton_q7",
+      "type": "mcq",
+      "question": "Al implementar Singleton con 'Double-Checked Locking', ¿por qué es necesaria la palabra clave 'volatile' en Java?",
+      "options": [
+        "Para acelerar el acceso a la variable",
+        "Para permitir que la variable sea serializada",
+        "Para evitar problemas de visibilidad de memoria y reordenamiento de instrucciones",
+        "Para que la variable pueda ser accedida desde otros paquetes"
+      ],
+      "answer": 2,
+      "explanation": "'volatile' asegura que los cambios realizados por un hilo sean visibles inmediatamente para otros hilos y evita que el compilador reordene la escritura de la variable antes de que el objeto esté completamente inicializado."
+    },
+    {
+      "id": "singleton_q8",
+      "type": "true_false",
+      "question": "Un Singleton debe ser heredable para permitir extender su funcionalidad en subclases.",
+      "answer": false,
+      "explanation": "Heredar de un Singleton es problemático porque si las subclases también son Singletons, se vuelve difícil garantizar que solo exista una instancia base. Generalmente se prefiere que la clase sea 'final'."
+    },
+    {
+      "id": "singleton_q9",
+      "type": "short",
+      "question": "¿Qué principio de diseño (SOLID) suele violar el Singleton al gestionar su propio ciclo de vida y además realizar su tarea principal?",
+      "answer": [
+        "SRP",
+        "Single Responsibility Principle",
+        "Responsabilidad Unica"
+      ],
+      "hint": "Una sola razon para cambiar.",
+      "explanation": "El Singleton suele violar el principio de Responsabilidad Única (SRP) porque tiene dos responsabilidades: gestionar su propia instancia (control de acceso) y realizar su lógica de negocio propia."
+    },
+    {
+      "id": "singleton_q10",
+      "type": "mcq",
+      "question": "¿Qué alternativa moderna se prefiere a menudo en lugar de usar el patrón Singleton directamente?",
+      "options": [
+        "Variables globales",
+        "Inyección de Dependencias con manejo de ciclo de vida singleton",
+        "Patrón Prototype",
+        "Clases estáticas puras"
+      ],
+      "answer": 1,
+      "explanation": "Los frameworks de Inyección de Dependencias (como Spring o Dagger) permiten definir un objeto como 'Singleton' dentro de un contenedor, delegando el control del ciclo de vida al framework y facilitando el testeo y el desacoplamiento."
+    },
+    {
+      "id": "singleton_q11",
+      "type": "true_false",
+      "question": "La instanciación ansiosa (Eager Initialization) crea la instancia del Singleton cuando se carga la clase.",
+      "answer": true,
+      "explanation": "Correcto. La instancia se crea en el momento de la carga de la clase por el ClassLoader, lo que garantiza thread-safety de forma natural pero puede desperdiciar recursos si la instancia no se usa."
+    },
+    {
+      "id": "singleton_q12",
+      "type": "short",
+      "question": "En el contexto de Singleton, ¿cómo se llama el método estático que suele devolver la instancia única?",
+      "answer": [
+        "getInstance",
+        "get",
+        "instance"
+      ],
+      "hint": "Obtener instancia.",
+      "explanation": "Tradicionalmente se utiliza un método estático llamado `getInstance()` para proporcionar el punto de acceso global a la instancia única."
+    },
+    {
+      "id": "singleton_q13",
+      "type": "mcq",
+      "question": "¿Cuál es un riesgo potencial de usar Singletons en una arquitectura de microservicios?",
+      "options": [
+        "Que el Singleton se comparta entre diferentes servicios",
+        "Que el estado del Singleton se pierda tras un despliegue",
+        "Confundir un Singleton de aplicación con un Singleton de sistema distribuido",
+        "Ninguna de las anteriores"
+      ],
+      "answer": 2,
+      "explanation": "En sistemas distribuidos, un Singleton solo es único dentro de un proceso (JVM/V8). Si tienes múltiples réplicas de un servicio, tendrás múltiples instancias. Se requiere un manejo externo (como Redis o una DB) para un 'Singleton distribuido'."
+    },
+    {
+      "id": "singleton_q14",
+      "type": "true_false",
+      "question": "Un Singleton puede ser reinicializado llamando de nuevo a su constructor privado.",
+      "answer": false,
+      "explanation": "Falso. Un constructor privado no puede ser llamado desde fuera de la clase. Una vez creada la instancia única, no hay un mecanismo estándar para 'reinicializarla' sin modificar el estado interno."
+    },
+    {
+      "id": "singleton_q15",
+      "type": "short",
+      "question": "¿Qué mecanismo de Java permite instanciar una clase incluso con constructor privado, rompiendo potencialmente el Singleton?",
+      "answer": [
+        "Reflection",
+        "Reflexion",
+        "Java Reflection"
+      ],
+      "hint": "Inspección de código en runtime.",
+      "explanation": "La API de Reflection de Java permite cambiar la accesibilidad del constructor (`setAccessible(true)`), permitiendo crear múltiples instancias a menos que se implementen guardas adicionales."
+    },
+    {
+      "id": "singleton_q16",
+      "type": "mcq",
+      "question": "¿En qué escenario es más apropiado usar un Singleton?",
+      "options": [
+        "Para pasar datos entre dos pantallas/vistas",
+        "Para un objeto que gestiona un pool de conexiones a BD o un Logger",
+        "Para cada entidad de negocio en una base de datos",
+        "Para evitar el uso de parámetros en las funciones"
+      ],
+      "answer": 1,
+      "explanation": "Componentes que coordinan recursos compartidos o servicios sin estado que deben centralizar acciones (como logs o configuraciones) son candidatos ideales para el Singleton."
+    },
+    {
+      "id": "singleton_q17",
+      "type": "true_false",
+      "question": "El patrón Singleton se clasifica dentro de los patrones estructurales de GoF.",
+      "answer": false,
+      "explanation": "Falso. El Singleton es un patrón **Creacional**, ya que se encarga de los mecanismos de creación de objetos."
+    },
+    {
+      "id": "singleton_q18",
+      "type": "short",
+      "question": "Si una clase Singleton implementa 'Serializable', ¿qué método debe definir para evitar que la deserialización cree una nueva instancia?",
+      "answer": [
+        "readResolve"
+      ],
+      "hint": "Método de reemplazo en deserialización.",
+      "explanation": "El método `readResolve()` permite reemplazar el objeto leído del stream por la instancia Singleton existente."
+    },
+    {
+      "id": "singleton_q19",
+      "type": "mcq",
+      "question": "¿Qué sucede si un Singleton es cargado por dos ClassLoaders diferentes en la misma JVM?",
+      "options": [
+        "La JVM lanza una excepción",
+        "Se crea una única instancia compartida entre ambos",
+        "Se crea una instancia distinta para cada ClassLoader",
+        "El segundo ClassLoader falla al cargar la clase"
+      ],
+      "answer": 2,
+      "explanation": "Cada ClassLoader tiene su propio espacio de nombres. Si la clase se carga en dos ClassLoaders distintos, la JVM las trata como clases diferentes y cada una tendrá su propio campo estático con su propia instancia."
+    },
+    {
+      "id": "singleton_q20",
+      "type": "true_false",
+      "question": "En JavaScript (ES6+), exportar una instancia de una clase desde un módulo (`export const instance = new MyClass()`) actúa efectivamente como un Singleton.",
+      "answer": true,
+      "explanation": "En el sistema de módulos de ES, los módulos son singletons. Lo que exportas se evalúa una sola vez y la referencia se comparte en toda la aplicación."
+    },
+    {
+      "id": "singleton_q21",
+      "type": "short",
+      "question": "El patrón Singleton suele considerarse un 'Antipatrón' cuando se usa para encubrir la falta de un buen diseño de...",
+      "answer": [
+        "arquitectura",
+        "dependencias",
+        "flujo de datos"
+      ],
+      "hint": "Relación entre componentes.",
+      "explanation": "A menudo se abusa del Singleton como una 'bolsa' de datos globales, lo que indica un mal diseño en la gestión de dependencias o flujo de datos."
+    },
+    {
+      "id": "singleton_q22",
+      "type": "mcq",
+      "question": "¿Cuál es la principal diferencia entre una clase con solo métodos estáticos y un Singleton?",
+      "options": [
+        "No hay diferencia, funcionan igual",
+        "Un Singleton puede implementar interfaces y ser pasado como objeto",
+        "Las clases estáticas son más lentas",
+        "Los Singletons no pueden tener estado"
+      ],
+      "answer": 1,
+      "explanation": "A diferencia de las clases estáticas, un Singleton es un objeto real que puede implementar interfaces, heredar de otras clases (aunque no sea recomendable ser heredado) y ser tratado de forma polimórfica."
+    },
+    {
+      "id": "singleton_q23",
+      "type": "true_false",
+      "question": "El patrón Monostate es otra forma de Singleton donde todos los campos son estáticos pero se permiten múltiples instancias.",
+      "answer": true,
+      "explanation": "El patrón Monostate (o Borg) permite crear múltiples instancias de una clase, pero todas comparten el mismo estado (datos estáticos), logrando un comportamiento similar al Singleton desde la perspectiva del estado."
+    },
+    {
+      "id": "singleton_q24",
+      "type": "short",
+      "question": "¿Qué patrón de diseño suele colaborar con el Singleton para crear fábricas únicas a nivel de aplicación?",
+      "answer": [
+        "Abstract Factory",
+        "Factory Method"
+      ],
+      "hint": "Kit de fábricas.",
+      "explanation": "Abstract Factory suele implementarse como un Singleton para asegurar que solo haya una instancia de la fábrica configurada para el entorno."
+    },
+    {
+      "id": "singleton_q25",
+      "type": "mcq",
+      "question": "En C#, ¿cómo se recomienda implementar un Singleton que sea Lazy y Thread-Safe de forma moderna?",
+      "options": [
+        "lock(syncRoot)",
+        "Usando la clase Lazy<T>",
+        "Usando el método volatile",
+        "Mediante herencia de SingletonBase"
+      ],
+      "answer": 1,
+      "explanation": "En .NET, `Lazy<T>` es la forma recomendada, ya que maneja la seguridad de hilos y la inicialización perezosa de forma interna y eficiente."
+    },
+    {
+      "id": "singleton_q26",
+      "type": "true_false",
+      "question": "El patrón Singleton ayuda a cumplir el principio de 'Programar para una interfaz, no para una implementación'.",
+      "answer": false,
+      "explanation": "Falso. El Singleton suele introducir un acoplamiento fuerte a una clase concreta (acceso mediante `MyClass.getInstance()`), lo que dificulta el uso de interfaces y el polimorfismo."
+    },
+    {
+      "id": "singleton_q27",
+      "type": "short",
+      "question": "Nombre del framework de Java que popularizó la gestión de Singletons mediante configuración en lugar de código manual.",
+      "answer": [
+        "Spring",
+        "Spring Framework"
+      ],
+      "hint": "Inyección de dependencias popular.",
+      "explanation": "Spring gestiona 'beans' con scope singleton por defecto, eliminando la necesidad de implementar el patrón manualmente en la lógica de negocio."
+    },
+    {
+      "id": "singleton_q28",
+      "type": "mcq",
+      "question": "¿Qué problema de concurrencia resuelve el 'Double-Checked Locking'?",
+      "options": [
+        "Ninguno, es un mito",
+        "Reduce el overhead de sincronización al verificar la existencia antes de bloquear",
+        "Evita que se creen dos instancias de la base de datos",
+        "Permite que varios hilos escriban en el Singleton a la vez"
+      ],
+      "answer": 1,
+      "explanation": "Sin double-check, tendríamos que sincronizar todo el método `getInstance()`, lo cual es costoso. Con esto, solo sincronizamos la primera vez que se crea la instancia."
+    },
+    {
+      "id": "singleton_q29",
+      "type": "true_false",
+      "question": "En Smalltalk o Python, es posible implementar Singleton de manera más flexible mediante metaclases.",
+      "answer": true,
+      "explanation": "Sí, en lenguajes dinámicos puedes interceptar la creación del objeto a nivel de metaclase para devolver siempre la misma instancia."
+    },
+    {
+      "id": "singleton_q30",
+      "type": "short",
+      "question": "Si el Singleton almacena muchas referencias a otros objetos, puede causar una fuga de memoria conocida como...",
+      "answer": [
+        "Memory Leak",
+        "Fuga de memoria"
+      ],
+      "hint": "Referencia persistente que impide el GC.",
+      "explanation": "Al ser un objeto con vida infinita (dura tanto como la app), si guarda referencias a objetos temporales, impedirá que el Garbage Collector los libere."
+    },
+    {
+      "id": "singleton_q31",
+      "type": "mcq",
+      "question": "¿Por qué un Singleton puede dificultar el escalamiento horizontal?",
+      "options": [
+        "Porque usa demasiada CPU",
+        "Porque mantiene estado local que no se sincroniza entre múltiples nodos",
+        "Porque impide la replicación de la base de datos",
+        "No afecta al escalamiento horizontal"
+      ],
+      "answer": 1,
+      "explanation": "Si el Singleton guarda estado (ej: contadores o caché), este estado vive en la memoria de una sola máquina. En un clúster, cada nodo tendrá su propia versión del estado, lo que lleva a inconsistencias."
+    },
+    {
+      "id": "singleton_q32",
+      "type": "true_false",
+      "question": "Un Singleton debe exponer un método 'reset()' o 'destroyInstance()' para facilitar las pruebas unitarias.",
+      "answer": false,
+      "explanation": "Aunque facilita las pruebas, viola la pureza del patrón y puede introducir errores inesperados en producción si se llama accidentalmente. Es una 'deuda técnica' para compensar un diseño acoplado."
+    },
+    {
+      "id": "singleton_q33",
+      "type": "short",
+      "question": "Patrón creacional que se usa como una alternativa al Singleton para clonar una instancia maestra pre-configurada.",
+      "answer": [
+        "Prototype",
+        "Prototipo"
+      ],
+      "hint": "Clonar objetos.",
+      "explanation": "Prototype permite crear nuevos objetos copiando uno existente, lo que puede usarse para evitar la instanciación costosa sin restringirse a una única instancia central."
+    },
+    {
+      "id": "singleton_q34",
+      "type": "mcq",
+      "question": "¿Cuál de estos NO es un método válido para asegurar Thread-Safety en un Singleton?",
+      "options": [
+        "Método sincronizado",
+        "Enumeradores (Enums)",
+        "Bloque try-catch",
+        "Sincronización de doble comprobación"
+      ],
+      "answer": 2,
+      "explanation": "Un bloque try-catch se usa para manejo de excepciones, no tiene ninguna relación con la sincronización o seguridad de hilos en la creación de una instancia."
+    },
+    {
+      "id": "singleton_q35",
+      "type": "true_false",
+      "question": "En una arquitectura limpia (Clean Architecture), los singletons deben vivir en la capa de Entidades.",
+      "answer": false,
+      "explanation": "Las entidades deben ser objetos planos. Los singletons, si existen, suelen ser servicios de infraestructura o adaptadores, y su 'singleton-ness' debe ser gestionado por la inyección de dependencias, no por la regla del negocio."
+    },
+    {
+      "id": "singleton_q36",
+      "type": "short",
+      "question": "En el patrón Singleton, ¿qué tipo de variable se usa para guardar la instancia única dentro de la clase?",
+      "answer": [
+        "estatica",
+        "static",
+        "miembro estatico"
+      ],
+      "hint": "Pertenece a la clase, no al objeto.",
+      "explanation": "Se utiliza una variable estática (`static`) para que la referencia sea compartida por todas las llamadas al método de acceso y persista durante la vida de la clase."
+    },
+    {
+      "id": "singleton_q37",
+      "type": "mcq",
+      "question": "¿Cómo maneja el recolector de basura (Garbage Collector) la instancia de un Singleton?",
+      "options": [
+        "La borra si no se usa en 5 minutos",
+        "Nunca la borra mientras la clase que la contiene esté cargada",
+        "La borra después de que el método getInstance() termina",
+        "Requiere llamar a System.gc() manualmente"
+      ],
+      "answer": 1,
+      "explanation": "Mientras la clase Singleton esté cargada en memoria, su campo estático mantiene una referencia fuerte a la instancia, impidiendo que el GC la recolecte."
+    },
+    {
+      "id": "singleton_q38",
+      "type": "true_false",
+      "question": "El patrón Singleton es un ejemplo de cómo implementar el principio OCP (Open-Closed Principle).",
+      "answer": false,
+      "explanation": "El Singleton suele ser difícil de extender (Cerrado para extensión) sin modificar la clase original o el código que la consume, por lo que a menudo se ve como un obstáculo para OCP."
+    },
+    {
+      "id": "singleton_q39",
+      "type": "short",
+      "question": "¿Qué lenguaje de programación usa la palabra clave 'object' para declarar Singletons nativos?",
+      "answer": [
+        "Kotlin"
+      ],
+      "hint": "Sucesor de Java en Android.",
+      "explanation": "Kotlin permite declarar un Singleton simplemente usando `object MySingleton`, lo cual es seguro para hilos y cargado de forma perezosa por defecto."
+    },
+    {
+      "id": "singleton_q40",
+      "type": "mcq",
+      "question": "Si una clase Singleton es serializada y luego deserializada dos veces, ¿qué sucede por defecto?",
+      "options": [
+        "Se obtienen dos referencias a la misma instancia original",
+        "Se obtienen dos instancias nuevas y distintas",
+        "La deserialización falla con un error de seguridad",
+        "La JVM se detiene"
+      ],
+      "answer": 1,
+      "explanation": "Por defecto, la deserialización crea un nuevo objeto en memoria. Si no se protege con `readResolve()`, terminarás con múltiples instancias de tu 'Singleton'."
+    }
+  ]
+}

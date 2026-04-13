@@ -1,0 +1,430 @@
+{
+  "id": "factory_method",
+  "name": "Factory Method",
+  "category": "Creacional",
+  "description": "Define una interfaz para crear un objeto, pero deja a las subclases decidir qué clase instanciar.",
+  "questions": [
+    {
+      "id": "factory_q1",
+      "type": "mcq",
+      "question": "¿Qué problema resuelve principalmente el patrón Factory Method?",
+      "options": [
+        "Reducir la memoria usada al crear objetos",
+        "Desacoplar la creación de objetos de su uso concreto",
+        "Garantizar que solo exista una instancia de un objeto",
+        "Compartir estado entre múltiples objetos"
+      ],
+      "answer": 1,
+      "explanation": "El Factory Method desacopla el código que usa los objetos del código que los crea, permitiendo que el sistema sea independiente de cómo se crean sus productos."
+    },
+    {
+      "id": "factory_q2",
+      "type": "true_false",
+      "question": "En el patrón Factory Method, la clase Creadora (Creator) siempre debe ser abstracta.",
+      "answer": false,
+      "explanation": "No es obligatorio. La clase Creator puede proporcionar una implementación por defecto que devuelva un producto base, aunque lo más común es que sea abstracta o una interfaz."
+    },
+    {
+      "id": "factory_q3",
+      "type": "short",
+      "question": "En el patrón Factory Method, ¿cómo se llama la interfaz o clase base que representa el objeto creado?",
+      "answer": [
+        "producto",
+        "product"
+      ],
+      "hint": "Resultado de la fábrica.",
+      "explanation": "El objeto que crea el Factory Method se denomina Producto. El Creator trabaja con esta interfaz abstracta en lugar de clases concretas."
+    },
+    {
+      "id": "factory_q4",
+      "type": "mcq",
+      "question": "¿Cuál es la principal diferencia entre Factory Method y Abstract Factory?",
+      "options": [
+        "Factory Method usa herencia, Abstract Factory usa composición de objetos",
+        "Factory Method crea familias de objetos, Abstract Factory solo uno",
+        "Factory Method es un patrón de comportamiento, Abstract Factory es creacional",
+        "No hay diferencia, son sinónimos"
+      ],
+      "answer": 0,
+      "explanation": "Factory Method se basa en la herencia (una subclase implementa el método de creación). Abstract Factory se basa en un objeto fábrica que tiene múltiples métodos para crear una familia de productos."
+    },
+    {
+      "id": "factory_q5",
+      "type": "true_false",
+      "question": "El Factory Method cumple con el Principio de Responsabilidad Única (SRP) al mover el código de creación a un lugar específico.",
+      "answer": true,
+      "explanation": "Sí, extrae la lógica de instanciación de la lógica de negocio del cliente, permitiendo que cada clase tenga una responsabilidad clara."
+    },
+    {
+      "id": "factory_q6",
+      "type": "short",
+      "question": "¿Qué principio SOLID se beneficia más cuando añadimos nuevos productos sin cambiar el código cliente existente en Factory Method?",
+      "answer": [
+        "OCP",
+        "Open-Closed Principle",
+        "Abierto-Cerrado"
+      ],
+      "hint": "Abierto para extensión, cerrado para modificación.",
+      "explanation": "El Factory Method permite introducir nuevos tipos de productos simplemente creando nuevas subclases del Creador, sin tocar el código que ya funciona."
+    },
+    {
+      "id": "factory_q7",
+      "type": "mcq",
+      "question": "En una implementación típica de Factory Method, el código del cliente interactúa con...",
+      "options": [
+        "Las clases de productos concretos directamente",
+        "Solo con la interfaz del Creador y la del Producto",
+        "Con una base de datos de objetos",
+        "Con un Singleton global"
+      ],
+      "answer": 1,
+      "explanation": "El objetivo es que el cliente ignore las implementaciones concretas. Solo conoce las interfaces abstractas (Creator y Product)."
+    },
+    {
+      "id": "factory_q8",
+      "type": "true_false",
+      "question": "El patrón Factory Method es una especialización del patrón Template Method aplicada a la creación de objetos.",
+      "answer": true,
+      "explanation": "Exacto. El Creator define el 'esqueleto' de un algoritmo que usa el producto, y delega el paso de 'instanciación' a las subclases mediante un método abstracto."
+    },
+    {
+      "id": "factory_q9",
+      "type": "short",
+      "question": "¿Cómo se llama la clase que sobrescribe el Factory Method para devolver una instancia de un producto específico?",
+      "answer": [
+        "ConcreteCreator",
+        "CreadorConcreto",
+        "Subclase creadora"
+      ],
+      "hint": "Implementación específica de la fábrica.",
+      "explanation": "El ConcreteCreator es la clase que efectivamente llama a 'new' para un producto específico."
+    },
+    {
+      "id": "factory_q10",
+      "type": "mcq",
+      "question": "¿Cuál es una desventaja notable del uso intensivo de Factory Method?",
+      "options": [
+        "Hace que el código sea más lento al ejecutar",
+        "Requiere crear muchas subclases (explisión de clases) solo para instanciar",
+        "Impide el uso de polimorfismo",
+        "Consume demasiada memoria RAM"
+      ],
+      "answer": 1,
+      "explanation": "Para cada nuevo tipo de producto, a menudo necesitas una nueva subclase del Creador, lo que puede complicar la jerarquía de clases si el sistema crece mucho."
+    },
+    {
+      "id": "factory_q11",
+      "type": "true_false",
+      "question": "Un 'Simple Factory' (fábrica con switch/case) es exactamente lo mismo que el patrón Factory Method de GoF.",
+      "answer": false,
+      "explanation": "No. El Simple Factory es un modismo o técnica común, pero no es el patrón GoF oficial. El Factory Method GoF requiere herencia y polimorfismo en el método de creación."
+    },
+    {
+      "id": "factory_q12",
+      "type": "short",
+      "question": "¿Qué palabra clave (keyword) se usa en el método del Creador para obligar a las subclases a implementarlo en Java/C#?",
+      "answer": [
+        "abstract",
+        "abstracto"
+      ],
+      "hint": "Sin implementación base.",
+      "explanation": "Declarar el método como `abstract` asegura que el Creador no instancie nada por sí mismo y fuerce a las subclases a definir la lógica de creación."
+    },
+    {
+      "id": "factory_q13",
+      "type": "mcq",
+      "question": "Si tienes una aplicación que soporta múltiples tipos de documentos (PDF, Word, Texto), ¿cómo aplicas Factory Method?",
+      "options": [
+        "Documento es el Creador, cada formato es un método estático",
+        "Aplicacion es el Creador, PDFApp y WordApp son ConcreteCreators",
+        "Usando un switch-case gigante en el Main",
+        "No es posible aplicar patrones en este caso"
+      ],
+      "answer": 1,
+      "explanation": "La estructura correcta es que la lógica general de la app esté en el Creator, y cada subclase específica sepa qué tipo de documento crear."
+    },
+    {
+      "id": "factory_q14",
+      "type": "true_false",
+      "question": "Factory Method ayuda a cumplir el principio de 'Inversión de Dependencias' (DIP).",
+      "answer": true,
+      "explanation": "Sí, tanto las clases de alto nivel como las de bajo nivel dependen de abstracciones (la interfaz Product), en lugar de que el alto nivel dependa del bajo nivel (clases concretas)."
+    },
+    {
+      "id": "factory_q15",
+      "type": "short",
+      "question": "Nombre del patrón que suele evolucionar a partir de varios Factory Methods cuando se necesita crear familias de objetos relacionados.",
+      "answer": [
+        "Abstract Factory",
+        "Fabrica Abstracta"
+      ],
+      "hint": "Kit de productos.",
+      "explanation": "Cuando los sistemas crecen, a menudo un solo Factory Method no basta y se agrupan en una Abstract Factory para manejar consistencia entre productos."
+    },
+    {
+      "id": "factory_q16",
+      "type": "mcq",
+      "question": "En el contexto de Factory Method, ¿qué significa 'Programar para una interfaz'?",
+      "options": [
+        "Escribir código solo en archivos .h o .interface",
+        "Usar tipos abstractos para declarar variables que contendrán productos",
+        "Evitar el uso de clases en absoluto",
+        "Usar solo una interfaz para toda la aplicación"
+      ],
+      "answer": 1,
+      "explanation": "Significa que el código cliente declara variables de tipo `IProduct`, permitiendo que cualquier implementación concreta devuelta por la fábrica funcione sin cambios."
+    },
+    {
+      "id": "factory_q17",
+      "type": "true_false",
+      "question": "El patrón Factory Method puede usarse para conectar jerarquías de clases paralelas.",
+      "answer": true,
+      "explanation": "A menudo ocurre que una jerarquía de clases (ej: Figuras) necesita una jerarquía paralela (ej: Manipuladores de Figuras). El Factory Method vincula ambas de forma limpia."
+    },
+    {
+      "id": "factory_q18",
+      "type": "short",
+      "question": "¿Qué se suele pasar como argumento a un Factory Method parametrizado para decidir qué objeto crear?",
+      "answer": [
+        "identificador",
+        "tipo",
+        "string",
+        "id"
+      ],
+      "hint": "Selector.",
+      "explanation": "En versiones parametrizadas, se pasa un 'id' o 'tipo' (ej: un Enum) para que la fábrica decida qué subclase de producto instanciar."
+    },
+    {
+      "id": "factory_q19",
+      "type": "mcq",
+      "question": "¿Por qué Factory Method es mejor que usar un constructor directo?",
+      "options": [
+        "Los constructores son más lentos en memoria",
+        "El constructor siempre devuelve una instancia de la clase exacta, impidiendo polimorfismo en la creación",
+        "Los constructores no pueden tener parámetros",
+        "Los constructores no existen en lenguajes modernos"
+      ],
+      "answer": 1,
+      "explanation": "Un constructor no puede devolver una subclase ni un objeto existente. El Factory Method encapsula esta decisión, permitiendo flexibilidad total en lo que se devuelve."
+    },
+    {
+      "id": "factory_q20",
+      "type": "true_false",
+      "question": "En Factory Method, el Creador puede ser una interfaz en lenguajes que permiten métodos por defecto (como Java 8+).",
+      "answer": true,
+      "explanation": "Sí, el Creador puede ser una interfaz que declara el factory method y opcionalmente proporciona lógica común que lo utiliza."
+    },
+    {
+      "id": "factory_q21",
+      "type": "short",
+      "question": "¿Qué tipo de patrones son Factory Method y Singleton según GoF?",
+      "answer": [
+        "creacionales",
+        "creacional"
+      ],
+      "hint": "Categoría de creación.",
+      "explanation": "Ambos pertenecen a la categoría de patrones **creacionales**, enfocados en los mecanismos de instanciación."
+    },
+    {
+      "id": "factory_q22",
+      "type": "mcq",
+      "question": "¿Cuál es un escenario típico de uso de Factory Method en frameworks web?",
+      "options": [
+        "Un Logger que escribe en consola",
+        "Un Controller que decide qué Vista (HTML, JSON) renderizar mediante un ViewEngine",
+        "Un bucle for para recorrer una lista",
+        "Una hoja de estilos CSS"
+      ],
+      "answer": 1,
+      "explanation": "Los motores de renderizado suelen usar fábricas para instanciar el tipo correcto de respuesta basándose en la configuración o la cabecera 'Accept'."
+    },
+    {
+      "id": "factory_q23",
+      "type": "true_false",
+      "question": "El Factory Method es ideal cuando una clase no puede anticipar la clase de objetos que debe crear.",
+      "answer": true,
+      "explanation": "Es el propósito principal: delegar la responsabilidad de la creación a alguien que tenga más información (las subclases)."
+    },
+    {
+      "id": "factory_q24",
+      "type": "short",
+      "question": "Patrón que permite a un objeto crear otros sin especificar sus clases concretas mediante el uso de prototipos que se clonan.",
+      "answer": [
+        "Prototype",
+        "Prototipo"
+      ],
+      "hint": "Clonación.",
+      "explanation": "Prototype es otra alternativa creacional que usa la clonación en lugar de la herencia que usa Factory Method."
+    },
+    {
+      "id": "factory_q25",
+      "type": "mcq",
+      "question": "En C#, ¿cómo se implementa el Factory Method para que sea opcional sobrescribirlo?",
+      "options": [
+        "Usando static",
+        "Usando la palabra clave virtual",
+        "Usando private",
+        "No se puede hacer opcional"
+      ],
+      "answer": 1,
+      "explanation": "Al usar `virtual`, el Creador puede tener una implementación base, permitiendo que las subclases solo lo sobrescriban si necesitan un producto diferente."
+    },
+    {
+      "id": "factory_q26",
+      "type": "true_false",
+      "question": "Factory Method promueve el acoplamiento fuerte entre el Creador y el Producto Concreto.",
+      "answer": false,
+      "explanation": "Falso. Al contrario, promueve el acoplamiento débil (loose coupling) al trabajar con abstracciones."
+    },
+    {
+      "id": "factory_q27",
+      "type": "short",
+      "question": "Nombre técnico de la operación que realiza el Factory Method.",
+      "answer": [
+        "factory method",
+        "metodo de fabrica",
+        "virtual constructor"
+      ],
+      "hint": "Constructor virtual.",
+      "explanation": "A veces se le conoce como 'Virtual Constructor' porque simula la capacidad de llamar a un constructor que se comporta de forma polimórfica."
+    },
+    {
+      "id": "factory_q28",
+      "type": "mcq",
+      "question": "¿Qué sucede si el Factory Method devuelve 'null'?",
+      "options": [
+        "Es una práctica recomendada",
+        "Viola la expectativa del patrón y puede causar NullPointerException",
+        "El compilador dará un error automático",
+        "Se crea un objeto por defecto automáticamente"
+      ],
+      "answer": 1,
+      "explanation": "A menos que se use el patrón Null Object, devolver null rompe la fluidez y obliga al cliente a hacer comprobaciones extra, debilitando las ventajas del patrón."
+    },
+    {
+      "id": "factory_q29",
+      "type": "true_false",
+      "question": "Puedes combinar Factory Method con Singleton para tener una única instancia de cada fábrica concreta.",
+      "answer": true,
+      "explanation": "Es muy común que los ConcreteCreators sean Singletons, ya que no suelen necesitar estado propio y basta con una instancia para realizar las creaciones."
+    },
+    {
+      "id": "factory_q30",
+      "type": "short",
+      "question": "Si el Factory Method necesita muchos parámetros para configurar el producto, ¿qué otro patrón creacional convendría usar?",
+      "answer": [
+        "Builder",
+        "Constructor"
+      ],
+      "hint": "Construcción paso a paso.",
+      "explanation": "Builder es más adecuado para creaciones complejas que requieren muchos pasos o configuraciones opcionales, mientras que Factory Method es mejor para creaciones de un solo paso."
+    },
+    {
+      "id": "factory_q31",
+      "type": "mcq",
+      "question": "¿Cuál es el rol de la clase 'Creator' además de declarar el Factory Method?",
+      "options": [
+        "Ninguno, solo declara el método",
+        "Suele contener lógica de negocio importante que utiliza el Producto creado",
+        "Almacena una lista de todos los productos creados",
+        "Actúa como base de datos"
+      ],
+      "answer": 1,
+      "explanation": "El Creator no es solo una fábrica; suele tener un método (ej: `render()`, `process()`) que llama al factory method y luego opera sobre el producto resultante."
+    },
+    {
+      "id": "factory_q32",
+      "type": "true_false",
+      "question": "Es posible inyectar la función de creación (callback) en lugar de usar herencia en lenguajes modernos.",
+      "answer": true,
+      "explanation": "Sí, en lenguajes con funciones de primera clase, pasar una función que fabrica el objeto es una alternativa funcional muy potente al Factory Method basado en clases."
+    },
+    {
+      "id": "factory_q33",
+      "type": "short",
+      "question": "¿Qué impacto tiene el Factory Method en la legibilidad del código?",
+      "answer": [
+        "mejora",
+        "la mejora",
+        "positiva"
+      ],
+      "hint": "Suele ser bueno.",
+      "explanation": "Al dar nombres significativos a los métodos de creación y centralizar la lógica, la legibilidad y mantenibilidad del código cliente suele mejorar significativamente."
+    },
+    {
+      "id": "factory_q34",
+      "type": "mcq",
+      "question": "¿Cómo maneja Factory Method la creación de objetos 'pesados'?",
+      "options": [
+        "Los hace más ligeros automáticamente",
+        "Permite implementar caché o pools dentro del ConcreteCreator sin que el cliente lo sepa",
+        "Requiere siempre crear un hilo nuevo",
+        "No permite crear objetos pesados"
+      ],
+      "answer": 1,
+      "explanation": "Como el cliente solo llama al método, el creador puede decidir devolver una instancia nueva o una cacheada (Flyweight), lo cual es transparente para el código que lo usa."
+    },
+    {
+      "id": "factory_q35",
+      "type": "true_false",
+      "question": "En el patrón Factory Method, el producto devuelto DEBE ser una clase concreta.",
+      "answer": false,
+      "explanation": "Falso. El producto devuelto debe ser una interfaz o clase abstracta para permitir el polimorfismo."
+    },
+    {
+      "id": "factory_q36",
+      "type": "short",
+      "question": "¿Qué patrón se usa para clonar objetos sin depender de sus clases concretas?",
+      "answer": [
+        "Prototype",
+        "Prototipo"
+      ],
+      "hint": "Copia exacta.",
+      "explanation": "Prototype es el patrón que usa la clonación de instancias existentes."
+    },
+    {
+      "id": "factory_q37",
+      "type": "mcq",
+      "question": "Si el Factory Method se vuelve estático (Static Factory Method), ¿qué limitación principal introduce?",
+      "options": [
+        "Ninguna, es mejor",
+        "Impide que sea sobrescrito por subclases (pierde polimorfismo)",
+        "Hace que el programa use más CPU",
+        "Solo permite crear un objeto a la vez"
+      ],
+      "answer": 1,
+      "explanation": "Los métodos estáticos no pueden ser virtuales o abstractos, por lo que no pueden ser sobrescritos por subclases, perdiendo la esencia del patrón GoF (aunque sigan siendo útiles para legibilidad)."
+    },
+    {
+      "id": "factory_q38",
+      "type": "true_false",
+      "question": "El Factory Method es un patrón de diseño orientado a objetos.",
+      "answer": true,
+      "explanation": "Sí, es uno de los pilares de la creación de objetos en el paradigma OO según la banda de los cuatro (GoF)."
+    },
+    {
+      "id": "factory_q39",
+      "type": "short",
+      "question": "¿Cómo se llama el patrón que encapsula la petición de un comando como un objeto, a menudo creado por una fábrica?",
+      "answer": [
+        "Command",
+        "Comando"
+      ],
+      "hint": "Acción como objeto.",
+      "explanation": "El patrón Command suele utilizar fábricas para instanciar las acciones concretas."
+    },
+    {
+      "id": "factory_q40",
+      "type": "mcq",
+      "question": "En una arquitectura de capas, ¿dónde debería situarse idealmente la lógica del Factory Method?",
+      "options": [
+        "En la base de datos",
+        "En la capa de Dominio o Infraestructura (dependiendo del tipo de objeto)",
+        "Solo en la interfaz de usuario",
+        "No debe haber lógica, solo datos"
+      ],
+      "answer": 1,
+      "explanation": "Las fábricas de dominio crean entidades de negocio, mientras que las de infraestructura crean adaptadores (ej: clientes de API). Es fundamental mantenerlas separadas de la UI."
+    }
+  ]
+}
