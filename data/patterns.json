@@ -1,0 +1,218 @@
+[
+  {
+    "id": "singleton",
+    "name": "Singleton",
+    "category": "Creacional",
+    "description": "Garantiza que una clase tenga una única instancia y proporciona un punto de acceso global a ella.",
+    "questions": [
+      {
+        "id": "singleton_q1",
+        "type": "multiple_choice",
+        "question": "¿Cuál es el propósito principal del patrón Singleton?",
+        "options": [
+          "Crear múltiples instancias de una clase de forma eficiente",
+          "Garantizar que una clase tenga solo una instancia y proveer acceso global a ella",
+          "Permitir que una clase cambie su comportamiento en tiempo de ejecución",
+          "Definir una familia de algoritmos intercambiables"
+        ],
+        "correct": 1,
+        "explanation": "El Singleton restringe la instanciación de una clase a un único objeto y proporciona un punto de acceso global. Se usa cuando exactamente un objeto es necesario para coordinar acciones en el sistema."
+      },
+      {
+        "id": "singleton_q2",
+        "type": "true_false",
+        "question": "El patrón Singleton puede causar problemas en aplicaciones multihilo si no se implementa correctamente.",
+        "correct": true,
+        "explanation": "Correcto. En entornos multihilo, si dos hilos intentan crear la instancia al mismo tiempo, podrían crear dos instancias distintas. Se debe usar sincronización (double-checked locking, eager initialization, etc.) para evitarlo."
+      },
+      {
+        "id": "singleton_q3",
+        "type": "short_answer",
+        "question": "¿Qué modificador de acceso debe tener el constructor en una implementación típica de Singleton?",
+        "correct": ["privado", "private"],
+        "hint": "El constructor debe ser inaccesible desde fuera de la clase.",
+        "explanation": "El constructor del Singleton debe ser **privado** para evitar que otras clases instancien directamente la clase. Esto obliga a usar el método estático (por ejemplo, `getInstance()`) para obtener la única instancia."
+      }
+    ]
+  },
+  {
+    "id": "factory_method",
+    "name": "Factory Method",
+    "category": "Creacional",
+    "description": "Define una interfaz para crear un objeto, pero deja a las subclases decidir qué clase instanciar.",
+    "questions": [
+      {
+        "id": "factory_q1",
+        "type": "multiple_choice",
+        "question": "¿Qué problema resuelve principalmente el patrón Factory Method?",
+        "options": [
+          "Reducir la memoria usada al crear objetos",
+          "Desacoplar la creación de objetos de su uso concreto",
+          "Garantizar que solo exista una instancia de un objeto",
+          "Compartir estado entre múltiples objetos"
+        ],
+        "correct": 1,
+        "explanation": "El Factory Method desacopla el código que usa los objetos del código que los crea. Las subclases deciden qué clase concreta instanciar, siguiendo el principio abierto/cerrado."
+      },
+      {
+        "id": "factory_q2",
+        "type": "true_false",
+        "question": "En el patrón Factory Method, la clase creadora (Creator) siempre debe ser abstracta.",
+        "correct": false,
+        "explanation": "No necesariamente. La clase creadora puede tener una implementación por defecto del Factory Method y no ser abstracta. Sin embargo, para que las subclases puedan sobrescribir la creación, sí es común que el método sea abstracto o virtual."
+      },
+      {
+        "id": "factory_q3",
+        "type": "short_answer",
+        "question": "En el patrón Factory Method, ¿cómo se llama la interfaz o clase base que representa el objeto creado?",
+        "correct": ["producto", "product"],
+        "hint": "Es el resultado que devuelve el factory method.",
+        "explanation": "El objeto que crea el Factory Method se llama **Producto** (Product). El Creator devuelve objetos de tipo Product, y los ConcreteCreators instancian ConcreteProducts específicos."
+      }
+    ]
+  },
+  {
+    "id": "observer",
+    "name": "Observer",
+    "category": "Comportamiento",
+    "description": "Define una dependencia uno-a-muchos entre objetos, de modo que cuando uno cambia de estado, todos sus dependientes son notificados automáticamente.",
+    "questions": [
+      {
+        "id": "observer_q1",
+        "type": "multiple_choice",
+        "question": "En el patrón Observer, ¿qué nombre recibe el objeto que mantiene el estado y notifica a los demás?",
+        "options": [
+          "Observer",
+          "Subscriber",
+          "Subject (Publisher)",
+          "Handler"
+        ],
+        "correct": 2,
+        "explanation": "El objeto que mantiene el estado y envía notificaciones se llama **Subject** (también conocido como Publisher o Observable). Los objetos que reciben las notificaciones son los **Observers** (o Subscribers)."
+      },
+      {
+        "id": "observer_q2",
+        "type": "true_false",
+        "question": "El patrón Observer promueve el acoplamiento fuerte entre el Subject y sus Observers.",
+        "correct": false,
+        "explanation": "Falso. El Observer promueve el **desacoplamiento**: el Subject solo conoce la interfaz del Observer, no su implementación concreta. Esto permite agregar o eliminar Observers sin modificar el Subject."
+      },
+      {
+        "id": "observer_q3",
+        "type": "short_answer",
+        "question": "¿Qué método suele llamar el Subject para notificar a todos sus observadores?",
+        "correct": ["notify", "notificar", "notifyObservers", "notifyAll", "update"],
+        "hint": "Es un método que recorre la lista de observadores y llama a su método de actualización.",
+        "explanation": "El Subject usa un método como **notify()** o **notifyObservers()** para iterar sobre su lista de observadores y llamar al método **update()** (o similar) de cada uno, pasando el nuevo estado."
+      }
+    ]
+  },
+  {
+    "id": "strategy",
+    "name": "Strategy",
+    "category": "Comportamiento",
+    "description": "Define una familia de algoritmos, encapsula cada uno y los hace intercambiables. Permite que el algoritmo varíe independientemente de los clientes que lo usan.",
+    "questions": [
+      {
+        "id": "strategy_q1",
+        "type": "multiple_choice",
+        "question": "¿Cuál de las siguientes situaciones es un buen caso de uso para el patrón Strategy?",
+        "options": [
+          "Necesitas que solo exista un objeto de una clase en toda la aplicación",
+          "Tienes múltiples variantes de un algoritmo y quieres poder cambiarlas en tiempo de ejecución",
+          "Quieres añadir funcionalidades a un objeto sin modificar su clase",
+          "Necesitas representar una jerarquía compleja de objetos"
+        ],
+        "correct": 1,
+        "explanation": "Strategy es ideal cuando tienes varias formas de realizar una tarea y quieres cambiar entre ellas dinámicamente. Por ejemplo, diferentes estrategias de ordenamiento, descuento, o validación."
+      },
+      {
+        "id": "strategy_q2",
+        "type": "true_false",
+        "question": "El patrón Strategy viola el principio abierto/cerrado (OCP) porque requiere modificar el contexto cada vez que se añade un nuevo algoritmo.",
+        "correct": false,
+        "explanation": "Falso. Strategy **respeta** el OCP: para agregar un nuevo algoritmo, simplemente creas una nueva clase que implementa la interfaz Strategy, sin modificar el contexto ni las estrategias existentes."
+      },
+      {
+        "id": "strategy_q3",
+        "type": "short_answer",
+        "question": "¿Cómo se llama el objeto que usa una Strategy y delega el comportamiento a ella?",
+        "correct": ["contexto", "context"],
+        "hint": "Es el objeto que mantiene una referencia a la estrategia y la invoca.",
+        "explanation": "El objeto que usa la estrategia se llama **Contexto** (Context). Mantiene una referencia a un objeto Strategy y delega el trabajo al objeto Strategy cuando necesita ejecutar el algoritmo."
+      }
+    ]
+  },
+  {
+    "id": "decorator",
+    "name": "Decorator",
+    "category": "Estructural",
+    "description": "Permite añadir funcionalidades a objetos colocándolos dentro de objetos encapsuladores especiales (decoradores) que contienen los comportamientos adicionales.",
+    "questions": [
+      {
+        "id": "decorator_q1",
+        "type": "multiple_choice",
+        "question": "¿Cuál es la ventaja principal del patrón Decorator sobre la herencia para extender funcionalidades?",
+        "options": [
+          "El Decorator es más rápido en tiempo de ejecución",
+          "El Decorator permite extender comportamientos en tiempo de ejecución sin crear subclases",
+          "El Decorator simplifica la jerarquía de clases al reducir el número de interfaces",
+          "El Decorator garantiza que solo exista una instancia del objeto decorado"
+        ],
+        "correct": 1,
+        "explanation": "A diferencia de la herencia (que es estática y definida en tiempo de compilación), el Decorator permite añadir o combinar comportamientos dinámicamente en tiempo de ejecución, componiendo decoradores de forma flexible."
+      },
+      {
+        "id": "decorator_q2",
+        "type": "true_false",
+        "question": "Un Decorator debe implementar la misma interfaz que el objeto que decora.",
+        "correct": true,
+        "explanation": "Correcto. El Decorator implementa la misma interfaz que el componente que envuelve. Esto permite que el cliente use el decorador exactamente igual que el objeto original, siendo transparente para el código que lo usa."
+      },
+      {
+        "id": "decorator_q3",
+        "type": "short_answer",
+        "question": "¿Cómo se llama el objeto original que el Decorator envuelve?",
+        "correct": ["componente", "component", "wrapped", "wrappee"],
+        "hint": "Es el objeto base al que el decorador añade funcionalidades.",
+        "explanation": "El objeto que el Decorator envuelve se llama **Componente** (Component o Wrappee). El Decorator mantiene una referencia a un Componente y delega las operaciones a él, añadiendo su propio comportamiento antes o después."
+      }
+    ]
+  },
+  {
+    "id": "adapter",
+    "name": "Adapter",
+    "category": "Estructural",
+    "description": "Permite la colaboración entre objetos con interfaces incompatibles, actuando como un traductor o envoltorio.",
+    "questions": [
+      {
+        "id": "adapter_q1",
+        "type": "multiple_choice",
+        "question": "¿Cuál es el escenario típico de uso del patrón Adapter?",
+        "options": [
+          "Quieres notificar a múltiples objetos cuando cambia el estado de otro",
+          "Necesitas usar una clase existente pero su interfaz no es compatible con el resto del código",
+          "Quieres crear objetos sin especificar su clase concreta",
+          "Necesitas dividir una operación compleja en pasos simples"
+        ],
+        "correct": 1,
+        "explanation": "El Adapter se usa cuando tienes una clase existente (Adaptee) con una interfaz incompatible y quieres que trabaje con otro código sin modificar su código fuente. Actúa como un traductor entre interfaces."
+      },
+      {
+        "id": "adapter_q2",
+        "type": "true_false",
+        "question": "El patrón Adapter modifica la interfaz del objeto original (Adaptee) directamente para hacerla compatible.",
+        "correct": false,
+        "explanation": "Falso. El Adapter **no modifica** el Adaptee. En su lugar, crea una nueva clase (Adapter) que envuelve al Adaptee y traduce las llamadas entre la interfaz esperada y la interfaz real del Adaptee."
+      },
+      {
+        "id": "adapter_q3",
+        "type": "short_answer",
+        "question": "¿Cómo se llama la clase existente con interfaz incompatible que el Adapter envuelve?",
+        "correct": ["adaptee", "adaptado"],
+        "hint": "Es la clase que tiene la funcionalidad que necesitas pero con una interfaz diferente.",
+        "explanation": "La clase existente con interfaz incompatible se llama **Adaptee**. El Adapter la envuelve y convierte su interfaz en la interfaz Target que el cliente espera."
+      }
+    ]
+  }
+]

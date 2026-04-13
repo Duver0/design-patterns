@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Plataforma interactiva de aprendizaje de patrones de diseño de software mediante preguntas y retroalimentación inmediata." />
+  <title>Patrones de Diseño – Aprendizaje Interactivo</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ── Site header ──────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <span class="site-logo">🧩 Design Patterns</span>
+    <nav>
+      <button id="nav-home" onclick="App.navigateHome()" aria-label="Volver al inicio">
+        🏠 Inicio
+      </button>
+    </nav>
+  </header>
+
+  <!-- ── Main content ─────────────────────────────────────────────────────── -->
+  <main class="main-content">
+
+    <!-- ── View: Home ──────────────────────────────────────────────────────── -->
+    <section id="view-home" class="view hidden" aria-label="Vista principal">
+      <h1 class="page-title">Patrones de Diseño</h1>
+      <p class="page-subtitle">Pon a prueba tu conocimiento respondiendo preguntas sobre cada patrón.</p>
+
+      <!-- Global progress stats -->
+      <div class="global-stats" id="global-stats" role="region" aria-label="Estadísticas globales">
+        <!-- Rendered by ui.js -->
+      </div>
+
+      <!-- Patterns grid -->
+      <div id="patterns-grid">
+        <!-- Rendered by ui.js -->
+      </div>
+
+      <div class="home-footer">
+        <button id="btn-reset-all" class="btn btn--danger" aria-label="Reiniciar todo el progreso">
+          🗑️ Reiniciar progreso
+        </button>
+      </div>
+    </section>
+
+    <!-- ── View: Pattern detail ─────────────────────────────────────────────── -->
+    <section id="view-pattern" class="view hidden" aria-label="Detalle del patrón">
+      <button class="back-btn" id="btn-back-home" aria-label="Volver al inicio">
+        ← Volver
+      </button>
+
+      <div class="detail-card">
+        <div class="detail-header">
+          <h2 class="detail-title" id="detail-name">–</h2>
+          <div class="detail-meta">
+            <span class="pattern-badge" id="detail-category">–</span>
+            <span class="pattern-badge" style="background:#64748b" id="detail-count">–</span>
+          </div>
+        </div>
+        <p class="detail-desc" id="detail-desc">–</p>
+
+        <div class="detail-progress">
+          <div class="detail-progress-bar">
+            <div id="detail-progress-fill" style="width:0%"></div>
+          </div>
+          <span id="detail-progress-label">0% completado</span>
+        </div>
+      </div>
+
+      <!-- Questions preview -->
+      <div class="questions-preview">
+        <h3>Preguntas</h3>
+        <div class="questions-list" id="questions-list">
+          <!-- Rendered by ui.js -->
+        </div>
+      </div>
+
+      <div class="detail-actions">
+        <button id="btn-start-quiz" class="btn btn--primary">▶ Iniciar cuestionario</button>
+        <button id="btn-reset-pattern" class="btn btn--danger">🗑️ Reiniciar patrón</button>
+      </div>
+    </section>
+
+    <!-- ── View: Quiz ───────────────────────────────────────────────────────── -->
+    <section id="view-quiz" class="view hidden" aria-label="Cuestionario">
+      <div class="quiz-header">
+        <span class="quiz-title" id="quiz-pattern-name">–</span>
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-bar" role="progressbar" aria-label="Progreso del cuestionario">
+            <div id="quiz-progress-fill" style="width:0%"></div>
+          </div>
+          <div class="quiz-progress-text" id="quiz-progress-text" aria-live="polite">0 / 0</div>
+        </div>
+      </div>
+
+      <!-- Question card -->
+      <div class="question-card">
+        <span class="question-type-label" id="question-type-label">–</span>
+        <p class="question-text" id="question-text">–</p>
+
+        <!-- Answer area (rendered dynamically) -->
+        <div id="answer-area">
+          <!-- Rendered by ui.js -->
+        </div>
+      </div>
+
+      <!-- Feedback box (shown after answering) -->
+      <div id="feedback-box" class="feedback-box hidden" aria-live="polite">
+        <!-- Rendered by ui.js -->
+      </div>
+    </section>
+
+    <!-- ── View: Results ─────────────────────────────────────────────────────── -->
+    <section id="view-results" class="view hidden" aria-label="Resultados">
+      <div class="results-card">
+        <span class="results-emoji" id="results-emoji">🎉</span>
+        <h2 class="results-title">Resultados: <span id="results-pattern-name">–</span></h2>
+        <div class="results-score" id="results-score" aria-live="polite">0 / 0</div>
+        <div class="results-pct" id="results-pct">0%</div>
+        <p class="results-message" id="results-message">–</p>
+        <div class="results-actions">
+          <button id="btn-retry"   class="btn btn--primary">🔄 Reintentar</button>
+          <button id="btn-go-home" class="btn btn--outline">🏠 Inicio</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Scripts (order matters) ──────────────────────────────────────────── -->
+  <script src="js/quiz.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
