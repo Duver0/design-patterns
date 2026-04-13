@@ -1,0 +1,414 @@
+{
+  "id": "builder",
+  "name": "Builder",
+  "category": "Creacional",
+  "description": "Separa la construcción de un objeto complejo de su representación, de modo que el mismo proceso de construcción pueda crear diferentes representaciones.",
+  "questions": [
+    {
+      "id": "builder_q1",
+      "type": "multiple_choice",
+      "question": "¿Cuál es el propósito principal del patrón Builder?",
+      "options": [
+        "Garantizar que una clase tenga una única instancia.",
+        "Separar la construcción de un objeto complejo de su representación.",
+        "Definir una familia de algoritmos intercambiables en tiempo de ejecución.",
+        "Permitir que objetos de diferentes jerarquías interactúen sin conocerse."
+      ],
+      "correct": 1,
+      "explanation": "El propósito del Builder es separar el 'qué' se construye (Director) del 'cómo' se ensamblan las piezas (Builder), permitiendo crear objetos complejos de manera incremental."
+    },
+    {
+      "id": "builder_q2",
+      "type": "multiple_choice",
+      "question": "¿Cuál de los siguientes participantes es responsable de controlar el orden de construcción?",
+      "options": [
+        "ConcreteBuilder",
+        "Product",
+        "Director",
+        "AbstractBuilder"
+      ],
+      "correct": 2,
+      "explanation": "El Director define la secuencia de pasos necesarios para construir el producto, utilizando la interfaz genérica del Builder."
+    },
+    {
+      "id": "builder_q3",
+      "type": "multiple_choice",
+      "question": "¿Qué problema resuelve el patrón Builder en comparación con el 'Telescoping Constructor'?",
+      "options": [
+        "La falta de herencia en lenguajes modernos.",
+        "El exceso de memoria al instanciar objetos pequeños.",
+        "La explosión de constructores con múltiples combinaciones de parámetros opcionales.",
+        "La imposibilidad de clonar objetos en tiempo de ejecución."
+      ],
+      "correct": 2,
+      "explanation": "El anti-patrón de constructor telescópico ocurre cuando se crean múltiples constructores para cubrir todas las combinaciones de parámetros. Builder ofrece un enfoque más legible y flexible."
+    },
+    {
+      "id": "builder_q4",
+      "type": "multiple_choice",
+      "question": "¿Cuál es la principal diferencia entre Builder y Abstract Factory?",
+      "options": [
+        "Builder crea objetos complejos paso a paso; Abstract Factory los crea de una sola vez.",
+        "Builder solo crea interfaces; Abstract Factory crea clases concretas.",
+        "Builder es un patrón estructural; Abstract Factory es creacional.",
+        "Builder no permite la inmutabilidad de los objetos resultantes."
+      ],
+      "correct": 0,
+      "explanation": "Mientras Abstract Factory se enfoca en crear familias de objetos relacionados inmediatamente, Builder se centra en la construcción paso a paso de un único objeto complejo."
+    },
+    {
+      "id": "builder_q5",
+      "type": "multiple_choice",
+      "question": "En el patrón Builder, ¿quién suele mantener la instancia final del producto durante su construcción?",
+      "options": [
+        "El Director",
+        "El Cliente",
+        "El ConcreteBuilder",
+        "La clase Product estática"
+      ],
+      "correct": 2,
+      "explanation": "El ConcreteBuilder es el encargado de instanciar el objeto Product y de ir configurándolo hasta que el cliente solicita el resultado final."
+    },
+    {
+      "id": "builder_q6",
+      "type": "multiple_choice",
+      "question": "¿Qué técnica permite encadenar llamadas a métodos en un Builder (ej. builder.addWheels().addEngine().build())?",
+      "options": [
+        "Inyección de Dependencias",
+        "Interfaz Fluida (Fluent Interface)",
+        "Polimorfismo Ad-hoc",
+        "Lazy Initialization"
+      ],
+      "correct": 1,
+      "explanation": "La Interfaz Fluida se logra haciendo que cada método de configuración del Builder devuelva una referencia a 'this' (el propio Builder)."
+    },
+    {
+      "id": "builder_q7",
+      "type": "multiple_choice",
+      "question": "¿Cuándo es recomendable usar el patrón Builder?",
+      "options": [
+        "Cuando el proceso de creación de un objeto requiere muchos parámetros opcionales.",
+        "Cuando el objeto se puede crear con un solo 'new' sin configuraciones adicionales.",
+        "Cuando solo necesitamos una única instancia global del objeto.",
+        "Cuando queremos desacoplar un objeto de sus observadores."
+      ],
+      "correct": 0,
+      "explanation": "Es ideal para objetos con múltiples configuraciones, configuraciones opcionales o un proceso de ensamblaje complejo que no debería estar en el constructor."
+    },
+    {
+      "id": "builder_q8",
+      "type": "multiple_choice",
+      "question": "¿Qué ventaja ofrece el Builder respecto a la Inmutabilidad?",
+      "options": [
+        "No ofrece ninguna ventaja para objetos inmutables.",
+        "Permite configurar todos los campos antes de 'congelar' el estado en el método build().",
+        "Obliga a que todos los campos sean públicos (public).",
+        "Los objetos Builder son intrínsecamente inmutables por definición."
+      ],
+      "correct": 1,
+      "explanation": "El Builder actúa como una zona de preparación (staging area). Una vez listo, crea un objeto Product cuyos campos pueden ser finales (inmutables)."
+    },
+    {
+      "id": "builder_q9",
+      "type": "multiple_choice",
+      "question": "Si necesito generar un documento en diferentes formatos (PDF, HTML, RTF) con la misma lógica de estructura, ¿quién representaría la lógica de estructura?",
+      "options": [
+        "El ConcreteBuilder",
+        "El Director",
+        "El Product",
+        "El Formatter"
+      ],
+      "correct": 1,
+      "explanation": "El Director orquesta los pasos (ej: añadir título, añadir párrafo). El Builder concreto traduce esos pasos en el formato específico (PDF o HTML)."
+    },
+    {
+      "id": "builder_q10",
+      "type": "multiple_choice",
+      "question": "¿Por qué el patrón Builder facilita el cumplimiento del Principio de Responsabilidad Única (SRP)?",
+      "options": [
+        "Porque el objeto Product ahora se encarga de autoconstruirse.",
+        "Porque separa la lógica de ensamblaje (Director) de la lógica de creación de componentes (Builder).",
+        "Porque el Cliente ya no necesita conocer la interfaz del Producto.",
+        "Porque elimina la necesidad de usar interfaces."
+      ],
+      "correct": 1,
+      "explanation": "El Director se encarga de 'cuándo' construir (algoritmo de ensamblaje) y el Builder de 'cómo' construir cada parte localmente."
+    },
+    {
+      "id": "builder_q11",
+      "type": "multiple_choice",
+      "question": "¿Cuál es la función del método getResult() (o build()) en el patrón Builder?",
+      "options": [
+        "Iniciar el proceso de construcción en el Director.",
+        "Retornar el producto final construido al cliente o director.",
+        "Limpiar todos los campos del Builder para una nueva construcción.",
+        "Validar que el Director haya seguido el orden correcto."
+      ],
+      "correct": 1,
+      "explanation": "Es el paso final del patrón, donde el objeto complejo que ha sido ensamblado es entregado al solicitante."
+    },
+    {
+      "id": "builder_q12",
+      "type": "multiple_choice",
+      "question": "En una implementación típica de Builder en Java, la clase Builder suele ser:",
+      "options": [
+        "Una interfaz externa obligatoria.",
+        "Una clase interna estática (static inner class) del Producto.",
+        "Un Singleton global.",
+        "Una subclase de la interfaz Director."
+      ],
+      "correct": 1,
+      "explanation": "Es un modismo común en lenguajes como Java tener el Builder como una clase interna estática para facilitar el acceso a campos privados del producto sin exponerlos públicamente."
+    },
+    {
+      "id": "builder_q13",
+      "type": "multiple_choice",
+      "question": "¿Qué sucede si el proceso de construcción de dos productos requiere pasos totalmente diferentes?",
+      "options": [
+        "Se debe usar el mismo Director.",
+        "Se deben definir diferentes interfaces Builder.",
+        "El patrón Builder no es aplicable en este escenario.",
+        "Se debe forzar a que ambos productos hereden de la misma clase base."
+      ],
+      "correct": 1,
+      "explanation": "El patrón Builder asume que los productos comparten un proceso de construcción similar (ej. todos los coches tienen motor). Si los procesos son dispares, se requieren builders independientes."
+    },
+    {
+      "id": "builder_q14",
+      "type": "multiple_choice",
+      "question": "Un SQL Query Builder es un ejemplo de este patrón porque:",
+      "options": [
+        "Ejecuta la consulta inmediatamente.",
+        "Permite añadir cláusulas (SELECT, WHERE, JOIN) paso a paso antes de generar el string final.",
+        "Garantiza que solo haya una conexión a la base de datos.",
+        "Traduce automáticamente excepciones de SQL a excepciones de dominio."
+      ],
+      "correct": 1,
+      "explanation": "Construye una sentencia SQL compleja de forma incremental, permitiendo flexibilidad en qué cláusulas incluir y en qué orden."
+    },
+    {
+      "id": "builder_q15",
+      "type": "multiple_choice",
+      "question": "¿Cuál es una desventaja potencial del patrón Builder?",
+      "options": [
+        "El código se vuelve más simple y corto.",
+        "Requiere crear una clase Builder adicional por cada producto complejo, aumentando la verbosidad.",
+        "Impide el uso de herencia en los productos.",
+        "El cliente tiene demasiado control sobre los detalles internos del producto."
+      ],
+      "correct": 1,
+      "explanation": "Aplicar Builder añade más clases y código ceremonial (boilerplate), lo que puede ser innecesario para objetos simples (Overengineering)."
+    },
+    {
+      "id": "builder_q16",
+      "type": "true_false",
+      "question": "El Director es un participante obligatorio en todas las implementaciones modernas del patrón Builder.",
+      "correct": false,
+      "explanation": "En muchas implementaciones fluidas modernas, el propio código del cliente actúa como Director orquestando las llamadas al Builder."
+    },
+    {
+      "id": "builder_q17",
+      "type": "true_false",
+      "question": "El patrón Builder permite que el producto final no tenga métodos 'setter', favoreciendo la inmutabilidad.",
+      "correct": true,
+      "explanation": "El Builder recolecta toda el estado y lo inyecta en el constructor del Producto, permitiendo que sus atributos sean inmutables (final)."
+    },
+    {
+      "id": "builder_q18",
+      "type": "true_false",
+      "question": "Builder es un patrón de diseño Estructural.",
+      "correct": false,
+      "explanation": "Es un patrón Creacional, ya que su objetivo principal es la creación de instancias de objetos complejos."
+    },
+    {
+      "id": "builder_q19",
+      "type": "true_false",
+      "question": "Un ConcreteBuilder diferente puede producir un tipo de producto totalmente distinto al de otro ConcreteBuilder.",
+      "correct": true,
+      "explanation": "Esta es una ventaja clave: el mismo proceso (Director) puede producir un coche (ProductoA) o un manual técnico (ProductoB) usando diferentes implementaciones de Builder."
+    },
+    {
+      "id": "builder_q20",
+      "type": "true_false",
+      "question": "El método build() suele estar definido en la interfaz del Director.",
+      "correct": false,
+      "explanation": "El método build() (o getResult()) es parte del Builder o del ConcreteBuilder, no del Director."
+    },
+    {
+      "id": "builder_q21",
+      "type": "true_false",
+      "question": "El patrón Builder es útil cuando un objeto debe ser creado en un solo paso atómico sin variaciones.",
+      "correct": false,
+      "explanation": "Si la creación es simple y atómica, se prefiere un constructor normal o una Factory Method. Builder brilla en creaciones multi-paso."
+    },
+    {
+      "id": "builder_q22",
+      "type": "true_false",
+      "question": "El uso de 'Interfaces Fluidas' (return this) es una característica original del libro de GoF para el Builder.",
+      "correct": false,
+      "explanation": "Las Interfaces Fluidas fueron teorizadas por Martin Fowler mucho después del libro original de GoF (1994)."
+    },
+    {
+      "id": "builder_q23",
+      "type": "true_false",
+      "question": "El Builder abstrae los detalles de cómo se ensamblan las partes del producto.",
+      "correct": true,
+      "explanation": "El Director o el cliente dan órdenes de alto nivel ('añadir ruedas'), pero el Builder conoce el detalle técnico de cómo instanciar y conectar esas ruedas."
+    },
+    {
+      "id": "builder_q24",
+      "type": "true_false",
+      "question": "En el patrón Builder, el producto resultante no suele compartir una interfaz común con otros productos de otros builders.",
+      "correct": true,
+      "explanation": "A diferencia de Abstract Factory, donde los productos suelen tener interfaces comunes, el Builder a menudo crea objetos tan complejos que no comparten una base común."
+    },
+    {
+      "id": "builder_q25",
+      "type": "true_false",
+      "question": "El patrón Builder ayuda a evitar constructores con demasiados parámetros (constructor antipattern).",
+      "correct": true,
+      "explanation": "Reduce la ambigüedad de pasar 10 argumentos en un constructor, donde es fácil equivocarse de posición en los tipos similares."
+    },
+    {
+      "id": "builder_q26",
+      "type": "true_false",
+      "question": "El Director conoce los detalles internos del producto que se está construyendo.",
+      "correct": false,
+      "explanation": "El Director solo interactúa con la interfaz del Builder, permaneciendo agnóstico de la representación final del producto."
+    },
+    {
+      "id": "builder_q27",
+      "type": "true_false",
+      "question": "Es posible reutilizar el mismo Builder para crear varios productos en secuencia, si se limpia su estado interno.",
+      "correct": true,
+      "explanation": "Muchas implementaciones incluyen un método reset() para poder iniciar una nueva construcción sin crear un objeto Builder nuevo."
+    },
+    {
+      "id": "builder_q28",
+      "type": "true_false",
+      "question": "El patrón Builder se utiliza a menudo para implementar el patrón de diseño 'Step-wise construction'.",
+      "correct": true,
+      "explanation": "Builder es el patrón por excelencia para la construcción paso a paso (incremental) de objetos."
+    },
+    {
+      "id": "builder_q29",
+      "type": "true_false",
+      "question": "Si los productos son simples y su creación no tiene variaciones, aplicar Builder podría ser un caso de 'Overengineering'.",
+      "correct": true,
+      "explanation": "El exceso de abstracción en casos simples complica el mantenimiento innecesariamente."
+    },
+    {
+      "id": "builder_q30",
+      "type": "true_false",
+      "question": "El Product de un Builder siempre debe tener una clase base abstracta.",
+      "correct": false,
+      "explanation": "No hay restricciones sobre la estructura del Producto; puede ser cualquier clase o incluso un tipo primitivo complejo."
+    },
+    {
+      "id": "builder_q31",
+      "type": "short_answer",
+      "question": "¿Qué nombre recibe la clase que coordina los pasos de construcción en el patrón clásico de GoF?",
+      "correct": [
+        "director"
+      ],
+      "hint": "Dirige el proceso.",
+      "explanation": "El Director es el componente que conoce el algoritmo de ensamblaje."
+    },
+    {
+      "id": "builder_q32",
+      "type": "short_answer",
+      "question": "¿Qué técnica de diseño se utiliza para permitir llamadas como .setA().setB().build()?",
+      "correct": [
+        "interfaz fluida",
+        "fluent interface",
+        "fluent"
+      ],
+      "hint": "Fluye como el lenguaje natural.",
+      "explanation": "La Interfaz Fluida mejora significativamente la legibilidad del código de construcción."
+    },
+    {
+      "id": "builder_q33",
+      "type": "short_answer",
+      "question": "¿A qué categoría de patrones pertenece el Builder?",
+      "correct": [
+        "creacional",
+        "creacionales"
+      ],
+      "hint": "Se encarga de la creación de objetos.",
+      "explanation": "Como todos los patrones de construcción de objetos, es Creacional."
+    },
+    {
+      "id": "builder_q34",
+      "type": "short_answer",
+      "question": "¿Qué objeto complejo es el resultado final del proceso de construcción?",
+      "correct": [
+        "producto",
+        "product"
+      ],
+      "hint": "Es lo que el Builder fabrica.",
+      "explanation": "El Producto es el objeto que el cliente desea obtener tras la orquestación."
+    },
+    {
+      "id": "builder_q35",
+      "type": "short_answer",
+      "question": "¿Cuál es el problema de tener demasiados constructores con distintos parámetros?",
+      "correct": [
+        "constructor telescopico",
+        "telescoping constructor"
+      ],
+      "hint": "Nombres que se expanden como un telescopio.",
+      "explanation": "El constructor telescópico es un anti-patrón de legibilidad y mantenibilidad."
+    },
+    {
+      "id": "builder_q36",
+      "type": "short_answer",
+      "question": "En Java, ¿qué palabra clave se usa a menudo para que un objeto Product no pueda ser modificado tras su construcción vía Builder?",
+      "correct": [
+        "final"
+      ],
+      "hint": "Indica que algo es definitivo.",
+      "explanation": "La palabra clave final asegura que el estado del objeto sea inmutable tras la construcción."
+    },
+    {
+      "id": "builder_q37",
+      "type": "short_answer",
+      "question": "¿Qué participante del patrón implementa los pasos específicos de construcción?",
+      "correct": [
+        "concretebuilder",
+        "builder concreto"
+      ],
+      "hint": "Es la versión real y específica del constructor.",
+      "explanation": "El ConcreteBuilder traduces las órdenes abstractas en acciones reales de ensamblaje."
+    },
+    {
+      "id": "builder_q38",
+      "type": "short_answer",
+      "question": "Completa la frase: El Builder construye el objeto paso a _____.",
+      "correct": [
+        "paso"
+      ],
+      "hint": "No es de golpe.",
+      "explanation": "La construcción incremental es la característica distintiva del Builder."
+    },
+    {
+      "id": "builder_q39",
+      "type": "short_answer",
+      "question": "¿Qué patrón creacional se diferencia del Builder en que crea familias de objetos relacionados de una sola vez?",
+      "correct": [
+        "abstract factory"
+      ],
+      "hint": "Fábrica de fábricas.",
+      "explanation": "Abstract Factory y Builder suelen compararse, pero se enfocan en atomicidad vs. incrementalidad."
+    },
+    {
+      "id": "builder_q40",
+      "type": "short_answer",
+      "question": "Si el Builder devuelve un 'Automóvil' y otro Builder devuelve un 'Manual de Usuario', ¿qué participante define la secuencia 'AñadirMotor()', 'AñadirAsientos()'?",
+      "correct": [
+        "director"
+      ],
+      "hint": "El orquestador de la secuencia.",
+      "explanation": "El Director asegura que se siga el mismo orden de construcción para diferentes representaciones finales."
+    }
+  ]
+}
