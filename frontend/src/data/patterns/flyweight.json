@@ -1,0 +1,420 @@
+{
+  "id": "flyweight",
+  "name": "Flyweight",
+  "category": "Estructural",
+  "description": "Reduce el uso de memoria al compartir estado intrínseco entre muchos objetos finos y externalizar el estado extrínseco según el contexto.",
+  "questions": [
+    {
+      "id": "flyweight_q1",
+      "type": "multiple_choice",
+      "question": "¿Cuál es el objetivo principal del patrón Flyweight?",
+      "options": [
+        "Garantizar una única instancia global por clase.",
+        "Reducir consumo de memoria compartiendo estado intrínseco.",
+        "Encadenar responsabilidades de forma dinámica.",
+        "Traducir una interfaz incompatible a otra."
+      ],
+      "correct": 1,
+      "explanation": "Flyweight busca ahorrar memoria reutilizando objetos con estado común compartible."
+    },
+    {
+      "id": "flyweight_q2",
+      "type": "multiple_choice",
+      "question": "En un editor de texto, ¿qué dato suele ser intrínseco en un flyweight de carácter?",
+      "options": [
+        "La posición exacta en pantalla.",
+        "El color de resaltado temporal.",
+        "La forma base del glifo.",
+        "La selección activa del usuario."
+      ],
+      "correct": 2,
+      "explanation": "El glifo es estable y compartible; posición o resaltado dependen del contexto."
+    },
+    {
+      "id": "flyweight_q3",
+      "type": "multiple_choice",
+      "question": "¿Qué describe mejor el estado extrínseco en Flyweight?",
+      "options": [
+        "Datos inmutables almacenados dentro del flyweight.",
+        "Datos contextuales que se pasan desde fuera en cada uso.",
+        "Metadatos de compilación del objeto.",
+        "Configuración global fija de la aplicación."
+      ],
+      "correct": 1,
+      "explanation": "El estado extrínseco cambia por contexto y por eso no se guarda en el objeto compartido."
+    },
+    {
+      "id": "flyweight_q4",
+      "type": "multiple_choice",
+      "question": "¿Qué participante administra la creación y reutilización de flyweights?",
+      "options": [
+        "Decorator",
+        "FlyweightFactory",
+        "Facade",
+        "Observer"
+      ],
+      "correct": 1,
+      "explanation": "La FlyweightFactory mantiene un caché por clave para devolver instancias ya existentes."
+    },
+    {
+      "id": "flyweight_q5",
+      "type": "multiple_choice",
+      "question": "¿En qué escenario Flyweight suele ser más útil?",
+      "options": [
+        "Pocos objetos con estado totalmente diferente.",
+        "Muchos objetos pequeños con alto estado repetido.",
+        "Objetos únicos de larga vida sin duplicación.",
+        "Procesos secuenciales sin uso de objetos."
+      ],
+      "correct": 1,
+      "explanation": "El patrón brilla cuando hay gran volumen de objetos y abundante información repetida."
+    },
+    {
+      "id": "flyweight_q6",
+      "type": "multiple_choice",
+      "question": "¿Cuándo suele NO compensar aplicar Flyweight?",
+      "options": [
+        "Cuando hay alta repetición de estado intrínseco.",
+        "Cuando el volumen de objetos es muy grande.",
+        "Cuando casi no hay repetición y el volumen es bajo.",
+        "Cuando existe una clave estable para reutilizar."
+      ],
+      "correct": 2,
+      "explanation": "Si no hay escala ni repetición relevante, la complejidad extra del patrón no se justifica."
+    },
+    {
+      "id": "flyweight_q7",
+      "type": "multiple_choice",
+      "question": "¿Cuál diferencia entre Flyweight y Singleton es correcta?",
+      "options": [
+        "Flyweight usa muchas instancias compartidas por clave; Singleton una sola instancia global.",
+        "Flyweight es creacional y Singleton estructural.",
+        "Singleton siempre separa estado extrínseco.",
+        "Son el mismo patrón con distinto nombre."
+      ],
+      "correct": 0,
+      "explanation": "Singleton limita a una instancia; Flyweight permite varias, pero reutilizadas por clave."
+    },
+    {
+      "id": "flyweight_q8",
+      "type": "multiple_choice",
+      "question": "¿Qué comparación con Prototype es más precisa?",
+      "options": [
+        "Prototype evita crear objetos nuevos; Flyweight siempre clona.",
+        "Flyweight comparte estado común; Prototype replica objetos por clonación.",
+        "Ambos se enfocan en árboles parte-todo.",
+        "No existe diferencia de intención."
+      ],
+      "correct": 1,
+      "explanation": "Prototype copia objetos; Flyweight evita duplicación compartiendo estado intrínseco."
+    },
+    {
+      "id": "flyweight_q9",
+      "type": "multiple_choice",
+      "question": "¿Qué práctica favorece flyweights seguros al compartirse?",
+      "options": [
+        "Permitir mutaciones libres del estado intrínseco.",
+        "Hacer inmutable el estado intrínseco.",
+        "Guardar estado de sesión dentro del flyweight.",
+        "Crear una copia del flyweight por cada uso."
+      ],
+      "correct": 1,
+      "explanation": "La inmutabilidad reduce efectos colaterales cuando múltiples clientes comparten la misma instancia."
+    },
+    {
+      "id": "flyweight_q10",
+      "type": "multiple_choice",
+      "question": "¿Qué tipo de clave debería usar una FlyweightFactory?",
+      "options": [
+        "Datos volátiles de cada operación.",
+        "Identificadores del usuario actual.",
+        "Atributos intrínsecos estables y compartibles.",
+        "Timestamps de creación."
+      ],
+      "correct": 2,
+      "explanation": "La clave debe representar exactamente el estado intrínseco que define la reutilización."
+    },
+    {
+      "id": "flyweight_q11",
+      "type": "multiple_choice",
+      "question": "¿Qué responsabilidad queda del lado del cliente al usar Flyweight?",
+      "options": [
+        "Mantener y pasar el estado extrínseco en cada operación.",
+        "Romper la interfaz del flyweight para cada caso.",
+        "Evitar cualquier forma de caché.",
+        "Convertir el patrón en Singleton obligatorio."
+      ],
+      "correct": 0,
+      "explanation": "El cliente/contexto aporta la parte variable que no vive dentro del objeto compartido."
+    },
+    {
+      "id": "flyweight_q12",
+      "type": "multiple_choice",
+      "question": "¿Cuál es un trade-off común de Flyweight?",
+      "options": [
+        "Elimina por completo el costo de CPU.",
+        "Aumenta complejidad al separar y transportar estado extrínseco.",
+        "Prohíbe el uso de mapas o diccionarios.",
+        "Impide pruebas unitarias."
+      ],
+      "correct": 1,
+      "explanation": "Se ahorra memoria, pero se incrementa la complejidad de coordinación entre contexto y flyweight."
+    },
+    {
+      "id": "flyweight_q13",
+      "type": "multiple_choice",
+      "question": "¿Qué combinación de patrones es razonable en un árbol grande con nodos hoja repetidos?",
+      "options": [
+        "Strategy + Command",
+        "Factory Method + Template Method",
+        "Composite + Flyweight",
+        "Observer + Mediator"
+      ],
+      "correct": 2,
+      "explanation": "Composite organiza la jerarquía y Flyweight puede compartir hojas repetidas para reducir memoria."
+    },
+    {
+      "id": "flyweight_q14",
+      "type": "multiple_choice",
+      "question": "Si el caché de flyweights crece sin límite, ¿qué riesgo aparece?",
+      "options": [
+        "Bloqueo del compilador.",
+        "Sobreconsumo de memoria por retención innecesaria.",
+        "Pérdida de polimorfismo.",
+        "Incompatibilidad con interfaces."
+      ],
+      "correct": 1,
+      "explanation": "Sin políticas de expiración o limpieza, la fábrica puede retener objetos que ya no se necesitan."
+    },
+    {
+      "id": "flyweight_q15",
+      "type": "multiple_choice",
+      "question": "¿Cuál ejemplo representa mejor Flyweight en un mapa interactivo?",
+      "options": [
+        "Un objeto único para todas las capas del mapa.",
+        "Un icono base compartido y coordenadas pasadas al renderizar.",
+        "Un adaptador para convertir GPS a píxeles.",
+        "Un observador para eventos de zoom."
+      ],
+      "correct": 1,
+      "explanation": "El icono puede compartirse como intrínseco, mientras posición y estado visual son extrínsecos."
+    },
+    {
+      "id": "flyweight_q16",
+      "type": "true_false",
+      "question": "El estado intrínseco en Flyweight debe ser independiente del contexto inmediato.",
+      "correct": true,
+      "explanation": "Solo así puede compartirse entre múltiples usos sin inconsistencia."
+    },
+    {
+      "id": "flyweight_q17",
+      "type": "true_false",
+      "question": "Es recomendable guardar coordenadas y color temporal dentro del flyweight compartido.",
+      "correct": false,
+      "explanation": "Esos datos suelen ser extrínsecos y varían por llamada o contexto."
+    },
+    {
+      "id": "flyweight_q18",
+      "type": "true_false",
+      "question": "Una FlyweightFactory debería devolver la misma instancia cuando recibe la misma clave intrínseca.",
+      "correct": true,
+      "explanation": "Esa reutilización es el núcleo del ahorro de memoria en el patrón."
+    },
+    {
+      "id": "flyweight_q19",
+      "type": "true_false",
+      "question": "Flyweight siempre mejora resultados, incluso cuando hay pocos objetos y poca repetición.",
+      "correct": false,
+      "explanation": "En escenarios pequeños, la complejidad añadida puede superar el beneficio."
+    },
+    {
+      "id": "flyweight_q20",
+      "type": "true_false",
+      "question": "Sin una política real de reutilización, aplicar Flyweight pierde gran parte de su valor.",
+      "correct": true,
+      "explanation": "Si no se comparte nada en la práctica, el patrón no aporta ahorro significativo."
+    },
+    {
+      "id": "flyweight_q21",
+      "type": "true_false",
+      "question": "En contextos concurrentes, la fábrica de flyweights puede requerir sincronización.",
+      "correct": true,
+      "explanation": "Acceso concurrente al caché puede crear duplicados o condiciones de carrera si no se controla."
+    },
+    {
+      "id": "flyweight_q22",
+      "type": "true_false",
+      "question": "Todos los flyweights deben ser mutables para adaptarse a cada uso.",
+      "correct": false,
+      "explanation": "Lo habitual es que el estado intrínseco sea inmutable y el contexto variable se pase externamente."
+    },
+    {
+      "id": "flyweight_q23",
+      "type": "true_false",
+      "question": "Una clave intrínseca mal definida puede provocar duplicación de objetos en la fábrica.",
+      "correct": true,
+      "explanation": "Si la clave no representa correctamente el estado compartible, se pierde reutilización."
+    },
+    {
+      "id": "flyweight_q24",
+      "type": "true_false",
+      "question": "Flyweight se usa principalmente para reducir el número de clases del sistema.",
+      "correct": false,
+      "explanation": "Su objetivo principal es reducir memoria compartiendo representación interna, no simplificar jerarquías."
+    },
+    {
+      "id": "flyweight_q25",
+      "type": "true_false",
+      "question": "Flyweight puede introducir sobrecosto de CPU por búsquedas en caché y manejo de contexto.",
+      "correct": true,
+      "explanation": "Se intercambia parte de complejidad/tiempo por menor consumo de memoria."
+    },
+    {
+      "id": "flyweight_q26",
+      "type": "true_false",
+      "question": "Flyweight y Proxy remoto tienen la misma intención principal.",
+      "correct": false,
+      "explanation": "Flyweight optimiza memoria por compartición; Proxy remoto controla acceso a objetos distribuidos."
+    },
+    {
+      "id": "flyweight_q27",
+      "type": "true_false",
+      "question": "Compartir una malla base en miles de partículas gráficas es un caso típico de Flyweight.",
+      "correct": true,
+      "explanation": "La malla compartida es estado intrínseco; transformaciones por partícula son extrínsecas."
+    },
+    {
+      "id": "flyweight_q28",
+      "type": "true_false",
+      "question": "Si el estado extrínseco es muy grande y costoso de transportar, el beneficio de Flyweight puede reducirse.",
+      "correct": true,
+      "explanation": "Mover demasiado estado externo en cada operación puede compensar negativamente el ahorro."
+    },
+    {
+      "id": "flyweight_q29",
+      "type": "true_false",
+      "question": "Una FlyweightFactory no puede coexistir con políticas de expiración del caché.",
+      "correct": false,
+      "explanation": "Puede aplicar limpieza, TTL o referencias débiles para controlar crecimiento de memoria."
+    },
+    {
+      "id": "flyweight_q30",
+      "type": "true_false",
+      "question": "El cliente normalmente pasa el contexto extrínseco al invocar operaciones del flyweight.",
+      "correct": true,
+      "explanation": "Esa separación entre estado compartido y estado contextual es esencial en el patrón."
+    },
+    {
+      "id": "flyweight_q31",
+      "type": "short_answer",
+      "question": "¿Cómo se llama el estado compartido que no depende del contexto?",
+      "correct": [
+        "intrinseco",
+        "estado intrinseco"
+      ],
+      "hint": "Es la parte que se reutiliza entre muchas instancias lógicas.",
+      "explanation": "El estado intrínseco contiene la información común compartible."
+    },
+    {
+      "id": "flyweight_q32",
+      "type": "short_answer",
+      "question": "¿Cómo se llama el estado que varía por contexto y se pasa desde fuera?",
+      "correct": [
+        "extrinseco",
+        "estado extrinseco"
+      ],
+      "hint": "No se almacena dentro del objeto compartido.",
+      "explanation": "El estado extrínseco se suministra en cada uso según el contexto."
+    },
+    {
+      "id": "flyweight_q33",
+      "type": "short_answer",
+      "question": "¿Qué componente centraliza caché y reutilización de instancias Flyweight?",
+      "correct": [
+        "flyweightfactory",
+        "factory",
+        "fabrica"
+      ],
+      "hint": "Es quien entrega objetos por clave.",
+      "explanation": "La FlyweightFactory evita crear duplicados y gestiona el repositorio compartido."
+    },
+    {
+      "id": "flyweight_q34",
+      "type": "short_answer",
+      "question": "¿A qué categoría de patrones pertenece Flyweight?",
+      "correct": [
+        "estructural",
+        "estructurales"
+      ],
+      "hint": "Se enfoca en cómo se organizan y relacionan objetos.",
+      "explanation": "Flyweight es un patrón estructural porque trata composición y compartición de objetos."
+    },
+    {
+      "id": "flyweight_q35",
+      "type": "short_answer",
+      "question": "¿Qué patrón suele confundirse con Flyweight por el tema de 'una sola instancia'?",
+      "correct": [
+        "singleton"
+      ],
+      "hint": "Restringe cardinalidad global, no compartición por clave.",
+      "explanation": "Singleton y Flyweight son distintos, aunque a veces se mezclan conceptualmente."
+    },
+    {
+      "id": "flyweight_q36",
+      "type": "short_answer",
+      "question": "¿Qué estructura de datos se usa típicamente para indexar flyweights por clave?",
+      "correct": [
+        "cache",
+        "mapa",
+        "diccionario",
+        "hashmap"
+      ],
+      "hint": "Permite recuperar rápido una instancia existente.",
+      "explanation": "Se emplea un mapa/caché para asociar claves intrínsecas con instancias compartidas."
+    },
+    {
+      "id": "flyweight_q37",
+      "type": "short_answer",
+      "question": "¿Qué propiedad es deseable en el estado intrínseco para evitar efectos colaterales?",
+      "correct": [
+        "inmutable",
+        "inmutabilidad"
+      ],
+      "hint": "No debería cambiar una vez creado.",
+      "explanation": "La inmutabilidad facilita compartir un mismo objeto de forma segura."
+    },
+    {
+      "id": "flyweight_q38",
+      "type": "short_answer",
+      "question": "¿Qué término se usa para el identificador que decide reutilización en la fábrica?",
+      "correct": [
+        "clave",
+        "key"
+      ],
+      "hint": "Debe representar atributos compartibles del objeto.",
+      "explanation": "La clave agrupa instancias equivalentes según su estado intrínseco."
+    },
+    {
+      "id": "flyweight_q39",
+      "type": "short_answer",
+      "question": "Si la fábrica retiene objetos para siempre sin limpieza, ¿qué riesgo de memoria aparece?",
+      "correct": [
+        "fuga",
+        "memory leak",
+        "leak"
+      ],
+      "hint": "Es retención no deseada de memoria.",
+      "explanation": "Un caché sin control puede crecer indefinidamente y causar fuga de memoria."
+    },
+    {
+      "id": "flyweight_q40",
+      "type": "short_answer",
+      "question": "Patrón estructural usado para compartir objetos finos en grandes cantidades.",
+      "correct": [
+        "flyweight"
+      ],
+      "hint": "Su nombre alude a peso ligero.",
+      "explanation": "Flyweight minimiza memoria compartiendo estado intrínseco entre múltiples objetos lógicos."
+    }
+  ]
+}

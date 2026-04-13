@@ -1,0 +1,423 @@
+{
+  "id": "composite",
+  "name": "Composite",
+  "category": "Estructural",
+  "description": "Permite componer objetos en estructuras de arbol para representar relaciones parte-todo, de modo que clientes traten de forma uniforme objetos individuales y compuestos.",
+  "questions": [
+    {
+      "id": "composite_q1",
+      "type": "multiple_choice",
+      "question": "¿Cual es el objetivo principal del patron Composite?",
+      "options": [
+        "Crear una unica instancia global de un objeto",
+        "Permitir tratar de forma uniforme objetos simples y compuestos",
+        "Encapsular algoritmos intercambiables en tiempo de ejecucion",
+        "Reducir memoria compartiendo estado intrinseco"
+      ],
+      "correct": 1,
+      "explanation": "Composite modela relaciones parte-todo y expone una interfaz comun para hojas y contenedores."
+    },
+    {
+      "id": "composite_q2",
+      "type": "multiple_choice",
+      "question": "En Composite, ¿que representa el rol Component?",
+      "options": [
+        "Una interfaz comun para Leaf y Composite",
+        "Una clase para persistencia del arbol",
+        "Un adaptador entre dos APIs incompatibles",
+        "Un observador de cambios de estado"
+      ],
+      "correct": 0,
+      "explanation": "Component define el contrato que permite al cliente operar sin distinguir tipos concretos."
+    },
+    {
+      "id": "composite_q3",
+      "type": "multiple_choice",
+      "question": "¿Que responsabilidad describe mejor a un Leaf?",
+      "options": [
+        "Administrar la coleccion de hijos",
+        "Coordinar la creacion de nodos complejos",
+        "Representar un elemento terminal sin descendientes",
+        "Aplicar cache distribuido en el arbol"
+      ],
+      "correct": 2,
+      "explanation": "Leaf es un nodo indivisible que implementa la operacion sin delegar en hijos."
+    },
+    {
+      "id": "composite_q4",
+      "type": "multiple_choice",
+      "question": "¿Que hace tipicamente un nodo Composite?",
+      "options": [
+        "Comparte estado inmutable entre objetos",
+        "Contiene hijos y delega operaciones recursivamente",
+        "Convierte interfaces incompatibles",
+        "Garantiza seguridad de hilos por defecto"
+      ],
+      "correct": 1,
+      "explanation": "Composite agrega resultados de sus hijos y aplica la operacion sobre la jerarquia."
+    },
+    {
+      "id": "composite_q5",
+      "type": "multiple_choice",
+      "question": "¿Que caracteriza al enfoque transparente de Composite?",
+      "options": [
+        "Solo Composite expone add/remove",
+        "Leaf y Composite exponen la misma interfaz completa",
+        "No existe interfaz comun entre nodos",
+        "La recursion esta prohibida"
+      ],
+      "correct": 1,
+      "explanation": "La transparencia maximiza uniformidad, aunque algunos metodos no tengan sentido en Leaf."
+    },
+    {
+      "id": "composite_q6",
+      "type": "multiple_choice",
+      "question": "¿Que caracteriza al enfoque seguro (safe) de Composite?",
+      "options": [
+        "Todos los nodos deben implementar add/remove",
+        "Leaf hereda metodos de gestion de hijos con excepciones",
+        "La gestion de hijos se limita a Composite y no a Component",
+        "El cliente no puede usar polimorfismo"
+      ],
+      "correct": 2,
+      "explanation": "El enfoque seguro evita operaciones invalidas en hojas al no exponer gestion de hijos en el contrato base."
+    },
+    {
+      "id": "composite_q7",
+      "type": "multiple_choice",
+      "question": "¿Como se calcula comunmente un total en una estructura Composite?",
+      "options": [
+        "Con un switch en el cliente por cada tipo concreto",
+        "Con recursion y agregacion de resultados de hijos",
+        "Con un singleton global de calculo",
+        "Con herencia multiple obligatoria"
+      ],
+      "correct": 1,
+      "explanation": "La recursion encaja naturalmente con estructuras de arbol para combinar resultados."
+    },
+    {
+      "id": "composite_q8",
+      "type": "multiple_choice",
+      "question": "¿Cual es un ejemplo canonico de Composite?",
+      "options": [
+        "Estrategias de compresion seleccionables",
+        "Sistema de archivos con carpetas y archivos",
+        "Conexion unica a base de datos",
+        "Pipeline de middlewares HTTP"
+      ],
+      "correct": 1,
+      "explanation": "Carpetas contienen archivos y subcarpetas, reflejando una relacion parte-todo."
+    },
+    {
+      "id": "composite_q9",
+      "type": "multiple_choice",
+      "question": "¿Que beneficio ofrece Composite al codigo cliente?",
+      "options": [
+        "Evita completamente las pruebas unitarias",
+        "Permite evitar condicionales por tipo concreto",
+        "Elimina la necesidad de interfaces",
+        "Garantiza complejidad O(1) en recorridos"
+      ],
+      "correct": 1,
+      "explanation": "El cliente programa contra Component y reduce logica condicional dependiente de clases concretas."
+    },
+    {
+      "id": "composite_q10",
+      "type": "multiple_choice",
+      "question": "¿Que desventaja puede aparecer al usar Composite en dominios con reglas estrictas?",
+      "options": [
+        "No se pueden modelar hojas",
+        "Puede costar imponer restricciones de hijos validos",
+        "Impide reutilizar clases",
+        "No permite polimorfismo"
+      ],
+      "correct": 1,
+      "explanation": "La API uniforme puede requerir validaciones extra para evitar composiciones invalidas."
+    },
+    {
+      "id": "composite_q11",
+      "type": "multiple_choice",
+      "question": "¿Que riesgo existe si se introducen ciclos en una estructura tratada como Composite sin control de visitados?",
+      "options": [
+        "Perdida de encapsulamiento en Component",
+        "Bucle infinito o duplicacion de calculos",
+        "Incompatibilidad con interfaces",
+        "Error de compilacion obligatorio"
+      ],
+      "correct": 1,
+      "explanation": "Las operaciones recursivas asumen arboles; los ciclos rompen esa suposicion."
+    },
+    {
+      "id": "composite_q12",
+      "type": "multiple_choice",
+      "question": "¿Que diferencia clave hay entre Composite y Decorator?",
+      "options": [
+        "Composite estructura arboles parte-todo; Decorator agrega responsabilidades dinamicas",
+        "Decorator modela jerarquias; Composite adapta interfaces",
+        "Composite solo funciona en UI; Decorator solo en backend",
+        "No existe diferencia de intencion"
+      ],
+      "correct": 0,
+      "explanation": "Composite organiza nodos jerarquicos; Decorator envuelve objetos para extender comportamiento."
+    },
+    {
+      "id": "composite_q13",
+      "type": "multiple_choice",
+      "question": "Frente a Flyweight, ¿cual enunciado es correcto sobre Composite?",
+      "options": [
+        "Composite se centra en ahorro de memoria por comparticion",
+        "Composite se centra en representar estructura jerarquica uniforme",
+        "Composite reemplaza por completo a Flyweight",
+        "Composite evita crear objetos"
+      ],
+      "correct": 1,
+      "explanation": "Flyweight optimiza memoria; Composite prioriza modelado estructural parte-todo."
+    },
+    {
+      "id": "composite_q14",
+      "type": "multiple_choice",
+      "question": "¿Cuando suele NO ser recomendable aplicar Composite?",
+      "options": [
+        "Cuando hay jerarquias profundas y operaciones comunes",
+        "Cuando existe una clara relacion parte-todo",
+        "Cuando solo hay elementos planos sin composicion real",
+        "Cuando el cliente debe tratar nodos de forma uniforme"
+      ],
+      "correct": 2,
+      "explanation": "Si no hay estructura jerarquica, el patron agrega complejidad innecesaria."
+    },
+    {
+      "id": "composite_q15",
+      "type": "multiple_choice",
+      "question": "En una version segura de Composite, ¿donde suelen declararse add/remove?",
+      "options": [
+        "Solo en la clase Composite",
+        "En Component con implementacion por defecto",
+        "En Leaf para validar hijos",
+        "En una fabrica abstracta"
+      ],
+      "correct": 0,
+      "explanation": "Asi se evita que Leaf exponga operaciones que no puede soportar semanticamente."
+    },
+    {
+      "id": "composite_q16",
+      "type": "multiple_choice",
+      "question": "¿Que patron complementa bien a Composite para agregar nuevas operaciones sin modificar las clases de nodos?",
+      "options": [
+        "Visitor",
+        "Singleton",
+        "Factory Method",
+        "Proxy"
+      ],
+      "correct": 0,
+      "explanation": "Visitor permite incorporar operaciones externas sobre la jerarquia minimizando cambios en nodos existentes."
+    },
+    {
+      "id": "composite_q17",
+      "type": "true_false",
+      "question": "Composite permite que el cliente trate hojas y compuestos mediante la misma abstraccion.",
+      "correct": true,
+      "explanation": "Esa uniformidad es la motivacion central del patron."
+    },
+    {
+      "id": "composite_q18",
+      "type": "true_false",
+      "question": "En Composite, una hoja deberia administrar internamente una lista de hijos.",
+      "correct": false,
+      "explanation": "La hoja es terminal y no contiene descendientes."
+    },
+    {
+      "id": "composite_q19",
+      "type": "true_false",
+      "question": "En el enfoque safe, add/remove no tienen por que estar en la interfaz base Component.",
+      "correct": true,
+      "explanation": "Se restringen a nodos compuestos para mayor seguridad semantica."
+    },
+    {
+      "id": "composite_q20",
+      "type": "true_false",
+      "question": "Composite siempre reduce la cantidad total de clases en cualquier diseno.",
+      "correct": false,
+      "explanation": "Puede incluso aumentarlas; su valor esta en claridad estructural y extensibilidad."
+    },
+    {
+      "id": "composite_q21",
+      "type": "true_false",
+      "question": "Las operaciones agregadas en Composite suelen implementarse de forma recursiva.",
+      "correct": true,
+      "explanation": "La recursion permite recorrer natural y consistentemente la jerarquia."
+    },
+    {
+      "id": "composite_q22",
+      "type": "true_false",
+      "question": "Si hay ciclos no controlados, una operacion recursiva sobre Composite puede no terminar.",
+      "correct": true,
+      "explanation": "Sin control de visitados, la recursion puede caer en bucles."
+    },
+    {
+      "id": "composite_q23",
+      "type": "true_false",
+      "question": "Al usar Composite correctamente, el cliente necesita hacer if/else por cada subtipo concreto.",
+      "correct": false,
+      "explanation": "El cliente se apoya en polimorfismo y en la interfaz comun."
+    },
+    {
+      "id": "composite_q24",
+      "type": "true_false",
+      "question": "Composite pertenece a la categoria de patrones creacionales.",
+      "correct": false,
+      "explanation": "Composite es un patron estructural."
+    },
+    {
+      "id": "composite_q25",
+      "type": "true_false",
+      "question": "Agregar un nuevo tipo de nodo puede hacerse con impacto reducido en clientes que dependen de Component.",
+      "correct": true,
+      "explanation": "Esto favorece el principio abierto/cerrado en el codigo cliente."
+    },
+    {
+      "id": "composite_q26",
+      "type": "true_false",
+      "question": "Un Leaf puede representar una accion final en un menu jerarquico.",
+      "correct": true,
+      "explanation": "En un menu, la accion final suele ser un nodo terminal sin hijos."
+    },
+    {
+      "id": "composite_q27",
+      "type": "true_false",
+      "question": "El enfoque transparente puede tensionar el principio de segregacion de interfaces.",
+      "correct": true,
+      "explanation": "Porque algunas clases podrian verse obligadas a exponer metodos que no necesitan."
+    },
+    {
+      "id": "composite_q28",
+      "type": "true_false",
+      "question": "Composite solo es util en componentes graficos y no en dominios de negocio.",
+      "correct": false,
+      "explanation": "Tambien se aplica a catalogos, organizaciones, permisos y sistemas de archivos."
+    },
+    {
+      "id": "composite_q29",
+      "type": "true_false",
+      "question": "El orden de hijos puede ser relevante en un Composite, por ejemplo en renderizado o evaluacion.",
+      "correct": true,
+      "explanation": "La semantica de la operacion puede depender del orden de recorrido."
+    },
+    {
+      "id": "composite_q30",
+      "type": "true_false",
+      "question": "Composite y Visitor pueden combinarse para mantener estable la jerarquia y extender operaciones.",
+      "correct": true,
+      "explanation": "Es una combinacion comun cuando cambian mas las operaciones que la estructura."
+    },
+    {
+      "id": "composite_q31",
+      "type": "short_answer",
+      "question": "¿Como se llama el nodo terminal sin hijos en Composite?",
+      "correct": [
+        "leaf",
+        "hoja"
+      ],
+      "hint": "Es el elemento indivisible del arbol.",
+      "explanation": "Leaf representa un componente simple que no contiene descendientes."
+    },
+    {
+      "id": "composite_q32",
+      "type": "short_answer",
+      "question": "¿Que tipo de relacion modela Composite entre nodos?",
+      "correct": [
+        "parte-todo",
+        "part-whole"
+      ],
+      "hint": "Describe como se agrupan elementos simples y contenedores.",
+      "explanation": "El patron organiza objetos en jerarquias donde un todo contiene partes."
+    },
+    {
+      "id": "composite_q33",
+      "type": "short_answer",
+      "question": "¿Como se llama el nodo que puede contener hijos?",
+      "correct": [
+        "composite",
+        "compuesto"
+      ],
+      "hint": "No es terminal; agrega otros nodos.",
+      "explanation": "El nodo compuesto administra descendientes y delega operaciones."
+    },
+    {
+      "id": "composite_q34",
+      "type": "short_answer",
+      "question": "Tecnica habitual para recorrer toda la jerarquia de Composite.",
+      "correct": [
+        "recursion",
+        "recursividad"
+      ],
+      "hint": "La funcion se invoca a si misma por nivel.",
+      "explanation": "La recursividad simplifica el procesamiento de estructuras arbol."
+    },
+    {
+      "id": "composite_q35",
+      "type": "short_answer",
+      "question": "Metodo comun para anexar un hijo en un nodo compuesto.",
+      "correct": [
+        "add",
+        "agregar"
+      ],
+      "hint": "Verbo corto usado junto a remove en muchas APIs.",
+      "explanation": "Muchos disenos usan add para incorporar descendientes."
+    },
+    {
+      "id": "composite_q36",
+      "type": "short_answer",
+      "question": "Principio que permite tratar distintos nodos mediante la misma interfaz.",
+      "correct": [
+        "polimorfismo",
+        "polymorphism"
+      ],
+      "hint": "Misma operacion, diferentes implementaciones.",
+      "explanation": "Composite se apoya en polimorfismo para uniformar el uso desde el cliente."
+    },
+    {
+      "id": "composite_q37",
+      "type": "short_answer",
+      "question": "Patron que suele combinarse con Composite para agregar operaciones externas.",
+      "correct": [
+        "visitor"
+      ],
+      "hint": "Evita modificar cada clase de nodo al sumar nuevas operaciones.",
+      "explanation": "Visitor separa operaciones de la estructura de objetos."
+    },
+    {
+      "id": "composite_q38",
+      "type": "short_answer",
+      "question": "Estructura de datos que se parece mas a un Composite bien formado.",
+      "correct": [
+        "arbol",
+        "tree"
+      ],
+      "hint": "Tiene raiz, nodos intermedios y hojas.",
+      "explanation": "Composite generalmente se representa como una jerarquia de tipo arbol."
+    },
+    {
+      "id": "composite_q39",
+      "type": "short_answer",
+      "question": "Nombre del tipo de nodo opuesto a Composite en la jerarquia.",
+      "correct": [
+        "leaf",
+        "hoja"
+      ],
+      "hint": "No contiene hijos.",
+      "explanation": "Leaf es el contrapunto terminal de los nodos compuestos."
+    },
+    {
+      "id": "composite_q40",
+      "type": "short_answer",
+      "question": "Nombre habitual de la abstraccion comun de todos los nodos en GoF.",
+      "correct": [
+        "component",
+        "componente"
+      ],
+      "hint": "Es la interfaz base compartida.",
+      "explanation": "Component define el contrato comun para operar con hojas y compuestos."
+    }
+  ]
+}

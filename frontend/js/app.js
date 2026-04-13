@@ -47,12 +47,13 @@ const App = (() => {
 
   async function startQuiz(pattern) {
     activePattern = pattern;
+    const sessionSize = Quiz.getTargetScore();
 
     let rawPatternData = null;
     let sessionQuestions = [];
     try {
       rawPatternData = await QuestionService.loadPatternData(pattern.id);
-      const selectedQuestionData = QuestionService.pickRandomQuestions(rawPatternData.questions, 10);
+      const selectedQuestionData = QuestionService.pickRandomQuestions(rawPatternData.questions, sessionSize);
       sessionQuestions = QuestionFactory.createQuestions({
         ...rawPatternData,
         questions: selectedQuestionData,
@@ -70,8 +71,7 @@ const App = (() => {
 
     Quiz.startSession(pattern, sessionQuestions);
 
-    const total = sessionQuestions.length;
-    UI.renderQuizView(pattern, Quiz.getCurrentQuestion(), 1, total);
+    UI.renderQuizView(pattern, Quiz.getCurrentQuestion(), 0, sessionSize);
     UI.showView('view-quiz');
   }
 
@@ -82,7 +82,7 @@ const App = (() => {
     UI.renderResults(
       s.pattern,
       s.score,
-      s.questions.length,
+      Quiz.getTargetScore(),
       () => startQuiz(activePattern),
       navigateHome,
     );
@@ -95,17 +95,24 @@ const App = (() => {
     if (!question) return;
 
     const { correct, correctAnswer } = Quiz.validateAnswer(question, userAnswer);
+
+    if (!correct) {
+      Quiz.failSession();
+      alert(`Incorrecto. Respuesta correcta: ${correctAnswer}\n\nSe reinicia el test con 10 nuevas preguntas.`);
+      startQuiz(activePattern);
+      return;
+    }
+
     const isLast = !Quiz.hasNextQuestion();
-    const total  = Quiz.session.questions.length;
-    const currentNum = Quiz.session.currentIndex + 1;
+    const total  = Quiz.getTargetScore();
 
     UI.renderFeedback(correct, correctAnswer, question.explanation, isLast, () => {
       if (isLast) {
         navigateResults();
       } else {
         Quiz.advanceQuestion();
-        const nextNum = Quiz.session.currentIndex + 1;
-        UI.renderQuizView(activePattern, Quiz.getCurrentQuestion(), nextNum, total);
+        const answeredCount = Quiz.session.currentIndex;
+        UI.renderQuizView(activePattern, Quiz.getCurrentQuestion(), answeredCount, total);
         UI.hide('feedback-box');
       }
     });

@@ -2,40 +2,422 @@
   "id": "decorator",
   "name": "Decorator",
   "category": "Estructural",
-  "description": "Permite añadir funcionalidades a objetos colocándolos dentro de objetos encapsuladores especiales (decoradores) que contienen los comportamientos adicionales.",
+  "description": "Permite añadir responsabilidades a objetos de forma dinámica envolviéndolos en decoradores que comparten la misma interfaz, evitando explosión de subclases y favoreciendo la composición.",
   "questions": [
     {
       "id": "decorator_q1",
       "type": "multiple_choice",
-      "question": "¿Cuál es la ventaja principal del patrón Decorator sobre la herencia para extender funcionalidades?",
+      "question": "¿Cuál es la intención principal del patrón Decorator?",
       "options": [
-        "El Decorator es más rápido en tiempo de ejecución",
-        "El Decorator permite extender comportamientos en tiempo de ejecución sin crear subclases",
-        "El Decorator simplifica la jerarquía de clases al reducir el número de interfaces",
-        "El Decorator garantiza que solo exista una instancia del objeto decorado"
+        "Añadir responsabilidades a un objeto en tiempo de ejecución sin cambiar su clase",
+        "Garantizar una única instancia global",
+        "Separar construcción y representación de un objeto complejo",
+        "Notificar automáticamente observadores ante cambios"
       ],
-      "correct": 1,
-      "explanation": "A diferencia de la herencia (que es estática y definida en tiempo de compilación), el Decorator permite añadir o combinar comportamientos dinámicamente en tiempo de ejecución, componiendo decoradores de forma flexible."
+      "correct": 0,
+      "explanation": "Decorator extiende comportamiento por composición dinámica, sin modificar la clase original."
     },
     {
       "id": "decorator_q2",
-      "type": "true_false",
-      "question": "Un Decorator debe implementar la misma interfaz que el objeto que decora.",
-      "correct": true,
-      "explanation": "Correcto. El Decorator implementa la misma interfaz que el componente que envuelve. Esto permite que el cliente use el decorador exactamente igual que el objeto original, siendo transparente para el código que lo usa."
+      "type": "multiple_choice",
+      "question": "¿Qué problema resuelve mejor Decorator frente a la herencia tradicional?",
+      "options": [
+        "Sincronización entre microservicios",
+        "Explosión de subclases para combinar funcionalidades opcionales",
+        "Conversión de interfaces incompatibles",
+        "Creación diferida de objetos pesados"
+      ],
+      "correct": 1,
+      "explanation": "Evita crear una subclase por cada combinación posible de características."
     },
     {
       "id": "decorator_q3",
-      "type": "short_answer",
-      "question": "¿Cómo se llama el objeto original que el Decorator envuelve?",
-      "correct": [
-        "componente",
-        "component",
-        "wrapped",
-        "wrappee"
+      "type": "multiple_choice",
+      "question": "En la estructura del patrón, ¿quién suele mantener la referencia al objeto envuelto?",
+      "options": [
+        "Client",
+        "ConcreteComponent",
+        "Decorator base",
+        "Factory"
       ],
-      "hint": "Es el objeto base al que el decorador añade funcionalidades.",
-      "explanation": "El objeto que el Decorator envuelve se llama **Componente** (Component o Wrappee). El Decorator mantiene una referencia a un Componente y delega las operaciones a él, añadiendo su propio comportamiento antes o después."
+      "correct": 2,
+      "explanation": "El decorador base encapsula la referencia al Component y centraliza la delegación."
+    },
+    {
+      "id": "decorator_q4",
+      "type": "multiple_choice",
+      "question": "¿Qué condición permite que cliente trate igual un objeto decorado y uno no decorado?",
+      "options": [
+        "Que ambos usen la misma base de datos",
+        "Que compartan la misma interfaz Component",
+        "Que tengan el mismo constructor",
+        "Que pertenezcan al mismo paquete"
+      ],
+      "correct": 1,
+      "explanation": "La transparencia del patrón depende de una abstracción común."
+    },
+    {
+      "id": "decorator_q5",
+      "type": "multiple_choice",
+      "question": "Si primero aplicas compresión y luego cifrado, ¿qué pasa al invertir el orden?",
+      "options": [
+        "No cambia nada en ningún caso",
+        "Solo cambia el nombre de clases",
+        "Puede cambiar el resultado funcional del procesamiento",
+        "Se pierde automáticamente el polimorfismo"
+      ],
+      "correct": 2,
+      "explanation": "El orden de decoradores altera el flujo de transformación."
+    },
+    {
+      "id": "decorator_q6",
+      "type": "multiple_choice",
+      "question": "¿Qué escenario encaja mejor con Decorator?",
+      "options": [
+        "Agregar logging, caché y reintentos alrededor de un cliente HTTP",
+        "Elegir entre QuickSort y MergeSort según tamaño",
+        "Convertir XML a JSON con un adaptador",
+        "Definir una única conexión global al sistema"
+      ],
+      "correct": 0,
+      "explanation": "Decorator permite apilar responsabilidades transversales sobre el mismo contrato."
+    },
+    {
+      "id": "decorator_q7",
+      "type": "multiple_choice",
+      "question": "¿Qué diferencia clave hay entre Decorator y Strategy?",
+      "options": [
+        "Decorator cambia algoritmo completo; Strategy agrega capas",
+        "Strategy agrega responsabilidades por envoltura; Decorator no",
+        "Decorator agrega responsabilidades alrededor del componente; Strategy sustituye un algoritmo",
+        "No hay diferencia, son equivalentes"
+      ],
+      "correct": 2,
+      "explanation": "Strategy selecciona comportamientos alternativos; Decorator compone responsabilidades acumulativas."
+    },
+    {
+      "id": "decorator_q8",
+      "type": "multiple_choice",
+      "question": "¿Qué diferencia describe mejor Decorator frente a Proxy?",
+      "options": [
+        "Decorator añade comportamiento; Proxy controla acceso o ciclo de vida",
+        "Decorator funciona solo en memoria; Proxy solo en red",
+        "Decorator es creacional; Proxy comportamental",
+        "Proxy no implementa la misma interfaz que el objeto real"
+      ],
+      "correct": 0,
+      "explanation": "Ambos envuelven, pero su intención principal es distinta."
+    },
+    {
+      "id": "decorator_q9",
+      "type": "multiple_choice",
+      "question": "¿Qué principio de diseño refuerza Decorator al extender sin modificar clases existentes?",
+      "options": [
+        "LSP",
+        "ISP",
+        "OCP",
+        "DIP"
+      ],
+      "correct": 2,
+      "explanation": "Permite abrir para extensión y cerrar para modificación."
+    },
+    {
+      "id": "decorator_q10",
+      "type": "multiple_choice",
+      "question": "¿Cuál es una desventaja típica al abusar de Decorator?",
+      "options": [
+        "Se elimina el polimorfismo",
+        "Aumenta el número de objetos y dificulta depuración",
+        "Obliga herencia múltiple",
+        "Impide pruebas unitarias"
+      ],
+      "correct": 1,
+      "explanation": "Muchas capas pequeñas pueden complicar trazabilidad y mantenimiento."
+    },
+    {
+      "id": "decorator_q11",
+      "type": "multiple_choice",
+      "question": "¿Qué práctica rompe la transparencia del patrón?",
+      "options": [
+        "Mantener la firma de Component en cada decorador",
+        "Delegar y luego agregar lógica",
+        "Exponer métodos usados por cliente que no existen en Component",
+        "Permitir encadenar varios decoradores"
+      ],
+      "correct": 2,
+      "explanation": "Si el cliente depende de métodos fuera del contrato común, pierde intercambiabilidad."
+    },
+    {
+      "id": "decorator_q12",
+      "type": "multiple_choice",
+      "question": "¿Cuándo es más apropiado elegir Decorator?",
+      "options": [
+        "Cuando necesitas una sola instancia global",
+        "Cuando las funcionalidades opcionales deben activarse dinámicamente",
+        "Cuando modelas jerarquías parte-todo",
+        "Cuando quieres ocultar un subsistema complejo con una API simple"
+      ],
+      "correct": 1,
+      "explanation": "Decorator es ideal para combinar responsabilidades en tiempo de ejecución."
+    },
+    {
+      "id": "decorator_q13",
+      "type": "multiple_choice",
+      "question": "En UI, ¿qué ejemplo clásico representa Decorator?",
+      "options": [
+        "Un singleton de configuración",
+        "Un botón envuelto por borde y scroll como capas",
+        "Un adaptador de teclado USB a Bluetooth",
+        "Un bus de eventos publish/subscribe"
+      ],
+      "correct": 1,
+      "explanation": "Bordes, scrollbars y efectos visuales suelen añadirse como decoradores."
+    },
+    {
+      "id": "decorator_q14",
+      "type": "multiple_choice",
+      "question": "Si quieres retirar una capacidad opcional sin tocar la clase base, ¿qué haces normalmente?",
+      "options": [
+        "Creas una subclase nueva del componente base",
+        "Eliminas el decorador correspondiente de la cadena",
+        "Modificas el contrato Component",
+        "Conviertes el patrón a Composite"
+      ],
+      "correct": 1,
+      "explanation": "La composición por capas permite añadir o quitar responsabilidades externamente."
+    },
+    {
+      "id": "decorator_q15",
+      "type": "multiple_choice",
+      "question": "¿Qué prueba valida mejor una cadena de decoradores?",
+      "options": [
+        "Que todos los decoradores tengan el mismo nombre",
+        "Que solo exista una capa",
+        "Que el comportamiento combinado preserve contrato y agregue efectos esperados",
+        "Que no haya objetos envueltos"
+      ],
+      "correct": 2,
+      "explanation": "Debe verificarse tanto la compatibilidad del contrato como el efecto acumulado."
+    },
+    {
+      "id": "decorator_q16",
+      "type": "multiple_choice",
+      "question": "¿Qué afirmación sobre el Decorator base es correcta?",
+      "options": [
+        "Contiene la lógica completa de negocio del componente",
+        "Suele definir delegación por defecto al objeto envuelto",
+        "Debe ser siempre una interfaz sin estado",
+        "Nunca puede ser abstracto"
+      ],
+      "correct": 1,
+      "explanation": "Es común que proporcione delegación estándar y deje extensión a decoradores concretos."
+    },
+    {
+      "id": "decorator_q17",
+      "type": "true_false",
+      "question": "Para mantener transparencia, componente y decoradores deben respetar la misma abstracción pública.",
+      "correct": true,
+      "explanation": "La interfaz común permite sustituibilidad entre objetos decorados y no decorados."
+    },
+    {
+      "id": "decorator_q18",
+      "type": "true_false",
+      "question": "Aplicar Decorator implica modificar obligatoriamente la clase ConcreteComponent.",
+      "correct": false,
+      "explanation": "El patrón busca extender comportamiento sin tocar la implementación base."
+    },
+    {
+      "id": "decorator_q19",
+      "type": "true_false",
+      "question": "Es válido apilar múltiples decoradores sobre el mismo componente.",
+      "correct": true,
+      "explanation": "La composición en cadena es un rasgo esencial del patrón."
+    },
+    {
+      "id": "decorator_q20",
+      "type": "true_false",
+      "question": "El orden de apilamiento de decoradores siempre es irrelevante.",
+      "correct": false,
+      "explanation": "Cambiar el orden puede alterar semántica y resultado."
+    },
+    {
+      "id": "decorator_q21",
+      "type": "true_false",
+      "question": "Decorator reemplaza por completo a la herencia en cualquier diseño orientado a objetos.",
+      "correct": false,
+      "explanation": "Reduce uso de herencia para variaciones dinámicas, pero no la elimina en todos los contextos."
+    },
+    {
+      "id": "decorator_q22",
+      "type": "true_false",
+      "question": "Si el cliente depende de tipos concretos de decorador, aumenta el acoplamiento.",
+      "correct": true,
+      "explanation": "El cliente debería depender del contrato Component, no de detalles concretos."
+    },
+    {
+      "id": "decorator_q23",
+      "type": "true_false",
+      "question": "Proxy y Decorator comparten estructura de envoltura, pero no necesariamente la misma intención.",
+      "correct": true,
+      "explanation": "La estructura puede parecerse, pero el objetivo funcional difiere."
+    },
+    {
+      "id": "decorator_q24",
+      "type": "true_false",
+      "question": "Un decorador puede agregar comportamiento antes y después de delegar la operación al componente envuelto.",
+      "correct": true,
+      "explanation": "Es un mecanismo típico para enriquecer procesamiento."
+    },
+    {
+      "id": "decorator_q25",
+      "type": "true_false",
+      "question": "Si un decorador omite delegar una operación crítica, podría romper el contrato esperado por cliente.",
+      "correct": true,
+      "explanation": "La delegación correcta es clave para mantener comportamiento base y sustituibilidad."
+    },
+    {
+      "id": "decorator_q26",
+      "type": "true_false",
+      "question": "Decorator es útil para preocupaciones transversales como métricas, auditoría o caching.",
+      "correct": true,
+      "explanation": "Permite sumar responsabilidades ortogonales sin contaminar el componente base."
+    },
+    {
+      "id": "decorator_q27",
+      "type": "true_false",
+      "question": "Strategy y Decorator son intercambiables en cualquier caso porque ambos alteran comportamiento.",
+      "correct": false,
+      "explanation": "Strategy sustituye algoritmo; Decorator acumula responsabilidades por capas."
+    },
+    {
+      "id": "decorator_q28",
+      "type": "true_false",
+      "question": "Decorator facilita activar o desactivar responsabilidades en tiempo de ejecución.",
+      "correct": true,
+      "explanation": "Las capas pueden componerse dinámicamente según configuración."
+    },
+    {
+      "id": "decorator_q29",
+      "type": "true_false",
+      "question": "Cada decorador necesita conocer toda la cadena completa para funcionar.",
+      "correct": false,
+      "explanation": "Normalmente conoce solo el siguiente componente envuelto."
+    },
+    {
+      "id": "decorator_q30",
+      "type": "true_false",
+      "question": "Decorator puede coexistir con Factory Method o Abstract Factory para crear cadenas preconfiguradas.",
+      "correct": true,
+      "explanation": "Patrones creacionales pueden ensamblar objetos ya decorados según contexto."
+    },
+    {
+      "id": "decorator_q31",
+      "type": "short_answer",
+      "question": "¿Cómo se llama la abstracción común que implementan componente y decoradores?",
+      "correct": [
+        "component",
+        "componente"
+      ],
+      "hint": "Es el contrato compartido por todo el patrón.",
+      "explanation": "Component define la interfaz que el cliente consume."
+    },
+    {
+      "id": "decorator_q32",
+      "type": "short_answer",
+      "question": "¿Qué rol representa la implementación base que recibe decoraciones?",
+      "correct": [
+        "concretecomponent",
+        "componente concreto"
+      ],
+      "hint": "Es el objeto original antes de envolverlo.",
+      "explanation": "ConcreteComponent aporta el comportamiento inicial sobre el que se agregan capas."
+    },
+    {
+      "id": "decorator_q33",
+      "type": "short_answer",
+      "question": "¿Qué técnica se usa para reenviar llamadas al objeto envuelto?",
+      "correct": [
+        "delegacion",
+        "delegación"
+      ],
+      "hint": "El decorador no reemplaza internamente la operación, la reenvía.",
+      "explanation": "La delegación conserva comportamiento base y permite extenderlo."
+    },
+    {
+      "id": "decorator_q34",
+      "type": "short_answer",
+      "question": "¿Qué principio SOLID se refuerza al extender sin modificar?",
+      "correct": [
+        "ocp",
+        "abierto cerrado",
+        "abierto-cerrado"
+      ],
+      "hint": "Open for extension, closed for modification.",
+      "explanation": "Decorator favorece el principio Abierto/Cerrado."
+    },
+    {
+      "id": "decorator_q35",
+      "type": "short_answer",
+      "question": "¿Qué patrón se compara con Decorator cuando se habla de control de acceso?",
+      "correct": [
+        "proxy"
+      ],
+      "hint": "También envuelve objetos, pero con otra intención.",
+      "explanation": "Proxy prioriza control de acceso, ubicación o inicialización diferida."
+    },
+    {
+      "id": "decorator_q36",
+      "type": "short_answer",
+      "question": "¿A qué categoría GoF pertenece Decorator?",
+      "correct": [
+        "estructural",
+        "estructura"
+      ],
+      "hint": "No es creacional ni de comportamiento.",
+      "explanation": "Decorator es un patrón estructural."
+    },
+    {
+      "id": "decorator_q37",
+      "type": "short_answer",
+      "question": "En java.io, BufferedInputStream suele decorar qué abstracción?",
+      "correct": [
+        "inputstream"
+      ],
+      "hint": "Es la base para lectura de bytes en flujo.",
+      "explanation": "BufferedInputStream envuelve un InputStream para añadir buffer."
+    },
+    {
+      "id": "decorator_q38",
+      "type": "short_answer",
+      "question": "¿Qué palabra describe la forma de combinar múltiples decoradores uno sobre otro?",
+      "correct": [
+        "encadenamiento",
+        "apilamiento"
+      ],
+      "hint": "Se construye una cadena de capas.",
+      "explanation": "El patrón se implementa típicamente mediante apilamiento de envolturas."
+    },
+    {
+      "id": "decorator_q39",
+      "type": "short_answer",
+      "question": "¿Qué relación de diseño permite envolver un objeto en lugar de heredarlo?",
+      "correct": [
+        "composicion",
+        "composición"
+      ],
+      "hint": "Tiene un objeto interno en vez de ser ese objeto.",
+      "explanation": "Decorator se basa en composición para extender comportamiento."
+    },
+    {
+      "id": "decorator_q40",
+      "type": "short_answer",
+      "question": "Si quieres variar un algoritmo completo en lugar de agregar capas, ¿qué patrón usarías?",
+      "correct": [
+        "strategy",
+        "estrategia"
+      ],
+      "hint": "Pertenece a patrones de comportamiento.",
+      "explanation": "Strategy encapsula algoritmos alternativos; Decorator añade responsabilidades acumulativas."
     }
   ]
 }

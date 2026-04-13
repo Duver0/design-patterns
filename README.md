@@ -11,17 +11,18 @@ Plataforma estática de aprendizaje para dominar los patrones de diseño (GoF) m
   - **Factory Method:** Centraliza la creación de las estrategias de preguntas.
   - **Singleton:** El `SessionState` mantiene el estado global del quiz activo de forma única.
 - **Datos:** Bancos de 40 preguntas por patrón almacenados en archivos JSON independientes.
+- **Datos:** Bancos de preguntas por patrón almacenados en archivos JSON independientes (25-40 preguntas según patrón).
 
 ## 🚀 Cómo ejecutar el proyecto localmente
 
 1. **Instalar dependencias:**
    ```bash
-   bun install
+   npm install
    ```
 
 2. **Iniciar servidor de desarrollo:**
    ```bash
-   bun run dev
+   npm run dev
    ```
 
 3. **Ver en el navegador:**
@@ -31,7 +32,7 @@ Plataforma estática de aprendizaje para dominar los patrones de diseño (GoF) m
 
 ### Generar archivos para producción
 ```bash
-bun run build
+npm run build
 ```
 Este comando genera una carpeta `dist/` en la raíz con todos los archivos estáticos necesarios.
 
@@ -40,6 +41,22 @@ El proyecto está optimizado para ser desplegado como un sitio estático:
 1. Asegúrate de que el comando `bun run build` haya generado la carpeta `dist`.
 2. Sube el contenido de `dist` a la rama de despliegue (`gh-pages` o `main` dependiendo de tu configuración).
 3. En la configuración de GitHub Pages, apunta a la raíz de la rama/carpeta donde subiste los archivos.
+
+## 🧱 Patrones Estructurales
+
+Banco de preguntas estructurales en formato JSON, consumido por el motor del quiz.
+
+| Patrón | Preguntas | Estado |
+|---|---:|---|
+| Adapter | 40 | Completo |
+| Bridge | 40 | Completo |
+| Composite | 40 | Completo |
+| Decorator | 40 | Completo |
+| Facade | 40 | Completo |
+| Flyweight | 40 | Completo |
+| Proxy | 40 | Completo |
+
+Criterio de completitud: un patrón se considera completo cuando tiene al menos 25 preguntas válidas.
 
 ## 📈 Estructura del Proyecto
 

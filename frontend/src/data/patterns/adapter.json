@@ -2,38 +2,431 @@
   "id": "adapter",
   "name": "Adapter",
   "category": "Estructural",
-  "description": "Permite la colaboración entre objetos con interfaces incompatibles, actuando como un traductor o envoltorio.",
+  "description": "Patrón estructural que convierte la interfaz de un componente existente en otra esperada por el cliente, permitiendo reutilizar código legado o de terceros sin modificarlo.",
   "questions": [
     {
       "id": "adapter_q1",
       "type": "multiple_choice",
-      "question": "¿Cuál es el escenario típico de uso del patrón Adapter?",
+      "question": "¿Cuál es la intención principal del patrón Adapter?",
       "options": [
-        "Quieres notificar a múltiples objetos cuando cambia el estado de otro",
-        "Necesitas usar una clase existente pero su interfaz no es compatible con el resto del código",
-        "Quieres crear objetos sin especificar su clase concreta",
-        "Necesitas dividir una operación compleja en pasos simples"
+        "Traducir una interfaz incompatible a la interfaz que el cliente espera",
+        "Crear familias de objetos relacionados sin conocer clases concretas",
+        "Agregar comportamiento a objetos sin modificar su clase",
+        "Centralizar la comunicación entre objetos colegas"
       ],
-      "correct": 1,
-      "explanation": "El Adapter se usa cuando tienes una clase existente (Adaptee) con una interfaz incompatible y quieres que trabaje con otro código sin modificar su código fuente. Actúa como un traductor entre interfaces."
+      "correct": 0,
+      "explanation": "Adapter se usa para resolver incompatibilidades de interfaz entre cliente y componente existente."
     },
     {
       "id": "adapter_q2",
-      "type": "true_false",
-      "question": "El patrón Adapter modifica la interfaz del objeto original (Adaptee) directamente para hacerla compatible.",
-      "correct": false,
-      "explanation": "Falso. El Adapter **no modifica** el Adaptee. En su lugar, crea una nueva clase (Adapter) que envuelve al Adaptee y traduce las llamadas entre la interfaz esperada y la interfaz real del Adaptee."
+      "type": "multiple_choice",
+      "question": "¿Qué situación justifica mejor aplicar Adapter?",
+      "options": [
+        "Cuando necesitas una sola instancia global",
+        "Cuando una librería externa tiene métodos con firma distinta al contrato interno",
+        "Cuando deseas simplificar un subsistema complejo con un punto de entrada",
+        "Cuando quieres alternar algoritmos equivalentes"
+      ],
+      "correct": 1,
+      "explanation": "Adapter encaja cuando existe un desajuste entre contratos y no quieres cambiar clientes ni componente externo."
     },
     {
       "id": "adapter_q3",
-      "type": "short_answer",
-      "question": "¿Cómo se llama la clase existente con interfaz incompatible que el Adapter envuelve?",
-      "correct": [
-        "adaptee",
-        "adaptado"
+      "type": "multiple_choice",
+      "question": "En la estructura clásica, ¿qué rol realiza la traducción entre contratos?",
+      "options": [
+        "Client",
+        "Target",
+        "Adapter",
+        "Adaptee"
       ],
-      "hint": "Es la clase que tiene la funcionalidad que necesitas pero con una interfaz diferente.",
-      "explanation": "La clase existente con interfaz incompatible se llama **Adaptee**. El Adapter la envuelve y convierte su interfaz en la interfaz Target que el cliente espera."
+      "correct": 2,
+      "explanation": "El Adapter implementa o expone Target y delega/transforma llamadas hacia el Adaptee."
+    },
+    {
+      "id": "adapter_q4",
+      "type": "multiple_choice",
+      "question": "¿Cómo funciona típicamente un Object Adapter?",
+      "options": [
+        "Hereda del cliente y del adaptee al mismo tiempo",
+        "Implementa Target y contiene una referencia al Adaptee",
+        "Elimina el Target y expone directamente el Adaptee",
+        "Reemplaza el Adaptee por reflexión en tiempo de ejecución"
+      ],
+      "correct": 1,
+      "explanation": "Object Adapter se basa en composición: envuelve al Adaptee y traduce llamadas desde Target."
+    },
+    {
+      "id": "adapter_q5",
+      "type": "multiple_choice",
+      "question": "¿Qué limitación suele tener Class Adapter frente a Object Adapter?",
+      "options": [
+        "No puede implementar la interfaz Target",
+        "No permite conversiones de parámetros",
+        "Depende de herencia y puede verse limitado por el lenguaje",
+        "Obliga al cliente a conocer el Adaptee"
+      ],
+      "correct": 2,
+      "explanation": "Class Adapter acopla más por herencia y puede requerir herencia múltiple o restricciones equivalentes."
+    },
+    {
+      "id": "adapter_q6",
+      "type": "multiple_choice",
+      "question": "¿Qué diseño escala mejor con varios proveedores externos?",
+      "options": [
+        "Un mega-adapter con condicionales por proveedor",
+        "Un adapter por proveedor implementando el mismo Target",
+        "Clientes acoplados directamente a cada SDK",
+        "Subclases de cliente para cada proveedor"
+      ],
+      "correct": 1,
+      "explanation": "Un adapter por proveedor mantiene cohesión y permite reemplazos sin tocar clientes."
+    },
+    {
+      "id": "adapter_q7",
+      "type": "multiple_choice",
+      "question": "¿Cuál diferencia entre Adapter y Facade es correcta?",
+      "options": [
+        "Adapter simplifica subsistemas y Facade corrige incompatibilidades",
+        "Facade y Adapter tienen exactamente la misma intención",
+        "Adapter convierte interfaces incompatibles; Facade simplifica acceso a un subsistema",
+        "Facade siempre requiere herencia múltiple y Adapter no"
+      ],
+      "correct": 2,
+      "explanation": "Facade trata complejidad de uso; Adapter trata compatibilidad de contratos."
+    },
+    {
+      "id": "adapter_q8",
+      "type": "multiple_choice",
+      "question": "¿Qué comparación con Bridge es más precisa?",
+      "options": [
+        "Bridge se diseña para separar abstracción e implementación; Adapter integra interfaces incompatibles",
+        "Bridge y Adapter son intercambiables en cualquier contexto",
+        "Adapter crea dos jerarquías independientes desde cero",
+        "Bridge se usa solo en sistemas legacy"
+      ],
+      "correct": 0,
+      "explanation": "Bridge es una decisión arquitectónica preventiva; Adapter suele resolver integración retrospectiva."
+    },
+    {
+      "id": "adapter_q9",
+      "type": "multiple_choice",
+      "question": "¿Qué debe hacer un buen Adapter con errores de un proveedor externo?",
+      "options": [
+        "Propagarlos sin contexto para no ocultar detalles",
+        "Convertirlos al modelo de errores del Target",
+        "Suprimirlos para no romper al cliente",
+        "Lanzarlos como texto plano"
+      ],
+      "correct": 1,
+      "explanation": "El adapter debe normalizar la semántica de fallos para preservar el contrato esperado por el cliente."
+    },
+    {
+      "id": "adapter_q10",
+      "type": "multiple_choice",
+      "question": "¿Qué práctica es una mala señal al implementar Adapter?",
+      "options": [
+        "Delegar responsabilidades técnicas al adaptee",
+        "Mapear unidades y formatos",
+        "Agregar reglas de negocio de dominio dentro del adapter",
+        "Mantener un contrato Target estable"
+      ],
+      "correct": 2,
+      "explanation": "El adapter debería traducir interfaces, no concentrar lógica de negocio."
+    },
+    {
+      "id": "adapter_q11",
+      "type": "multiple_choice",
+      "question": "En una API interna de pagos, ¿qué beneficio da Adapter cuando cambia el SDK externo?",
+      "options": [
+        "Eliminar por completo los cambios de mantenimiento",
+        "Concentrar el impacto de cambio en el adapter",
+        "Evitar pruebas de integración",
+        "Garantizar que nunca falle la red"
+      ],
+      "correct": 1,
+      "explanation": "Al depender del Target interno, los cambios del proveedor se aíslan principalmente en el adapter."
+    },
+    {
+      "id": "adapter_q12",
+      "type": "multiple_choice",
+      "question": "¿Cuál ejemplo representa una transformación semántica válida en Adapter?",
+      "options": [
+        "Cambiar comentarios del código",
+        "Convertir montos de centavos a unidades monetarias esperadas por el cliente",
+        "Renombrar carpetas del proyecto",
+        "Reducir la cantidad de clases del dominio"
+      ],
+      "correct": 1,
+      "explanation": "Adapter puede transformar formatos, unidades o convenciones para cumplir el contrato objetivo."
+    },
+    {
+      "id": "adapter_q13",
+      "type": "multiple_choice",
+      "question": "¿Qué enfoque de pruebas unitarias es apropiado para un Adapter?",
+      "options": [
+        "Probar solo interfaces gráficas",
+        "Mockear el Adaptee y verificar traducción de entrada/salida",
+        "Evitar mocks porque Adapter es trivial",
+        "Probar únicamente el cliente"
+      ],
+      "correct": 1,
+      "explanation": "La responsabilidad principal del adapter es mapear correctamente llamadas y respuestas."
+    },
+    {
+      "id": "adapter_q14",
+      "type": "multiple_choice",
+      "question": "¿Qué dependencia debería mantener el cliente en un diseño con Adapter?",
+      "options": [
+        "Dependencia directa al SDK externo",
+        "Dependencia a la interfaz Target",
+        "Dependencia a la implementación concreta AdapterX",
+        "Dependencia al Adaptee por reflexión"
+      ],
+      "correct": 1,
+      "explanation": "El cliente debe depender del contrato estable Target para reducir acoplamiento."
+    },
+    {
+      "id": "adapter_q15",
+      "type": "multiple_choice",
+      "question": "¿Qué riesgo aparece al encadenar demasiados adapters?",
+      "options": [
+        "Pérdida obligatoria de tipado estático",
+        "Complejidad de trazabilidad y depuración",
+        "Desaparición del polimorfismo",
+        "Incompatibilidad con inyección de dependencias"
+      ],
+      "correct": 1,
+      "explanation": "Múltiples capas de traducción pueden volver opaco el flujo y dificultar mantenimiento."
+    },
+    {
+      "id": "adapter_q16",
+      "type": "multiple_choice",
+      "question": "¿Cuándo NO conviene usar Adapter?",
+      "options": [
+        "Cuando las interfaces ya son compatibles y el objetivo real es simplificar flujos",
+        "Cuando hay contrato interno estable y proveedores variables",
+        "Cuando se integra código legacy sin modificarlo",
+        "Cuando se requiere aislar cambios del tercero"
+      ],
+      "correct": 0,
+      "explanation": "Si no hay incompatibilidad de interfaz, Adapter suele ser innecesario y otro patrón puede encajar mejor."
+    },
+    {
+      "id": "adapter_q17",
+      "type": "true_false",
+      "question": "Adapter es un patrón estructural.",
+      "correct": true,
+      "explanation": "Correcto. Su foco es organizar relaciones entre componentes con contratos distintos."
+    },
+    {
+      "id": "adapter_q18",
+      "type": "true_false",
+      "question": "Aplicar Adapter obliga a modificar el código fuente del Adaptee.",
+      "correct": false,
+      "explanation": "Falso. Justamente permite integrar componentes existentes sin alterarlos."
+    },
+    {
+      "id": "adapter_q19",
+      "type": "true_false",
+      "question": "Si el cliente depende de Target, normalmente se puede reemplazar un proveedor cambiando solo el adapter correspondiente.",
+      "correct": true,
+      "explanation": "Verdadero. Ese desacoplamiento es uno de los beneficios principales."
+    },
+    {
+      "id": "adapter_q20",
+      "type": "true_false",
+      "question": "Class Adapter suele ser más rígido que Object Adapter por su dependencia de herencia.",
+      "correct": true,
+      "explanation": "Verdadero. La composición de Object Adapter suele ofrecer mayor flexibilidad."
+    },
+    {
+      "id": "adapter_q21",
+      "type": "true_false",
+      "question": "Object Adapter puede envolver diferentes implementaciones concretas del Adaptee en tiempo de ejecución.",
+      "correct": true,
+      "explanation": "Verdadero. La composición permite intercambiar instancias concretas."
+    },
+    {
+      "id": "adapter_q22",
+      "type": "true_false",
+      "question": "Usar Adapter elimina la necesidad de pruebas de integración con el proveedor externo.",
+      "correct": false,
+      "explanation": "Falso. Aunque reduce acoplamiento, las integraciones externas siguen requiriendo validación real."
+    },
+    {
+      "id": "adapter_q23",
+      "type": "true_false",
+      "question": "Si Target y Adaptee representan modelos de negocio incompatibles conceptualmente, Adapter puede ocultar un problema de modelado más profundo.",
+      "correct": true,
+      "explanation": "Verdadero. No todo desajuste se resuelve bien con traducción superficial."
+    },
+    {
+      "id": "adapter_q24",
+      "type": "true_false",
+      "question": "Un Adapter puede normalizar formatos de fecha, moneda o códigos de estado para mantener coherencia del contrato interno.",
+      "correct": true,
+      "explanation": "Verdadero. Esa normalización semántica es una tarea típica del patrón."
+    },
+    {
+      "id": "adapter_q25",
+      "type": "true_false",
+      "question": "Decorator y Adapter comparten exactamente la misma intención principal.",
+      "correct": false,
+      "explanation": "Falso. Decorator añade responsabilidades; Adapter corrige incompatibilidad de interfaz."
+    },
+    {
+      "id": "adapter_q26",
+      "type": "true_false",
+      "question": "En migraciones progresivas, Adapter puede servir como capa temporal para coexistir con sistemas legacy.",
+      "correct": true,
+      "explanation": "Verdadero. Es común durante transiciones donde no se puede reescribir todo de una vez."
+    },
+    {
+      "id": "adapter_q27",
+      "type": "true_false",
+      "question": "Exponer directamente el Adaptee al cliente rompe parte del valor de encapsulación que aporta Adapter.",
+      "correct": true,
+      "explanation": "Verdadero. Si el cliente conoce el Adaptee, aumenta el acoplamiento y se pierde aislamiento."
+    },
+    {
+      "id": "adapter_q28",
+      "type": "true_false",
+      "question": "Un adapter bien diseñado puede actuar como frontera anti-corrupción entre un modelo externo y el dominio interno.",
+      "correct": true,
+      "explanation": "Verdadero. Ayuda a evitar que conceptos externos contaminen el modelo interno."
+    },
+    {
+      "id": "adapter_q29",
+      "type": "short_answer",
+      "question": "¿Cómo se llama la interfaz que el cliente espera consumir en Adapter?",
+      "correct": [
+        "target"
+      ],
+      "hint": "Es el contrato estable del lado del cliente.",
+      "explanation": "Target define la API que el cliente conoce y usa."
+    },
+    {
+      "id": "adapter_q30",
+      "type": "short_answer",
+      "question": "¿Cómo se llama el componente existente con interfaz incompatible?",
+      "correct": [
+        "adaptee"
+      ],
+      "hint": "Suele ser legado o de terceros.",
+      "explanation": "Adaptee es el elemento real que se desea reutilizar."
+    },
+    {
+      "id": "adapter_q31",
+      "type": "short_answer",
+      "question": "En Object Adapter, ¿qué técnica principal se usa para reutilizar el Adaptee?",
+      "correct": [
+        "composicion",
+        "composición"
+      ],
+      "hint": "El adapter contiene una referencia al objeto real.",
+      "explanation": "Object Adapter se apoya en composición y delegación."
+    },
+    {
+      "id": "adapter_q32",
+      "type": "short_answer",
+      "question": "En Class Adapter, ¿qué mecanismo estructural predomina?",
+      "correct": [
+        "herencia"
+      ],
+      "hint": "Depende de extender clases o contratos.",
+      "explanation": "Class Adapter basa la adaptación en heredar del componente existente y/o del contrato."
+    },
+    {
+      "id": "adapter_q33",
+      "type": "short_answer",
+      "question": "¿Qué patrón usarías si quieres simplificar un subsistema complejo, no traducir interfaces?",
+      "correct": [
+        "facade",
+        "fachada"
+      ],
+      "hint": "Ofrece una entrada de alto nivel.",
+      "explanation": "Facade se centra en simplificar uso, no en compatibilidad de contratos."
+    },
+    {
+      "id": "adapter_q34",
+      "type": "short_answer",
+      "question": "¿Qué patrón separa abstracción e implementación en dos jerarquías independientes?",
+      "correct": [
+        "bridge",
+        "puente"
+      ],
+      "hint": "No está orientado a integración legacy.",
+      "explanation": "Bridge desacopla variaciones estructurales desde el diseño."
+    },
+    {
+      "id": "adapter_q35",
+      "type": "short_answer",
+      "question": "Si un adapter crece con demasiadas responsabilidades, ¿qué anti-patrón puede aparecer?",
+      "correct": [
+        "god object",
+        "objeto dios"
+      ],
+      "hint": "Clase que sabe y hace demasiado.",
+      "explanation": "Un adapter sobredimensionado puede convertirse en objeto dios y dificultar mantenimiento."
+    },
+    {
+      "id": "adapter_q36",
+      "type": "short_answer",
+      "question": "¿Cómo se llama la capa que protege el dominio interno de modelos externos incompatibles?",
+      "correct": [
+        "anticorrupcion",
+        "anti-corrupcion",
+        "anti-corrupción"
+      ],
+      "hint": "Se usa en integración de contextos.",
+      "explanation": "Una capa anti-corrupción traduce conceptos externos al lenguaje interno del dominio."
+    },
+    {
+      "id": "adapter_q37",
+      "type": "short_answer",
+      "question": "¿Qué acción realiza un adapter sobre parámetros y resultados para alinear contratos?",
+      "correct": [
+        "mapeo",
+        "transformacion",
+        "transformación"
+      ],
+      "hint": "No crea negocio nuevo; convierte representaciones.",
+      "explanation": "La labor central del adapter es mapear o transformar entradas/salidas."
+    },
+    {
+      "id": "adapter_q38",
+      "type": "short_answer",
+      "question": "¿Qué atributo de diseño mejora cuando el cliente depende de Target y no del proveedor?",
+      "correct": [
+        "desacoplamiento",
+        "acoplamiento bajo",
+        "bajo acoplamiento"
+      ],
+      "hint": "Se reducen dependencias directas.",
+      "explanation": "Target estable reduce acoplamiento entre cliente y componentes externos."
+    },
+    {
+      "id": "adapter_q39",
+      "type": "short_answer",
+      "question": "Si se agrega un nuevo proveedor externo, ¿qué pieza se crea normalmente para mantener el mismo Target?",
+      "correct": [
+        "adapter",
+        "adaptador"
+      ],
+      "hint": "Implementa el mismo contrato interno.",
+      "explanation": "Se crea un nuevo adapter para ese proveedor sin tocar clientes existentes."
+    },
+    {
+      "id": "adapter_q40",
+      "type": "short_answer",
+      "question": "¿Qué tipo de prueba valida la interacción real entre adapter y SDK externo?",
+      "correct": [
+        "integracion",
+        "integración"
+      ],
+      "hint": "No usa solo mocks; verifica el comportamiento con la dependencia real.",
+      "explanation": "Las pruebas de integración confirman que la traducción del adapter funciona con el proveedor real."
     }
   ]
 }

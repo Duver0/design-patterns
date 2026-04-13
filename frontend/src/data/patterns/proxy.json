@@ -1,0 +1,432 @@
+{
+  "id": "proxy",
+  "name": "Proxy",
+  "category": "Estructural",
+  "description": "Proporciona un sustituto del objeto real para controlar el acceso y anadir comportamientos como carga diferida, seguridad, acceso remoto o gestion inteligente antes de delegar en el objeto objetivo.",
+  "questions": [
+    {
+      "id": "proxy_q1",
+      "type": "multiple_choice",
+      "question": "Cual es el proposito principal del patron Proxy?",
+      "options": [
+        "Dividir una operacion compleja en pasos configurables",
+        "Controlar el acceso a un objeto real mediante un sustituto con la misma interfaz",
+        "Crear familias de objetos relacionados sin acoplarse a clases concretas",
+        "Convertir una interfaz incompatible en otra esperada por el cliente"
+      ],
+      "correct": 1,
+      "explanation": "Proxy introduce un objeto intermediario que expone la misma interfaz que el objeto real y decide cuando y como delegar, permitiendo control de acceso, optimizacion o funcionalidades adicionales."
+    },
+    {
+      "id": "proxy_q2",
+      "type": "multiple_choice",
+      "question": "En una galeria web, las imagenes de alta resolucion se cargan solo al hacer clic en una miniatura. Que tipo de Proxy representa mejor este caso?",
+      "options": [
+        "Proxy virtual",
+        "Proxy remoto",
+        "Proxy de proteccion",
+        "Proxy inteligente"
+      ],
+      "correct": 0,
+      "explanation": "El Proxy virtual retrasa la creacion o carga de objetos costosos hasta que realmente se necesitan, reduciendo tiempo de arranque y consumo inicial de recursos."
+    },
+    {
+      "id": "proxy_q3",
+      "type": "multiple_choice",
+      "question": "Un cliente local invoca metodos de un servicio que corre en otro servidor como si fuera un objeto local. Que tipo de Proxy se esta usando?",
+      "options": [
+        "Proxy virtual",
+        "Proxy de proteccion",
+        "Proxy remoto",
+        "Proxy de cache"
+      ],
+      "correct": 2,
+      "explanation": "El Proxy remoto representa un objeto ubicado en otra direccion de red y se encarga de detalles de comunicacion como serializacion, transporte y errores de conectividad."
+    },
+    {
+      "id": "proxy_q4",
+      "type": "multiple_choice",
+      "question": "Cual es la responsabilidad clave de un Proxy de proteccion?",
+      "options": [
+        "Convertir datos de un formato a otro",
+        "Validar permisos o roles antes de delegar la operacion",
+        "Construir objetos complejos paso a paso",
+        "Eliminar completamente la latencia de red"
+      ],
+      "correct": 1,
+      "explanation": "El Proxy de proteccion anade reglas de autorizacion y acceso, impidiendo llamadas no permitidas al objeto real."
+    },
+    {
+      "id": "proxy_q5",
+      "type": "multiple_choice",
+      "question": "Que comportamiento es mas caracteristico de un Smart Proxy?",
+      "options": [
+        "Cambiar la interfaz publica del objeto real",
+        "Agrupar subsistemas detras de una API simplificada",
+        "Seleccionar algoritmos en tiempo de ejecucion",
+        "Agregar logica transversal como conteo de referencias, logging o cache"
+      ],
+      "correct": 3,
+      "explanation": "El Smart Proxy anade servicios de gestion alrededor del acceso al objeto real, por ejemplo metricas, sincronizacion, validaciones o administracion de ciclo de vida."
+    },
+    {
+      "id": "proxy_q6",
+      "type": "multiple_choice",
+      "question": "Que estructura describe correctamente el patron Proxy?",
+      "options": [
+        "Cliente -> Facade -> Subsistemas multiples con interfaces distintas",
+        "Cliente -> Decorator -> Componente, donde cada decorador cambia la interfaz",
+        "Cliente -> Subject; Proxy y RealSubject implementan Subject",
+        "Cliente -> Adapter -> Adaptee sin interfaz comun con el objetivo"
+      ],
+      "correct": 2,
+      "explanation": "Proxy y RealSubject comparten la interfaz Subject para que el cliente pueda usar cualquiera de forma transparente."
+    },
+    {
+      "id": "proxy_q7",
+      "type": "multiple_choice",
+      "question": "Cual diferencia de intencion entre Decorator y Proxy es correcta?",
+      "options": [
+        "Decorator extiende responsabilidades; Proxy controla acceso al objeto",
+        "Decorator controla permisos; Proxy anade funcionalidades visuales",
+        "Decorator simplifica subsistemas; Proxy traduce interfaces incompatibles",
+        "Decorator y Proxy tienen exactamente la misma intencion"
+      ],
+      "correct": 0,
+      "explanation": "Aunque ambos envuelven objetos y comparten interfaz, Decorator se centra en anadir comportamiento, mientras Proxy prioriza controlar o mediar el acceso al objeto real."
+    },
+    {
+      "id": "proxy_q8",
+      "type": "multiple_choice",
+      "question": "Que afirmacion distingue mejor Facade de Proxy?",
+      "options": [
+        "Facade y Proxy requieren siempre autorizacion basada en roles",
+        "Facade simplifica el uso de un subsistema; Proxy representa y controla acceso a un objeto especifico",
+        "Facade solo funciona en sistemas distribuidos y Proxy solo en local",
+        "Facade reemplaza herencia multiple y Proxy reemplaza polimorfismo"
+      ],
+      "correct": 1,
+      "explanation": "Facade ofrece una interfaz simplificada para varios componentes, mientras Proxy actua como sustituto de un objeto concreto para mediar su acceso."
+    },
+    {
+      "id": "proxy_q9",
+      "type": "multiple_choice",
+      "question": "Tienes un cliente de almacenamiento en la nube; para reducir costo y latencia quieres servir lecturas repetidas desde memoria local antes de consultar la nube. Que opcion encaja mejor?",
+      "options": [
+        "Factory Method para crear clientes",
+        "Adapter para cambiar protocolo HTTP a gRPC",
+        "Facade para ocultar todas las APIs del proveedor",
+        "Smart Proxy con politica de cache y delegacion al servicio real"
+      ],
+      "correct": 3,
+      "explanation": "Un Smart Proxy puede interceptar lecturas, aplicar cache y solo delegar al objeto real cuando no hay datos disponibles localmente."
+    },
+    {
+      "id": "proxy_q10",
+      "type": "multiple_choice",
+      "question": "Un modulo de facturacion necesita una API unica y simple para coordinar impuestos, descuentos y notificaciones, sin controlar acceso por objeto. Que patron es mas adecuado?",
+      "options": [
+        "Proxy",
+        "Decorator",
+        "Facade",
+        "Observer"
+      ],
+      "correct": 2,
+      "explanation": "El problema descrito es de simplificacion de un subsistema, objetivo tipico de Facade, no de mediacion de acceso a un objeto real como en Proxy."
+    },
+    {
+      "id": "proxy_q11",
+      "type": "multiple_choice",
+      "question": "Cual es un riesgo real al introducir Proxies en exceso?",
+      "options": [
+        "Eliminar completamente el acoplamiento entre modulos",
+        "Forzar a usar herencia en lugar de composicion",
+        "Aumentar complejidad y latencia por capas adicionales de indireccion",
+        "Impedir cualquier forma de pruebas unitarias"
+      ],
+      "correct": 2,
+      "explanation": "Cada proxy anade logica intermedia. Si se encadenan sin criterio, puede crecer la complejidad operativa y el costo de ejecucion."
+    },
+    {
+      "id": "proxy_q12",
+      "type": "multiple_choice",
+      "question": "En una API interna quieres exigir token valido y limite por usuario antes de llamar al servicio real de reportes. Que enfoque aplica mejor?",
+      "options": [
+        "Usar Builder para construir el reporte",
+        "Usar un Proxy de proteccion con validacion y rate limiting previo",
+        "Usar Prototype para clonar respuestas previas",
+        "Usar Adapter para renombrar metodos del servicio"
+      ],
+      "correct": 1,
+      "explanation": "El Proxy de proteccion puede centralizar reglas de seguridad y control de uso antes de delegar al servicio real."
+    },
+    {
+      "id": "proxy_q13",
+      "type": "true_false",
+      "question": "En Proxy, tanto el Proxy como el RealSubject deben cumplir la misma interfaz esperada por el cliente.",
+      "correct": true,
+      "explanation": "La transparencia para el cliente se logra porque ambos implementan Subject; asi el cliente no necesita cambiar su codigo."
+    },
+    {
+      "id": "proxy_q14",
+      "type": "true_false",
+      "question": "Decorator y Proxy son equivalentes porque ambos se usan exclusivamente para seguridad de acceso.",
+      "correct": false,
+      "explanation": "Comparten forma estructural de envoltura, pero su intencion principal difiere: Decorator extiende comportamiento; Proxy media y controla acceso."
+    },
+    {
+      "id": "proxy_q15",
+      "type": "true_false",
+      "question": "Un Proxy virtual puede mejorar el tiempo de inicio al posponer la creacion de objetos pesados.",
+      "correct": true,
+      "explanation": "Al retrasar la inicializacion hasta el primer uso real, se reduce trabajo inicial y consumo de recursos tempranos."
+    },
+    {
+      "id": "proxy_q16",
+      "type": "true_false",
+      "question": "Un Proxy de proteccion debe crear siempre el objeto real en su constructor, incluso si el usuario no tiene permisos.",
+      "correct": false,
+      "explanation": "Precisamente puede evitar crear o usar el objeto real cuando no se cumplen reglas de autorizacion, optimizando recursos."
+    },
+    {
+      "id": "proxy_q17",
+      "type": "true_false",
+      "question": "Un Proxy remoto puede ocultar al cliente detalles de serializacion y transporte de red.",
+      "correct": true,
+      "explanation": "Esa es una de sus ventajas: exponer una interfaz local mientras encapsula la comunicacion distribuida."
+    },
+    {
+      "id": "proxy_q18",
+      "type": "true_false",
+      "question": "Facade y Proxy son intercambiables porque ambos siempre representan exactamente un unico objeto real.",
+      "correct": false,
+      "explanation": "Facade suele simplificar multiples componentes del subsistema. Proxy tipicamente representa un objeto objetivo concreto y controla su acceso."
+    },
+    {
+      "id": "proxy_q19",
+      "type": "true_false",
+      "question": "Un Smart Proxy puede registrar metricas de uso sin modificar directamente la clase del objeto real.",
+      "correct": true,
+      "explanation": "Al interceptar llamadas, el proxy puede instrumentar logging, metricas o tracing manteniendo intacta la implementacion del RealSubject."
+    },
+    {
+      "id": "proxy_q20",
+      "type": "true_false",
+      "question": "Usar Proxy remoto elimina por completo fallos de red, por lo que no es necesario manejar excepciones de comunicacion.",
+      "correct": false,
+      "explanation": "El proxy abstrae complejidad, pero no elimina la naturaleza distribuida; timeouts y errores de red siguen existiendo y deben gestionarse."
+    },
+    {
+      "id": "proxy_q21",
+      "type": "short_answer",
+      "question": "Como se llama la interfaz comun que implementan Proxy y objeto real en este patron?",
+      "correct": [
+        "subject",
+        "sujeto"
+      ],
+      "hint": "Es el contrato que permite transparencia para el cliente.",
+      "explanation": "La interfaz comun se conoce como Subject (Sujeto), y define las operaciones que el cliente invoca."
+    },
+    {
+      "id": "proxy_q22",
+      "type": "short_answer",
+      "question": "Como se denomina el objeto concreto al que finalmente delega el Proxy?",
+      "correct": [
+        "realsubject",
+        "real subject",
+        "sujeto real"
+      ],
+      "hint": "Es la implementacion autentica del servicio.",
+      "explanation": "Se llama RealSubject: el objeto real que contiene la logica principal y recibe la delegacion del Proxy."
+    },
+    {
+      "id": "proxy_q23",
+      "type": "short_answer",
+      "question": "Que tipo de Proxy se especializa en carga diferida de objetos costosos?",
+      "correct": [
+        "virtual",
+        "proxy virtual"
+      ],
+      "hint": "Su objetivo principal es posponer la inicializacion.",
+      "explanation": "El Proxy virtual difiere la creacion o carga del objeto real hasta que sea estrictamente necesario."
+    },
+    {
+      "id": "proxy_q24",
+      "type": "short_answer",
+      "question": "Que tipo de Proxy anadirias para contar referencias, registrar accesos y liberar recursos automaticamente?",
+      "correct": [
+        "smart",
+        "proxy inteligente",
+        "smart proxy"
+      ],
+      "hint": "No solo controla acceso; tambien agrega gestion tecnica transversal.",
+      "explanation": "Ese rol corresponde al Smart Proxy, que incorpora servicios adicionales de administracion alrededor del objeto real."
+    },
+    {
+      "id": "proxy_q25",
+      "type": "short_answer",
+      "question": "Que patron usarias para simplificar el acceso a un subsistema completo, en lugar de representar un unico objeto real?",
+      "correct": [
+        "facade",
+        "fachada"
+      ],
+      "hint": "Su foco es ofrecer una interfaz unificada y simple.",
+      "explanation": "Facade encapsula complejidad de varios componentes detras de una API de alto nivel, distinto al proposito central de Proxy."
+    },
+    {
+      "id": "proxy_q26",
+      "type": "multiple_choice",
+      "question": "Que consecuencia tiene permitir que el cliente instancie directamente RealSubject, saltandose el Proxy?",
+      "options": [
+        "Mejora la trazabilidad porque se eliminan capas",
+        "No afecta, porque Proxy solo se usa en tiempo de compilacion",
+        "Se pierde el control centralizado de acceso, auditoria o cache que provee el Proxy",
+        "Convierte automaticamente el diseno en Facade"
+      ],
+      "correct": 2,
+      "explanation": "Si el cliente evita el Proxy, se rompen las politicas y comportamientos transversales definidos en la capa de mediacion."
+    },
+    {
+      "id": "proxy_q27",
+      "type": "multiple_choice",
+      "question": "En la implementacion clasica de Proxy, quien suele mantener la referencia interna al objeto real?",
+      "options": [
+        "El propio Proxy",
+        "El cliente",
+        "La interfaz Subject",
+        "Unicamente un Builder externo"
+      ],
+      "correct": 0,
+      "explanation": "El Proxy encapsula la referencia al RealSubject y decide cuando crearla o delegar operaciones."
+    },
+    {
+      "id": "proxy_q28",
+      "type": "multiple_choice",
+      "question": "Debes autenticar, auditar y limitar tasa antes de invocar una API de pagos, manteniendo la misma interfaz para el cliente. Que enfoque encaja mejor?",
+      "options": [
+        "Adapter para mapear DTOs",
+        "Proxy de proteccion con logica transversal antes de delegar",
+        "Builder para ensamblar la respuesta",
+        "Command para deshacer operaciones"
+      ],
+      "correct": 1,
+      "explanation": "La necesidad principal es controlar y enriquecer el acceso a un servicio real sin cambiar su contrato visible."
+    },
+    {
+      "id": "proxy_q29",
+      "type": "multiple_choice",
+      "question": "Cual es un efecto esperado al usar Proxy remoto en operaciones frecuentes y de baja latencia?",
+      "options": [
+        "Desaparecen los fallos parciales de la red",
+        "La interfaz deja de ser polimorfica",
+        "Puede aumentar la latencia por serializacion, red y deserializacion",
+        "Se elimina la necesidad de observabilidad"
+      ],
+      "correct": 2,
+      "explanation": "Aunque el cliente vea una llamada similar a local, el costo de transporte y conversion de datos sigue existiendo."
+    },
+    {
+      "id": "proxy_q30",
+      "type": "multiple_choice",
+      "question": "En que escenario es menos recomendable introducir un Proxy?",
+      "options": [
+        "Cuando necesitas control de permisos por operacion",
+        "Cuando deseas carga diferida de objetos pesados",
+        "Cuando quieres cachear respuestas de un servicio costoso",
+        "Cuando el objeto es liviano, local y no requiere politicas adicionales"
+      ],
+      "correct": 3,
+      "explanation": "Si no hay necesidad de control, optimizacion ni mediacion, agregar Proxy solo anade complejidad innecesaria."
+    },
+    {
+      "id": "proxy_q31",
+      "type": "true_false",
+      "question": "Un Proxy puede diferir la creacion del RealSubject hasta la primera invocacion real del cliente.",
+      "correct": true,
+      "explanation": "Ese comportamiento es tipico del Proxy virtual y ayuda a optimizar uso de memoria y tiempo de inicializacion."
+    },
+    {
+      "id": "proxy_q32",
+      "type": "true_false",
+      "question": "Si el Proxy cambia la firma de los metodos respecto a Subject, el cliente sigue siendo transparente a ese cambio.",
+      "correct": false,
+      "explanation": "La transparencia depende de mantener el mismo contrato. Cambiar firmas rompe sustitucion y acopla al cliente."
+    },
+    {
+      "id": "proxy_q33",
+      "type": "true_false",
+      "question": "Cuando un Proxy implementa cache, definir una estrategia de invalidacion es clave para evitar datos obsoletos.",
+      "correct": true,
+      "explanation": "Sin invalidacion o expiracion adecuadas, la cache puede devolver informacion vieja y causar errores funcionales."
+    },
+    {
+      "id": "proxy_q34",
+      "type": "true_false",
+      "question": "En Proxy remoto, aplicar reintentos ilimitados sin timeout es una buena practica para garantizar disponibilidad.",
+      "correct": false,
+      "explanation": "Reintentos sin limites pueden saturar el sistema. Se requieren timeouts, limites y patrones de resiliencia."
+    },
+    {
+      "id": "proxy_q35",
+      "type": "true_false",
+      "question": "Es posible combinar varios Proxies sobre la misma interfaz Subject para separar seguridad, cache y observabilidad.",
+      "correct": true,
+      "explanation": "Componer capas de proxies o interceptores es una estrategia comun para aislar responsabilidades transversales."
+    },
+    {
+      "id": "proxy_q36",
+      "type": "short_answer",
+      "question": "En la estructura del patron, que actor consume Subject sin depender de implementaciones concretas?",
+      "correct": [
+        "cliente",
+        "client"
+      ],
+      "hint": "Es quien realiza las llamadas de negocio.",
+      "explanation": "El cliente trabaja contra la interfaz Subject, lo que permite sustituir RealSubject por Proxy sin cambios en su codigo."
+    },
+    {
+      "id": "proxy_q37",
+      "type": "short_answer",
+      "question": "Que mecanismo de resiliencia suele acompanar a un Proxy remoto para cortar llamadas tras fallos repetidos?",
+      "correct": [
+        "circuit breaker",
+        "cortacircuitos"
+      ],
+      "hint": "Evita seguir golpeando un servicio caido.",
+      "explanation": "El circuit breaker abre el circuito tras cierto umbral de errores y previene cascadas de fallos."
+    },
+    {
+      "id": "proxy_q38",
+      "type": "short_answer",
+      "question": "Que costo arquitectonico introduce Proxy al agregar una capa intermedia entre cliente y objeto real?",
+      "correct": [
+        "indireccion",
+        "indirección"
+      ],
+      "hint": "Es el efecto de no llamar directamente al objetivo.",
+      "explanation": "Proxy agrega un nivel de indirección que puede aumentar complejidad y, en algunos casos, latencia."
+    },
+    {
+      "id": "proxy_q39",
+      "type": "short_answer",
+      "question": "Que patron usar para anadir responsabilidades dinamicas a un objeto, cuando el foco no es controlar acceso?",
+      "correct": [
+        "decorator",
+        "decorador"
+      ],
+      "hint": "Tiene forma parecida, pero distinta intencion.",
+      "explanation": "Decorator prioriza extender comportamiento de forma componible, mientras Proxy prioriza mediar acceso."
+    },
+    {
+      "id": "proxy_q40",
+      "type": "short_answer",
+      "question": "Que tipo de Proxy representa un objeto ubicado en otro proceso o maquina?",
+      "correct": [
+        "remoto",
+        "proxy remoto"
+      ],
+      "hint": "Encapsula comunicacion de red.",
+      "explanation": "El Proxy remoto actua como representante local de un servicio distribuido."
+    }
+  ]
+}

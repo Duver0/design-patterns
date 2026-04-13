@@ -11,12 +11,6 @@ const UI = (() => {
   function hide(...ids) { ids.forEach(id => el(id)?.classList.add('hidden')); }
   function show(...ids) { ids.forEach(id => el(id)?.classList.remove('hidden')); }
 
-  function questionCount(pattern) {
-    if (Number.isFinite(pattern.questionCount)) return pattern.questionCount;
-    if (Array.isArray(pattern.questions)) return pattern.questions.length;
-    return 0;
-  }
-
   /** Simple markdown-lite: bold **text** */
   function mdLite(text) {
     return String(text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
@@ -58,12 +52,12 @@ const UI = (() => {
         <span class="stat-label">Patrones completados</span>
       </div>
       <div class="stat-item">
-        <span class="stat-value">${stats.correctAnswers}/${stats.totalQuestions}</span>
-        <span class="stat-label">Respuestas correctas</span>
+        <span class="stat-value">${stats.totalCorrectAnswers}</span>
+        <span class="stat-label">Correctas acumuladas</span>
       </div>
       <div class="stat-item">
-        <span class="stat-value">${stats.accuracy}%</span>
-        <span class="stat-label">Precisión global</span>
+        <span class="stat-value">${stats.totalIncorrectAnswers}</span>
+        <span class="stat-label">Incorrectas acumuladas</span>
       </div>
     `;
 
@@ -87,11 +81,14 @@ const UI = (() => {
 
       const row = qs(`#cards-${cat}`, section);
       categories[cat].forEach(pattern => {
-        const totalQuestions = questionCount(pattern);
-        const score = Quiz.getPatternScore(pattern.id, totalQuestions);
+        const score = Quiz.getPatternScore(pattern.id);
         const pct   = Math.round(score * 100);
+        const targetScore = Quiz.getTargetScore();
         const entry = Quiz.getPatternProgress(pattern.id);
-        const answered = entry ? Object.keys(entry.answers).length : 0;
+        const bestScore = entry ? entry.bestScore : 0;
+        const progressLabel = entry?.completed
+          ? `Completado: ${targetScore}/${targetScore}`
+          : `Mejor puntaje: ${bestScore}/${targetScore}`;
 
         const card = document.createElement('button');
         card.className = 'pattern-card';
@@ -103,7 +100,7 @@ const UI = (() => {
           <div class="progress-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100">
             <div class="progress-fill" style="width:${pct}%"></div>
           </div>
-          <span class="progress-label">${answered}/${totalQuestions} preguntas respondidas</span>
+          <span class="progress-label">${progressLabel}</span>
         `;
         card.addEventListener('click', () => onPatternClick(pattern));
         row.appendChild(card);
@@ -123,24 +120,27 @@ const UI = (() => {
 
   // ── Pattern detail view ───────────────────────────────────────────────────
   function renderPatternDetail(pattern, onStart, onBack) {
-    const totalQuestions = questionCount(pattern);
+    const targetScore = Quiz.getTargetScore();
 
     el('detail-name').textContent     = pattern.name;
     el('detail-category').textContent = pattern.category;
     el('detail-desc').textContent     = pattern.description;
-    el('detail-count').textContent    = `${totalQuestions} preguntas`;
+    el('detail-count').textContent    = `${targetScore} preguntas por sesión`;
 
-    const score = Quiz.getPatternScore(pattern.id, totalQuestions);
+    const score = Quiz.getPatternScore(pattern.id);
     const pct   = Math.round(score * 100);
+    const entry = Quiz.getPatternProgress(pattern.id);
+    const bestScore = entry ? entry.bestScore : 0;
+
     el('detail-progress-fill').style.width  = `${pct}%`;
-    el('detail-progress-label').textContent = `${pct}% completado`;
+    el('detail-progress-label').textContent = entry?.completed
+      ? `Completado: ${targetScore}/${targetScore} (100%)`
+      : `Mejor intento: ${bestScore}/${targetScore} (${pct}%)`;
 
     const startBtn = el('btn-start-quiz');
     if (startBtn) {
-      startBtn.disabled = totalQuestions === 0;
-      startBtn.textContent = totalQuestions === 0
-        ? 'Sin preguntas disponibles'
-        : '▶ Iniciar cuestionario';
+      startBtn.disabled = false;
+      startBtn.textContent = '▶ Iniciar cuestionario';
       startBtn.onclick = () => onStart(pattern);
     }
     el('btn-back-home').onclick  = onBack;
@@ -160,14 +160,16 @@ const UI = (() => {
   }
 
   // ── Quiz view ─────────────────────────────────────────────────────────────
-  function renderQuizHeader(pattern, current, total) {
+  function renderQuizHeader(pattern, currentAnswered, total) {
+    const safeAnswered = Math.max(0, Math.min(total, Number(currentAnswered) || 0));
     el('quiz-pattern-name').textContent = pattern.name;
-    el('quiz-progress-text').textContent = `${current} / ${total}`;
-    const pct = Math.round(((current - 1) / total) * 100);
+    el('quiz-progress-text').textContent = `${safeAnswered} / ${total} respondidas`;
+    const pct = total > 0 ? Math.round((safeAnswered / total) * 100) : 0;
     el('quiz-progress-fill').style.width = `${pct}%`;
   }
 
-  function renderQuestion(question, questionNum, total) {
+  function renderQuestion(question, currentAnswered, total) {
+    const safeAnswered = Math.max(0, Math.min(total, Number(currentAnswered) || 0));
     el('question-type-label').textContent = typeLabel(question.type);
     el('question-text').textContent       = question.question;
 
@@ -179,14 +181,14 @@ const UI = (() => {
     const getAnswer = QuestionRenderer.render(question, answerArea);
     renderSubmitRow(answerArea, getAnswer);
 
-    el('quiz-progress-text').textContent = `${questionNum} / ${total}`;
-    const pct = Math.round(((questionNum - 1) / total) * 100);
+    el('quiz-progress-text').textContent = `${safeAnswered} / ${total} respondidas`;
+    const pct = total > 0 ? Math.round((safeAnswered / total) * 100) : 0;
     el('quiz-progress-fill').style.width = `${pct}%`;
   }
 
-  function renderQuizView(pattern, question, questionNum, total) {
-    renderQuizHeader(pattern, questionNum, total);
-    renderQuestion(question, questionNum, total);
+  function renderQuizView(pattern, question, currentAnswered, total) {
+    renderQuizHeader(pattern, currentAnswered, total);
+    renderQuestion(question, currentAnswered, total);
   }
 
   function renderSubmitRow(container, getAnswer) {

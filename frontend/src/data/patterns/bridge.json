@@ -1,0 +1,437 @@
+{
+  "id": "bridge",
+  "name": "Bridge",
+  "category": "Estructural",
+  "description": "Separa una abstraccion de su implementacion para que ambas puedan evolucionar de forma independiente usando composicion en lugar de acoplamiento rigido.",
+  "questions": [
+    {
+      "id": "bridge_q1",
+      "type": "multiple_choice",
+      "question": "¿Cual es el proposito principal del patron Bridge?",
+      "options": [
+        "Traducir una API incompatible a otra interfaz esperada",
+        "Separar una abstraccion de su implementacion para que varien de forma independiente",
+        "Crear objetos complejos paso a paso",
+        "Notificar automaticamente a multiples observadores"
+      ],
+      "correct": 1,
+      "explanation": "Bridge desacopla dos jerarquias: la de abstracciones y la de implementaciones."
+    },
+    {
+      "id": "bridge_q2",
+      "type": "multiple_choice",
+      "question": "¿Que conjunto de participantes corresponde al patron Bridge?",
+      "options": [
+        "Abstraction, RefinedAbstraction, Implementor, ConcreteImplementor",
+        "Context, Strategy, ConcreteStrategy, Client",
+        "Target, Adapter, Adaptee, Facade",
+        "Subject, Observer, ConcreteObserver, State"
+      ],
+      "correct": 0,
+      "explanation": "Esa es la estructura clasica de Bridge."
+    },
+    {
+      "id": "bridge_q3",
+      "type": "multiple_choice",
+      "question": "¿En que situacion Bridge suele aportar mas valor?",
+      "options": [
+        "Cuando solo existe una implementacion estable y definitiva",
+        "Cuando hay dos ejes de cambio independientes",
+        "Cuando necesitas un objeto global unico",
+        "Cuando solo buscas simplificar una API compleja"
+      ],
+      "correct": 1,
+      "explanation": "Bridge brilla cuando hay variacion independiente en dos dimensiones."
+    },
+    {
+      "id": "bridge_q4",
+      "type": "multiple_choice",
+      "question": "¿Como se relaciona normalmente Abstraction con Implementor en Bridge?",
+      "options": [
+        "Por herencia multiple",
+        "Por composicion y delegacion",
+        "Por eventos asincronos obligatorios",
+        "Por reflexion en tiempo de ejecucion"
+      ],
+      "correct": 1,
+      "explanation": "La abstraccion mantiene una referencia a Implementor y delega operaciones."
+    },
+    {
+      "id": "bridge_q5",
+      "type": "multiple_choice",
+      "question": "¿Que diferencia clave describe mejor Bridge frente a Adapter?",
+      "options": [
+        "Bridge corrige incompatibilidades legacy; Adapter diseña para cambios futuros",
+        "Bridge diseña desacoplamiento desde el inicio; Adapter integra interfaces incompatibles existentes",
+        "No existe diferencia real entre ambos",
+        "Adapter solo se usa con bases de datos y Bridge con UI"
+      ],
+      "correct": 1,
+      "explanation": "Adapter suele ser integracion retrospectiva; Bridge es una decision de arquitectura preventiva."
+    },
+    {
+      "id": "bridge_q6",
+      "type": "multiple_choice",
+      "question": "¿Que diferencia es correcta entre Bridge y Strategy?",
+      "options": [
+        "Strategy separa dos jerarquias estructurales; Bridge cambia algoritmos",
+        "Bridge y Strategy son exactamente el mismo patron",
+        "Strategy encapsula algoritmos intercambiables; Bridge desacopla abstraccion e implementacion",
+        "Bridge reemplaza por completo a Strategy"
+      ],
+      "correct": 2,
+      "explanation": "Strategy modela variantes algoritmicas; Bridge modela dos dimensiones estructurales."
+    },
+    {
+      "id": "bridge_q7",
+      "type": "multiple_choice",
+      "question": "¿Que problema ayuda a evitar Bridge cuando crecen las combinaciones?",
+      "options": [
+        "Deadlocks",
+        "Explosión combinatoria de subclases",
+        "Condiciones de carrera en memoria compartida",
+        "Duplicacion de indices en base de datos"
+      ],
+      "correct": 1,
+      "explanation": "Separar jerarquias evita crear una clase por cada combinacion posible."
+    },
+    {
+      "id": "bridge_q8",
+      "type": "multiple_choice",
+      "question": "¿Cual es una desventaja comun al aplicar Bridge en problemas simples?",
+      "options": [
+        "Elimina polimorfismo",
+        "Aumenta clases e indireccion, agregando complejidad",
+        "Obliga a usar herencia multiple",
+        "Impide pruebas unitarias"
+      ],
+      "correct": 1,
+      "explanation": "Si no hay dos ejes de cambio reales, Bridge puede ser sobreingenieria."
+    },
+    {
+      "id": "bridge_q9",
+      "type": "multiple_choice",
+      "question": "Cuando el cliente llama un metodo de Abstraction en Bridge, ¿que suele ocurrir?",
+      "options": [
+        "Abstraction delega parte del trabajo a Implementor",
+        "Implementor reemplaza al cliente",
+        "Client instancia un Adapter automaticamente",
+        "ConcreteImplementor invoca directamente al cliente"
+      ],
+      "correct": 0,
+      "explanation": "La API de alto nivel vive en Abstraction, mientras que detalles tecnicos viven en Implementor."
+    },
+    {
+      "id": "bridge_q10",
+      "type": "multiple_choice",
+      "question": "Tienes figuras (circulo, rectangulo) y motores de render (SVG, Canvas, WebGL). ¿Que patron evita clases como CirculoSVG y RectanguloCanvas?",
+      "options": [
+        "Decorator",
+        "Adapter",
+        "Bridge",
+        "Prototype"
+      ],
+      "correct": 2,
+      "explanation": "Bridge separa la jerarquia de figuras de la jerarquia de renderizadores."
+    },
+    {
+      "id": "bridge_q11",
+      "type": "multiple_choice",
+      "question": "En un sistema de cobro con tipos de plan y pasarelas externas, ¿que beneficio da Bridge?",
+      "options": [
+        "Permite evolucionar planes y pasarelas sin tocar todas las combinaciones",
+        "Garantiza compatibilidad automatica con cualquier SDK",
+        "Elimina pruebas de integracion",
+        "Convierte todo a un solo proveedor"
+      ],
+      "correct": 0,
+      "explanation": "Cada eje evoluciona por separado cuando se desacopla correctamente."
+    },
+    {
+      "id": "bridge_q12",
+      "type": "multiple_choice",
+      "question": "¿Cuando NO suele recomendarse Bridge?",
+      "options": [
+        "Cuando existen cambios independientes en ambos ejes",
+        "Cuando se espera crecimiento de abstracciones e implementaciones",
+        "Cuando hay una sola dimension estable y simplicidad es prioridad",
+        "Cuando se busca reducir acoplamiento entre capas"
+      ],
+      "correct": 2,
+      "explanation": "Sin variacion real en dos dimensiones, la capa extra no compensa."
+    },
+    {
+      "id": "bridge_q13",
+      "type": "multiple_choice",
+      "question": "Si agregas un nuevo ConcreteImplementor respetando la interfaz Implementor, ¿que resultado esperas?",
+      "options": [
+        "Modificar todas las clases cliente",
+        "Modificar todas las abstracciones existentes obligatoriamente",
+        "Integrarlo con impacto minimo en la jerarquia de abstraccion",
+        "Eliminar RefinedAbstraction"
+      ],
+      "correct": 2,
+      "explanation": "Ese desacoplamiento es un objetivo central de Bridge."
+    },
+    {
+      "id": "bridge_q14",
+      "type": "multiple_choice",
+      "question": "Si agregas una nueva RefinedAbstraction y mantienes estable la interfaz Implementor, ¿que deberia pasar?",
+      "options": [
+        "No deberia requerir cambios en ConcreteImplementor",
+        "Debe cambiar cada ConcreteImplementor",
+        "Debe reescribirse la interfaz Implementor",
+        "Debe eliminarse la jerarquia de implementacion"
+      ],
+      "correct": 0,
+      "explanation": "Las abstracciones pueden crecer de forma independiente."
+    },
+    {
+      "id": "bridge_q15",
+      "type": "multiple_choice",
+      "question": "¿Que practica de diseño refuerza Bridge para mejorar testabilidad?",
+      "options": [
+        "Acoplar la abstraccion a una clase concreta",
+        "Inyectar Implementor mediante interfaz y usar dobles de prueba",
+        "Eliminar interfaces para reducir codigo",
+        "Usar solo metodos estaticos"
+      ],
+      "correct": 1,
+      "explanation": "La dependencia a contrato facilita mocks y pruebas unitarias."
+    },
+    {
+      "id": "bridge_q16",
+      "type": "multiple_choice",
+      "question": "¿Que modelado sugiere Bridge correctamente?",
+      "options": [
+        "TVRemote, RadioRemote, TVAdvancedRemote, RadioAdvancedRemote",
+        "RemoteAbstraction + DeviceImplementor con variantes en ambos lados",
+        "Una sola clase Remote con if-else por dispositivo",
+        "Un singleton global para controlar todos los dispositivos"
+      ],
+      "correct": 1,
+      "explanation": "Bridge evita multiplicar subclases por combinacion."
+    },
+    {
+      "id": "bridge_q17",
+      "type": "true_false",
+      "question": "Bridge se clasifica como un patron estructural.",
+      "correct": true,
+      "explanation": "Su foco es la composicion y relacion entre estructuras de clases/objetos."
+    },
+    {
+      "id": "bridge_q18",
+      "type": "true_false",
+      "question": "En Bridge, el cliente idealmente depende de ConcreteImplementor.",
+      "correct": false,
+      "explanation": "El cliente deberia depender de Abstraction, no de implementaciones concretas."
+    },
+    {
+      "id": "bridge_q19",
+      "type": "true_false",
+      "question": "Bridge permite cambiar implementaciones en tiempo de ejecucion si la abstraccion lo permite.",
+      "correct": true,
+      "explanation": "La referencia a Implementor puede sustituirse dinamicamente en muchos diseños."
+    },
+    {
+      "id": "bridge_q20",
+      "type": "true_false",
+      "question": "Bridge elimina completamente cualquier uso de herencia.",
+      "correct": false,
+      "explanation": "Puede haber herencia dentro de cada jerarquia; lo importante es separar jerarquias con composicion."
+    },
+    {
+      "id": "bridge_q21",
+      "type": "true_false",
+      "question": "Si cambia la interfaz Implementor, es probable que varias abstracciones necesiten ajustes.",
+      "correct": true,
+      "explanation": "La estabilidad del contrato Implementor es clave para minimizar impacto."
+    },
+    {
+      "id": "bridge_q22",
+      "type": "true_false",
+      "question": "Si solo existe una implementacion fija y no habra nuevas variantes, Bridge siempre es la mejor opcion.",
+      "correct": false,
+      "explanation": "En escenarios simples, Bridge puede ser complejidad innecesaria."
+    },
+    {
+      "id": "bridge_q23",
+      "type": "true_false",
+      "question": "Bridge puede facilitar pruebas unitarias al permitir reemplazar Implementor con mocks.",
+      "correct": true,
+      "explanation": "La abstraccion puede probarse aislando el lado tecnico."
+    },
+    {
+      "id": "bridge_q24",
+      "type": "true_false",
+      "question": "Facade y Bridge tienen la misma intencion principal.",
+      "correct": false,
+      "explanation": "Facade simplifica acceso a subsistemas; Bridge desacopla dos dimensiones de variacion."
+    },
+    {
+      "id": "bridge_q25",
+      "type": "true_false",
+      "question": "Bridge ayuda a cumplir el principio Abierto/Cerrado al permitir extender sin modificar codigo existente.",
+      "correct": true,
+      "explanation": "Nuevas abstracciones o implementaciones pueden añadirse con menor impacto."
+    },
+    {
+      "id": "bridge_q26",
+      "type": "true_false",
+      "question": "En Bridge, ConcreteImplementor deberia depender del cliente para coordinar su comportamiento.",
+      "correct": false,
+      "explanation": "La direccion recomendada es cliente -> abstraccion -> implementor."
+    },
+    {
+      "id": "bridge_q27",
+      "type": "true_false",
+      "question": "Bridge se usa frecuentemente para abstraer plataformas o drivers bajo una API de alto nivel.",
+      "correct": true,
+      "explanation": "Es un caso tipico: API estable arriba y variaciones tecnicas abajo."
+    },
+    {
+      "id": "bridge_q28",
+      "type": "true_false",
+      "question": "Bridge es obligatorio siempre que existan dos clases relacionadas.",
+      "correct": false,
+      "explanation": "No basta con dos clases; debe existir necesidad de variacion independiente."
+    },
+    {
+      "id": "bridge_q29",
+      "type": "short_answer",
+      "question": "¿Como se llama el rol de alto nivel que consume el cliente en Bridge?",
+      "correct": [
+        "abstraction",
+        "abstraccion",
+        "abstracción"
+      ],
+      "hint": "Define la API principal del dominio.",
+      "explanation": "La capa visible para el cliente es Abstraction."
+    },
+    {
+      "id": "bridge_q30",
+      "type": "short_answer",
+      "question": "¿Como se llama el contrato del lado tecnico en Bridge?",
+      "correct": [
+        "implementor",
+        "implementador"
+      ],
+      "hint": "Lo cumplen las implementaciones concretas.",
+      "explanation": "Implementor define operaciones que usa la abstraccion."
+    },
+    {
+      "id": "bridge_q31",
+      "type": "short_answer",
+      "question": "¿Como se denomina una variante concreta de la abstraccion en Bridge?",
+      "correct": [
+        "refinedabstraction",
+        "abstraccion refinada",
+        "abstracción refinada"
+      ],
+      "hint": "Extiende la capa de alto nivel.",
+      "explanation": "RefinedAbstraction especializa el comportamiento de Abstraction."
+    },
+    {
+      "id": "bridge_q32",
+      "type": "short_answer",
+      "question": "¿Como se llama una implementacion concreta del contrato tecnico en Bridge?",
+      "correct": [
+        "concreteimplementor",
+        "implementador concreto"
+      ],
+      "hint": "Materializa el contrato Implementor.",
+      "explanation": "ConcreteImplementor contiene detalles tecnicos especificos."
+    },
+    {
+      "id": "bridge_q33",
+      "type": "short_answer",
+      "question": "Relacion principal entre Abstraction e Implementor en Bridge.",
+      "correct": [
+        "composicion",
+        "composición"
+      ],
+      "hint": "No es acoplamiento por herencia directa entre jerarquias.",
+      "explanation": "Bridge une ambas jerarquias mediante composicion."
+    },
+    {
+      "id": "bridge_q34",
+      "type": "short_answer",
+      "question": "Problema tipico que Bridge evita cuando crecen combinaciones de variantes.",
+      "correct": [
+        "explosion de clases",
+        "explosión de clases"
+      ],
+      "hint": "Aparecen demasiadas subclases por cada mezcla posible.",
+      "explanation": "Sin Bridge, el numero de clases puede crecer de forma combinatoria."
+    },
+    {
+      "id": "bridge_q35",
+      "type": "short_answer",
+      "question": "Patron adecuado para integrar una API legacy incompatible.",
+      "correct": [
+        "adapter",
+        "adaptador"
+      ],
+      "hint": "No esta pensado para dos ejes de variacion nuevos.",
+      "explanation": "Ese problema corresponde al patron Adapter."
+    },
+    {
+      "id": "bridge_q36",
+      "type": "short_answer",
+      "question": "Patron enfocado en intercambiar algoritmos dentro de un contexto.",
+      "correct": [
+        "strategy",
+        "estrategia"
+      ],
+      "hint": "El contexto cambia politica de comportamiento.",
+      "explanation": "Esa intencion pertenece a Strategy."
+    },
+    {
+      "id": "bridge_q37",
+      "type": "short_answer",
+      "question": "Principio SOLID reforzado cuando Abstraction depende de Implementor (interfaz) y no de concretos.",
+      "correct": [
+        "dip",
+        "inversion de dependencias",
+        "inversión de dependencias"
+      ],
+      "hint": "La D de SOLID.",
+      "explanation": "Bridge favorece depender de abstracciones en lugar de concreciones."
+    },
+    {
+      "id": "bridge_q38",
+      "type": "short_answer",
+      "question": "En el ejemplo de figuras y motores, nombre del eje tecnico (SVG, Canvas, WebGL).",
+      "correct": [
+        "renderizador",
+        "renderer"
+      ],
+      "hint": "Se encarga de dibujar.",
+      "explanation": "Ese eje corresponde a implementaciones de render."
+    },
+    {
+      "id": "bridge_q39",
+      "type": "short_answer",
+      "question": "En el ejemplo remoto-dispositivo, el control remoto representa la...",
+      "correct": [
+        "abstraccion",
+        "abstracción",
+        "abstraction"
+      ],
+      "hint": "Es la API de alto nivel para el usuario.",
+      "explanation": "El remoto delega detalles en dispositivos concretos."
+    },
+    {
+      "id": "bridge_q40",
+      "type": "short_answer",
+      "question": "En el mismo ejemplo, TV o Radio son del lado de la...",
+      "correct": [
+        "implementacion",
+        "implementación",
+        "implementor"
+      ],
+      "hint": "Lado tecnico que ejecuta operaciones reales.",
+      "explanation": "TV y Radio representan implementaciones concretas del contrato tecnico."
+    }
+  ]
+}

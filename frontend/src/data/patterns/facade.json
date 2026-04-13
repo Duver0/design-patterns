@@ -1,0 +1,418 @@
+{
+  "id": "facade",
+  "name": "Facade",
+  "category": "Estructural",
+  "description": "Proporciona una interfaz unificada y de alto nivel para simplificar el uso de subsistemas complejos, reduciendo acoplamiento y complejidad para el cliente.",
+  "questions": [
+    {
+      "id": "facade_q1",
+      "type": "multiple_choice",
+      "question": "¿Cuál es el propósito principal del patrón Facade?",
+      "options": [
+        "Crear familias de objetos relacionados sin exponer sus constructores",
+        "Simplificar el acceso a un subsistema complejo mediante una interfaz de alto nivel",
+        "Permitir que objetos incompatibles colaboren sin cambiar su código",
+        "Garantizar una única instancia global para un servicio"
+      ],
+      "correct": 1,
+      "explanation": "Facade define una entrada simple para operaciones frecuentes sobre varios componentes internos, ocultando su coordinación."
+    },
+    {
+      "id": "facade_q2",
+      "type": "multiple_choice",
+      "question": "En la estructura de Facade, ¿qué responsabilidad tiene la clase Facade?",
+      "options": [
+        "Implementar toda la lógica interna de cada subsistema",
+        "Orquestar llamadas entre componentes y exponer operaciones simplificadas",
+        "Reemplazar todas las APIs existentes por una sola clase utilitaria",
+        "Convertirse en el único punto permitido para toda regla de dominio"
+      ],
+      "correct": 1,
+      "explanation": "La Facade coordina componentes y ofrece métodos de mayor nivel; no debe absorber toda la lógica interna."
+    },
+    {
+      "id": "facade_q3",
+      "type": "multiple_choice",
+      "question": "¿Qué escenario es un buen candidato para aplicar Facade?",
+      "options": [
+        "Un proceso de checkout que coordina inventario, pago, impuestos y envío",
+        "Una clase que necesita clonar objetos con copia profunda",
+        "Un algoritmo que requiere cambiar su estrategia en tiempo de ejecución",
+        "Un componente que notifica eventos a sus observadores"
+      ],
+      "correct": 0,
+      "explanation": "Un flujo de checkout involucra múltiples servicios; Facade encapsula su secuencia para el cliente."
+    },
+    {
+      "id": "facade_q4",
+      "type": "multiple_choice",
+      "question": "¿Qué opción diferencia mejor Facade de Adapter?",
+      "options": [
+        "Facade traduce interfaces incompatibles; Adapter simplifica uso",
+        "Facade simplifica un subsistema; Adapter adapta una interfaz a otra esperada",
+        "Facade y Adapter tienen el mismo objetivo práctico",
+        "Adapter solo se usa con librerías de terceros y Facade no"
+      ],
+      "correct": 1,
+      "explanation": "Adapter resuelve incompatibilidad de interfaces; Facade reduce complejidad de uso de un conjunto de APIs."
+    },
+    {
+      "id": "facade_q5",
+      "type": "multiple_choice",
+      "question": "¿Cuál es la diferencia más precisa entre Facade y Mediator?",
+      "options": [
+        "Mediator simplifica APIs externas; Facade regula comunicación entre colegas",
+        "Facade y Mediator son variantes del mismo patrón",
+        "Mediator centraliza interacción entre colegas; Facade simplifica acceso de clientes a un subsistema",
+        "Facade es comportamental y Mediator es estructural"
+      ],
+      "correct": 2,
+      "explanation": "Mediator define cómo colaboran objetos pares; Facade da una puerta de entrada más simple a componentes existentes."
+    },
+    {
+      "id": "facade_q6",
+      "type": "multiple_choice",
+      "question": "Al integrar una librería externa volátil, ¿qué ventaja aporta una Facade interna?",
+      "options": [
+        "Evitar por completo actualizaciones de la librería",
+        "Aislar cambios de API externa y reducir impacto en clientes",
+        "Eliminar la necesidad de pruebas de integración",
+        "Garantizar compatibilidad retroactiva sin mantenimiento"
+      ],
+      "correct": 1,
+      "explanation": "La Facade concentra el acoplamiento con la librería; cuando cambia la API, el ajuste queda encapsulado."
+    },
+    {
+      "id": "facade_q7",
+      "type": "multiple_choice",
+      "question": "¿Qué riesgo aparece cuando una Facade crece sin límites?",
+      "options": [
+        "Se convierte en un objeto dios y viola SRP",
+        "Impide por definición cualquier reutilización de subsistemas",
+        "Bloquea la ejecución concurrente de la aplicación",
+        "Fuerza herencia múltiple para funcionar"
+      ],
+      "correct": 0,
+      "explanation": "Si concentra demasiadas responsabilidades, la Facade pierde foco y se vuelve difícil de mantener."
+    },
+    {
+      "id": "facade_q8",
+      "type": "multiple_choice",
+      "question": "Cuando el subsistema cambia con frecuencia, ¿qué estrategia con Facade suele ser más mantenible?",
+      "options": [
+        "Exponer directamente todas las clases internas al cliente",
+        "Mantener una interfaz estable en la Facade y adaptar internamente",
+        "Mover toda regla de negocio a la Facade",
+        "Crear una Facade nueva por cada método interno"
+      ],
+      "correct": 1,
+      "explanation": "Una interfaz estable protege a los clientes de cambios internos y concentra refactors en una frontera."
+    },
+    {
+      "id": "facade_q9",
+      "type": "multiple_choice",
+      "question": "¿Qué acoplamiento reduce principalmente el patrón Facade?",
+      "options": [
+        "Acoplamiento del cliente con múltiples clases concretas internas",
+        "Acoplamiento entre objetos inmutables",
+        "Acoplamiento por herencia entre interfaces",
+        "Acoplamiento temporal entre hilos del sistema operativo"
+      ],
+      "correct": 0,
+      "explanation": "El cliente pasa a depender de una interfaz pequeña de alto nivel en lugar de muchas dependencias específicas."
+    },
+    {
+      "id": "facade_q10",
+      "type": "multiple_choice",
+      "question": "En una arquitectura por capas, ¿qué diseño refleja mejor Facade?",
+      "options": [
+        "La UI llama directamente a repositorios y proveedores externos",
+        "La UI consume una Facade de aplicación que coordina servicios internos",
+        "La UI manipula entidades de dominio y controla transacciones",
+        "La UI invoca un Adapter distinto por cada caso de uso"
+      ],
+      "correct": 1,
+      "explanation": "Una Facade de aplicación simplifica la API que consume la capa de presentación y encapsula orquestación."
+    },
+    {
+      "id": "facade_q11",
+      "type": "multiple_choice",
+      "question": "¿Qué enfoque de pruebas unitarias encaja mejor para una Facade?",
+      "options": [
+        "Probar solo vistas y asumir correcta la orquestación",
+        "Mockear dependencias y validar contrato, secuencia y manejo de errores",
+        "Usar siempre servicios reales para evitar mocks",
+        "No probarla porque solo delega llamadas"
+      ],
+      "correct": 1,
+      "explanation": "La Facade agrega valor en coordinación; sus pruebas deben cubrir orden, condiciones y respuesta ante fallas."
+    },
+    {
+      "id": "facade_q12",
+      "type": "multiple_choice",
+      "question": "¿Cuál ejemplo se parece más a Facade en sistemas distribuidos?",
+      "options": [
+        "Un Event Bus con suscriptores desacoplados",
+        "Un API Gateway que unifica múltiples microservicios para frontend",
+        "Un balanceador de carga L4",
+        "Una entidad de dominio con validaciones internas"
+      ],
+      "correct": 1,
+      "explanation": "Un API Gateway ofrece una interfaz unificada de alto nivel sobre varios servicios, análogo a Facade."
+    },
+    {
+      "id": "facade_q13",
+      "type": "multiple_choice",
+      "question": "¿Cuál decisión mantiene saludable una Facade en el tiempo?",
+      "options": [
+        "Incluir toda lógica de dominio para evitar más clases",
+        "Limitarla a casos de uso de orquestación y delegar reglas al dominio",
+        "Eliminar servicios internos y dejar solo la Facade",
+        "Convertir todos sus métodos en estáticos globales"
+      ],
+      "correct": 1,
+      "explanation": "La Facade debe orquestar y delegar; las reglas de negocio permanecen en componentes especializados."
+    },
+    {
+      "id": "facade_q14",
+      "type": "multiple_choice",
+      "question": "Si necesitas exponer un flujo atómico 'reservar+facturar+notificar', ¿qué aporta Facade?",
+      "options": [
+        "Persistencia automática sin transacciones",
+        "Un punto único para coordinar pasos y políticas de rollback",
+        "Conversión de todas las APIs síncronas en asíncronas",
+        "Eliminación total de excepciones de infraestructura"
+      ],
+      "correct": 1,
+      "explanation": "Facade permite centralizar la orquestación del flujo y aplicar políticas coherentes ante fallos parciales."
+    },
+    {
+      "id": "facade_q15",
+      "type": "multiple_choice",
+      "question": "¿Cuándo conviene tener múltiples Facades sobre el mismo subsistema?",
+      "options": [
+        "Cuando todos los clientes tienen exactamente las mismas necesidades",
+        "Cuando existen perfiles distintos, por ejemplo cliente básico y cliente avanzado",
+        "Cuando se quiere duplicar intencionalmente lógica de negocio",
+        "Cuando se pretende reemplazar interfaces por herencia múltiple"
+      ],
+      "correct": 1,
+      "explanation": "Facades orientadas a contexto permiten exponer APIs específicas por tipo de consumidor sin sobrecargar una sola clase."
+    },
+    {
+      "id": "facade_q16",
+      "type": "true_false",
+      "question": "Facade puede simplificar un subsistema sin impedir que clientes avanzados usen clases internas directamente.",
+      "correct": true,
+      "explanation": "Verdadero. Facade ofrece un camino simple, pero no necesariamente bloquea acceso directo cuando se requiere."
+    },
+    {
+      "id": "facade_q17",
+      "type": "true_false",
+      "question": "Implementar Facade implica eliminar las clases del subsistema y mover toda su lógica a una sola clase.",
+      "correct": false,
+      "explanation": "Falso. La lógica principal sigue en los componentes internos; Facade los coordina."
+    },
+    {
+      "id": "facade_q18",
+      "type": "true_false",
+      "question": "Facade es útil para reducir el impacto de cambios de terceros al encapsular dependencias externas.",
+      "correct": true,
+      "explanation": "Verdadero. Al centralizar integración, el resto del sistema queda más protegido."
+    },
+    {
+      "id": "facade_q19",
+      "type": "true_false",
+      "question": "Facade y Adapter persiguen exactamente el mismo objetivo de diseño.",
+      "correct": false,
+      "explanation": "Falso. Adapter adapta interfaces incompatibles; Facade simplifica interacción con un subsistema."
+    },
+    {
+      "id": "facade_q20",
+      "type": "true_false",
+      "question": "Una Facade sobredimensionada puede dificultar pruebas y evolución del sistema.",
+      "correct": true,
+      "explanation": "Verdadero. Si acumula responsabilidades ajenas, aumenta complejidad y fragilidad."
+    },
+    {
+      "id": "facade_q21",
+      "type": "true_false",
+      "question": "El patrón Facade pertenece a la categoría de patrones estructurales.",
+      "correct": true,
+      "explanation": "Verdadero. Se enfoca en cómo organizar y simplificar relaciones entre componentes."
+    },
+    {
+      "id": "facade_q22",
+      "type": "true_false",
+      "question": "La existencia de Facade elimina automáticamente la necesidad de contratos bien definidos en subsistemas.",
+      "correct": false,
+      "explanation": "Falso. Los contratos internos siguen siendo clave para mantenibilidad y pruebas."
+    },
+    {
+      "id": "facade_q23",
+      "type": "true_false",
+      "question": "Facade puede servir como capa anti-corrupción ligera al integrar un sistema legacy.",
+      "correct": true,
+      "explanation": "Verdadero. Es una técnica frecuente para encapsular modelos y APIs heredadas."
+    },
+    {
+      "id": "facade_q24",
+      "type": "true_false",
+      "question": "Si usas Facade, nunca debes crear más de una para el mismo subsistema.",
+      "correct": false,
+      "explanation": "Falso. Es válido crear facades diferentes según contexto o perfil de cliente."
+    },
+    {
+      "id": "facade_q25",
+      "type": "true_false",
+      "question": "Una Facade bien diseñada suele exponer menos métodos que la suma total de APIs internas.",
+      "correct": true,
+      "explanation": "Verdadero. Su valor está en ofrecer operaciones de alto nivel y no duplicar toda la superficie interna."
+    },
+    {
+      "id": "facade_q26",
+      "type": "true_false",
+      "question": "Facade impone por definición que todas las llamadas internas sean síncronas.",
+      "correct": false,
+      "explanation": "Falso. La coordinación puede ser síncrona, asíncrona o híbrida según el caso."
+    },
+    {
+      "id": "facade_q27",
+      "type": "true_false",
+      "question": "En refactoring, Facade puede introducirse gradualmente sin reescribir todo el subsistema.",
+      "correct": true,
+      "explanation": "Verdadero. Es común envolver operaciones existentes e iterar de forma incremental."
+    },
+    {
+      "id": "facade_q28",
+      "type": "true_false",
+      "question": "Facade reemplaza automáticamente la necesidad de casos de uso o servicios de aplicación.",
+      "correct": false,
+      "explanation": "Falso. Puede implementarlos o apoyarlos, pero no sustituye decisiones arquitectónicas por sí sola."
+    },
+    {
+      "id": "facade_q29",
+      "type": "true_false",
+      "question": "Una Facade puede centralizar manejo de errores cross-cutting para un flujo de negocio.",
+      "correct": true,
+      "explanation": "Verdadero. Al ser punto de orquestación, puede aplicar políticas comunes de error y compensación."
+    },
+    {
+      "id": "facade_q30",
+      "type": "true_false",
+      "question": "Si una operación requiere 8 pasos internos, exponer esos 8 pasos al cliente siempre es mejor que encapsularlos en Facade.",
+      "correct": false,
+      "explanation": "Falso. Exponer demasiados detalles incrementa acoplamiento y complejidad para el cliente."
+    },
+    {
+      "id": "facade_q31",
+      "type": "short_answer",
+      "question": "¿Qué patrón usarías si el problema principal fuera traducir interfaces incompatibles?",
+      "correct": [
+        "adapter",
+        "adaptador"
+      ],
+      "hint": "Se centra en compatibilidad de contratos.",
+      "explanation": "Cuando hay incompatibilidad de interfaces, el patrón adecuado es Adapter."
+    },
+    {
+      "id": "facade_q32",
+      "type": "short_answer",
+      "question": "¿Cómo se llama el anti-patrón de una clase que concentra demasiadas responsabilidades?",
+      "correct": [
+        "god object",
+        "objeto dios"
+      ],
+      "hint": "Sabe y hace demasiado.",
+      "explanation": "Una Facade sobredimensionada puede degradar a un God Object."
+    },
+    {
+      "id": "facade_q33",
+      "type": "short_answer",
+      "question": "¿Qué cualidad mejora cuando el cliente depende de una única interfaz de alto nivel?",
+      "correct": [
+        "bajo acoplamiento",
+        "acoplamiento bajo"
+      ],
+      "hint": "Menos dependencias directas entre módulos.",
+      "explanation": "Facade reduce dependencias entre cliente y múltiples clases concretas."
+    },
+    {
+      "id": "facade_q34",
+      "type": "short_answer",
+      "question": "¿Qué patrón centraliza la comunicación entre colegas, a diferencia de Facade?",
+      "correct": [
+        "mediator",
+        "mediador"
+      ],
+      "hint": "Coordina interacción entre pares.",
+      "explanation": "Mediator regula colaboración entre objetos colegas."
+    },
+    {
+      "id": "facade_q35",
+      "type": "short_answer",
+      "question": "¿A qué categoría GoF pertenece Facade?",
+      "correct": [
+        "estructural",
+        "estructurales"
+      ],
+      "hint": "No es creacional ni comportamental.",
+      "explanation": "Facade es un patrón de tipo estructural."
+    },
+    {
+      "id": "facade_q36",
+      "type": "short_answer",
+      "question": "¿Qué componente de arquitectura suele actuar como Facade frente a microservicios?",
+      "correct": [
+        "api gateway",
+        "gateway"
+      ],
+      "hint": "Entrada unificada para clientes.",
+      "explanation": "Un API Gateway simplifica el acceso a múltiples servicios backend."
+    },
+    {
+      "id": "facade_q37",
+      "type": "short_answer",
+      "question": "Si encapsulas un sistema legado para proteger al dominio nuevo, ¿qué capa ligera estás creando?",
+      "correct": [
+        "facade",
+        "fachada"
+      ],
+      "hint": "Interfaz de alto nivel delante del legacy.",
+      "explanation": "La Facade puede actuar como frontera estable frente a APIs antiguas."
+    },
+    {
+      "id": "facade_q38",
+      "type": "short_answer",
+      "question": "¿Qué principio se vulnera si una Facade asume demasiadas responsabilidades heterogéneas?",
+      "correct": [
+        "srp",
+        "responsabilidad unica"
+      ],
+      "hint": "Single Responsibility Principle.",
+      "explanation": "Una Facade con demasiadas funciones rompe el principio de responsabilidad única."
+    },
+    {
+      "id": "facade_q39",
+      "type": "short_answer",
+      "question": "¿Qué palabra describe una interfaz que no expone detalles internos innecesarios?",
+      "correct": [
+        "simple",
+        "unificada"
+      ],
+      "hint": "Alta legibilidad para el cliente.",
+      "explanation": "La esencia de Facade es ofrecer una interfaz simple y unificada de alto nivel."
+    },
+    {
+      "id": "facade_q40",
+      "type": "short_answer",
+      "question": "¿Qué estrategia de cambio minimiza impacto en clientes cuando el subsistema evoluciona?",
+      "correct": [
+        "encapsulacion",
+        "encapsulación"
+      ],
+      "hint": "Ocultar detalles tras una frontera estable.",
+      "explanation": "Encapsular cambios detrás de la Facade mantiene estable el contrato consumido por los clientes."
+    }
+  ]
+}

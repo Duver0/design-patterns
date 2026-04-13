@@ -17,36 +17,71 @@
     "id": "abstract_factory",
     "name": "Abstract Factory",
     "category": "Creacional",
-    "description": "Proporciona una interfaz para crear familias de objetos relacionados o dependientes sin especificar sus clases concretas.",
+    "description": "Proporciona una interfaz para crear familias de objetos relacionados o dependientes sin especificar sus clases concretas, manteniendo consistencia entre productos que deben colaborar.",
     "questionCount": 40
   },
   {
     "id": "builder",
     "name": "Builder",
     "category": "Creacional",
-    "description": "Permite construir objetos complejos paso a paso. El patrón permite producir distintos tipos y representaciones de un objeto empleando el mismo código de construcción.",
+    "description": "Separa la construcción de un objeto complejo de su representación, de modo que el mismo proceso de construcción pueda crear diferentes representaciones.",
     "questionCount": 40
   },
   {
     "id": "prototype",
     "name": "Prototype",
     "category": "Creacional",
-    "description": "Permite copiar objetos existentes sin que el código dependa de sus clases.",
+    "description": "Especifica los tipos de objetos a crear mediante una instancia prototípica y crea nuevos objetos copiando este prototipo. Es ideal cuando el costo de instanciación es alto o se requiere independencia del sistema de creación.",
     "questionCount": 40
   },
   {
     "id": "adapter",
     "name": "Adapter",
     "category": "Estructural",
-    "description": "Permite la colaboración entre objetos con interfaces incompatibles, actuando como un traductor o envoltorio.",
-    "questionCount": 3
+    "description": "Patrón estructural que convierte la interfaz de un componente existente en otra esperada por el cliente, permitiendo reutilizar código legado o de terceros sin modificarlo.",
+    "questionCount": 40
+  },
+  {
+    "id": "bridge",
+    "name": "Bridge",
+    "category": "Estructural",
+    "description": "Separa una abstraccion de su implementacion para que ambas puedan evolucionar de forma independiente usando composicion en lugar de acoplamiento rigido.",
+    "questionCount": 40
+  },
+  {
+    "id": "composite",
+    "name": "Composite",
+    "category": "Estructural",
+    "description": "Permite componer objetos en estructuras de arbol para representar relaciones parte-todo, de modo que clientes traten de forma uniforme objetos individuales y compuestos.",
+    "questionCount": 40
   },
   {
     "id": "decorator",
     "name": "Decorator",
     "category": "Estructural",
-    "description": "Permite añadir funcionalidades a objetos colocándolos dentro de objetos encapsuladores especiales (decoradores) que contienen los comportamientos adicionales.",
-    "questionCount": 3
+    "description": "Permite añadir responsabilidades a objetos de forma dinámica envolviéndolos en decoradores que comparten la misma interfaz, evitando explosión de subclases y favoreciendo la composición.",
+    "questionCount": 40
+  },
+  {
+    "id": "facade",
+    "name": "Facade",
+    "category": "Estructural",
+    "description": "Proporciona una interfaz unificada y de alto nivel para simplificar el uso de subsistemas complejos, reduciendo acoplamiento y complejidad para el cliente.",
+    "questionCount": 40
+  },
+  {
+    "id": "flyweight",
+    "name": "Flyweight",
+    "category": "Estructural",
+    "description": "Reduce el uso de memoria al compartir estado intrínseco entre muchos objetos finos y externalizar el estado extrínseco según el contexto.",
+    "questionCount": 40
+  },
+  {
+    "id": "proxy",
+    "name": "Proxy",
+    "category": "Estructural",
+    "description": "Proporciona un sustituto del objeto real para controlar el acceso y anadir comportamientos como carga diferida, seguridad, acceso remoto o gestion inteligente antes de delegar en el objeto objetivo.",
+    "questionCount": 40
   },
   {
     "id": "observer",
