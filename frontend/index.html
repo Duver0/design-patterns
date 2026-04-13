@@ -115,17 +115,17 @@
             });
 
             // Temporary development button
-            const main = document.querySelector('.main-content');
-            const devBtn = document.createElement('button');
-            devBtn.textContent = "DEBUG: Start Singleton Quiz (new architecture)";
-            devBtn.className = "btn btn--outline";
-            devBtn.style.marginTop = "20px";
-            devBtn.onclick = () => {
-                document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
-                document.getElementById('view-quiz').classList.remove('hidden');
-                orchestrator.startQuiz('singleton');
-            };
-            main.appendChild(devBtn);
+            // const main = document.querySelector('.main-content');
+            // const devBtn = document.createElement('button');
+            // devBtn.textContent = "DEBUG: Start Singleton Quiz (new architecture)";
+            // devBtn.className = "btn btn--outline";
+            // devBtn.style.marginTop = "20px";
+            // devBtn.onclick = () => {
+            //     document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
+            //     document.getElementById('view-quiz').classList.remove('hidden');
+            //     orchestrator.startQuiz('singleton');
+            // };
+            // main.appendChild(devBtn);
         });
     </script>
 </body>
