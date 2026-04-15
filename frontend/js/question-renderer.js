@@ -106,6 +106,15 @@ const QuestionRenderer = (() => {
       hintBtn.textContent = visible ? '💡 Ver pista' : '🙈 Ocultar pista';
     });
 
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const value = input.value.trim();
+        if (value) {
+          App.handleAnswer(value);
+        }
+      }
+    });
+
     wrapper.appendChild(input);
     wrapper.appendChild(hintBtn);
     wrapper.appendChild(hintBox);

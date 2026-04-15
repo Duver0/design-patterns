@@ -9,6 +9,10 @@ const QuestionFactory = (() => {
       Object.assign(this, data);
     }
 
+    getExpectedAnswer() {
+      return this.answer ?? this.correct;
+    }
+
     validate() {
       return false;
     }
@@ -21,11 +25,12 @@ const QuestionFactory = (() => {
   class MultipleChoiceQuestion extends BaseQuestion {
     validate(userAnswer) {
       const selected = Number(userAnswer);
-      return selected === Number(this.correct);
+      return selected === Number(this.getExpectedAnswer());
     }
 
     getCorrectAnswer() {
-      return Array.isArray(this.options) ? this.options[this.correct] : '';
+      const answerIndex = Number(this.getExpectedAnswer());
+      return Array.isArray(this.options) ? this.options[answerIndex] : '';
     }
   }
 
@@ -34,28 +39,44 @@ const QuestionFactory = (() => {
       const normalized = typeof userAnswer === 'boolean'
         ? userAnswer
         : String(userAnswer).toLowerCase() === 'true';
-      return normalized === Boolean(this.correct);
+
+      const expected = this.getExpectedAnswer();
+      const expectedBoolean = typeof expected === 'boolean'
+        ? expected
+        : String(expected).trim().toLowerCase() === 'true';
+
+      return normalized === expectedBoolean;
     }
 
     getCorrectAnswer() {
-      return this.correct ? 'Verdadero' : 'Falso';
+      const expected = this.getExpectedAnswer();
+      const expectedBoolean = typeof expected === 'boolean'
+        ? expected
+        : String(expected).trim().toLowerCase() === 'true';
+      return expectedBoolean ? 'Verdadero' : 'Falso';
     }
   }
 
   class ShortAnswerQuestion extends BaseQuestion {
     validate(userAnswer) {
+      if (userAnswer === null || userAnswer === undefined) return false;
       const value = String(userAnswer).trim().toLowerCase();
-      const accepted = Array.isArray(this.correct)
-        ? this.correct
-        : [this.correct];
-      return accepted
+
+      const expected = this.getExpectedAnswer();
+      const acceptedAnswers = Array.isArray(expected)
+        ? expected
+        : [expected];
+
+      return acceptedAnswers
         .filter(answer => answer !== undefined && answer !== null)
         .map(answer => String(answer).trim().toLowerCase())
         .includes(value);
     }
 
     getCorrectAnswer() {
-      return Array.isArray(this.correct) ? (this.correct[0] || '') : String(this.correct || '');
+      const expected = this.getExpectedAnswer();
+      const answers = Array.isArray(expected) ? expected : [expected];
+      return answers[0] || '';
     }
   }
 

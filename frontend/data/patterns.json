@@ -1,0 +1,134 @@
+[
+  {
+    "id": "singleton",
+    "name": "Singleton",
+    "category": "Creacional",
+    "description": "Garantiza que una clase tenga una única instancia y proporciona un punto de acceso global a ella."
+  },
+  {
+    "id": "factory_method",
+    "name": "Factory Method",
+    "category": "Creacional",
+    "description": "Define una interfaz para crear un objeto, pero deja que las subclases decidan qué clase instanciar."
+  },
+  {
+    "id": "abstract_factory",
+    "name": "Abstract Factory",
+    "category": "Creacional",
+    "description": "Proporciona una interfaz para crear familias de objetos relacionados o dependientes sin especificar sus clases concretas."
+  },
+  {
+    "id": "builder",
+    "name": "Builder",
+    "category": "Creacional",
+    "description": "Separa la construcción de un objeto complejo de su representación, de modo que el mismo proceso de construcción pueda crear diferentes representaciones."
+  },
+  {
+    "id": "prototype",
+    "name": "Prototype",
+    "category": "Creacional",
+    "description": "Especifica los tipos de objetos a crear por medio de una instancia prototípica y crea nuevos objetos copiando este prototipo."
+  },
+  {
+    "id": "adapter",
+    "name": "Adapter",
+    "category": "Estructural",
+    "description": "Convierte la interfaz de una clase en otra interfaz que los clientes esperan."
+  },
+  {
+    "id": "bridge",
+    "name": "Bridge",
+    "category": "Estructural",
+    "description": "Desacopla una abstracción de su implementación de manera que ambas puedan variar independientemente."
+  },
+  {
+    "id": "composite",
+    "name": "Composite",
+    "category": "Estructural",
+    "description": "Combina objetos en estructuras de árbol para representar jerarquías de parte-todo."
+  },
+  {
+    "id": "decorator",
+    "name": "Decorator",
+    "category": "Estructural",
+    "description": "Añade responsabilidades a objetos dinámicamente sin modificar su estructura."
+  },
+  {
+    "id": "facade",
+    "name": "Facade",
+    "category": "Estructural",
+    "description": "Proporciona una interfaz unificada para un conjunto de interfaces en un subsistema."
+  },
+  {
+    "id": "flyweight",
+    "name": "Flyweight",
+    "category": "Estructural",
+    "description": "Usa el compartimiento para soportar eficientemente grandes cantidades de objetos de grano fino."
+  },
+  {
+    "id": "proxy",
+    "name": "Proxy",
+    "category": "Estructural",
+    "description": "Proporciona un sustituto o marcador de posición para otro objeto para controlar el acceso a él."
+  },
+  {
+    "id": "chain_of_responsibility",
+    "name": "Chain of Responsibility",
+    "category": "Comportamiento",
+    "description": "Evita el acoplamiento del emisor de una petición a su receptor dando a más de un objeto la posibilidad de responder a la petición."
+  },
+  {
+    "id": "command",
+    "name": "Command",
+    "category": "Comportamiento",
+    "description": "Encapsula una petición como un objeto, permitiendo así parametrizar a los clientes con diferentes peticiones."
+  },
+  {
+    "id": "iterator",
+    "name": "Iterator",
+    "category": "Comportamiento",
+    "description": "Proporciona un modo de acceder secuencialmente a los elementos de un objeto agregado sin exponer su representación subyacente."
+  },
+  {
+    "id": "mediator",
+    "name": "Mediator",
+    "category": "Comportamiento",
+    "description": "Define un objeto que encapsula cómo interactúa un conjunto de objetos."
+  },
+  {
+    "id": "memento",
+    "name": "Memento",
+    "category": "Comportamiento",
+    "description": "Sin violar la encapsulación, captura y externaliza el estado interno de un objeto para que el objeto pueda restaurarse a este estado más tarde."
+  },
+  {
+    "id": "observer",
+    "name": "Observer",
+    "category": "Comportamiento",
+    "description": "Define una dependencia de uno-a-muchos entre objetos para que cuando un objeto cambie de estado, todos sus dependientes sean notificados y actualizados automáticamente."
+  },
+  {
+    "id": "state",
+    "name": "State",
+    "category": "Comportamiento",
+    "description": "Permite que un objeto altere su comportamiento cuando su estado interno cambia. El objeto parecerá haber cambiado de clase."
+  },
+  {
+    "id": "strategy",
+    "name": "Strategy",
+    "category": "Comportamiento",
+    "description": "Define una familia de algoritmos, encapsula cada uno de ellos y los hace intercambiables."
+  },
+  {
+    "id": "template_method",
+    "name": "Template Method",
+    "category": "Comportamiento",
+    "description": "Define el esqueleto de un algoritmo en una operación, delegando algunos pasos a las subclases."
+  },
+  {
+    "id": "visitor",
+    "name": "Visitor",
+    "category": "Comportamiento",
+    "description": "Representa una operación a realizar en los elementos de una estructura de objetos."
+  }
+]
