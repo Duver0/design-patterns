@@ -16,41 +16,41 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: '24'
+          bun-version: latest
 
       - name: Install dependencies
-        run: npm install
+        run: bun install --frozen-lockfile
 
       - name: Validate JSON Pattern Files
         run: |
           for file in frontend/src/data/patterns/*.json; do
             echo "Validating $file..."
-            node -e "const fs=require('fs'); JSON.parse(fs.readFileSync('$file', 'utf8'))"
+            bun -e "const fs=require('fs'); JSON.parse(fs.readFileSync('$file', 'utf8'))"
           done
 
       - name: Validate Core JSON Data
-        run: node -e "const fs=require('fs'); JSON.parse(fs.readFileSync('frontend/data/patterns.json', 'utf8'))"
+        run: bun -e "const fs=require('fs'); JSON.parse(fs.readFileSync('frontend/data/patterns.json', 'utf8'))"
 
   build:
     needs: validate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: '24'
+          bun-version: latest
 
       - name: Install dependencies
-        run: npm install
+        run: bun install --frozen-lockfile
 
       - name: Build project
-        run: npm run build
+        run: bun run build
 
       - name: Verify build output
         run: ls -R ./dist

@@ -15,14 +15,19 @@ Plataforma estática de aprendizaje para dominar los patrones de diseño (GoF) m
 
 ## 🚀 Cómo ejecutar el proyecto localmente
 
+0. **Instalar Bun (si aún no lo tienes):**
+   ```bash
+   curl -fsSL https://bun.sh/install | bash
+   ```
+
 1. **Instalar dependencias:**
    ```bash
-   npm install
+   bun install
    ```
 
 2. **Iniciar servidor de desarrollo:**
    ```bash
-   npm run dev
+   bun run dev
    ```
 
 3. **Ver en el navegador:**
@@ -32,13 +37,13 @@ Plataforma estática de aprendizaje para dominar los patrones de diseño (GoF) m
 
 ### Generar archivos para producción
 ```bash
-npm run build
+bun run build
 ```
 Este comando genera una carpeta `dist/` en la raíz con todos los archivos estáticos necesarios.
 
 ### Despliegue en GitHub Pages
 El proyecto está optimizado para ser desplegado como un sitio estático:
-1. Asegúrate de que el comando `npm run build` haya generado la carpeta `dist`.
+1. Asegúrate de que el comando `bun run build` haya generado la carpeta `dist`.
 2. Sube el contenido de `dist` a la rama de despliegue (`gh-pages` o `main` dependiendo de tu configuración).
 3. En la configuración de GitHub Pages, apunta a la raíz de la rama/carpeta donde subiste los archivos.
 

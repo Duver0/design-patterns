@@ -2,6 +2,7 @@
   "name": "design-patterns-quiz",
   "private": true,
   "version": "1.0.0",
+  "packageManager": "bun@1.2.21",
   "type": "module",
   "scripts": {
     "dev": "vite frontend",
