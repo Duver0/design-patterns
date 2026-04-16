@@ -6,7 +6,7 @@
   "questions": [
     {
       "id": "strategy_q1",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Que problema resuelve Strategy con mayor precision?",
       "options": [
         "Garantizar una unica instancia global",
@@ -19,7 +19,7 @@
     },
     {
       "id": "strategy_q2",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Que diferencia de intencion separa mejor Strategy de State?",
       "options": [
         "State modela transiciones por estado interno; Strategy selecciona algoritmos por politica de uso",
@@ -32,7 +32,7 @@
     },
     {
       "id": "strategy_q3",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "Frente a Template Method, ¿cuando es preferible Strategy?",
       "options": [
         "Cuando se necesita fijar una secuencia inmutable por herencia",
@@ -45,7 +45,7 @@
     },
     {
       "id": "strategy_q4",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Que afirmacion distingue mejor Strategy de Command?",
       "options": [
         "Command encapsula una solicitud como objeto (cola, log, undo); Strategy encapsula una familia de algoritmos",
@@ -58,7 +58,7 @@
     },
     {
       "id": "strategy_q5",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "Comparado con Chain of Responsibility, ¿que caracteriza a Strategy?",
       "options": [
         "En Strategy se selecciona una politica principal; en Chain la solicitud puede pasar por multiples handlers",
@@ -71,7 +71,7 @@
     },
     {
       "id": "strategy_q6",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Cuando conviene mantener policy objects simples en lugar de formalizar un Strategy completo?",
       "options": [
         "Cuando hay una sola operacion estable, pocas variantes y el contrato funcional es claro",
@@ -84,7 +84,7 @@
     },
     {
       "id": "strategy_q7",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Que practica mejora el desacoplamiento del Context al aplicar Strategy?",
       "options": [
         "Instanciar estrategias concretas con new dentro de cada metodo",
@@ -97,7 +97,7 @@
     },
     {
       "id": "strategy_q8",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Cual es un criterio robusto para seleccionar estrategia en runtime?",
       "options": [
         "Elegir al azar para distribuir carga",
@@ -110,7 +110,7 @@
     },
     {
       "id": "strategy_q9",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Que tradeoff de testabilidad aparece con Strategy bien aplicado?",
       "options": [
         "No se pueden usar mocks porque hay polimorfismo",
@@ -123,7 +123,7 @@
     },
     {
       "id": "strategy_q10",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Que condicion protege mejor la sustituibilidad entre estrategias?",
       "options": [
         "Que todas compartan nombre de clase similar",
@@ -136,7 +136,7 @@
     },
     {
       "id": "strategy_q11",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Cuando NO usar Strategy suele ser la decision mas razonable?",
       "options": [
         "Cuando el algoritmo es unico, estable y no hay señales de variacion futura",
@@ -149,7 +149,7 @@
     },
     {
       "id": "strategy_q12",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Que tradeoff de rendimiento puede aparecer en escenarios criticos?",
       "options": [
         "El despacho indirecto y objetos extra pueden agregar overhead medible",
@@ -162,7 +162,7 @@
     },
     {
       "id": "strategy_q13",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "Si el numero de estrategias crece sin gobierno, ¿que riesgo aumenta?",
       "options": [
         "Menor trazabilidad de decisiones y mayor carga cognitiva",
@@ -175,7 +175,7 @@
     },
     {
       "id": "strategy_q14",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Que decision reduce riesgos de concurrencia al reutilizar estrategias?",
       "options": [
         "Compartir estado mutable global entre todas las concretas",
@@ -188,7 +188,7 @@
     },
     {
       "id": "strategy_q15",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Que enfoque de resiliencia conserva la intencion de Strategy?",
       "options": [
         "Reemplazar Strategy por if/else cuando una politica falla",
@@ -201,7 +201,7 @@
     },
     {
       "id": "strategy_q16",
-      "type": "mcq",
+      "type": "multiple_choice",
       "question": "¿Que combinacion facilita escalar Strategy en sistemas grandes?",
       "options": [
         "Registro en contenedor DI mas fabrica de resolucion por clave",
@@ -312,8 +312,9 @@
     },
     {
       "id": "strategy_q31",
-      "type": "short",
+      "type": "short_answer",
       "question": "¿Nombre del contrato comun que implementan las variantes del algoritmo?",
+      "options": [],
       "correct": [
         "strategy",
         "estrategia",
@@ -324,8 +325,9 @@
     },
     {
       "id": "strategy_q32",
-      "type": "short",
+      "type": "short_answer",
       "question": "¿Objeto que delega el trabajo a una estrategia activa?",
+      "options": [],
       "correct": [
         "context",
         "contexto"
@@ -335,8 +337,9 @@
     },
     {
       "id": "strategy_q33",
-      "type": "short",
+      "type": "short_answer",
       "question": "Principio SOLID que permite extender con nuevas estrategias sin modificar codigo estable.",
+      "options": [],
       "correct": [
         "ocp",
         "open-closed",
@@ -347,8 +350,9 @@
     },
     {
       "id": "strategy_q34",
-      "type": "short",
+      "type": "short_answer",
       "question": "Relacion estructural recomendada en Strategy: ______ sobre herencia.",
+      "options": [],
       "correct": [
         "composicion",
         "composition"
@@ -358,8 +362,9 @@
     },
     {
       "id": "strategy_q35",
-      "type": "short",
+      "type": "short_answer",
       "question": "Si solo hay un algoritmo estable y sin roadmap de variantes, el riesgo principal es ______.",
+      "options": [],
       "correct": [
         "sobreingenieria",
         "overengineering"
@@ -369,8 +374,9 @@
     },
     {
       "id": "strategy_q36",
-      "type": "short",
+      "type": "short_answer",
       "question": "Costo potencial en rutas criticas por indirecciones y objetos extra.",
+      "options": [],
       "correct": [
         "overhead",
         "sobrecosto"
@@ -380,8 +386,9 @@
     },
     {
       "id": "strategy_q37",
-      "type": "short",
+      "type": "short_answer",
       "question": "Componente habitual para resolver estrategia por clave sin acoplar al cliente.",
+      "options": [],
       "correct": [
         "fabrica",
         "factory",
@@ -392,8 +399,9 @@
     },
     {
       "id": "strategy_q38",
-      "type": "short",
+      "type": "short_answer",
       "question": "Atributo de calidad que mejora al probar cada algoritmo en aislamiento.",
+      "options": [],
       "correct": [
         "testabilidad",
         "testeabilidad"
@@ -403,8 +411,9 @@
     },
     {
       "id": "strategy_q39",
-      "type": "short",
+      "type": "short_answer",
       "question": "Riesgo tecnico cuando varias estrategias comparten estado mutable no controlado.",
+      "options": [],
       "correct": [
         "efectos colaterales",
         "inconsistencia"
@@ -414,8 +423,9 @@
     },
     {
       "id": "strategy_q40",
-      "type": "short",
+      "type": "short_answer",
       "question": "Criterio para migrar de policy objects simples a Strategy formal: aumento de ______ del dominio.",
+      "options": [],
       "correct": [
         "complejidad",
         "variabilidad"
